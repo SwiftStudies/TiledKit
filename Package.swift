@@ -35,6 +35,12 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "TiledKitTests",
-            dependencies: ["TiledKit"]),
+            dependencies: ["TiledKit"],
+            resources: [
+                .copy("Resources/Test Project.tiled-project"),
+                .copy("Resources/Maps"),
+                .copy("Resources/Tilesets"),
+                .process("Resources/Images")]
+            ),
     ]
 )
