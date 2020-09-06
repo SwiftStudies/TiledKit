@@ -110,7 +110,7 @@ public struct TileSet : TiledDecodable{
     public var type : TileSetType
     
     public enum CodingKeys : String, CodingKey {
-        case tiles
+        case tiles = "tile"
         case tileWidth = "tilewidth"
         case tileHeight = "tileheight"
         case name
@@ -139,10 +139,14 @@ public struct TileSet : TiledDecodable{
         } else {
             //It's individual files
             type = .files
-            self.tiles = try container.decode([Int : Tile].self, forKey: .tiles)
-            for tile in tiles.values {
+            
+            let allTiles = try container.decode([Tile].self, forKey: .tiles)
+            
+            for tile in allTiles where tile.identifier.integerSource != nil{
                 tile.tileSet = self
+                tiles[tile.identifier.integerSource!] = tile
             }
+            
         }
     }
     
@@ -161,7 +165,7 @@ public struct TileSet : TiledDecodable{
         }
 
         enum CodingKeys : String, CodingKey {
-            case image, objects = "objectgroup"
+            case identifier = "id", image, objects = "objectgroup"
         }
         
         public required init(_ index:Int, from sheet:TileSheet, for set:TileSet, at location: (x:Int,y:Int), in container:LayerContainer){
@@ -178,11 +182,12 @@ public struct TileSet : TiledDecodable{
             
             if let path = try container.decodeIfPresent(String.self, forKey: CodingKeys.image){
                 self.path = path
-                identifier = Identifier(stringLiteral: path)
             } else {
-                path = nil
-                identifier = Identifier(integerLiteral: 0)
+                self.path = nil
             }
+            
+            identifier = Identifier(integerLiteral: try container.decode(Int.self, forKey: .identifier))
+            
             parent = (decoder.userInfo[DecodingContext.key] as! DecodingContext).level!
             objects = try container.decodeIfPresent(ObjectLayer.self, forKey: .objects)
             position = nil
