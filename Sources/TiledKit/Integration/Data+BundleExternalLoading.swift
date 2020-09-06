@@ -15,7 +15,7 @@
 import Foundation
 
 public extension Data {
-    public static func withContentsInBundleFirst(url:URL)->Data {
+    static func withContentsInBundleFirst(url:URL)->Data {
         let data : Data
 
         if let bundleUrl = Bundle.main.url(forResource: url.lastPathComponent.replacingOccurrences(of: ".json", with: ""), withExtension: "json"){

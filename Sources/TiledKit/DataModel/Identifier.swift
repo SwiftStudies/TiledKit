@@ -18,7 +18,15 @@ public struct Identifier : Hashable {
     let stringSource      : String?
     let integerSource     : Int?
     
-    public let hashValue         : Int
+    public func hash(into hasher: inout Hasher) {
+        if let string = stringSource {
+            string.hash(into: &hasher)
+        } else if let integer = integerSource {
+            integer.hash(into: &hasher)
+        } else {
+            fatalError("Identifier must have integer or string source, but both are nil")
+        }
+    }
     
 }
 
@@ -28,7 +36,6 @@ extension Identifier : ExpressibleByIntegerLiteral {
     public init(integerLiteral value: Int) {
         integerSource = value
         stringSource = nil
-        hashValue = "\(value)".hashValue
     }
 }
 
@@ -38,7 +45,6 @@ extension Identifier : ExpressibleByStringLiteral {
     public init(stringLiteral value: String) {
         stringSource = value
         integerSource = nil
-        hashValue = value.hashValue
     }
 }
 
