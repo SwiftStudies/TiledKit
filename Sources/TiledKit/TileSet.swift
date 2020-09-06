@@ -14,6 +14,7 @@
 
 
 import Foundation
+import XMLCoder
 
 class TileSetReference : Decodable{
     var identifier : Identifier? = nil
@@ -52,7 +53,26 @@ public struct TileSheet : Decodable {
     
     
     private enum CodingKeys : String, CodingKey {
-        case imageWidth = "imagewidth", imageHeight = "imageheight", margin, spacing, tileCount="tilecount", transparentColor = "transparentcolor", columns, imagePath = "image"
+        case imageWidth = "width", imageHeight = "height", margin, spacing, tileCount="tilecount", transparentColor = "transparentcolor", columns, imagePath = "source", image = "image"
+    }
+    
+    public init(from decoder: Decoder) throws{
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        // Required
+        columns = try container.decode(Int.self, forKey: .columns)
+        tileCount = try container.decode(Int.self, forKey: .tileCount)
+
+        let imageContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .image)
+        
+        imagePath = try imageContainer.decode(String.self, forKey: .imagePath)
+        imageWidth = try imageContainer.decode(Int.self, forKey: .imageWidth)
+        imageHeight = try imageContainer.decode(Int.self, forKey: .imageHeight)
+        
+        // Optional
+        transparentColor = (try? container.decode(Color.self, forKey: .transparentColor)) ?? Color(r: 0, g: 0, b: 0, a: 0)
+        margin = (try? container.decode(Int.self, forKey: .margin)) ?? 0
+        spacing = (try? container.decode(Int.self, forKey: .spacing)) ?? 0
     }
     
     func createTiles(for tileSet:TileSet, with data:[Int:TileSet.Tile], in container:LayerContainer)->[Int:TileSet.Tile]{
@@ -178,10 +198,10 @@ public struct TileSet : TiledDecodable{
         let data = Data.withContentsInBundleFirst(url:url)
         
         do {
-            let jsonDecoder = JSONDecoder()
-            jsonDecoder.userInfo[DecodingContext.key] = DecodingContext(with: [])
+            let decoder = XMLDecoder()
+            decoder.userInfo[DecodingContext.key] = DecodingContext(with: [])
             
-            let loaded = try jsonDecoder.decode(TileSet.self, from: data)
+            let loaded = try decoder.decode(TileSet.self, from: data)
             
             self.tiles = loaded.tiles
             self.tileWidth = loaded.tileWidth
@@ -189,7 +209,7 @@ public struct TileSet : TiledDecodable{
             self.name = loaded.name
             self.type = loaded.type
         } catch {
-            fatalError("Could not decode JSON \(error)")
+            fatalError("Could not decode XML \(error)")
         }
     }
     
