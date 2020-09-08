@@ -36,6 +36,8 @@ extension Layer {
             return .tile
         } else if self is ObjectLayer{
             return .object
+        } else if self is ImageLayer{
+            return .image
         }
         fatalError("Layer of unknown type")
     }

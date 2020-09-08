@@ -60,8 +60,16 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(level.tileHeight, 16)
         XCTAssertEqual(level.layers.count, 5)
 
-        print(level.height)
+        XCTAssertEqual(level.getTileLayers().count, 2)
+        XCTAssertEqual(level.getObjectLayers().count, 1)
+        XCTAssertEqual(level.getGroups().count, 1)
+
+        guard let nestedImageLayer = level.getLayers(ofType: .image, named: "Grouped Image Layer", matching: [:], recursively: true)[0] as? ImageLayer else {
+            XCTFail("Could not get nested image layer")
+            return
+        }
         
+        XCTAssertEqual((nestedImageLayer.parent as? GroupLayer)?.name ?? "FAILED", "Group")
     }
     
     static var allTests = [
