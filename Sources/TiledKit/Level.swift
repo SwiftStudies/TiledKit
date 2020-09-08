@@ -166,7 +166,7 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
         }
     }
     
-    enum CodingKeys : String, XMLChoiceCodingKey {
+    enum CodingKeys : String, CodingKey {
         case height, width, layers = "layer", objectLayer = "objectgroup", imageLayer="imagelayer", group="group", properties
         case tileWidth  = "tilewidth"
         case tileHeight = "tileheight"

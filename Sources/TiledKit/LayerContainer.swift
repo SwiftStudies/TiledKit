@@ -15,26 +15,16 @@
 
 import Foundation
 
-public enum LayerType : Decodable {
-    case object, group, tile
+public enum LayerType : String, CaseIterable {
+    case object = "objectgroup", group = "group", tile = "layer", image = "imagelayer"
     
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        switch try container.decode(String.self, forKey: .type){
-        case "objectgroup":
-            self = .object
-        case "group":
-            self = .group
-        case "tilelayer":
-            self = .tile
-        default:
-            fatalError("Unknown layer type")
+    var codingKey : Level.CodingKeys {
+        switch self {
+        case .object:   return .objectLayer
+        case .group:    return .group
+        case .image:    return .imageLayer
+        case .tile:     return .layers
         }
-    }
-    
-    private enum CodingKeys : String, CodingKey {
-        case type
     }
 }
 
@@ -117,38 +107,26 @@ extension LayerContainer {
     }
     
     static func decodeLayers(_ container:KeyedDecodingContainer<Level.CodingKeys>) throws ->[Layer]  {
-//        var typeExposer     = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.layers)
-//        var undecodedLayers = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.layers)
         var decodedLayers = [Layer]()
         
-        var continueDecoding = true
-        while continueDecoding {
-            if let groupLayer = try? container.decode(GroupLayer.self, forKey: .group){
-                decodedLayers.append(groupLayer)
-            } else if let objectLayer = try? container.decode(ObjectLayer.self, forKey: .objectLayer) {
-                decodedLayers.append(objectLayer)
-            } else if let tileLayer = try? container.decode(TileLayer.self, forKey: .layers) {
-                decodedLayers.append(tileLayer)
-            } else if let imageLayer = try? container.decode(ImageLayer.self, forKey: .imageLayer) {
-                decodedLayers.append(imageLayer)
-            } else {
-                continueDecoding = false
+        var groupLayers     = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.group)
+        var tileLayers      = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.layers)
+        var imageLayers     = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.imageLayer)
+        var objectLayers    = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.objectLayer)
+
+        for key in container.allKeys.map({$0.stringValue}) where LayerType.allCases.map({$0.rawValue}).contains(key){
+            switch LayerType.init(rawValue: key)! {
+            case .group:
+                decodedLayers.append(try groupLayers.decode(GroupLayer.self))
+            case .object:
+                decodedLayers.append(try objectLayers.decode(ObjectLayer.self))
+            case .tile:
+                decodedLayers.append(try tileLayers.decode(TileLayer.self))
+            case .image:
+                decodedLayers.append(try imageLayers.decode(ImageLayer.self))
             }
         }
-         
         
-        
-//        while !undecodedLayers.isAtEnd {
-//            let layerType = try typeExposer.decode(LayerType.self)
-//            switch layerType {
-//            case .group:
-//                decodedLayers.append(try undecodedLayers.decode(GroupLayer.self))
-//            case .object:
-//                decodedLayers.append(try undecodedLayers.decode(ObjectLayer.self))
-//            case .tile:
-//                decodedLayers.append(try undecodedLayers.decode(TileLayer.self))
-//            }
-//        }
         return decodedLayers
     }
 }

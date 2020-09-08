@@ -38,11 +38,12 @@ public class Layer: TiledDecodable, Propertied{
     
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        x = try container.decode(Int.self, forKey: .x)
-        y = try container.decode(Int.self, forKey: .y)
+        x = (try? container.decode(Int.self, forKey: .x)) ?? 0
+        y = (try? container.decode(Int.self, forKey: .y)) ?? 0
         name = try container.decode(String.self, forKey: .name)
-        visible = try container.decode(Bool.self, forKey: .visible)
-        opacity = try container.decode(Float.self, forKey: .opacity)
+        print("Decoding \(name) with path \(decoder.codingPath.map({$0.stringValue}))")
+        visible = (try? container.decode(Bool.self, forKey: .visible)) ?? true
+        opacity = (try? container.decode(Float.self, forKey: .opacity)) ?? 1.0
         
         let decoderContext = decoder.userInfo[DecodingContext.key] as! DecodingContext
         
@@ -86,6 +87,25 @@ public extension LayerContainer{
     }
 }
 
+public enum LayerDataEncoding : String, Codable {
+    case none
+    case csv
+}
+
+public class LayerData : Decodable {
+    public let contents : String
+    public let encoding : LayerDataEncoding
+    
+    enum CodingKeys : String, CodingKey {
+        case encoding, contents = ""
+    }
+    
+    var tiles : [Int] {
+        #warning("Needs to be implemented")
+        return [0]
+    }
+}
+
 public class TileLayer : Layer{
     public let width : Int
     public let height : Int
@@ -100,7 +120,10 @@ public class TileLayer : Layer{
         let container = try decoder.container(keyedBy: TiledCodingKeys.self)
         width = try container.decode(Int.self, forKey: .width)
         height = try container.decode(Int.self, forKey: .height)
-        tiles = try container.decode([Int].self, forKey: .tiles)
+        let data = try container.decode(LayerData.self, forKey: .tiles)
+        
+        tiles = data.tiles
+        
         let offsetx = (try? container.decode(Int.self, forKey: .offsetx)) ?? 0
         let offsety = (try? container.decode(Int.self, forKey: .offsety)) ?? 0
         offset = (offsetx, offsety)
