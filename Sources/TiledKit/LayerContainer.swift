@@ -117,20 +117,38 @@ extension LayerContainer {
     }
     
     static func decodeLayers(_ container:KeyedDecodingContainer<Level.CodingKeys>) throws ->[Layer]  {
-        var typeExposer     = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.layers)
-        var undecodedLayers = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.layers)
+//        var typeExposer     = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.layers)
+//        var undecodedLayers = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.layers)
         var decodedLayers = [Layer]()
-        while !undecodedLayers.isAtEnd {
-            let layerType = try typeExposer.decode(LayerType.self)
-            switch layerType {
-            case .group:
-                decodedLayers.append(try undecodedLayers.decode(GroupLayer.self))
-            case .object:
-                decodedLayers.append(try undecodedLayers.decode(ObjectLayer.self))
-            case .tile:
-                decodedLayers.append(try undecodedLayers.decode(TileLayer.self))
+        
+        var continueDecoding = true
+        while continueDecoding {
+            if let groupLayer = try? container.decode(GroupLayer.self, forKey: .group){
+                decodedLayers.append(groupLayer)
+            } else if let objectLayer = try? container.decode(ObjectLayer.self, forKey: .objectLayer) {
+                decodedLayers.append(objectLayer)
+            } else if let tileLayer = try? container.decode(TileLayer.self, forKey: .layers) {
+                decodedLayers.append(tileLayer)
+            } else if let imageLayer = try? container.decode(ImageLayer.self, forKey: .imageLayer) {
+                decodedLayers.append(imageLayer)
+            } else {
+                continueDecoding = false
             }
         }
+         
+        
+        
+//        while !undecodedLayers.isAtEnd {
+//            let layerType = try typeExposer.decode(LayerType.self)
+//            switch layerType {
+//            case .group:
+//                decodedLayers.append(try undecodedLayers.decode(GroupLayer.self))
+//            case .object:
+//                decodedLayers.append(try undecodedLayers.decode(ObjectLayer.self))
+//            case .tile:
+//                decodedLayers.append(try undecodedLayers.decode(TileLayer.self))
+//            }
+//        }
         return decodedLayers
     }
 }

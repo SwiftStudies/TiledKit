@@ -46,7 +46,20 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(tileSet.tiles.count, 2)
     }
     
+    func testLevel(){
+        guard let url = Bundle.module.url(forResource: "Test Map 1", withExtension: "tmx", subdirectory: "Maps") else {
+            XCTFail("Could not find Map in bundle")
+            return
+        }
+
+        let level = try! Level(from:url)
+        
+        print(level.height)
+        
+    }
+    
     static var allTests = [
+        ("testLevel",testLevel),
         ("testMultiImageTileSetWithSingleTile",testMultiImageTileSetWithSingleTile),
         ("testMultiImageTileSet",testMultiImageTileSet),
         ("testSingleImageTileSetWithOptionals", testSingleImageTileSetWithOptionals),

@@ -106,7 +106,7 @@ public class TileLayer : Layer{
         offset = (offsetx, offsety)
         try super.init(from: decoder)
         
-        let decoderContext = level.decodingContext(decoder)
+        let decoderContext = level.decodingContext(url: nil, decoder)
         decoderContext.layerPath.append(self)
         decoderContext.layerPath.removeLast()
     }
@@ -121,12 +121,12 @@ public class ObjectLayer : Layer{
     
     public required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
-        let decoderContext = level.decodingContext(decoder)
+        let decoderContext = level.decodingContext(url: nil, decoder)
         decoderContext.layerPath.append(self)
         objects = try decodeObjects(from: try decoder.container(keyedBy: CodingKeys.self).nestedUnkeyedContainer(forKey: .objects), in: decoderContext)
         
         for tileObject in objects.compactMap({$0 as? TileObject}){
-            tileObject.tile = decoder.userInfo.levelDecodingContext().level?.tiles[tileObject.gid]
+            tileObject.tile = decoder.userInfo.levelDecodingContext(originatingFrom: nil).level?.tiles[tileObject.gid]
         }
         
         decoderContext.layerPath.removeLast()
@@ -143,7 +143,7 @@ public final class GroupLayer : Layer, LayerContainer{
     
     public required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
-        let decoderContext = level.decodingContext(decoder)
+        let decoderContext = level.decodingContext(url: nil, decoder)
         
         decoderContext.layerPath.append(self)
         let layers : [Layer] = try Level.decodeLayers(decoder.container(keyedBy: Level.CodingKeys.self))
@@ -152,3 +152,13 @@ public final class GroupLayer : Layer, LayerContainer{
     }
 }
 
+public final class ImageLayer : Layer {
+    let offsetx : Double = 0.0
+    let offsety : Double = 0.0
+
+    public required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        let decoderContext = level.decodingContext(url: nil, decoder)
+        decoderContext.layerPath.append(self)
+    }
+}

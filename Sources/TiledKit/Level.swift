@@ -13,17 +13,20 @@
 //    limitations under the License.
 
 import Foundation
+import XMLCoder
 
 //TODO: Move into its own file
 class DecodingContext{
     static var key : CodingUserInfoKey {
         return CodingUserInfoKey(rawValue: "TiledLevelDecodingContext")!
     }
-    let customObjectTypes : [CustomObject.Type]
+    var originUrl : URL?
+    var customObjectTypes : [CustomObject.Type]
     var level : Level? = nil
     var layerPath = [Layer]()
     
-    init(with customObjectTypes:[CustomObject.Type]){
+    init(originatingFrom url:URL?, with customObjectTypes:[CustomObject.Type]){
+        self.originUrl = url
         self.customObjectTypes = customObjectTypes
     }
 }
@@ -33,8 +36,8 @@ protocol TiledDecodable : Decodable {
 }
 
 extension TiledDecodable {
-    func decodingContext(_ decoder:Decoder)->DecodingContext{
-        return decoder.userInfo.levelDecodingContext()
+    func decodingContext(url:URL?,_ decoder:Decoder)->DecodingContext{
+        return decoder.userInfo.levelDecodingContext(originatingFrom: url)
     }
 }
 
@@ -60,6 +63,31 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
         tileSetReferences = []
     }
 
+    public init(from url:URL) throws {
+        let data = Data.withContentsInBundleFirst(url:url)
+        
+        do {
+            let decoder = XMLDecoder()
+            let context = DecodingContext(originatingFrom: url.deletingLastPathComponent(), with: [])
+            
+            decoder.userInfo[DecodingContext.key] = context
+            
+            let loaded = try decoder.decode(Level.self, from: data)
+            
+            height = loaded.height
+            width = loaded.width
+            tileWidth = loaded.tileWidth
+            tileHeight = loaded.tileHeight
+            tileSetReferences = loaded.tileSetReferences
+            properties = loaded.properties
+            tileSets = loaded.tileSets
+            layers = loaded.layers
+            
+        } catch {
+            fatalError("Could not decode XML \(error)")
+        }
+    }
+    
     public required init(from decoder:Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -68,9 +96,13 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
         tileWidth = try container.decode(Int.self, forKey: .tileWidth)
         tileHeight = try container.decode(Int.self, forKey: .tileHeight)
         tileSetReferences = try container.decode([TileSetReference].self, forKey: .tileSets)
-        properties = try decode(from: decoder)
-        decodingContext(decoder).level = self
+        if let properties = try? decode(from: decoder) {
+            self.properties = properties
+        }
         
+        
+        decodingContext(url: nil, decoder).level = self
+
         for tileSetReference in tileSetReferences {
             let tileSet = TileSetCache.tileSet(from: tileSetReference)
             tileSets.append(tileSet)
@@ -85,7 +117,7 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
         //Now build all the custom objects
         for objectLayer in getObjectLayers(recursively: true) as [ObjectLayer]{
             for object in objectLayer.objects {
-                object.type = CustomObjectFactory.make(for: object, with: decodingContext(decoder).customObjectTypes)
+                object.type = CustomObjectFactory.make(for: object, with: decodingContext(url: nil, decoder).customObjectTypes)
             }
         }
     }
@@ -113,7 +145,7 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
             FileManager.default.changeCurrentDirectoryPath(url.deletingLastPathComponent().absoluteURL.path)
             
             let jsonDecoder = JSONDecoder()
-            let decodingContext = DecodingContext(with: customObjectTypes)
+            let decodingContext = DecodingContext(originatingFrom: url, with: customObjectTypes)
             jsonDecoder.userInfo[DecodingContext.key] = decodingContext
             let loadedLevel = try jsonDecoder.decode(Level.self, from: data)
             self.height = loadedLevel.height
@@ -134,17 +166,20 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
         }
     }
     
-    enum CodingKeys : String, CodingKey {
-        case height, width, layers, properties
+    enum CodingKeys : String, XMLChoiceCodingKey {
+        case height, width, layers = "layer", objectLayer = "objectgroup", imageLayer="imagelayer", group="group", properties
         case tileWidth  = "tilewidth"
         case tileHeight = "tileheight"
-        case tileSets = "tilesets"
+        case tileSets = "tileset"
     }
 }
 
 extension Dictionary where Key == CodingUserInfoKey {
-    func levelDecodingContext()->DecodingContext{
-        return (self[DecodingContext.key] as? DecodingContext) ?? DecodingContext(with: [])
+    var decodingContext : DecodingContext? {
+        return self[DecodingContext.key] as? DecodingContext
+    }
+    func levelDecodingContext(originatingFrom url:URL?)->DecodingContext{
+        return (self[DecodingContext.key] as? DecodingContext) ?? DecodingContext(originatingFrom:  nil, with: [])
 
     }
 }

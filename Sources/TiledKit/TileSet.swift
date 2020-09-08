@@ -21,6 +21,23 @@ class TileSetReference : Decodable{
     let firstGID    : Int
     let file        : String
     
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let relativePath = try container.decode(String.self, forKey: .file)
+        
+        if relativePath.hasPrefix("..") {
+            let originUrl = decoder.userInfo.decodingContext?.originUrl ?? Bundle.main.bundleURL
+            
+            file = originUrl.appendingPathComponent(relativePath).path
+            
+        } else {
+            file = relativePath
+        }
+        
+        firstGID = try container.decode(Int.self, forKey: .firstGID)
+    }
+    
     init(with firstGid:Int, for tileSet:TileSet, in file:String){
         self.firstGID = firstGid
         identifier = Identifier(stringLiteral: tileSet.name)
@@ -126,7 +143,7 @@ public struct TileSet : TiledDecodable{
         
         //Import to set the level context before decoding tiles as they can contain layers
         let level = Level()
-        decoder.userInfo.levelDecodingContext().level = level
+        decoder.userInfo.levelDecodingContext(originatingFrom: nil).level = level
         
         // Create the tiles, we first need to determine if this is a
         // sheet type or a collection of images
@@ -204,7 +221,7 @@ public struct TileSet : TiledDecodable{
         
         do {
             let decoder = XMLDecoder()
-            decoder.userInfo[DecodingContext.key] = DecodingContext(with: [])
+            decoder.userInfo[DecodingContext.key] = DecodingContext(originatingFrom: url, with: [])
             
             let loaded = try decoder.decode(TileSet.self, from: data)
             

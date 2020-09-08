@@ -68,7 +68,7 @@ public class Object : TiledDecodable, Propertied{
         y       = try container.decode(Float.self, forKey: .y)
         rawType = try container.decodeIfPresent(String.self, forKey: .type)
         
-        parent = decoder.userInfo.levelDecodingContext().layerPath.last! as! ObjectLayer
+        parent = decoder.userInfo.levelDecodingContext(originatingFrom: nil).layerPath.last! as! ObjectLayer
         
         // Properties
         properties = try decode(from: decoder)
