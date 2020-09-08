@@ -30,29 +30,41 @@ public class Layer: TiledDecodable, Propertied{
     }
     
     enum CodingKeys : String, CodingKey {
-        case name, visible, opacity, x, y, objects, layers
+        case name, visible, opacity, x, y, objects = "objectgroup", layers = "layer", group = "group", imagelayer = "imagelayer"
         case tileData  = "data"
         case tileWidth = "width"
         case tileHeight = "height"
     }
     
     public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        x = (try? container.decode(Int.self, forKey: .x)) ?? 0
-        y = (try? container.decode(Int.self, forKey: .y)) ?? 0
-        name = try container.decode(String.self, forKey: .name)
-        print("Decoding \(name) with path \(decoder.codingPath.map({$0.stringValue}))")
-        visible = (try? container.decode(Bool.self, forKey: .visible)) ?? true
-        opacity = (try? container.decode(Float.self, forKey: .opacity)) ?? 1.0
-        
-        let decoderContext = decoder.userInfo[DecodingContext.key] as! DecodingContext
-        
-        if let layerStackTop = decoderContext.layerPath.last {
-            parent = layerStackTop as! GroupLayer
-        } else {
-            parent = decoderContext.level!
+        guard let decoderContext = decoder.userInfo.decodingContext else {
+            fatalError("No DecodingContext")
         }
-        properties = try decode(from: decoder)
+        
+        if let containedBy = decoderContext.currentContainer {
+            parent = containedBy
+        } else {
+            #warning("Should throw instead")
+            fatalError("No container for layer")
+        }
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+
+            name = try container.decode(String.self, forKey: .name)
+            print("Decoding \(name) with path \(decoderContext.layerPath.map({$0.name}))")
+            
+            x = (try? container.decode(Int.self, forKey: .x)) ?? 0
+            y = (try? container.decode(Int.self, forKey: .y)) ?? 0
+            
+            visible = (try? container.decode(Bool.self, forKey: .visible)) ?? true
+            opacity = (try? container.decode(Float.self, forKey: .opacity)) ?? 1.0
+                    
+            properties = try decode(from: decoder)
+        } catch {
+            print("Whilst building \(Swift.type(of: Self.self)) encountered decoding error: \(error.localizedDescription)")
+            throw error
+        }
     }
 }
 
@@ -128,10 +140,6 @@ public class TileLayer : Layer{
         let offsety = (try? container.decode(Int.self, forKey: .offsety)) ?? 0
         offset = (offsetx, offsety)
         try super.init(from: decoder)
-        
-        let decoderContext = level.decodingContext(url: nil, decoder)
-        decoderContext.layerPath.append(self)
-        decoderContext.layerPath.removeLast()
     }
     
     public subscript(_ x:Int, _ y:Int)->Int{
@@ -143,13 +151,17 @@ public class ObjectLayer : Layer{
     public var objects = [Object] ()
     
     public required init(from decoder: Decoder) throws {
+        guard let decoderContext = decoder.userInfo.decodingContext else {
+            fatalError("No DecodingContext")
+        }
+
         try super.init(from: decoder)
-        let decoderContext = level.decodingContext(url: nil, decoder)
+        
         decoderContext.layerPath.append(self)
         objects = try decodeObjects(from: try decoder.container(keyedBy: CodingKeys.self).nestedUnkeyedContainer(forKey: .objects), in: decoderContext)
         
         for tileObject in objects.compactMap({$0 as? TileObject}){
-            tileObject.tile = decoder.userInfo.levelDecodingContext(originatingFrom: nil).level?.tiles[tileObject.gid]
+            tileObject.tile = decoderContext.level?.tiles[tileObject.gid]
         }
         
         decoderContext.layerPath.removeLast()
@@ -161,17 +173,18 @@ public final class GroupLayer : Layer, LayerContainer{
     public var layers = [Layer]()
     
     enum LayerCodingKeys : String, CodingKey {
-        case layers
+        case layers = "layer"
     }
     
     public required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
-        let decoderContext = level.decodingContext(url: nil, decoder)
-        
-        decoderContext.layerPath.append(self)
+
+        decoder.userInfo.decodingContext?.layerPath.append(self)
+
         let layers : [Layer] = try Level.decodeLayers(decoder.container(keyedBy: Level.CodingKeys.self))
         self.layers.append(contentsOf: layers)
-        decoderContext.layerPath.removeLast()
+        
+        decoder.userInfo.decodingContext?.layerPath.removeLast()
     }
 }
 
@@ -180,8 +193,10 @@ public final class ImageLayer : Layer {
     let offsety : Double = 0.0
 
     public required init(from decoder: Decoder) throws {
+        guard let decoderContext = decoder.userInfo.decodingContext else {
+            fatalError("No DecodingContext")
+        }
         try super.init(from: decoder)
-        let decoderContext = level.decodingContext(url: nil, decoder)
-        decoderContext.layerPath.append(self)
+        #warning("Image Layers not implemented")
     }
 }

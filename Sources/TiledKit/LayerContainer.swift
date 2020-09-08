@@ -109,21 +109,21 @@ extension LayerContainer {
     static func decodeLayers(_ container:KeyedDecodingContainer<Level.CodingKeys>) throws ->[Layer]  {
         var decodedLayers = [Layer]()
         
-        var groupLayers     = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.group)
-        var tileLayers      = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.layers)
-        var imageLayers     = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.imageLayer)
-        var objectLayers    = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.objectLayer)
+        var groupLayers     = try container.decode([GroupLayer].self, forKey: .group)
+        var tileLayers      = try container.decode([TileLayer].self, forKey: .layers)
+        var imageLayers     = try container.decode([ImageLayer].self, forKey: .imageLayer)
+        var objectLayers    = try container.decode([ObjectLayer].self, forKey: .objectLayer)
 
         for key in container.allKeys.map({$0.stringValue}) where LayerType.allCases.map({$0.rawValue}).contains(key){
             switch LayerType.init(rawValue: key)! {
             case .group:
-                decodedLayers.append(try groupLayers.decode(GroupLayer.self))
+                decodedLayers.append(groupLayers.removeFirst())
             case .object:
-                decodedLayers.append(try objectLayers.decode(ObjectLayer.self))
+                decodedLayers.append(objectLayers.removeFirst())
             case .tile:
-                decodedLayers.append(try tileLayers.decode(TileLayer.self))
+                decodedLayers.append(tileLayers.removeFirst())
             case .image:
-                decodedLayers.append(try imageLayers.decode(ImageLayer.self))
+                decodedLayers.append(imageLayers.removeFirst())
             }
         }
         

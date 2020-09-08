@@ -54,6 +54,12 @@ final class TiledKitTests: XCTestCase {
 
         let level = try! Level(from:url)
         
+        XCTAssertEqual(level.width, 10)
+        XCTAssertEqual(level.height, 10)
+        XCTAssertEqual(level.tileWidth, 16)
+        XCTAssertEqual(level.tileHeight, 16)
+        XCTAssertEqual(level.layers.count, 5)
+
         print(level.height)
         
     }

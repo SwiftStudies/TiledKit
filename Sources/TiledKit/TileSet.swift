@@ -135,6 +135,9 @@ public struct TileSet : TiledDecodable{
     }
     
     public init(from decoder: Decoder) throws{
+        guard let decoderContext = decoder.userInfo.decodingContext else {
+            fatalError("No DecodingContext")
+        }
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         tileWidth = try container.decode(Int.self, forKey: .tileWidth)
@@ -143,7 +146,7 @@ public struct TileSet : TiledDecodable{
         
         //Import to set the level context before decoding tiles as they can contain layers
         let level = Level()
-        decoder.userInfo.levelDecodingContext(originatingFrom: nil).level = level
+        decoderContext.level = level
         
         // Create the tiles, we first need to determine if this is a
         // sheet type or a collection of images

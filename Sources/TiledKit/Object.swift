@@ -58,6 +58,9 @@ public class Object : TiledDecodable, Propertied{
     }
     
     required public init(from decoder: Decoder) throws {
+        guard let decoderContext = decoder.userInfo.decodingContext else {
+            fatalError("No DecodingContext")
+        }
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         //Standard stuff
@@ -68,7 +71,8 @@ public class Object : TiledDecodable, Propertied{
         y       = try container.decode(Float.self, forKey: .y)
         rawType = try container.decodeIfPresent(String.self, forKey: .type)
         
-        parent = decoder.userInfo.levelDecodingContext(originatingFrom: nil).layerPath.last! as! ObjectLayer
+        #warning("Need to do some conditional unwrapping")
+        parent = decoderContext.layerPath.last! as! ObjectLayer
         
         // Properties
         properties = try decode(from: decoder)

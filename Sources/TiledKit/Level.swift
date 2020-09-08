@@ -29,16 +29,17 @@ class DecodingContext{
         self.originUrl = url
         self.customObjectTypes = customObjectTypes
     }
+    
+    var currentContainer : LayerContainer? {
+        if let topContainer = layerPath.last {
+            return topContainer as? LayerContainer
+        }
+        return level
+    }
 }
 
 protocol TiledDecodable : Decodable {
    
-}
-
-extension TiledDecodable {
-    func decodingContext(url:URL?,_ decoder:Decoder)->DecodingContext{
-        return decoder.userInfo.levelDecodingContext(originatingFrom: url)
-    }
 }
 
 public class Level : TiledDecodable, LayerContainer, Propertied {
@@ -89,6 +90,9 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
     }
     
     public required init(from decoder:Decoder) throws {
+        guard let decoderContext = decoder.userInfo.decodingContext else {
+            fatalError("No DecodingContext")
+        }
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         width = try container.decode(Int.self, forKey: .width)
@@ -101,7 +105,7 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
         }
         
         
-        decodingContext(url: nil, decoder).level = self
+        decoderContext.level = self
 
         for tileSetReference in tileSetReferences {
             let tileSet = TileSetCache.tileSet(from: tileSetReference)
@@ -114,12 +118,6 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
         //Import to set the level context before decoding layers
         layers.append(contentsOf: try Level.decodeLayers(container))
 
-        //Now build all the custom objects
-        for objectLayer in getObjectLayers(recursively: true) as [ObjectLayer]{
-            for object in objectLayer.objects {
-                object.type = CustomObjectFactory.make(for: object, with: decodingContext(url: nil, decoder).customObjectTypes)
-            }
-        }
     }
     
     public init<Engine:GameEngine>(fromFile file:String, using customObjectTypes:[CustomObject.Type] = [], for engine:Engine.Type){
@@ -178,8 +176,10 @@ extension Dictionary where Key == CodingUserInfoKey {
     var decodingContext : DecodingContext? {
         return self[DecodingContext.key] as? DecodingContext
     }
-    func levelDecodingContext(originatingFrom url:URL?)->DecodingContext{
-        return (self[DecodingContext.key] as? DecodingContext) ?? DecodingContext(originatingFrom:  nil, with: [])
+    
 
+
+    mutating func createContext(loadingFrom url:URL){
+        self[DecodingContext.key] = DecodingContext(originatingFrom: url, with: []) as! Value
     }
 }
