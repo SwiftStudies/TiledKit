@@ -150,6 +150,10 @@ public class TileLayer : Layer{
 public class ObjectLayer : Layer{
     public var objects = [Object] ()
     
+    public enum ObjectLayerCodingKeys : String, CodingKey {
+        case object
+    }
+    
     public required init(from decoder: Decoder) throws {
         guard let decoderContext = decoder.userInfo.decodingContext else {
             fatalError("No DecodingContext")
@@ -158,7 +162,8 @@ public class ObjectLayer : Layer{
         try super.init(from: decoder)
         
         decoderContext.layerPath.append(self)
-        objects = try decodeObjects(from: try decoder.container(keyedBy: CodingKeys.self).nestedUnkeyedContainer(forKey: .objects), in: decoderContext)
+        
+        objects = try decodeObjects(from: decoder)
         
         for tileObject in objects.compactMap({$0 as? TileObject}){
             tileObject.tile = decoderContext.level?.tiles[tileObject.gid]

@@ -15,24 +15,6 @@
 
 import Foundation
 
-public protocol CustomObject {
-    static var identifier : String { get }
-    init?(for object: Object)
-}
-
-fileprivate var registeredCustomObjectTypes = [CustomObject.Type]()
-
-enum CustomObjectFactory {
-    static func make(for object:Object, with customObjectTypes:[CustomObject.Type])->CustomObject? {
-        for type in customObjectTypes {
-            if type.identifier == object.rawType ?? "" {
-                return type.init(for: object)
-            }
-        }
-        return nil
-    }
-}
-
 public class Object : TiledDecodable, Propertied{
     internal enum ObjectDecodingError : Error {
         case notMyType      // A specialisation cannot decode
@@ -44,7 +26,6 @@ public class Object : TiledDecodable, Propertied{
     
     public let id          : Int
     public let name        : String?
-    public var type        : CustomObject?
     fileprivate let rawType : String?
     public let visible     : Bool
     public let x           : Float
@@ -245,16 +226,16 @@ public class PolylineObject : Object{
 }
 
 extension ObjectLayer {
-    func decodeObjects(from container: UnkeyedDecodingContainer, in context:DecodingContext) throws -> [Object] {
-        var container = container
+    func decodeObjects(from decoder: Decoder) throws -> [Object] {
         let objectKinds = [PolylineObject.self, PolygonObject.self, PointObject.self, TextObject.self, TileObject.self, EllipseObject.self, RectangleObject.self]
         
-        var objects = [Object]()
 
-        ontoNextObject: while !container.isAtEnd {
+        var objectElements = try decoder.unkeyedContainer()
+        
+        ontoNextObject: while !objectElements.isAtEnd {
             for objectKind in objectKinds {
                 do {
-                    objects.append(try container.decode(objectKind))
+                    objects.append(try objectElements.decode(objectKind))
                     
                     continue ontoNextObject
                 } catch let error as DecodingError {
@@ -263,21 +244,9 @@ extension ObjectLayer {
                     continue
                 }
             }
-
         }
-        
+                
         return objects
     }
 }
 
-public extension LayerContainer {
-    func customObjects<T>(traverseGroups:Bool = false)->[T]{
-        var objects = [T]()
-        
-        for layer in getObjectLayers(recursively: traverseGroups) as [ObjectLayer]{
-            objects.append(contentsOf: layer.objects.compactMap({$0.type as? T}))
-        }
-        
-        return objects
-    }
-}

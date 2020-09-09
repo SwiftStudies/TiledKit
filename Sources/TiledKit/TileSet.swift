@@ -213,9 +213,6 @@ public struct TileSet : TiledDecodable{
             position = nil
         }
         
-        func texture<Engine:GameEngine>(for:Engine.Type)->Engine.Texture{
-            return Engine.textureCache[identifier] ?? Engine.texture(self)
-        }
     }
     
     
@@ -224,7 +221,7 @@ public struct TileSet : TiledDecodable{
         
         do {
             let decoder = XMLDecoder()
-            decoder.userInfo[DecodingContext.key] = DecodingContext(originatingFrom: url, with: [])
+            decoder.userInfo[DecodingContext.key] = DecodingContext(originatingFrom: url)
             
             let loaded = try decoder.decode(TileSet.self, from: data)
             

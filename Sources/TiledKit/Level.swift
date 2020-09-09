@@ -21,13 +21,11 @@ class DecodingContext{
         return CodingUserInfoKey(rawValue: "TiledLevelDecodingContext")!
     }
     var originUrl : URL?
-    var customObjectTypes : [CustomObject.Type]
     var level : Level? = nil
     var layerPath = [Layer]()
     
-    init(originatingFrom url:URL?, with customObjectTypes:[CustomObject.Type]){
+    init(originatingFrom url:URL?){
         self.originUrl = url
-        self.customObjectTypes = customObjectTypes
     }
     
     var currentContainer : LayerContainer? {
@@ -69,7 +67,7 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
         
         do {
             let decoder = XMLDecoder()
-            let context = DecodingContext(originatingFrom: url.deletingLastPathComponent(), with: [])
+            let context = DecodingContext(originatingFrom: url.deletingLastPathComponent())
             
             decoder.userInfo[DecodingContext.key] = context
             
@@ -120,50 +118,6 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
 
     }
     
-    public init<Engine:GameEngine>(fromFile file:String, using customObjectTypes:[CustomObject.Type] = [], for engine:Engine.Type){
-        let url : URL
-        
-        if let bundleUrl = Bundle.main.url(forResource: file, withExtension: "json") {
-            url = bundleUrl
-        } else {
-            url = URL(fileURLWithPath: file)
-        }
-        
-        if !FileManager.default.fileExists(atPath: url.path){
-            fatalError("Could not find level file \(file)")
-        }
-        
-        guard let data = try? Data(contentsOf: url) else {
-            fatalError("Could not load \(file) as data")
-        }
-        
-        do {
-            let workingDirectory = FileManager.default.currentDirectoryPath
-            
-            FileManager.default.changeCurrentDirectoryPath(url.deletingLastPathComponent().absoluteURL.path)
-            
-            let jsonDecoder = JSONDecoder()
-            let decodingContext = DecodingContext(originatingFrom: url, with: customObjectTypes)
-            jsonDecoder.userInfo[DecodingContext.key] = decodingContext
-            let loadedLevel = try jsonDecoder.decode(Level.self, from: data)
-            self.height = loadedLevel.height
-            self.width  = loadedLevel.width
-            self.tileWidth = loadedLevel.tileWidth
-            self.tileHeight = loadedLevel.tileHeight
-            self.properties = loadedLevel.properties
-            self.layers = loadedLevel.layers
-            self.tileSetReferences = loadedLevel.tileSetReferences
-            self.tileSets = loadedLevel.tileSets
-            self.tiles = loadedLevel.tiles
-            
-            
-            Engine.cacheTextures(from: self)
-            FileManager.default.changeCurrentDirectoryPath(workingDirectory)
-        } catch {
-            fatalError("\(error)")
-        }
-    }
-    
     enum CodingKeys : String, CodingKey {
         case height, width, layers = "layer", objectLayer = "objectgroup", imageLayer="imagelayer", group="group", properties
         case tileWidth  = "tilewidth"
@@ -180,6 +134,6 @@ extension Dictionary where Key == CodingUserInfoKey {
 
 
     mutating func createContext(loadingFrom url:URL){
-        self[DecodingContext.key] = DecodingContext(originatingFrom: url, with: []) as! Value
+        self[DecodingContext.key] = DecodingContext(originatingFrom: url) as! Value
     }
 }
