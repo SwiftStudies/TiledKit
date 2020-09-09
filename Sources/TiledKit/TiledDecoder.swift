@@ -12,9 +12,12 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-public func require<T>(_ optional:T?,or message:String)->T{
-    if let unwrapped = optional {
-        return unwrapped
+import Foundation
+import XMLCoder
+
+internal class TiledDecoder : XMLDecoder {
+    init(from url: URL) {
+        super.init()
+        userInfo[DecodingContext.key] = DecodingContext(originatingFrom: url)
     }
-    fatalError(message)
 }
