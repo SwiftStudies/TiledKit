@@ -99,22 +99,27 @@ public extension LayerContainer{
     }
 }
 
-public enum LayerDataEncoding : String, Codable {
-    case none
-    case csv
-}
-
-public class LayerData : Decodable {
-    public let contents : String
-    public let encoding : LayerDataEncoding
-    
-    enum CodingKeys : String, CodingKey {
-        case encoding, contents = ""
+private class LayerData : Decodable {
+    enum Encoding : String, Decodable {
+        case csv
+        
+        func decode(mapFrom string:String)->[Int]{
+            let string = string.replacingOccurrences(of: "\n", with: "")
+            return string.split(separator: ",").map({Int($0) ?? 0})
+        }
     }
     
+    enum CodingKeys : String, CodingKey {
+        case encoding, data = ""
+    }
+    
+    let encoding : Encoding
+    let data : String
+    
     var tiles : [Int] {
+        
         #warning("Needs to be implemented")
-        return [0]
+        return encoding.decode(mapFrom: data)
     }
 }
 

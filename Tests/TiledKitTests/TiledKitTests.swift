@@ -72,6 +72,7 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual((nestedImageLayer.parent as? GroupLayer)?.name ?? "FAILED", "Group")
         
         XCTAssertEqual(level.getObjectLayers()[0].objects.count, 7)
+        XCTAssertEqual(level.getTileLayers()[0].tiles.count, 100)
     }
     
     static var allTests = [
