@@ -19,6 +19,7 @@ fileprivate enum PropertyJSONKeys : String, CodingKey {
     case types = "propertytypes", values = "properties"
 }
 
+#warning("Is this needed?")
 fileprivate struct FlexibleCodingKey : CodingKey {
     var stringValue: String
     var intValue: Int?
