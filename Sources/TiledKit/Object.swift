@@ -73,7 +73,8 @@ public class RectangleObject : Object{
     init(id: Int, name: String, visible: Bool, x: Double, y: Double, width:Double, height:Double, in parent: ObjectLayer, with properties: [String : Literal]) {
         self.width = Float(width)
         self.height = Float(height)
-        self.rotation = Float(rotation)
+        #warning("Not passing along rotation, this should really be an abstract base class")
+        self.rotation = 0.0
         super.init(id: id, name: name, visible: visible, x: x, y: y, in: parent, with: properties)
     }
 }
@@ -141,17 +142,17 @@ fileprivate struct LoadableObject : Decodable {
     let parent : ObjectLayer
 
     enum Kind {
-        case tile(gid:Int), point, ellipse, rectangle, polyline(points:[(x:Double,y:Double)]), text(wrap:Bool, string:String),polygon(points:[(x:Double,y:Double)])
+        case tile(gid:Int), point, ellipse, rectangle, polyline(points:[Position]), text(wrap:Bool, string:String),polygon(points:[Position])
     }
     
     struct PolygonPoints : Decodable {
         var points : String
         
-        var pointsArray : [(x:Double,y:Double)] {
+        var pointsArray : [Position] {
             return points.split(separator: " ").map{
                 let xy = $0.split(separator: ",")
                 #warning("Remove forced unwrap")
-                return (x:Double(xy[0])!,y:Double(xy[1])!)
+                return Position(x: Float(xy[0])!, y: Float(xy[1])!)
             }
         }
     }
@@ -175,7 +176,7 @@ fileprivate struct LoadableObject : Decodable {
             fatalError("No decoder context")
         }
         
-        guard let objectLayer : ObjectLayer = decoderContext.currentContainer as? ObjectLayer else {
+        guard let objectLayer : ObjectLayer = decoderContext.layerPath.last as? ObjectLayer else {
             fatalError("Current container is not an object layer")
         }
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -205,6 +206,9 @@ fileprivate struct LoadableObject : Decodable {
             kind = .text(wrap: definition.wrap, string: definition.string)
         } else if container.allKeys.contains(.polygon){
             let polygonPoints = try container.decode(PolygonPoints.self, forKey: .polygon)
+            kind = .polygon(points: polygonPoints.pointsArray)
+        } else if container.allKeys.contains(.polyline) {
+            let polygonPoints = try container.decode(PolygonPoints.self, forKey: .polyline)
             kind = .polyline(points: polygonPoints.pointsArray)
         } else {
             kind = .rectangle
@@ -220,11 +224,13 @@ fileprivate struct LoadableObject : Decodable {
         case .point:
             return PointObject(id: id, name: name, visible: visible, x: x, y: y, in: parent, with: properties)
         case .ellipse:
-            return EllipseObject(id: id, name: name, visible: visible, x: x, y: y, width: width!, height: height!, in: parent, with: properties
+            return EllipseObject(id: id, name: name, visible: visible, x: x, y: y, width: width!, height: height!, in: parent, with: properties)
         case .rectangle:
-            return RectangleObject(id: id, name: name, visible: visible, x: x, y: y, width: width!, height: height!, in: parent, with: properties
+            return RectangleObject(id: id, name: name, visible: visible, x: x, y: y, width: width!, height: height!, in: parent, with: properties)
+        case .polygon(points: let points):
+            return PolygonObject(id: id, name: name, visible: visible, x: x, y: y, points: points, in: parent, with: properties)
         case .polyline(points: let points):
-            return PolylineObject(id: id, name: name, visible: visible, x: x, y: y, points: kind, in: <#T##ObjectLayer#>, with: <#T##[String : Literal]#>)
+            return PolylineObject(id: id, name: name, visible: visible, x: x, y: y, points: points, in: parent, with: properties)
         case .text(wrap: let wrap, string: let string):
             #warning("Lots of things not read, create failing test")
             let text = TextObject.TextProperties(fontName: "", fontSize: 12, text: string, color: Color(r: 255, g: 255, b: 255))

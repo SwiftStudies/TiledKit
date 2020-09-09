@@ -66,11 +66,8 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
         let data = Data.withContentsInBundleFirst(url:url)
         
         do {
-            let decoder = XMLDecoder()
-            let context = DecodingContext(originatingFrom: url.deletingLastPathComponent())
-            
-            decoder.userInfo[DecodingContext.key] = context
-            
+            let decoder = TiledDecoder(from: url)
+
             let loaded = try decoder.decode(Level.self, from: data)
             
             height = loaded.height
@@ -130,10 +127,5 @@ extension Dictionary where Key == CodingUserInfoKey {
     var decodingContext : DecodingContext? {
         return self[DecodingContext.key] as? DecodingContext
     }
-    
 
-
-    mutating func createContext(loadingFrom url:URL){
-        self[DecodingContext.key] = DecodingContext(originatingFrom: url) as! Value
-    }
 }

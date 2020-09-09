@@ -38,6 +38,10 @@ let package = Package(
         .testTarget(
             name: "TiledKitTests",
             dependencies: ["TiledKit"],
+            exclude: [
+                "Resources/PikoPixel",
+                "Resources/Test Project.tiled-session"
+            ],
             resources: [
                 .copy("Resources/Test Project.tiled-project"),
                 .copy("Resources/Maps"),

@@ -220,8 +220,7 @@ public struct TileSet : TiledDecodable{
         let data = Data.withContentsInBundleFirst(url:url)
         
         do {
-            let decoder = XMLDecoder()
-            decoder.userInfo[DecodingContext.key] = DecodingContext(originatingFrom: url)
+            let decoder = TiledDecoder(from: url)
             
             let loaded = try decoder.decode(TileSet.self, from: data)
             

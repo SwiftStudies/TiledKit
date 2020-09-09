@@ -16,8 +16,12 @@ import Foundation
 import XMLCoder
 
 internal class TiledDecoder : XMLDecoder {
+    let decodingContext : DecodingContext
     init(from url: URL) {
+        let url = url.deletingLastPathComponent()
+        decodingContext = DecodingContext(originatingFrom: url)
         super.init()
-        userInfo[DecodingContext.key] = DecodingContext(originatingFrom: url)
+        
+        userInfo[DecodingContext.key] = decodingContext
     }
 }
