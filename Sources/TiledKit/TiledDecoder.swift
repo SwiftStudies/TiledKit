@@ -33,4 +33,6 @@ public enum TiledDecodingError : Error {
     case couldNotLoadLevel(url:URL, decodingError:Error)
     case couldNotLoadTileSet(url:URL, decodingError:Error)
     case objectNotContainedInObjectLayer(layerPath:[Layer])
+    case unknownLayerType(layerType:String)
+    case cannotCreateSpecialisedLevelOfType(desiredType:String, supportedTypes:[String])
 }

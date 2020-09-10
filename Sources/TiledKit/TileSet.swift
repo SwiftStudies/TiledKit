@@ -169,6 +169,8 @@ public struct TileSet : TiledDecodable{
             }
             
         }
+        
+        try Tiled.default.tileSetLoaded(self)
     }
     
     public class Tile: TiledDecodable, LayerContainer {

@@ -22,6 +22,9 @@ let package = Package(
         .library(
             name: "TiledKit",
             targets: ["TiledKit"]),
+        .library(
+            name: "SKTiledKit",
+            targets: ["SKTiledKit"]),
     ],
     dependencies: [
         .package(url: "https://github.com/MaxDesiatov/XMLCoder.git", from: "0.11.1")
@@ -34,6 +37,23 @@ let package = Package(
         .target(
             name: "TiledKit",
             dependencies: ["XMLCoder"]
+            ),
+        .target(
+            name: "SKTiledKit",
+            dependencies: ["TiledKit"]
+            ),
+        .testTarget(
+            name: "SKTiledKitTests",
+            dependencies: ["SKTiledKit"],
+            exclude: [
+                "Resources/PikoPixel",
+                "Resources/Test Project.tiled-session"
+            ],
+            resources: [
+                .copy("Resources/Test Project.tiled-project"),
+                .copy("Resources/Maps"),
+                .copy("Resources/Tilesets"),
+                .process("Resources/Images")]
             ),
         .testTarget(
             name: "TiledKitTests",
