@@ -14,6 +14,7 @@
 
 
 import Foundation
+import XMLCoder
 
 fileprivate struct TileSetNameOnly : Decodable {
     let name : String
@@ -24,7 +25,7 @@ enum TileSetCache {
     static var cache            = [Identifier : TileSet]()
     
     
-    static func tileSet(from tileSetReference:TileSetReference)->TileSet{
+    static func tileSet(from tileSetReference:TileSetReference) throws ->TileSet {
         if let identifier = tileSetReference.identifier, let cachedSet = cache[identifier] {
             return cachedSet
         }
@@ -44,13 +45,13 @@ enum TileSetCache {
         }
         
         // Try finding it in the cache by its tileset name which at this point means loading it
-        let tileSetName = try! JSONDecoder().decode(TileSetNameOnly.self, from: Data.withContentsInBundleFirst(url:url)).name
+        let tileSetName = try! XMLDecoder().decode(TileSetNameOnly.self, from: Data.withContentsInBundleFirst(url:url)).name
         identifier = Identifier(stringLiteral: tileSetName)
         if let cachedWithSameName = cache[Identifier(stringLiteral: tileSetName)] {
             return cachedWithSameName
         }
         
-        let newTileSet = TileSet(from: url)
+        let newTileSet = try TileSet(from: url)
         
         fileTileSetMap[url] = newTileSet
         cache[identifier] = newTileSet

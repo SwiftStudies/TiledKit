@@ -15,25 +15,8 @@
 
 import Foundation
 
-public protocol CustomObject {
-    static var identifier : String { get }
-    init?(for object: Object)
-}
-
-fileprivate var registeredCustomObjectTypes = [CustomObject.Type]()
-
-enum CustomObjectFactory {
-    static func make(for object:Object, with customObjectTypes:[CustomObject.Type])->CustomObject? {
-        for type in customObjectTypes {
-            if type.identifier == object.rawType ?? "" {
-                return type.init(for: object)
-            }
-        }
-        return nil
-    }
-}
-
-public class Object : TiledDecodable, Propertied{
+#warning("Don't think this needs to be tiled decodable, would mean I can also get read of the initiatizer")
+public class Object : Propertied{
     internal enum ObjectDecodingError : Error {
         case notMyType      // A specialisation cannot decode
         case unknownType    // No specialisation can decode
@@ -44,8 +27,6 @@ public class Object : TiledDecodable, Propertied{
     
     public let id          : Int
     public let name        : String?
-    public var type        : CustomObject?
-    fileprivate let rawType : String?
     public let visible     : Bool
     public let x           : Float
     public let y           : Float
@@ -57,21 +38,14 @@ public class Object : TiledDecodable, Propertied{
         return parent.level 
     }
     
-    required public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        //Standard stuff
-        id      = try container.decode(Int.self, forKey: .id)
-        name    = try container.decodeIfPresent(String.self, forKey: .name)
-        visible = try container.decode(Bool.self, forKey: .visible)
-        x       = try container.decode(Float.self, forKey: .x)
-        y       = try container.decode(Float.self, forKey: .y)
-        rawType = try container.decodeIfPresent(String.self, forKey: .type)
-        
-        parent = decoder.userInfo.levelDecodingContext().layerPath.last! as! ObjectLayer
-        
-        // Properties
-        properties = try decode(from: decoder)
+    init(id:Int, name:String, visible:Bool, x:Double, y:Double, in parent:ObjectLayer, with properties:[String:Literal]){
+        self.id = id
+        self.name = name
+        self.visible = visible
+        self.x = Float(x)
+        self.y = Float(y)
+        self.parent = parent
+        self.properties = properties
     }
 }
 
@@ -88,192 +62,192 @@ public extension Object {
     }
 }
 
-class PointObject : Object {
-    private enum CodingKeys : String, CodingKey {
-        case point
-    }
-    
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        if try container.decodeIfPresent(Bool.self, forKey: .point) ?? false != true {
-            throw ObjectDecodingError.notMyType
-        }
-        
-        try super.init(from: decoder)
-    }
+public class PointObject : Object {
 }
 
 public class RectangleObject : Object{
-    private enum CodingKeys : String, CodingKey {
-        case width, height, rotation
-    }
-
     public let width       : Float
     public let height      : Float
     public let rotation    : Float
     
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        if !(container.contains(.width) && container.contains(.height) && container.contains(.rotation)) {
-            throw ObjectDecodingError.notMyType
-        }
-        
-        width       = try container.decode(Float.self, forKey: .width)
-        height      = try container.decode(Float.self, forKey: .height)
-        rotation    = try container.decode(Float.self, forKey: .rotation)
-
-        try super.init(from: decoder)
+    init(id: Int, name: String, visible: Bool, x: Double, y: Double, width:Double, height:Double, in parent: ObjectLayer, with properties: [String : Literal]) {
+        self.width = Float(width)
+        self.height = Float(height)
+        #warning("Not passing along rotation, this should really be an abstract base class")
+        self.rotation = 0.0
+        super.init(id: id, name: name, visible: visible, x: x, y: y, in: parent, with: properties)
     }
 }
 
-class EllipseObject : RectangleObject{
-    private enum CodingKeys : String, CodingKey {
-        case ellipse
-    }
+public class EllipseObject : RectangleObject{
     
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        if try container.decodeIfPresent(Bool.self, forKey: .ellipse) ?? false != true {
-            throw ObjectDecodingError.notMyType
-        }
-        
-        try super.init(from: decoder)
-    }
 }
 
 public class TileObject : RectangleObject{
-    private enum CodingKeys : String, CodingKey {
-        case gid, tile
-    }
-    
+
     public let gid : Int
     public var tile    : TileSet.Tile? = nil
     
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+    init(id: Int, tileGid gid:Int, name: String, visible: Bool, x: Double, y: Double, width: Double, height: Double, in parent: ObjectLayer, with properties: [String : Literal]) {
         
-        if !container.contains(.gid) {
-            throw ObjectDecodingError.notMyType
-        }
+        self.gid = gid
+        self.tile = parent.level.tiles[gid]
         
-        gid = try container.decode(Int.self, forKey: .gid)
-        
-        try super.init(from: decoder)
+        super.init(id: id, name: name, visible: visible, x: x, y: y, width: width, height: height, in: parent, with: properties)
     }
 }
 
 public class TextObject : RectangleObject{
-    public struct TextProperties : Decodable{
+    public struct TextProperties {
         public let fontName : String
         public let fontSize : Int
         public let text     : String
         public let color    : Color
-        
-        enum CodingKeys : String, CodingKey {
-            case    fontName = "fontfamily",
-            fontSize = "pixelsize",
-            text,color
-        }
-    }
-    
-    
-    private enum CodingKeys : String, CodingKey {
-        case text
     }
     
     public let text : TextProperties
     
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+    init(id: Int, name: String, visible: Bool, x: Double, y: Double, width: Double, height: Double, text:TextProperties, in parent: ObjectLayer, with properties: [String : Literal]) {
         
-        if !container.contains(.text) {
-            throw ObjectDecodingError.notMyType
-        }
-        
-        text = try container.decode(TextProperties.self, forKey: .text)
-        
-        try super.init(from: decoder)
+        self.text = text
+        super.init(id: id, name: name, visible: visible, x: x, y: y, width: width, height: height, in: parent, with: properties)
     }
 }
 
 
 public class PolygonObject : Object{
-    private enum CodingKeys : String, CodingKey {
-        case polygon
-    }
-    
     public let points : [Position]
     
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        if !container.contains(.polygon) {
-            throw ObjectDecodingError.notMyType
-        }
-        
-        points = try container.decode([Position].self, forKey: .polygon)
-        
-        try super.init(from: decoder)
+    
+    init(id: Int, name: String, visible: Bool, x: Double, y: Double, points:[Position], in parent: ObjectLayer, with properties: [String : Literal]) {
+        self.points = points
+        super.init(id: id, name: name, visible: true, x: x, y: y, in: parent, with: properties)
     }
 }
 
-public class PolylineObject : Object{
-    private enum CodingKeys : String, CodingKey {
-        case polyline
+public class PolylineObject : PolygonObject{
+}
+
+fileprivate struct LoadableObject : Decodable {
+    let id : Int
+    let name : String
+    let x : Double
+    let y : Double
+    let width: Double?
+    let height : Double?
+    let rotation : Double
+    let kind : Kind
+    let visible : Bool
+    let properties : [String:Literal]
+    let parent : ObjectLayer
+
+    enum Kind {
+        case tile(gid:Int), point, ellipse, rectangle, polyline(points:[Position]), text(wrap:Bool, string:String),polygon(points:[Position])
     }
     
-    public let points : [Position]
-    
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+    struct PolygonPoints : Decodable {
+        var points : String
         
-        if !container.contains(.polyline) {
-            throw ObjectDecodingError.notMyType
+        var pointsArray : [Position] {
+            return points.split(separator: " ").map{
+                let xy = $0.split(separator: ",")
+                #warning("Remove forced unwrap")
+                return Position(x: Float(xy[0])!, y: Float(xy[1])!)
+            }
+        }
+    }
+    
+    struct TextDefinition : Decodable {
+        var wrap : Bool
+        var string : String
+        
+        enum CodingKeys : String, CodingKey {
+            case wrap, string = ""
         }
         
-        points = try container.decode([Position].self, forKey: .polyline)
+    }
+    
+    enum CodingKeys : String, CodingKey {
+        case id, name, x, y, width, height, gid, rotation, ellipse, point, polygon, text, visible, polyline
+    }
+    
+    init(from decoder: Decoder) throws {
+        guard let decoderContext = decoder.userInfo.decodingContext else {
+            throw TiledDecodingError.missingDecoderContext
+        }
         
-        try super.init(from: decoder)
+        guard let objectLayer : ObjectLayer = decoderContext.layerPath.last as? ObjectLayer else {
+            throw TiledDecodingError.objectNotContainedInObjectLayer(layerPath: decoderContext.layerPath)
+        }
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id = try container.decode(Int.self, forKey: .id)
+        name = try container.decode((String.self), forKey: .name)
+        x = try container.decode(Double.self, forKey: .x)
+        y = try container.decode(Double.self, forKey: .y)
+        width = try container.decodeIfPresent(Double.self, forKey: .width)
+        height = try container.decodeIfPresent(Double.self, forKey: .height)
+        rotation = try container.decodeIfPresent(Double.self, forKey: .rotation) ?? 0.0
+        visible = try container.decodeIfPresent(Bool.self, forKey: .visible) ?? true
+        #warning("Does not load properties")
+        properties = [String:Literal]()
+        parent = objectLayer
+        
+        
+        
+        if container.allKeys.contains(.ellipse){
+            kind = .ellipse
+        } else if container.allKeys.contains(.point){
+            kind = .point
+        } else if container.allKeys.contains(.gid){
+            kind = .tile(gid: try container.decode(Int.self, forKey: .gid))
+        } else if container.allKeys.contains(.text){
+            let definition = try container.decode(TextDefinition.self, forKey: .text)
+            kind = .text(wrap: definition.wrap, string: definition.string)
+        } else if container.allKeys.contains(.polygon){
+            let polygonPoints = try container.decode(PolygonPoints.self, forKey: .polygon)
+            kind = .polygon(points: polygonPoints.pointsArray)
+        } else if container.allKeys.contains(.polyline) {
+            let polygonPoints = try container.decode(PolygonPoints.self, forKey: .polyline)
+            kind = .polyline(points: polygonPoints.pointsArray)
+        } else {
+            kind = .rectangle
+        }
+        
+    }
+    
+    #warning("Lots of forced unwrapping")
+    var objectInstance : Object {
+        switch kind {
+        case .tile(gid: let gid):
+            return TileObject(id: id, tileGid: gid, name: name, visible: visible, x: x, y: y, width: width!, height: height!, in: parent, with: properties)
+        case .point:
+            return PointObject(id: id, name: name, visible: visible, x: x, y: y, in: parent, with: properties)
+        case .ellipse:
+            return EllipseObject(id: id, name: name, visible: visible, x: x, y: y, width: width!, height: height!, in: parent, with: properties)
+        case .rectangle:
+            return RectangleObject(id: id, name: name, visible: visible, x: x, y: y, width: width!, height: height!, in: parent, with: properties)
+        case .polygon(points: let points):
+            return PolygonObject(id: id, name: name, visible: visible, x: x, y: y, points: points, in: parent, with: properties)
+        case .polyline(points: let points):
+            return PolylineObject(id: id, name: name, visible: visible, x: x, y: y, points: points, in: parent, with: properties)
+        case .text(wrap: let wrap, string: let string):
+            #warning("Lots of things not read, create failing test")
+            let text = TextObject.TextProperties(fontName: "", fontSize: 12, text: string, color: Color(r: 255, g: 255, b: 255))
+            return TextObject(id: id, name: name, visible: visible, x: x, y: y, width: width!, height: height!, text: text, in: parent, with: properties)
+        }
     }
 }
 
 extension ObjectLayer {
-    func decodeObjects(from container: UnkeyedDecodingContainer, in context:DecodingContext) throws -> [Object] {
-        var container = container
-        let objectKinds = [PolylineObject.self, PolygonObject.self, PointObject.self, TextObject.self, TileObject.self, EllipseObject.self, RectangleObject.self]
+    func decodeObjects(from decoder: Decoder) throws -> [Object] {
+        let container = try decoder.container(keyedBy: ObjectLayerCodingKeys.self)
         
-        var objects = [Object]()
-
-        ontoNextObject: while !container.isAtEnd {
-            for objectKind in objectKinds {
-                do {
-                    objects.append(try container.decode(objectKind))
-                    
-                    continue ontoNextObject
-                } catch let error as DecodingError {
-                    throw error
-                } catch _ as Object.ObjectDecodingError {
-                    continue
-                }
-            }
-
+        let objects = try container.decode([LoadableObject].self, forKey: .object).map{
+            $0.objectInstance
         }
-        
+
         return objects
     }
 }
 
-public extension LayerContainer {
-    func customObjects<T>(traverseGroups:Bool = false)->[T]{
-        var objects = [T]()
-        
-        for layer in getObjectLayers(recursively: traverseGroups) as [ObjectLayer]{
-            objects.append(contentsOf: layer.objects.compactMap({$0.type as? T}))
-        }
-        
-        return objects
-    }
-}

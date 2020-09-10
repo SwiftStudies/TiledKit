@@ -15,26 +15,16 @@
 
 import Foundation
 
-public enum LayerType : Decodable {
-    case object, group, tile
+public enum LayerType : String, CaseIterable {
+    case object = "objectgroup", group = "group", tile = "layer", image = "imagelayer"
     
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        switch try container.decode(String.self, forKey: .type){
-        case "objectgroup":
-            self = .object
-        case "group":
-            self = .group
-        case "tilelayer":
-            self = .tile
-        default:
-            fatalError("Unknown layer type")
+    var codingKey : Level.CodingKeys {
+        switch self {
+        case .object:   return .objectLayer
+        case .group:    return .group
+        case .image:    return .imageLayer
+        case .tile:     return .layers
         }
-    }
-    
-    private enum CodingKeys : String, CodingKey {
-        case type
     }
 }
 
@@ -46,6 +36,8 @@ extension Layer {
             return .tile
         } else if self is ObjectLayer{
             return .object
+        } else if self is ImageLayer{
+            return .image
         }
         fatalError("Layer of unknown type")
     }
@@ -117,20 +109,26 @@ extension LayerContainer {
     }
     
     static func decodeLayers(_ container:KeyedDecodingContainer<Level.CodingKeys>) throws ->[Layer]  {
-        var typeExposer     = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.layers)
-        var undecodedLayers = try container.nestedUnkeyedContainer(forKey: Level.CodingKeys.layers)
         var decodedLayers = [Layer]()
-        while !undecodedLayers.isAtEnd {
-            let layerType = try typeExposer.decode(LayerType.self)
-            switch layerType {
+        
+        var groupLayers     = try container.decode([GroupLayer].self, forKey: .group)
+        var tileLayers      = try container.decode([TileLayer].self, forKey: .layers)
+        var imageLayers     = try container.decode([ImageLayer].self, forKey: .imageLayer)
+        var objectLayers    = try container.decode([ObjectLayer].self, forKey: .objectLayer)
+
+        for key in container.allKeys.map({$0.stringValue}) where LayerType.allCases.map({$0.rawValue}).contains(key){
+            switch LayerType.init(rawValue: key)! {
             case .group:
-                decodedLayers.append(try undecodedLayers.decode(GroupLayer.self))
+                decodedLayers.append(groupLayers.removeFirst())
             case .object:
-                decodedLayers.append(try undecodedLayers.decode(ObjectLayer.self))
+                decodedLayers.append(objectLayers.removeFirst())
             case .tile:
-                decodedLayers.append(try undecodedLayers.decode(TileLayer.self))
+                decodedLayers.append(tileLayers.removeFirst())
+            case .image:
+                decodedLayers.append(imageLayers.removeFirst())
             }
         }
+        
         return decodedLayers
     }
 }

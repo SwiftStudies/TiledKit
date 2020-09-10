@@ -14,11 +14,29 @@
 
 
 import Foundation
+import XMLCoder
 
 class TileSetReference : Decodable{
     var identifier : Identifier? = nil
     let firstGID    : Int
     let file        : String
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let relativePath = try container.decode(String.self, forKey: .file)
+        
+        if relativePath.hasPrefix("..") {
+            let originUrl = decoder.userInfo.decodingContext?.originUrl ?? Bundle.main.bundleURL
+            
+            file = originUrl.appendingPathComponent(relativePath).path
+            
+        } else {
+            file = relativePath
+        }
+        
+        firstGID = try container.decode(Int.self, forKey: .firstGID)
+    }
     
     init(with firstGid:Int, for tileSet:TileSet, in file:String){
         self.firstGID = firstGid
@@ -26,8 +44,9 @@ class TileSetReference : Decodable{
         self.file = file
     }
     
-    var tileSet : TileSet {
-        return TileSetCache.tileSet(from: self)
+    func tileSet() throws -> TileSet {
+        return try TileSetCache.tileSet(from: self)
+
     }
     
     enum CodingKeys : String, CodingKey {
@@ -52,7 +71,26 @@ public struct TileSheet : Decodable {
     
     
     private enum CodingKeys : String, CodingKey {
-        case imageWidth = "imagewidth", imageHeight = "imageheight", margin, spacing, tileCount="tilecount", transparentColor = "transparentcolor", columns, imagePath = "image"
+        case imageWidth = "width", imageHeight = "height", margin, spacing, tileCount="tilecount", transparentColor = "transparentcolor", columns, imagePath = "source", image = "image"
+    }
+    
+    public init(from decoder: Decoder) throws{
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        // Required
+        columns = try container.decode(Int.self, forKey: .columns)
+        tileCount = try container.decode(Int.self, forKey: .tileCount)
+
+        let imageContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .image)
+        
+        imagePath = try imageContainer.decode(String.self, forKey: .imagePath)
+        imageWidth = try imageContainer.decode(Int.self, forKey: .imageWidth)
+        imageHeight = try imageContainer.decode(Int.self, forKey: .imageHeight)
+        
+        // Optional
+        transparentColor = (try? container.decode(Color.self, forKey: .transparentColor)) ?? Color(r: 0, g: 0, b: 0, a: 0)
+        margin = (try? container.decode(Int.self, forKey: .margin)) ?? 0
+        spacing = (try? container.decode(Int.self, forKey: .spacing)) ?? 0
     }
     
     func createTiles(for tileSet:TileSet, with data:[Int:TileSet.Tile], in container:LayerContainer)->[Int:TileSet.Tile]{
@@ -90,7 +128,7 @@ public struct TileSet : TiledDecodable{
     public var type : TileSetType
     
     public enum CodingKeys : String, CodingKey {
-        case tiles
+        case tiles = "tile"
         case tileWidth = "tilewidth"
         case tileHeight = "tileheight"
         case name
@@ -98,6 +136,9 @@ public struct TileSet : TiledDecodable{
     }
     
     public init(from decoder: Decoder) throws{
+        guard let decoderContext = decoder.userInfo.decodingContext else {
+            throw TiledDecodingError.missingDecoderContext
+        }
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         tileWidth = try container.decode(Int.self, forKey: .tileWidth)
@@ -106,7 +147,7 @@ public struct TileSet : TiledDecodable{
         
         //Import to set the level context before decoding tiles as they can contain layers
         let level = Level()
-        decoder.userInfo.levelDecodingContext().level = level
+        decoderContext.level = level
         
         // Create the tiles, we first need to determine if this is a
         // sheet type or a collection of images
@@ -119,10 +160,14 @@ public struct TileSet : TiledDecodable{
         } else {
             //It's individual files
             type = .files
-            self.tiles = try container.decode([Int : Tile].self, forKey: .tiles)
-            for tile in tiles.values {
+            
+            let allTiles = try container.decode([Tile].self, forKey: .tiles)
+            
+            for tile in allTiles where tile.identifier.integerSource != nil{
                 tile.tileSet = self
+                tiles[tile.identifier.integerSource!] = tile
             }
+            
         }
     }
     
@@ -141,7 +186,7 @@ public struct TileSet : TiledDecodable{
         }
 
         enum CodingKeys : String, CodingKey {
-            case image, objects = "objectgroup"
+            case identifier = "id", image, objects = "objectgroup"
         }
         
         public required init(_ index:Int, from sheet:TileSheet, for set:TileSet, at location: (x:Int,y:Int), in container:LayerContainer){
@@ -158,30 +203,27 @@ public struct TileSet : TiledDecodable{
             
             if let path = try container.decodeIfPresent(String.self, forKey: CodingKeys.image){
                 self.path = path
-                identifier = Identifier(stringLiteral: path)
             } else {
-                path = nil
-                identifier = Identifier(integerLiteral: 0)
+                self.path = nil
             }
+            
+            identifier = Identifier(integerLiteral: try container.decode(Int.self, forKey: .identifier))
+            
             parent = (decoder.userInfo[DecodingContext.key] as! DecodingContext).level!
             objects = try container.decodeIfPresent(ObjectLayer.self, forKey: .objects)
             position = nil
         }
         
-        func texture<Engine:GameEngine>(for:Engine.Type)->Engine.Texture{
-            return Engine.textureCache[identifier] ?? Engine.texture(self)
-        }
     }
     
     
-    public init(from url:URL){
-        let data = Data.withContentsInBundleFirst(url:url)
+    public init(from url:URL) throws {
+        let data = try Data.withContentsInBundleFirst(url:url)
         
         do {
-            let jsonDecoder = JSONDecoder()
-            jsonDecoder.userInfo[DecodingContext.key] = DecodingContext(with: [])
+            let decoder = TiledDecoder(from: url)
             
-            let loaded = try jsonDecoder.decode(TileSet.self, from: data)
+            let loaded = try decoder.decode(TileSet.self, from: data)
             
             self.tiles = loaded.tiles
             self.tileWidth = loaded.tileWidth
@@ -189,7 +231,7 @@ public struct TileSet : TiledDecodable{
             self.name = loaded.name
             self.type = loaded.type
         } catch {
-            fatalError("Could not decode JSON \(error)")
+            throw TiledDecodingError.couldNotLoadTileSet(url: url, decodingError: error)
         }
     }
     
