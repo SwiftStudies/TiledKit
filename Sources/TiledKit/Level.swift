@@ -63,7 +63,7 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
     }
 
     public init(from url:URL) throws {
-        let data = Data.withContentsInBundleFirst(url:url)
+        let data = try  Data.withContentsInBundleFirst(url:url)
         
         do {
             let decoder = TiledDecoder(from: url)
@@ -80,13 +80,13 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
             layers = loaded.layers
             
         } catch {
-            fatalError("Could not decode XML \(error)")
+            throw TiledDecodingError.couldNotLoadLevel(url: url, decodingError: error)
         }
     }
     
     public required init(from decoder:Decoder) throws {
         guard let decoderContext = decoder.userInfo.decodingContext else {
-            fatalError("No DecodingContext")
+            throw TiledDecodingError.missingDecoderContext
         }
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -103,7 +103,7 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
         decoderContext.level = self
 
         for tileSetReference in tileSetReferences {
-            let tileSet = TileSetCache.tileSet(from: tileSetReference)
+            let tileSet = try TileSetCache.tileSet(from: tileSetReference)
             tileSets.append(tileSet)
             for (lid,tile) in tileSet.tiles {
                 tiles[tileSetReference.firstGID+lid] = tile

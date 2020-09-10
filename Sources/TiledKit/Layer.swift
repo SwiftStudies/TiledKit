@@ -38,14 +38,13 @@ public class Layer: TiledDecodable, Propertied{
     
     public required init(from decoder: Decoder) throws {
         guard let decoderContext = decoder.userInfo.decodingContext else {
-            fatalError("No DecodingContext")
+            throw TiledDecodingError.missingDecoderContext
         }
         
         if let containedBy = decoderContext.currentContainer {
             parent = containedBy
         } else {
-            #warning("Should throw instead")
-            fatalError("No container for layer")
+            throw TiledDecodingError.noContainerForLayer(layerPath: decoderContext.layerPath)
         }
         
         do {
@@ -161,7 +160,7 @@ public class ObjectLayer : Layer{
     
     public required init(from decoder: Decoder) throws {
         guard let decoderContext = decoder.userInfo.decodingContext else {
-            fatalError("No DecodingContext")
+            throw TiledDecodingError.missingDecoderContext
         }
 
         try super.init(from: decoder)
@@ -204,7 +203,7 @@ public final class ImageLayer : Layer {
 
     public required init(from decoder: Decoder) throws {
         guard let decoderContext = decoder.userInfo.decodingContext else {
-            fatalError("No DecodingContext")
+            throw TiledDecodingError.missingDecoderContext
         }
         try super.init(from: decoder)
         #warning("Image Layers not implemented")

@@ -25,7 +25,7 @@ enum TileSetCache {
     static var cache            = [Identifier : TileSet]()
     
     
-    static func tileSet(from tileSetReference:TileSetReference)->TileSet{
+    static func tileSet(from tileSetReference:TileSetReference) throws ->TileSet {
         if let identifier = tileSetReference.identifier, let cachedSet = cache[identifier] {
             return cachedSet
         }
@@ -51,7 +51,7 @@ enum TileSetCache {
             return cachedWithSameName
         }
         
-        let newTileSet = TileSet(from: url)
+        let newTileSet = try TileSet(from: url)
         
         fileTileSetMap[url] = newTileSet
         cache[identifier] = newTileSet

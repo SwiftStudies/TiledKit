@@ -173,11 +173,11 @@ fileprivate struct LoadableObject : Decodable {
     
     init(from decoder: Decoder) throws {
         guard let decoderContext = decoder.userInfo.decodingContext else {
-            fatalError("No decoder context")
+            throw TiledDecodingError.missingDecoderContext
         }
         
         guard let objectLayer : ObjectLayer = decoderContext.layerPath.last as? ObjectLayer else {
-            fatalError("Current container is not an object layer")
+            throw TiledDecodingError.objectNotContainedInObjectLayer(layerPath: decoderContext.layerPath)
         }
         let container = try decoder.container(keyedBy: CodingKeys.self)
         

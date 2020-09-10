@@ -44,8 +44,9 @@ class TileSetReference : Decodable{
         self.file = file
     }
     
-    var tileSet : TileSet {
-        return TileSetCache.tileSet(from: self)
+    func tileSet() throws -> TileSet {
+        return try TileSetCache.tileSet(from: self)
+
     }
     
     enum CodingKeys : String, CodingKey {
@@ -136,7 +137,7 @@ public struct TileSet : TiledDecodable{
     
     public init(from decoder: Decoder) throws{
         guard let decoderContext = decoder.userInfo.decodingContext else {
-            fatalError("No DecodingContext")
+            throw TiledDecodingError.missingDecoderContext
         }
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -216,8 +217,8 @@ public struct TileSet : TiledDecodable{
     }
     
     
-    public init(from url:URL){
-        let data = Data.withContentsInBundleFirst(url:url)
+    public init(from url:URL) throws {
+        let data = try Data.withContentsInBundleFirst(url:url)
         
         do {
             let decoder = TiledDecoder(from: url)
@@ -230,7 +231,7 @@ public struct TileSet : TiledDecodable{
             self.name = loaded.name
             self.type = loaded.type
         } catch {
-            fatalError("Could not decode XML \(error)")
+            throw TiledDecodingError.couldNotLoadTileSet(url: url, decodingError: error)
         }
     }
     

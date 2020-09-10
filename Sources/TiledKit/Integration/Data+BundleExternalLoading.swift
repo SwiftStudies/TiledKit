@@ -15,7 +15,7 @@
 import Foundation
 
 public extension Data {
-    static func withContentsInBundleFirst(url:URL)->Data {
+    static func withContentsInBundleFirst(url:URL) throws ->Data {
         let data : Data
 
         let fileExtension = url.pathExtension
@@ -23,15 +23,14 @@ public extension Data {
         
         if let bundleUrl = Bundle.main.url(forResource: bundleURL, withExtension: fileExtension){
             guard let bundleData = try? Data(contentsOf: bundleUrl) else {
-                fatalError("Could not load bundle resource \(url) as data")
+                throw TiledDecodingError.couldNotLoadFile(url: url, message: "Could not load bundle resource as data")
             }
             data = bundleData
         } else {
             do {
                 return try Data(contentsOf: url)
-                
             } catch {
-                fatalError("\(error)")
+                throw TiledDecodingError.couldNotLoadFile(url: url, message: "Could not load data \(error)")
             }
         }
         

@@ -25,3 +25,12 @@ internal class TiledDecoder : XMLDecoder {
         userInfo[DecodingContext.key] = decodingContext
     }
 }
+
+public enum TiledDecodingError : Error {
+    case missingDecoderContext
+    case noContainerForLayer(layerPath:[Layer])
+    case couldNotLoadFile(url:URL, message:String)
+    case couldNotLoadLevel(url:URL, decodingError:Error)
+    case couldNotLoadTileSet(url:URL, decodingError:Error)
+    case objectNotContainedInObjectLayer(layerPath:[Layer])
+}
