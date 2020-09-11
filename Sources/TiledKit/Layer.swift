@@ -51,7 +51,6 @@ public class Layer: TiledDecodable, Propertied{
             let container = try decoder.container(keyedBy: CodingKeys.self)
 
             name = try container.decode(String.self, forKey: .name)
-            print("Decoding \(name) with path \(decoderContext.layerPath.map({$0.name}))")
             
             x = (try? container.decode(Int.self, forKey: .x)) ?? 0
             y = (try? container.decode(Int.self, forKey: .y)) ?? 0
@@ -61,7 +60,6 @@ public class Layer: TiledDecodable, Propertied{
                     
             properties = try decode(from: decoder)
         } catch {
-            print("Whilst building \(Swift.type(of: Self.self)) encountered decoding error: \(error.localizedDescription)")
             throw error
         }
     }

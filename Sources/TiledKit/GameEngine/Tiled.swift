@@ -36,17 +36,18 @@ public final class Tiled {
         
     }
     
-    private func walk(_ layers:[Layer], for subscriber:GameEngine, in container:LayerContainer) throws {
+    #warning("Again, absolutely hideous I need to decide how I'm going to deal with the generics and get rid of Any")
+    private func walk(_ layers:[Layer], for engine:GameEngine, in specialisedContainer:Any) throws {
         for layer in layers {
             if let tileLayer = layer as? TileLayer {
-                try subscriber.add(tileLayer: tileLayer, to: container)
+                try engine.add(tileLayer: tileLayer, to: specialisedContainer)
             } else if let objectLayer = layer as? ObjectLayer {
-                try subscriber.add(objects: objectLayer, to: container)
+                try engine.add(objects: objectLayer, to: specialisedContainer)
             } else if let group = layer as? GroupLayer {
-                try subscriber.add(group: group, to: container)
-                try walk(group.layers, for: subscriber, in: group)
+                let specializedGroup = try engine.add(group: group, to: specialisedContainer)
+                try walk(group.layers, for: engine, in: engine.container(for: specializedGroup))
             } else if let image = layer as? ImageLayer {
-                try subscriber.add(image: image, to: container)
+                try engine.add(image: image, to: specialisedContainer)
             } else {
                 throw TiledDecodingError.unknownLayerType(layerType: "\(type(of: layer))")
             }
@@ -57,41 +58,43 @@ public final class Tiled {
         let level = try Level(from: url)
         
         let specialisedLevel : Output = try gameEngine.create(level: level)
-        try walk(level.layers, for: gameEngine, in: level)
+        try walk(level.layers, for: gameEngine, in: gameEngine.container(for: specialisedLevel))
         
         return specialisedLevel
     }
 }
 
 fileprivate struct DefaultGameEngine : GameEngine {
+
+    func container(for object: Any) -> Any {
+        return object
+    }
+    
     func create(tileSet: TileSet) throws {
-        
+        throw TiledDecodingError.noGameEngineSpecified
     }
     
     func create<SpecialisedLevel>(level: Level) throws -> SpecialisedLevel {
-        guard level is SpecialisedLevel else {
-            throw TiledDecodingError.cannotCreateSpecialisedLevelOfType(desiredType: "\(type(of: SpecialisedLevel.self))", supportedTypes: ["TiledKit.Level"])
-        }
-        return level as! SpecialisedLevel
+        throw TiledDecodingError.noGameEngineSpecified
     }
     
     func add(tile: Int, to tileSet: TileSet) throws {
-        
+        throw TiledDecodingError.noGameEngineSpecified
     }
     
-    func add(tileLayer: TileLayer, to container: LayerContainer) throws {
-        
+    func add(tileLayer: TileLayer, to container: Any) throws {
+        throw TiledDecodingError.noGameEngineSpecified
     }
     
-    func add(group: GroupLayer, to container: LayerContainer) throws {
-        
+    func add(group: GroupLayer, to container: Any) throws -> Any {
+        throw TiledDecodingError.noGameEngineSpecified
     }
     
-    func add(image: ImageLayer, to container: LayerContainer) throws {
-        
+    func add(image: ImageLayer, to container: Any) throws {
+        throw TiledDecodingError.noGameEngineSpecified
     }
     
-    func add(objects: ObjectLayer, to container: LayerContainer) throws {
-        
+    func add(objects: ObjectLayer, to container: Any) throws {
+        throw TiledDecodingError.noGameEngineSpecified
     }
 }

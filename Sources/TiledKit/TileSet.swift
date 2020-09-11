@@ -60,7 +60,7 @@ public enum TileSetType {
 }
 
 public struct TileSheet : Decodable {
-    let imagePath : String
+    public let imagePath : URL
     let imageWidth : Int
     let imageHeight : Int
     let margin : Int
@@ -83,7 +83,15 @@ public struct TileSheet : Decodable {
 
         let imageContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .image)
         
-        imagePath = try imageContainer.decode(String.self, forKey: .imagePath)
+        let path = try imageContainer.decode(String.self, forKey: .imagePath)
+        
+        #warning("Should check for .. first")
+        guard let imageURL = decoder.userInfo.decodingContext?.originUrl?.appendingPathComponent(path) else {
+            throw TiledDecodingError.missingPathForTileSheetImage
+        }
+        
+        imagePath = imageURL
+        
         imageWidth = try imageContainer.decode(Int.self, forKey: .imageWidth)
         imageHeight = try imageContainer.decode(Int.self, forKey: .imageHeight)
         
@@ -176,7 +184,7 @@ public struct TileSet : TiledDecodable{
     public class Tile: TiledDecodable, LayerContainer {
         public var identifier : Identifier
         public var parent : LayerContainer
-        public let path    : String?
+        public let path    : URL?
         public var objects : ObjectLayer?
         public var tileSet : TileSet? = nil
         public let position : Position?
@@ -201,14 +209,20 @@ public struct TileSet : TiledDecodable{
         }
         
         public required init(from decoder: Decoder) throws{
-            let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            if let path = try container.decodeIfPresent(String.self, forKey: CodingKeys.image){
-                self.path = path
-            } else {
-                self.path = nil
+            struct TileImage : Decodable {
+                let width : Int
+                let height : Int
+                let source : String
             }
             
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            let tileImage = try container.decode(TileImage.self, forKey: .image)
+            
+            #warning("Should check for .. first")
+            path = decoder.userInfo.decodingContext?.originUrl?.appendingPathComponent(tileImage.source)
+                    
             identifier = Identifier(integerLiteral: try container.decode(Int.self, forKey: .identifier))
             
             parent = (decoder.userInfo[DecodingContext.key] as! DecodingContext).level!

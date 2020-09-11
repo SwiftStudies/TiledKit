@@ -19,6 +19,8 @@ final class SKTiledKitTests : XCTestCase {
         
         do {
             let scene : SKScene = try Tiled.default.load(levelFrom: url)
+            
+            print(scene)
         } catch {
             XCTFail("Could not create scene \(error)")
         }

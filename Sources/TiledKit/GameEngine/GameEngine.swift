@@ -12,18 +12,20 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+#warning("Absolutely hideous, I need to decide how I'm going to deal with the generics")
 public protocol GameEngine {
-
     init()
     
     func create(tileSet:TileSet) throws
     func create<SpecialisedLevel>(level:Level) throws -> SpecialisedLevel
     
     func add(tile:Int, to tileSet:TileSet) throws
-    func add(tileLayer:TileLayer, to container:LayerContainer) throws
-    func add(group:GroupLayer, to container:LayerContainer) throws
-    func add(image:ImageLayer, to container:LayerContainer) throws
-    func add(objects:ObjectLayer, to container:LayerContainer) throws
+    func add(tileLayer:TileLayer, to container:Any) throws
+    func add(group:GroupLayer, to container:Any) throws -> Any
+    func add(image:ImageLayer, to container:Any) throws
+    func add(objects:ObjectLayer, to container:Any) throws
+    
+    func container(for object:Any)->Any
 }
 
 public extension GameEngine {

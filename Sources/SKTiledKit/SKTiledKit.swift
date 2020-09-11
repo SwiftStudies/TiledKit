@@ -17,17 +17,28 @@ import TiledKit
 import SpriteKit
 
 public enum SKTiledKitError : Error {
+    case tileNodeDoesNotExist
+    case tileNotFound
     case notImplemented
+    case missingPathForTile(tile:String)
+    case couldNotLoadImage(url:URL)
+    case imageFileNotFound(url:URL)
+    case couldNotCreateImage(url:URL)
+    case noPositionForTile(identifier:Int, tileSet:String)
 }
 
 open class SKTiledKit :  GameEngine {
+    public func container(for object: Any) -> Any {
+        return object
+    }
+    
     
     required public init(){
         
     }
     
     public func create(tileSet: TileSet) throws {
-        throw SKTiledKitError.notImplemented
+        try SKTileSets.load(tileSet)        
     }
     
     public func create<SpecialisedLevel>(level: Level) throws -> SpecialisedLevel {
@@ -37,27 +48,75 @@ open class SKTiledKit :  GameEngine {
             throw TiledDecodingError.cannotCreateSpecialisedLevelOfType(desiredType: "\(type(of: SpecialisedLevel.self))", supportedTypes: ["SKScene"])
         }
         
+        
+        
         return scene as! SpecialisedLevel
     }
     
+    #warning("This may not be necessary")
     public func add(tile: Int, to tileSet: TileSet) throws {
         throw SKTiledKitError.notImplemented
     }
     
-    public func add(tileLayer: TileLayer, to container: LayerContainer) throws {
+    public func add(tileLayer: TileLayer, to container: Any) throws {
+        let container = container as! SKNode
+        
+        let tileLayerNode = SKNode()
+        
+        for x in 0..<tileLayer.level.width {
+            for y in 0..<tileLayer.level.height {
+                #warning("Forced unwrap")
+                let tileMapOffset = y*tileLayer.level.width+x
+                let levelTileOffset = tileLayer.tiles[tileMapOffset]
+                guard let tile = tileLayer.level.tiles[levelTileOffset] else {
+                    throw SKTiledKitError.tileNotFound
+                }
+                let cachedNode = SKTileSets.tileCache[tile.uuid]
+                guard let tileNode = cachedNode?.copy() as? SKNode else {
+                    throw SKTiledKitError.tileNodeDoesNotExist
+                }
+                tileNode.position = CGPoint(x: x, y: y)
+                tileLayerNode.addChild(tileNode)
+            }
+        }
+        
+        container.addChild(tileLayerNode)
+    }
+    
+    public func add(group: GroupLayer, to container: Any) throws -> Any {
+        let container = container as! SKNode
+        
+        let node = SKNode()
+        
+        container.addChild(node)
+        
+        return container
+    }
+
+    #warning("Not implemented")
+    public func add(image: ImageLayer, to container: Any) throws {
+        let container = container as! SKNode
+
+        let emptyTextureNode = SKTexture()
+        
+        let spriteNode = SKSpriteNode(texture: emptyTextureNode, color: SKColor.red, size: CGSize(width: 100, height: 100))
+        
+        spriteNode.position = CGPoint(x: image.x, y: image.y)
+        
+        container.addChild(spriteNode)
+        
         throw SKTiledKitError.notImplemented
     }
     
-    public func add(group: GroupLayer, to container: LayerContainer) throws {
-        throw SKTiledKitError.notImplemented
-    }
-    
-    public func add(image: ImageLayer, to container: LayerContainer) throws {
-        throw SKTiledKitError.notImplemented
-    }
-    
-    public func add(objects: ObjectLayer, to container: LayerContainer) throws {
-        throw SKTiledKitError.notImplemented
+    public func add(objects: ObjectLayer, to container: Any) throws {
+        let container = container as! SKNode
+
+        for object in objects.objects {
+            if let rectangle = object as? RectangleObject {
+                let rectangle = SKShapeNode(rect: CGRect(x: rectangle.x.cgFloatValue, y: rectangle.y.cgFloatValue, width: rectangle.width.cgFloatValue, height: rectangle.height.cgFloatValue))
+                container.addChild(rectangle)
+            }
+        }
     }
     
 }
