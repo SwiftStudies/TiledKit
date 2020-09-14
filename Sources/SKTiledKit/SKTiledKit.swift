@@ -27,30 +27,18 @@ public enum SKTiledKitError : Error {
     case noPositionForTile(identifier:Int, tileSet:String)
 }
 
-open class SKTiledKit :  GameEngine {
-    public func container(for object: Any) -> Any {
-        return object
+extension SKScene : SpecializedLevel {
+    public typealias Container = SKNode
+    
+    public var primaryContainer: Container {
+        return self
     }
-    
-    
-    required public init(){
-        
+
+    public func apply(tiledLevel level: Level) {
+        scene?.size =  CGSize(width: CGFloat(level.width*level.tileWidth), height: CGFloat(level.height*level.tileHeight))
     }
-    
     public func create(tileSet: TileSet) throws {
         try SKTileSets.load(tileSet)        
-    }
-    
-    public func create<SpecialisedLevel>(level: Level) throws -> SpecialisedLevel {
-        let scene = SKScene(size: CGSize(width: CGFloat(level.width*level.tileWidth), height: CGFloat(level.height*level.tileHeight)))
-        
-        guard scene is SpecialisedLevel else {
-            throw TiledDecodingError.cannotCreateSpecialisedLevelOfType(desiredType: "\(type(of: SpecialisedLevel.self))", supportedTypes: ["SKScene"])
-        }
-        
-        
-        
-        return scene as! SpecialisedLevel
     }
     
     #warning("This may not be necessary")
@@ -58,7 +46,7 @@ open class SKTiledKit :  GameEngine {
         throw SKTiledKitError.notImplemented
     }
     
-    public func add(tileLayer: TileLayer, to container: Any) throws {
+    public func add(tileLayer: TileLayer, to container: Container) throws {
         let container = container as! SKNode
         
         let tileLayerNode = SKNode()
@@ -83,7 +71,7 @@ open class SKTiledKit :  GameEngine {
         container.addChild(tileLayerNode)
     }
     
-    public func add(group: GroupLayer, to container: Any) throws -> Any {
+    public func add(group: GroupLayer, to container: Container) throws -> Container {
         let container = container as! SKNode
         
         let node = SKNode()
@@ -94,7 +82,7 @@ open class SKTiledKit :  GameEngine {
     }
 
     #warning("Not implemented")
-    public func add(image: ImageLayer, to container: Any) throws {
+    public func add(image: ImageLayer, to container: Container) throws {
         let container = container as! SKNode
 
         let emptyTextureNode = SKTexture()
@@ -108,7 +96,7 @@ open class SKTiledKit :  GameEngine {
         throw SKTiledKitError.notImplemented
     }
     
-    public func add(objects: ObjectLayer, to container: Any) throws {
+    public func add(objects: ObjectLayer, to container: Container) throws {
         let container = container as! SKNode
 
         for object in objects.objects {

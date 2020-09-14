@@ -51,7 +51,7 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
     public let tileHeight  : Int
     public var properties  = [String:Literal]()
     fileprivate let tileSetReferences    : [TileSetReference]
-    fileprivate var tileSets = [TileSet]()
+    internal var tileSets = [TileSet]()
     public var tiles = [Int : TileSet.Tile]()
     
     public init(){

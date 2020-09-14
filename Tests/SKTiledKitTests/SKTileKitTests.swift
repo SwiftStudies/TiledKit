@@ -10,15 +10,13 @@ final class SKTiledKitTests : XCTestCase {
     }
     
     func testSceneCreation(){
-        SKTiledKit.enable()
-
         guard let url = Bundle.module.url(forResource: "Test Map 1", withExtension: "tmx", subdirectory: "Maps") else {
             XCTFail("Failed to load the map")
             return
         }
         
         do {
-            let scene : SKScene = try Tiled.default.load(levelFrom: url)
+            let scene = try SKScene(tiledLevel: url)
             
             print(scene)
         } catch {
