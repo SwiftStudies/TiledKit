@@ -47,7 +47,6 @@ extension SKScene : SpecializedLevel {
     }
     
     public func add(tileLayer: TileLayer, to container: Container) throws {
-        let container = container as! SKNode
         
         let tileLayerNode = SKNode()
         
@@ -56,15 +55,18 @@ extension SKScene : SpecializedLevel {
                 #warning("Forced unwrap")
                 let tileMapOffset = y*tileLayer.level.width+x
                 let levelTileOffset = tileLayer.tiles[tileMapOffset]
-                guard let tile = tileLayer.level.tiles[levelTileOffset] else {
-                    throw SKTiledKitError.tileNotFound
+                
+                if levelTileOffset > 0 {
+                    guard let tile = tileLayer.level.tiles[levelTileOffset] else {
+                        throw SKTiledKitError.tileNotFound
+                    }
+                    let cachedNode = SKTileSets.tileCache[tile.uuid]
+                    guard let tileNode = cachedNode?.copy() as? SKNode else {
+                        throw SKTiledKitError.tileNodeDoesNotExist
+                    }
+                    tileNode.position = CGPoint(x: x * tileLayer.level.tileWidth, y: y * tileLayer.level.tileHeight)
+                    tileLayerNode.addChild(tileNode)
                 }
-                let cachedNode = SKTileSets.tileCache[tile.uuid]
-                guard let tileNode = cachedNode?.copy() as? SKNode else {
-                    throw SKTiledKitError.tileNodeDoesNotExist
-                }
-                tileNode.position = CGPoint(x: x, y: y)
-                tileLayerNode.addChild(tileNode)
             }
         }
         
@@ -72,8 +74,6 @@ extension SKScene : SpecializedLevel {
     }
     
     public func add(group: GroupLayer, to container: Container) throws -> Container {
-        let container = container as! SKNode
-        
         let node = SKNode()
         
         container.addChild(node)
@@ -83,8 +83,6 @@ extension SKScene : SpecializedLevel {
 
     #warning("Not implemented")
     public func add(image: ImageLayer, to container: Container) throws {
-        let container = container as! SKNode
-
         let emptyTextureNode = SKTexture()
         
         let spriteNode = SKSpriteNode(texture: emptyTextureNode, color: SKColor.red, size: CGSize(width: 100, height: 100))
@@ -92,13 +90,9 @@ extension SKScene : SpecializedLevel {
         spriteNode.position = CGPoint(x: image.x, y: image.y)
         
         container.addChild(spriteNode)
-        
-        throw SKTiledKitError.notImplemented
     }
     
     public func add(objects: ObjectLayer, to container: Container) throws {
-        let container = container as! SKNode
-
         for object in objects.objects {
             if let rectangle = object as? RectangleObject {
                 let rectangle = SKShapeNode(rect: CGRect(x: rectangle.x.cgFloatValue, y: rectangle.y.cgFloatValue, width: rectangle.width.cgFloatValue, height: rectangle.height.cgFloatValue))

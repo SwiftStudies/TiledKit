@@ -18,6 +18,9 @@ final class SKTiledKitTests : XCTestCase {
         do {
             let scene = try SKScene(tiledLevel: url)
             
+            let view = SKView(frame: NSRect(x: 0, y: 0, width: scene.size.width, height: scene.size.height))
+            view.presentScene(scene)
+            
             print(scene)
         } catch {
             XCTFail("Could not create scene \(error)")

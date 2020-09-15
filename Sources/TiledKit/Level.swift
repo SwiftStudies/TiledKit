@@ -106,6 +106,7 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
             let tileSet = try TileSetCache.tileSet(from: tileSetReference)
             tileSets.append(tileSet)
             for (lid,tile) in tileSet.tiles {
+                print("Setting \(tileSetReference.firstGID+lid) (\(tileSetReference.firstGID)+\(lid))")
                 tiles[tileSetReference.firstGID+lid] = tile
             }
         }
