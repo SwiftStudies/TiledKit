@@ -83,14 +83,16 @@ public struct TileSheet : Decodable {
 
         let imageContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .image)
         
-        let path = try imageContainer.decode(String.self, forKey: .imagePath)
+        var path = try imageContainer.decode(String.self, forKey: .imagePath)
         
         #warning("Should check for .. first")
-        guard let imageURL = decoder.userInfo.decodingContext?.originUrl?.appendingPathComponent(path) else {
-            throw TiledDecodingError.missingPathForTileSheetImage
+        if path.hasPrefix("..") {
+            let originUrl = decoder.userInfo.decodingContext?.originUrl ?? Bundle.main.bundleURL
+            
+            path = originUrl.appendingPathComponent(path).standardizedFileURL.path
         }
         
-        imagePath = imageURL
+        imagePath = URL(fileURLWithPath: path)
         
         imageWidth = try imageContainer.decode(Int.self, forKey: .imageWidth)
         imageHeight = try imageContainer.decode(Int.self, forKey: .imageHeight)
@@ -220,7 +222,7 @@ public struct TileSet : TiledDecodable{
             let tileImage = try container.decode(TileImage.self, forKey: .image)
             
             #warning("Should check for .. first")
-            path = decoder.userInfo.decodingContext?.originUrl?.appendingPathComponent(tileImage.source)
+            path = decoder.userInfo.decodingContext?.originUrl?.appendingPathComponent(tileImage.source).standardizedFileURL
                     
             identifier = Identifier(integerLiteral: try container.decode(Int.self, forKey: .identifier))
             

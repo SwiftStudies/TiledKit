@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="9">
+ <properties>
+  <property name="Boolean Property" type="bool" value="true"/>
+  <property name="Object Property" type="object" value="3"/>
+ </properties>
  <tileset firstgid="1" source="../Tilesets/SingleImageAutoTransparency.tsx"/>
  <tileset firstgid="5" source="../Tilesets/SeparateSingleImage.tsx"/>
  <layer id="6" name="Tile Layer 2" width="10" height="10">

@@ -49,7 +49,7 @@ extension SKScene : SpecializedLevel {
     public func add(tileLayer: TileLayer, to container: Container) throws {
         
         let tileLayerNode = SKNode()
-        
+                
         for x in 0..<tileLayer.level.width {
             for y in 0..<tileLayer.level.height {
                 #warning("Forced unwrap")
@@ -64,7 +64,8 @@ extension SKScene : SpecializedLevel {
                     guard let tileNode = cachedNode?.copy() as? SKNode else {
                         throw SKTiledKitError.tileNodeDoesNotExist
                     }
-                    tileNode.position = CGPoint(x: x * tileLayer.level.tileWidth, y: y * tileLayer.level.tileHeight)
+                    #warning("Force unwrap")
+                    tileNode.position = CGPoint(x: x * tileLayer.level.tileWidth + (tile.tileSet!.tileWidth / 2), y: y * tileLayer.level.tileHeight + (tile.tileSet!.tileHeight / 2))
                     tileLayerNode.addChild(tileNode)
                 }
             }
@@ -89,12 +90,15 @@ extension SKScene : SpecializedLevel {
         
         spriteNode.position = CGPoint(x: image.x, y: image.y)
         
-        container.addChild(spriteNode)
+//        container.addChild(spriteNode)
     }
     
     public func add(objects: ObjectLayer, to container: Container) throws {
         for object in objects.objects {
-            if let rectangle = object as? RectangleObject {
+            if let rectangle = object as? EllipseObject {
+                let elipse = SKShapeNode(ellipseIn: CGRect(x: rectangle.x.cgFloatValue, y: rectangle.y.cgFloatValue, width: rectangle.width.cgFloatValue, height: rectangle.height.cgFloatValue))
+                container.addChild(elipse)
+            } else if let rectangle = object as? RectangleObject {
                 let rectangle = SKShapeNode(rect: CGRect(x: rectangle.x.cgFloatValue, y: rectangle.y.cgFloatValue, width: rectangle.width.cgFloatValue, height: rectangle.height.cgFloatValue))
                 container.addChild(rectangle)
             }

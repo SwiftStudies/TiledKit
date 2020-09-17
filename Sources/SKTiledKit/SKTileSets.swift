@@ -34,23 +34,31 @@ internal class SKTileSets {
             return cachedTexture
         }
         
-        var loadedTexture = SKTexture(imageNamed: url.deletingPathExtension().lastPathComponent)
+        let provider : CGDataProvider
         
-        if loadedTexture.size() == .zero {
-            guard let provider = CGDataProvider(url: url as CFURL) else {
-                throw SKTiledKitError.imageFileNotFound(url: url)
+        if let directProvider = CGDataProvider(url: url as CFURL) {
+            provider = directProvider
+        } else {
+            // See if it has been processed into directly into the bundle resources
+            var bundleURL = Bundle.main.bundleURL
+            bundleURL.appendPathComponent(url.lastPathComponent)
+            guard let bundleProvider = CGDataProvider(url: bundleURL as CFURL) else {
+                // Perhaps it's from a atlas
+                return SKTexture(imageNamed: url.deletingPathExtension().lastPathComponent)
             }
-            guard let cgImageSource = CGImageSourceCreateWithDataProvider(provider, nil) else {
-                throw SKTiledKitError.couldNotLoadImage(url: url)
-            }
-            
-            guard let cgImage = CGImageSourceCreateImageAtIndex(cgImageSource, 0, nil) else {
-                throw SKTiledKitError.couldNotCreateImage(url: url)
-            }
-            
-            
-            loadedTexture = SKTexture(cgImage: cgImage)
+            provider = bundleProvider
         }
+        
+        guard let cgImageSource = CGImageSourceCreateWithDataProvider(provider, nil) else {
+            throw SKTiledKitError.couldNotLoadImage(url: url)
+        }
+        
+        guard let cgImage = CGImageSourceCreateImageAtIndex(cgImageSource, 0, nil) else {
+            throw SKTiledKitError.couldNotCreateImage(url: url)
+        }
+            
+            
+        let loadedTexture = SKTexture(cgImage: cgImage)
 
         tileTextureCache[url.path] = loadedTexture
         
@@ -66,7 +74,6 @@ internal class SKTileSets {
     static func load(_ tileset:TileSet) throws {
         switch tileset.type {
         case .files:
-            print("\(tileset.name) has \(tileset.tiles.count)")
             for tile in tileset.tiles.values {
                 guard let url = tile.path else {
                     throw SKTiledKitError.missingPathForTile(tile: "\(tileset.name) - \(tile.identifier)")
@@ -79,7 +86,12 @@ internal class SKTileSets {
                 guard let position = tile.position else {
                     throw SKTiledKitError.noPositionForTile(identifier: tile.identifier.hashValue, tileSet: tileset.name)
                 }
-                let subTexture = SKTexture(rect: CGRect(x: position.x.cgFloatValue, y: position.y.cgFloatValue, width: tileset.tileWidth.cgFloatValue, height: tileset.tileHeight.cgFloatValue), in: parentTexture)
+                let subTexture = SKTexture(
+                    rect: CGRect(x: position.x.cgFloatValue / parentTexture.size().width,
+                                 y: position.y.cgFloatValue  / parentTexture.size().height,
+                                 width: tileset.tileWidth.cgFloatValue  / parentTexture.size().width,
+                                 height: tileset.tileHeight.cgFloatValue  / parentTexture.size().height),
+                    in: parentTexture )
                 createTileNode(tile, from: tileset, with: subTexture)
             }
             return
