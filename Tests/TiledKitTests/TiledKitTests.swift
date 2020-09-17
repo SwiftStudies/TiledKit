@@ -71,6 +71,7 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(level.tileWidth, 16)
         XCTAssertEqual(level.tileHeight, 16)
         XCTAssertEqual(level.layers.count, 5)
+        XCTAssertEqual(level.properties.count, 2)
 
         XCTAssertEqual(level.getTileLayers().count, 2)
         XCTAssertEqual(level.getObjectLayers().count, 1)

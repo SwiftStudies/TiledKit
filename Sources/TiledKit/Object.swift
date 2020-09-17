@@ -15,7 +15,6 @@
 
 import Foundation
 
-#warning("Don't think this needs to be tiled decodable, would mean I can also get read of the initiatizer")
 public class Object : Propertied{
     internal enum ObjectDecodingError : Error {
         case notMyType      // A specialisation cannot decode
@@ -32,13 +31,13 @@ public class Object : Propertied{
     public let y           : Float
     public let parent      : ObjectLayer
     
-    public var properties  = [String:Literal]()
+    public var properties  = [String:PropertyValue]()
     
     public var level       : Level {
         return parent.level 
     }
     
-    init(id:Int, name:String, visible:Bool, x:Double, y:Double, in parent:ObjectLayer, with properties:[String:Literal]){
+    init(id:Int, name:String, visible:Bool, x:Double, y:Double, in parent:ObjectLayer, with properties:[String:PropertyValue]){
         self.id = id
         self.name = name
         self.visible = visible
@@ -50,11 +49,11 @@ public class Object : Propertied{
 }
 
 public extension Object {
-    subscript(_ property:String)->Literal?{
+    subscript(_ property:String)->PropertyValue?{
         return self[property, defaultingTo:nil]
     }
     
-    subscript(_ property:String, defaultingTo defaultValue:Literal?)->Literal?{
+    subscript(_ property:String, defaultingTo defaultValue:PropertyValue?)->PropertyValue?{
         if let onSelf = properties[property]{
             return onSelf
         }
@@ -70,7 +69,7 @@ public class RectangleObject : Object{
     public let height      : Float
     public let rotation    : Float
     
-    init(id: Int, name: String, visible: Bool, x: Double, y: Double, width:Double, height:Double, in parent: ObjectLayer, with properties: [String : Literal]) {
+    init(id: Int, name: String, visible: Bool, x: Double, y: Double, width:Double, height:Double, in parent: ObjectLayer, with properties: [String : PropertyValue]) {
         self.width = Float(width)
         self.height = Float(height)
         #warning("Not passing along rotation, this should really be an abstract base class")
@@ -88,7 +87,7 @@ public class TileObject : RectangleObject{
     public let gid : Int
     public var tile    : TileSet.Tile? = nil
     
-    init(id: Int, tileGid gid:Int, name: String, visible: Bool, x: Double, y: Double, width: Double, height: Double, in parent: ObjectLayer, with properties: [String : Literal]) {
+    init(id: Int, tileGid gid:Int, name: String, visible: Bool, x: Double, y: Double, width: Double, height: Double, in parent: ObjectLayer, with properties: [String : PropertyValue]) {
         
         self.gid = gid
         self.tile = parent.level.tiles[gid]
@@ -107,7 +106,7 @@ public class TextObject : RectangleObject{
     
     public let text : TextProperties
     
-    init(id: Int, name: String, visible: Bool, x: Double, y: Double, width: Double, height: Double, text:TextProperties, in parent: ObjectLayer, with properties: [String : Literal]) {
+    init(id: Int, name: String, visible: Bool, x: Double, y: Double, width: Double, height: Double, text:TextProperties, in parent: ObjectLayer, with properties: [String : PropertyValue]) {
         
         self.text = text
         super.init(id: id, name: name, visible: visible, x: x, y: y, width: width, height: height, in: parent, with: properties)
@@ -119,7 +118,7 @@ public class PolygonObject : Object{
     public let points : [Position]
     
     
-    init(id: Int, name: String, visible: Bool, x: Double, y: Double, points:[Position], in parent: ObjectLayer, with properties: [String : Literal]) {
+    init(id: Int, name: String, visible: Bool, x: Double, y: Double, points:[Position], in parent: ObjectLayer, with properties: [String : PropertyValue]) {
         self.points = points
         super.init(id: id, name: name, visible: true, x: x, y: y, in: parent, with: properties)
     }
@@ -128,7 +127,7 @@ public class PolygonObject : Object{
 public class PolylineObject : PolygonObject{
 }
 
-fileprivate struct LoadableObject : Decodable {
+fileprivate struct LoadableObject : Decodable, Propertied {
     let id : Int
     let name : String
     let x : Double
@@ -138,7 +137,7 @@ fileprivate struct LoadableObject : Decodable {
     let rotation : Double
     let kind : Kind
     let visible : Bool
-    let properties : [String:Literal]
+    var properties = [String:PropertyValue]()
     let parent : ObjectLayer
 
     enum Kind {
@@ -189,8 +188,6 @@ fileprivate struct LoadableObject : Decodable {
         height = try container.decodeIfPresent(Double.self, forKey: .height)
         rotation = try container.decodeIfPresent(Double.self, forKey: .rotation) ?? 0.0
         visible = try container.decodeIfPresent(Bool.self, forKey: .visible) ?? true
-        #warning("Does not load properties")
-        properties = [String:Literal]()
         parent = objectLayer
         
         
@@ -212,6 +209,10 @@ fileprivate struct LoadableObject : Decodable {
             kind = .polyline(points: polygonPoints.pointsArray)
         } else {
             kind = .rectangle
+        }
+        
+        if let properties = try? decode(from: decoder) {
+            self.properties = properties
         }
         
     }

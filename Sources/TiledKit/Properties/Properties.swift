@@ -15,8 +15,8 @@
 
 import Foundation
 
-fileprivate enum PropertyJSONKeys : String, CodingKey {
-    case types = "propertytypes", values = "properties"
+fileprivate enum PropertyXMLCodingKeys : String, CodingKey {
+    case properties, property
 }
 
 #warning("Is this needed?")
@@ -34,16 +34,37 @@ fileprivate struct FlexibleCodingKey : CodingKey {
 }
 
 protocol Propertied {
-    var  properties : [String : Literal] {get set}
+    var  properties : [String : PropertyValue] {get set}
 }
 
-fileprivate enum PropertyType : String, Decodable {
-    case string, bool, int, float, file, color
+public enum PropertyValue : Equatable{
+    case string(String), bool(Bool), int(Int), float(Float), file(url:URL), color(color:Color), object(id:Int), error(type:String, value:String)
+}
+
+fileprivate enum RawPropertyType : String, Decodable {
+    case string, bool, int, float, file, color, object
+}
+
+fileprivate struct XMLProperty : Decodable {
+    let name    : String
+    let type    : RawPropertyType
+    private let value : String
+    
+    var property : PropertyValue {
+        return .string(value)
+    }
 }
 
 extension Decodable where Self : Propertied {
-    func decode(from decoder:Decoder) throws -> [String : Literal] {
-        #warning("Properties not implemented")
-        return [String:Literal]()
+    func decode(from decoder:Decoder) throws -> [String : PropertyValue] {
+        let container = try decoder.container(keyedBy: PropertyXMLCodingKeys.self)
+        
+        let propertiesContainer = try container.nestedContainer(keyedBy: PropertyXMLCodingKeys.self, forKey: .properties)
+        
+        let properties = try propertiesContainer.decode([XMLProperty].self, forKey: .property).reduce(into:[String:PropertyValue]()){
+            $0[$1.name] = $1.property
+        }
+        
+        return properties
     }
 }
