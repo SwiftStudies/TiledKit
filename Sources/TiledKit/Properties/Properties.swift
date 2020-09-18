@@ -19,20 +19,6 @@ fileprivate enum PropertyXMLCodingKeys : String, CodingKey {
     case properties, property
 }
 
-#warning("Is this needed?")
-fileprivate struct FlexibleCodingKey : CodingKey {
-    var stringValue: String
-    var intValue: Int?
-
-    init?(stringValue: String) {
-        self.stringValue = stringValue
-    }
-    
-    init?(intValue: Int) {
-        return nil
-    }
-}
-
 protocol Propertied {
     var  properties : [String : PropertyValue] {get set}
 }
