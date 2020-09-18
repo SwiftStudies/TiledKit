@@ -19,17 +19,32 @@ public struct Color : Decodable, Equatable{
     
     //Tiled represents colors in the form of a string #AARRGGBB
     public init(from string:String){
-        if string.count == 7 {
-            alpha = 255
-            red   = Byte(string[1..<3], radix: 16) ?? 255
-            green = Byte(string[3..<5], radix: 16) ?? 0
-            blue  = Byte(string[5..<7], radix: 16) ?? 255
+        if string.hasPrefix("#") {
+            if string.count == 6 {
+                alpha = 255
+                red   = Byte(string[1..<3], radix: 16) ?? 255
+                green = Byte(string[3..<5], radix: 16) ?? 0
+                blue  = Byte(string[5..<7], radix: 16) ?? 255
 
+            } else {
+                alpha = Byte(string[1..<3], radix: 16) ?? 255
+                red   = Byte(string[3..<5], radix: 16) ?? 255
+                green = Byte(string[5..<7], radix: 16) ?? 0
+                blue  = Byte(string[7..<9], radix: 16) ?? 255
+            }
         } else {
-            alpha = Byte(string[1..<3], radix: 16) ?? 255
-            red   = Byte(string[3..<5], radix: 16) ?? 255
-            green = Byte(string[5..<7], radix: 16) ?? 0
-            blue  = Byte(string[7..<9], radix: 16) ?? 255
+            if string.count == 6 {
+                alpha = 255
+                red   = Byte(string[0..<2], radix: 16) ?? 255
+                green = Byte(string[2..<4], radix: 16) ?? 0
+                blue  = Byte(string[4..<6], radix: 16) ?? 255
+
+            } else {
+                alpha = Byte(string[0..<2], radix: 16) ?? 255
+                red   = Byte(string[2..<4], radix: 16) ?? 255
+                green = Byte(string[4..<6], radix: 16) ?? 0
+                blue  = Byte(string[6..<8], radix: 16) ?? 255
+            }
         }
     }
     
@@ -50,22 +65,4 @@ public struct Color : Decodable, Equatable{
     }
 }
 
-#if os(macOS) || os(tvOS) || os(watchOS) || os(iOS)
 
-import SpriteKit
-
-public extension Color {
-    var skColor : SKColor {
-        let red = CGFloat(self.red) / 255
-        let green = CGFloat(self.green) / 255
-        let blue = CGFloat(self.blue) / 255
-        let alpha = CGFloat(self.alpha) / 255
-        
-        #if os(macOS)
-        return SKColor(calibratedRed: red, green: green, blue: blue, alpha: alpha)
-        #else
-        return SKColor(red: red, green: green, blue: blue, alpha: alpha)
-        #endif
-    }
-}
-#endif
