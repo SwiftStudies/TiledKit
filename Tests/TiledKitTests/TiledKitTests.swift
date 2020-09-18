@@ -23,7 +23,25 @@ final class TiledKitTests: XCTestCase {
     }
     
     func testSingleImageTileSetWithOptionals(){
-        XCTFail("Not implemented")
+        do {
+            guard let url = Bundle.module.url(forResource: "SingleImageMarginsAndSpacing", withExtension: "tsx", subdirectory: "Tilesets") else {
+                XCTFail("Could not find TileSet in bundle")
+                return
+            }
+            
+            let tileSet = try TileSet(from: url)
+            XCTAssertEqual(tileSet.tileWidth, 12)
+            XCTAssertEqual(tileSet.tileHeight, 12)
+            XCTAssertEqual(tileSet.tiles.count, 4)
+            switch tileSet.type{
+            case .sheet(let tileSheet):
+                XCTAssertEqual(tileSheet.transparentColor, Color(r: 255, g: 0, b: 255))
+            default:
+                XCTFail("Should be a tilesheet")
+            }
+        } catch {
+            XCTFail("Error thrown \(error)")
+        }
     }
 
     func testMultiImageTileSetWithSingleTile(){
@@ -71,6 +89,7 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(level.tileWidth, 16)
         XCTAssertEqual(level.tileHeight, 16)
         XCTAssertEqual(level.layers.count, 5)
+        XCTAssertEqual(level.properties.count, 7)
 
         XCTAssertEqual(level.getTileLayers().count, 2)
         XCTAssertEqual(level.getObjectLayers().count, 1)

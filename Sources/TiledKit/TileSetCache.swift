@@ -38,7 +38,7 @@ enum TileSetCache {
         }
         
         //Try finding it in the cache by its URL
-        let url = URL(fileURLWithPath: tileSetReference.file)
+        let url = URL(fileURLWithPath: tileSetReference.file).standardizedFileURL
         if let tileSet = TileSetCache.fileTileSetMap[url] {
             identifier = Identifier(stringLiteral: tileSet.name)
             return tileSet

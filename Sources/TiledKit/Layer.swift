@@ -23,7 +23,7 @@ public class Layer: TiledDecodable, Propertied{
     
     public let parent  : LayerContainer
     
-    public var properties = [String : Literal]()
+    public var properties = [String : PropertyValue]()
     
     public var level : Level {
         return parent.level
@@ -51,7 +51,6 @@ public class Layer: TiledDecodable, Propertied{
             let container = try decoder.container(keyedBy: CodingKeys.self)
 
             name = try container.decode(String.self, forKey: .name)
-            print("Decoding \(name) with path \(decoderContext.layerPath.map({$0.name}))")
             
             x = (try? container.decode(Int.self, forKey: .x)) ?? 0
             y = (try? container.decode(Int.self, forKey: .y)) ?? 0
@@ -59,20 +58,21 @@ public class Layer: TiledDecodable, Propertied{
             visible = (try? container.decode(Bool.self, forKey: .visible)) ?? true
             opacity = (try? container.decode(Float.self, forKey: .opacity)) ?? 1.0
                     
-            properties = try decode(from: decoder)
+            if let properties = try? decode(from: decoder) {
+                self.properties = properties
+            }
         } catch {
-            print("Whilst building \(Swift.type(of: Self.self)) encountered decoding error: \(error.localizedDescription)")
             throw error
         }
     }
 }
 
 public extension Layer {
-    subscript(_ property:String)->Literal?{
+    subscript(_ property:String)->PropertyValue?{
         return self[property, defaultingTo:nil]
     }
     
-    subscript(_ property:String, defaultingTo defaultValue:Literal?)->Literal?{
+    subscript(_ property:String, defaultingTo defaultValue:PropertyValue?)->PropertyValue?{
         if let onSelf = properties[property]{
             return onSelf
         }
@@ -81,11 +81,11 @@ public extension Layer {
 }
 
 public extension LayerContainer{
-    subscript(_ property:String)->Literal?{
+    subscript(_ property:String)->PropertyValue?{
         return self[property, defaultingTo:nil]
     }
     
-    subscript(_ property:String, defaultingTo defaultValue:Literal?)->Literal?{
+    subscript(_ property:String, defaultingTo defaultValue:PropertyValue?)->PropertyValue?{
         if let propertiedSelf = self as? Propertied, let onSelf = propertiedSelf.properties[property]{
             return onSelf
         }

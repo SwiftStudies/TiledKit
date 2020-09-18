@@ -46,7 +46,7 @@ let package = Package(
                 .copy("Resources/Test Project.tiled-project"),
                 .copy("Resources/Maps"),
                 .copy("Resources/Tilesets"),
-                .process("Resources/Images")]
+                .copy("Resources/Images")]
             ),
     ]
 )

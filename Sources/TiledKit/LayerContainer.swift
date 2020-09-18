@@ -58,19 +58,19 @@ extension LayerContainer {
     }
 
     
-    public func getGroups(named name:String? = nil, matching conditions:[String:Literal] = [:], recursively:Bool = false)->[GroupLayer]{
+    public func getGroups(named name:String? = nil, matching conditions:[String:PropertyValue] = [:], recursively:Bool = false)->[GroupLayer]{
         return getLayers(ofType: .group, named: name, matching: conditions, recursively: recursively) as! [GroupLayer]
     }
 
-    public func getObjectLayers(named name:String? = nil, matching conditions:[String:Literal] = [:], recursively:Bool = false)->[ObjectLayer]{
+    public func getObjectLayers(named name:String? = nil, matching conditions:[String:PropertyValue] = [:], recursively:Bool = false)->[ObjectLayer]{
         return getLayers(ofType: .object, named: name, matching: conditions, recursively: recursively) as! [ObjectLayer]
     }
 
-    public func getTileLayers(named name:String? = nil, matching conditions:[String:Literal] = [:], recursively:Bool = false)->[TileLayer]{
+    public func getTileLayers(named name:String? = nil, matching conditions:[String:PropertyValue] = [:], recursively:Bool = false)->[TileLayer]{
         return getLayers(ofType: .tile, named: name, matching: conditions, recursively: recursively) as! [TileLayer]
     }
     
-    public func getLayers(ofType type:LayerType, named name:String?, matching conditions:[String:Literal], recursively:Bool)->[Layer]{
+    public func getLayers(ofType type:LayerType, named name:String?, matching conditions:[String:PropertyValue], recursively:Bool)->[Layer]{
         var matchingLayers = [Layer]()
         
         for layer in layers {

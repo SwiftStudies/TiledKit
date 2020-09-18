@@ -27,10 +27,14 @@ internal class TiledDecoder : XMLDecoder {
 }
 
 public enum TiledDecodingError : Error {
+    case noGameEngineSpecified
     case missingDecoderContext
     case noContainerForLayer(layerPath:[Layer])
     case couldNotLoadFile(url:URL, message:String)
     case couldNotLoadLevel(url:URL, decodingError:Error)
     case couldNotLoadTileSet(url:URL, decodingError:Error)
     case objectNotContainedInObjectLayer(layerPath:[Layer])
+    case unknownLayerType(layerType:String)
+    case cannotCreateSpecialisedLevelOfType(desiredType:String, supportedTypes:[String])
+    case missingPathForTileSheetImage
 }
