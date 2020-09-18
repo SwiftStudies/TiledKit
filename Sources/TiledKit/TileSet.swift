@@ -60,7 +60,7 @@ public enum TileSetType {
 }
 
 public struct TileSheet : Decodable {
-    let imagePath : String
+    public let imagePath : URL
     let imageWidth : Int
     let imageHeight : Int
     let margin : Int
@@ -71,7 +71,7 @@ public struct TileSheet : Decodable {
     
     
     private enum CodingKeys : String, CodingKey {
-        case imageWidth = "width", imageHeight = "height", margin, spacing, tileCount="tilecount", transparentColor = "transparentcolor", columns, imagePath = "source", image = "image"
+        case imageWidth = "width", imageHeight = "height", margin, spacing, tileCount="tilecount", transparentColor = "trans", columns, imagePath = "source", image = "image"
     }
     
     public init(from decoder: Decoder) throws{
@@ -83,12 +83,23 @@ public struct TileSheet : Decodable {
 
         let imageContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .image)
         
-        imagePath = try imageContainer.decode(String.self, forKey: .imagePath)
+        var path = try imageContainer.decode(String.self, forKey: .imagePath)
+        
+        #warning("Should check for .. first")
+        if path.hasPrefix("..") {
+            let originUrl = decoder.userInfo.decodingContext?.originUrl ?? Bundle.main.bundleURL
+            
+            path = originUrl.appendingPathComponent(path).standardizedFileURL.path
+        }
+        
+        imagePath = URL(fileURLWithPath: path)
+        
         imageWidth = try imageContainer.decode(Int.self, forKey: .imageWidth)
         imageHeight = try imageContainer.decode(Int.self, forKey: .imageHeight)
         
         // Optional
-        transparentColor = (try? container.decode(Color.self, forKey: .transparentColor)) ?? Color(r: 0, g: 0, b: 0, a: 0)
+        #warning("Not reading the grid")
+        transparentColor = (try? imageContainer.decode(Color.self, forKey: .transparentColor)) ?? Color(r: 0, g: 0, b: 0, a: 0)
         margin = (try? container.decode(Int.self, forKey: .margin)) ?? 0
         spacing = (try? container.decode(Int.self, forKey: .spacing)) ?? 0
     }
@@ -169,12 +180,13 @@ public struct TileSet : TiledDecodable{
             }
             
         }
+        
     }
     
     public class Tile: TiledDecodable, LayerContainer {
         public var identifier : Identifier
         public var parent : LayerContainer
-        public let path    : String?
+        public let path    : URL?
         public var objects : ObjectLayer?
         public var tileSet : TileSet? = nil
         public let position : Position?
@@ -199,14 +211,20 @@ public struct TileSet : TiledDecodable{
         }
         
         public required init(from decoder: Decoder) throws{
-            let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            if let path = try container.decodeIfPresent(String.self, forKey: CodingKeys.image){
-                self.path = path
-            } else {
-                self.path = nil
+            struct TileImage : Decodable {
+                let width : Int
+                let height : Int
+                let source : String
             }
             
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            let tileImage = try container.decode(TileImage.self, forKey: .image)
+            
+            #warning("Should check for .. first")
+            path = decoder.userInfo.decodingContext?.originUrl?.appendingPathComponent(tileImage.source).standardizedFileURL
+                    
             identifier = Identifier(integerLiteral: try container.decode(Int.self, forKey: .identifier))
             
             parent = (decoder.userInfo[DecodingContext.key] as! DecodingContext).level!
