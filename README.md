@@ -2,4 +2,10 @@
 
 # TiledKit
 
-A description of this package.
+A Swift Package for reading [Tiled](https://www.mapeditor.org) levels that makes it easy to specialize the loaded level/sheets etc for a specifc game engine. 
+
+## Available Specializations
+
+  - [SpriteKit](https://github.com/SwiftStudies/SKTiledKit)
+  
+  
