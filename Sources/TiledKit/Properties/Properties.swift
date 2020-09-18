@@ -37,7 +37,31 @@ fileprivate struct XMLProperty : Decodable {
     private let value : String
     
     var property : PropertyValue {
-        return .string(value)
+
+        switch type {
+        case .string:
+            return .string(value)
+        case .bool:
+            return .bool(value == "true")
+        case .int:
+            if let intValue = Int(value) {
+                return .int(intValue)
+            }
+        case .float:
+            if let floatValue = Float(value) {
+                return .float(floatValue)
+            }
+        case .file:
+            return .file(url: URL(fileURLWithPath: value))
+        case .color:
+            return .color(color: Color(from: value))
+        case .object:
+            if let objectId = Int(value) {
+                return .object(id: objectId)
+            }
+        }
+        
+        return .error(type: "\(type)", value: value)
     }
 }
 
