@@ -71,7 +71,7 @@ public struct TileSheet : Decodable {
     
     
     private enum CodingKeys : String, CodingKey {
-        case imageWidth = "width", imageHeight = "height", margin, spacing, tileCount="tilecount", transparentColor = "transparentcolor", columns, imagePath = "source", image = "image"
+        case imageWidth = "width", imageHeight = "height", margin, spacing, tileCount="tilecount", transparentColor = "trans", columns, imagePath = "source", image = "image"
     }
     
     public init(from decoder: Decoder) throws{
@@ -98,7 +98,8 @@ public struct TileSheet : Decodable {
         imageHeight = try imageContainer.decode(Int.self, forKey: .imageHeight)
         
         // Optional
-        transparentColor = (try? container.decode(Color.self, forKey: .transparentColor)) ?? Color(r: 0, g: 0, b: 0, a: 0)
+        #warning("Not reading the grid")
+        transparentColor = (try? imageContainer.decode(Color.self, forKey: .transparentColor)) ?? Color(r: 0, g: 0, b: 0, a: 0)
         margin = (try? container.decode(Int.self, forKey: .margin)) ?? 0
         spacing = (try? container.decode(Int.self, forKey: .spacing)) ?? 0
     }

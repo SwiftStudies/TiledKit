@@ -33,11 +33,15 @@ fileprivate enum RawPropertyType : String, Decodable {
 
 fileprivate struct XMLProperty : Decodable {
     let name    : String
-    let type    : RawPropertyType
+    let type    : RawPropertyType?
     private let value : String
     
     var property : PropertyValue {
 
+        guard let type = type else {
+            return .string(value)
+        }
+        
         switch type {
         case .string:
             return .string(value)
