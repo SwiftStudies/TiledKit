@@ -19,7 +19,7 @@ fileprivate enum PropertyXMLCodingKeys : String, CodingKey {
     case properties, property
 }
 
-protocol Propertied {
+public protocol Propertied {
     var  properties : [String : PropertyValue] {get set}
 }
 
