@@ -131,12 +131,14 @@ public struct TileSheet : Decodable {
     }
 }
 
-public struct TileSet : TiledDecodable{
+public struct TileSet : TiledDecodable, Propertied{
     public var name : String
     public var tileWidth : Int
     public var tileHeight : Int
     public var tiles = [Int:Tile]()
     public var type : TileSetType
+    
+    public var properties = [String : PropertyValue]()
     
     public enum CodingKeys : String, CodingKey {
         case tiles = "tile"
@@ -144,6 +146,7 @@ public struct TileSet : TiledDecodable{
         case tileHeight = "tileheight"
         case name
         case image
+        case properties
     }
     
     public init(from decoder: Decoder) throws{
@@ -181,6 +184,9 @@ public struct TileSet : TiledDecodable{
             
         }
         
+        if let properties = try? decode(from: decoder) {
+            self.properties = properties
+        }
     }
     
     public class Tile: TiledDecodable, LayerContainer {
@@ -248,6 +254,7 @@ public struct TileSet : TiledDecodable{
             self.tileHeight = loaded.tileHeight
             self.name = loaded.name
             self.type = loaded.type
+            self.properties = loaded.properties
         } catch {
             throw TiledDecodingError.couldNotLoadTileSet(url: url, decodingError: error)
         }

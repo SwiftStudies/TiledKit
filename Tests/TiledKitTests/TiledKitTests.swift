@@ -17,6 +17,8 @@ final class TiledKitTests: XCTestCase {
             XCTAssertEqual(tileSet.tileWidth, 16)
             XCTAssertEqual(tileSet.tileHeight, 16)
             XCTAssertEqual(tileSet.tiles.count, 4)
+            XCTAssertEqual(tileSet.properties.count, 1)
+            XCTAssertEqual(tileSet.properties["filteringMode"], .string("nearest"))
         } catch {
             XCTFail("Error thrown \(error)")
         }
