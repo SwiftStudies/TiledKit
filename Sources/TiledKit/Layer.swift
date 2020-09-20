@@ -222,9 +222,9 @@ public final class ImageLayer : Layer {
         case offsetx, offsety, image
     }
     
-    var url : URL
-    var width : Int
-    var height : Int
+    public var url : URL
+    public var width : Int
+    public var height : Int
     
     public required init(from decoder: Decoder) throws {
         guard let decoderContext = decoder.userInfo.decodingContext else {
