@@ -197,7 +197,7 @@ fileprivate struct LoadableObject : Decodable, Propertied {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         id = try container.decode(Int.self, forKey: .id)
-        name = try container.decode((String.self), forKey: .name)
+        name = try container.decodeIfPresent((String.self), forKey: .name) ?? ""
         x = try container.decode(Double.self, forKey: .x)
         y = try container.decode(Double.self, forKey: .y)
         width = try container.decodeIfPresent(Double.self, forKey: .width)
