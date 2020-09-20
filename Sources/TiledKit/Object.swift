@@ -97,17 +97,17 @@ public class TileObject : RectangleObject{
 
 public class TextObject : RectangleObject{
     public struct TextStyle {
-        let wrap : Bool
-        let fontFamily : String?
-        let pixelSize : Int
-        let color : Color
-        let verticalAlignment : VerticalTextAlignment
-        let horizontalAlignment : HorizontalTextAlignment
-        let bold : Bool
-        let italic : Bool
-        let underline : Bool
-        let strikeout : Bool
-        let kerning : Bool
+        public let wrap : Bool
+        public let fontFamily : String?
+        public let pixelSize : Int
+        public let color : Color
+        public let verticalAlignment : VerticalTextAlignment
+        public let horizontalAlignment : HorizontalTextAlignment
+        public let bold : Bool
+        public let italic : Bool
+        public let underline : Bool
+        public let strikeout : Bool
+        public let kerning : Bool
         
         internal init(from definition:TextDefinition){
             self.wrap = definition.wrap
