@@ -14,6 +14,7 @@
 
 import Foundation
 
+@dynamicMemberLookup
 public class Layer: TiledDecodable, Propertied{
     public let name    : String
     public let visible : Bool

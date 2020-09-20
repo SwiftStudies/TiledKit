@@ -27,6 +27,72 @@ public enum PropertyValue : Equatable{
     case string(String), bool(Bool), int(Int), double(Double), file(url:URL), color(color:Color), object(id:Int), error(type:String, value:String)
 }
 
+public extension Propertied {
+    
+    subscript(dynamicMember member:String)->Color? {
+        guard let property = properties[member] else {
+            return nil
+        }
+        if case let PropertyValue.color(value) = property {
+            return value
+        }
+        return nil
+    }
+
+    
+    subscript(dynamicMember member:String)->URL? {
+        guard let property = properties[member] else {
+            return nil
+        }
+        if case let PropertyValue.file(value) = property {
+            return value
+        }
+        return nil
+    }
+
+    
+    subscript(dynamicMember member:String)->Double? {
+        guard let property = properties[member] else {
+            return nil
+        }
+        if case let PropertyValue.double(value) = property {
+            return value
+        }
+        return nil
+    }
+
+    
+    subscript(dynamicMember member:String)->Int? {
+        guard let property = properties[member] else {
+            return nil
+        }
+        if case let PropertyValue.int(value) = property {
+            return value
+        }
+        return nil
+    }
+
+    subscript(dynamicMember member:String)->Bool? {
+        guard let property = properties[member] else {
+            return nil
+        }
+        if case let PropertyValue.bool(value) = property {
+            return value
+        }
+        return nil
+    }
+
+    subscript(dynamicMember member:String)->String? {
+        guard let property = properties[member] else {
+            return nil
+        }
+        if case let PropertyValue.string(value) = property {
+            return value
+        }
+        return nil
+    }
+}
+
 fileprivate enum RawPropertyType : String, Decodable {
     case string, bool, int, float, file, color, object
 }

@@ -131,6 +131,7 @@ public struct TileSheet : Decodable {
     }
 }
 
+@dynamicMemberLookup
 public struct TileSet : TiledDecodable, Propertied{
     public var name : String
     public var tileWidth : Int

@@ -15,6 +15,7 @@
 
 import Foundation
 
+@dynamicMemberLookup
 public class Object : Propertied{
     internal enum ObjectDecodingError : Error {
         case notMyType      // A specialisation cannot decode
