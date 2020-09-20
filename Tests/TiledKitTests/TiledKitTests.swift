@@ -183,14 +183,16 @@ final class TiledKitTests: XCTestCase {
         }
         
         XCTAssertEqual(textObject.string, "Bottom")
-        XCTAssertEqual(textObject.style.fontFamily, ".SF NS Mono")
+        XCTAssertEqual(textObject.style.horizontalAlignment, .left)
+        XCTAssertEqual(textObject.style.verticalAlignment, .top)
+        XCTAssertEqual(textObject.style.fontFamily, "Courier New")
         XCTAssertEqual(textObject.style.pixelSize, 8)
         XCTAssertEqual(textObject.style.wrap, true)
         XCTAssertEqual(textObject.style.color, Color(r: 32, g: 255, b: 255, a: 255))
-        XCTAssertEqual(textObject.style.bold, true)
-        XCTAssertEqual(textObject.style.italic, true)
-        XCTAssertEqual(textObject.style.underline, true)
-        XCTAssertEqual(textObject.style.strikeout, true)
+        XCTAssertEqual(textObject.style.bold, false)
+        XCTAssertEqual(textObject.style.italic, false)
+        XCTAssertEqual(textObject.style.underline, false)
+        XCTAssertEqual(textObject.style.strikeout, false)
 }
 
     func testElipseObject(){

@@ -43,8 +43,8 @@ struct TextDefinition : Decodable {
         fontFamily = try container.decodeIfPresent(String.self, forKey: .fontFamily)
         pixelSize = try container.decodeIfPresent(Int.self, forKey: .pixelSize) ?? 16
         color = try container.decodeIfPresent(Color.self, forKey: .color) ?? Color(r: 255, g: 255, b: 255)
-        verticalAlignment = try container.decodeIfPresent(VerticalTextAlignment.self, forKey: .verticalAlignment) ?? .middle
-        horizontalAlignment = try container.decodeIfPresent(HorizontalTextAlignment.self, forKey: .horizontalAlignment) ?? .center
+        verticalAlignment = try container.decodeIfPresent(VerticalTextAlignment.self, forKey: .verticalAlignment) ?? .top
+        horizontalAlignment = try container.decodeIfPresent(HorizontalTextAlignment.self, forKey: .horizontalAlignment) ?? .left
         bold = try container.decodeIfPresent(Int.self, forKey: .bold) ?? 0 == 1
         italic = try container.decodeIfPresent(Int.self, forKey: .italic) ?? 0 == 1
         underline = try container.decodeIfPresent(Int.self, forKey: .underline) ?? 0 == 1
