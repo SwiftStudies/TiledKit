@@ -24,7 +24,7 @@ public protocol Propertied {
 }
 
 public enum PropertyValue : Equatable{
-    case string(String), bool(Bool), int(Int), float(Float), file(url:URL), color(color:Color), object(id:Int), error(type:String, value:String)
+    case string(String), bool(Bool), int(Int), double(Double), file(url:URL), color(color:Color), object(id:Int), error(type:String, value:String)
 }
 
 fileprivate enum RawPropertyType : String, Decodable {
@@ -52,8 +52,8 @@ fileprivate struct XMLProperty : Decodable {
                 return .int(intValue)
             }
         case .float:
-            if let floatValue = Float(value) {
-                return .float(floatValue)
+            if let value = Double(value) {
+                return .double(value)
             }
         case .file:
             return .file(url: URL(fileURLWithPath: value))

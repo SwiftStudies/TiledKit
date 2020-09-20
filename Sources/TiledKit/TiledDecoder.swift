@@ -29,6 +29,7 @@ internal class TiledDecoder : XMLDecoder {
 public enum TiledDecodingError : Error {
     case noGameEngineSpecified
     case missingDecoderContext
+    case couldNotReadTextDefinition
     case noContainerForLayer(layerPath:[Layer])
     case couldNotLoadFile(url:URL, message:String)
     case couldNotLoadLevel(url:URL, decodingError:Error)

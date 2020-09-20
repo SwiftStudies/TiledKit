@@ -27,8 +27,8 @@ public class Object : Propertied{
     public let id          : Int
     public let name        : String?
     public let visible     : Bool
-    public let x           : Float
-    public let y           : Float
+    public let x           : Double
+    public let y           : Double
     public let parent      : ObjectLayer
     
     public var properties  = [String:PropertyValue]()
@@ -41,8 +41,8 @@ public class Object : Propertied{
         self.id = id
         self.name = name
         self.visible = visible
-        self.x = Float(x)
-        self.y = Float(y)
+        self.x = x
+        self.y = y
         self.parent = parent
         self.properties = properties
     }
@@ -65,15 +65,14 @@ public class PointObject : Object {
 }
 
 public class RectangleObject : Object{
-    public let width       : Float
-    public let height      : Float
-    public let rotation    : Float
+    public let width       : Double
+    public let height      : Double
+    public let rotation    : Double
     
-    init(id: Int, name: String, visible: Bool, x: Double, y: Double, width:Double, height:Double, in parent: ObjectLayer, with properties: [String : PropertyValue]) {
-        self.width = Float(width)
-        self.height = Float(height)
-        #warning("Not passing along rotation, this should really be an abstract base class")
-        self.rotation = 0.0
+    init(id: Int, name: String, visible: Bool, x: Double, y: Double, width:Double, height:Double, rotatedTo:Double, in parent: ObjectLayer, with properties: [String : PropertyValue]) {
+        self.width = width
+        self.height = height
+        self.rotation = rotatedTo
         super.init(id: id, name: name, visible: visible, x: x, y: y, in: parent, with: properties)
     }
 }
@@ -87,29 +86,54 @@ public class TileObject : RectangleObject{
     public let gid : Int
     public var tile    : TileSet.Tile? = nil
     
-    init(id: Int, tileGid gid:Int, name: String, visible: Bool, x: Double, y: Double, width: Double, height: Double, in parent: ObjectLayer, with properties: [String : PropertyValue]) {
+    init(id: Int, tileGid gid:Int, name: String, visible: Bool, x: Double, y: Double, width: Double, height: Double, rotation: Double, in parent: ObjectLayer, with properties: [String : PropertyValue]) {
         
         self.gid = gid
         self.tile = parent.level.tiles[gid]
         
-        super.init(id: id, name: name, visible: visible, x: x, y: y, width: width, height: height, in: parent, with: properties)
+        super.init(id: id, name: name, visible: visible, x: x, y: y, width: width, height: height, rotatedTo: rotation, in: parent, with: properties)
     }
 }
 
 public class TextObject : RectangleObject{
-    public struct TextProperties {
-        public let fontName : String
-        public let fontSize : Int
-        public let text     : String
-        public let color    : Color
+    public struct TextStyle {
+        let wrap : Bool
+        let fontFamily : String?
+        let pixelSize : Int
+        let color : Color
+        let verticalAlignment : VerticalTextAlignment
+        let horizontalAlignment : HorizontalTextAlignment
+        let bold : Bool
+        let italic : Bool
+        let underline : Bool
+        let strikeout : Bool
+        let kerning : Bool
+        
+        internal init(from definition:TextDefinition){
+            self.wrap = definition.wrap
+            self.fontFamily = definition.fontFamily
+            self.pixelSize = definition.pixelSize
+            self.color = definition.color
+            self.verticalAlignment = definition.verticalAlignment
+            self.horizontalAlignment = definition.horizontalAlignment
+            self.bold = definition.bold
+            self.italic = definition.italic
+            self.underline = definition.underline
+            self.strikeout = definition.strikeout
+            self.kerning = definition.kerning
+        }
     }
     
-    public let text : TextProperties
+    public let string : String
+    public let style : TextStyle
     
-    init(id: Int, name: String, visible: Bool, x: Double, y: Double, width: Double, height: Double, text:TextProperties, in parent: ObjectLayer, with properties: [String : PropertyValue]) {
+    internal init(id: Int, name: String, visible: Bool, x: Double, y: Double, width: Double, height: Double, rotation:Double, text:TextDefinition, in parent: ObjectLayer, with properties: [String : PropertyValue]) {
         
-        self.text = text
-        super.init(id: id, name: name, visible: visible, x: x, y: y, width: width, height: height, in: parent, with: properties)
+        self.string = text.string
+        
+        self.style = TextStyle(from: text)
+        
+        super.init(id: id, name: name, visible: visible, x: x, y: y, width: width, height: height, rotatedTo: rotation, in: parent, with: properties)
     }
 }
 
@@ -141,7 +165,7 @@ fileprivate struct LoadableObject : Decodable, Propertied {
     let parent : ObjectLayer
 
     enum Kind {
-        case tile(gid:Int), point, ellipse, rectangle, polyline(points:[Position]), text(wrap:Bool, string:String),polygon(points:[Position])
+        case tile(gid:Int), point, ellipse, rectangle, polyline(points:[Position]), text(definition:TextDefinition),polygon(points:[Position])
     }
     
     struct PolygonPoints : Decodable {
@@ -151,20 +175,11 @@ fileprivate struct LoadableObject : Decodable, Propertied {
             return points.split(separator: " ").map{
                 let xy = $0.split(separator: ",")
                 #warning("Remove forced unwrap")
-                return Position(x: Float(xy[0])!, y: Float(xy[1])!)
+                return Position(x: Double(xy[0])!, y: Double(xy[1])!)
             }
         }
     }
     
-    struct TextDefinition : Decodable {
-        var wrap : Bool
-        var string : String
-        
-        enum CodingKeys : String, CodingKey {
-            case wrap, string = ""
-        }
-        
-    }
     
     enum CodingKeys : String, CodingKey {
         case id, name, x, y, width, height, gid, rotation, ellipse, point, polygon, text, visible, polyline
@@ -200,7 +215,7 @@ fileprivate struct LoadableObject : Decodable, Propertied {
             kind = .tile(gid: try container.decode(Int.self, forKey: .gid))
         } else if container.allKeys.contains(.text){
             let definition = try container.decode(TextDefinition.self, forKey: .text)
-            kind = .text(wrap: definition.wrap, string: definition.string)
+            kind = .text(definition: definition)
         } else if container.allKeys.contains(.polygon){
             let polygonPoints = try container.decode(PolygonPoints.self, forKey: .polygon)
             kind = .polygon(points: polygonPoints.pointsArray)
@@ -221,21 +236,19 @@ fileprivate struct LoadableObject : Decodable, Propertied {
     var objectInstance : Object {
         switch kind {
         case .tile(gid: let gid):
-            return TileObject(id: id, tileGid: gid, name: name, visible: visible, x: x, y: y, width: width!, height: height!, in: parent, with: properties)
+            return TileObject(id: id, tileGid: gid, name: name, visible: visible, x: x, y: y, width: width!, height: height!, rotation: rotation, in: parent, with: properties)
         case .point:
             return PointObject(id: id, name: name, visible: visible, x: x, y: y, in: parent, with: properties)
         case .ellipse:
-            return EllipseObject(id: id, name: name, visible: visible, x: x, y: y, width: width!, height: height!, in: parent, with: properties)
+            return EllipseObject(id: id, name: name, visible: visible, x: x, y: y, width: width!, height: height!, rotatedTo: rotation, in: parent, with: properties)
         case .rectangle:
-            return RectangleObject(id: id, name: name, visible: visible, x: x, y: y, width: width!, height: height!, in: parent, with: properties)
+            return RectangleObject(id: id, name: name, visible: visible, x: x, y: y, width: width!, height: height!, rotatedTo: rotation, in: parent, with: properties)
         case .polygon(points: let points):
             return PolygonObject(id: id, name: name, visible: visible, x: x, y: y, points: points, in: parent, with: properties)
         case .polyline(points: let points):
             return PolylineObject(id: id, name: name, visible: visible, x: x, y: y, points: points, in: parent, with: properties)
-        case .text(wrap: let wrap, string: let string):
-            #warning("Lots of things not read, create failing test")
-            let text = TextObject.TextProperties(fontName: "", fontSize: 12, text: string, color: Color(r: 255, g: 255, b: 255))
-            return TextObject(id: id, name: name, visible: visible, x: x, y: y, width: width!, height: height!, text: text, in: parent, with: properties)
+        case .text(let definition):
+            return TextObject(id: id, name: name, visible: visible, x: x, y: y, width: width!, height: height!, rotation: rotation, text: definition, in: parent, with: properties)
         }
     }
 }

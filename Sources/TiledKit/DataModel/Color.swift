@@ -20,7 +20,7 @@ public struct Color : Decodable, Equatable{
     //Tiled represents colors in the form of a string #AARRGGBB
     public init(from string:String){
         if string.hasPrefix("#") {
-            if string.count == 6 {
+            if string.count == 7 {
                 alpha = 255
                 red   = Byte(string[1..<3], radix: 16) ?? 255
                 green = Byte(string[3..<5], radix: 16) ?? 0

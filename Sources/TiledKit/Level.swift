@@ -78,7 +78,7 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
             properties = loaded.properties
             tileSets = loaded.tileSets
             layers = loaded.layers
-            
+            tiles = loaded.tiles
         } catch {
             throw TiledDecodingError.couldNotLoadLevel(url: url, decodingError: error)
         }

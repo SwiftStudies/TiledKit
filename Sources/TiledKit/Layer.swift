@@ -17,7 +17,7 @@ import Foundation
 public class Layer: TiledDecodable, Propertied{
     public let name    : String
     public let visible : Bool
-    public let opacity : Float
+    public let opacity : Double
     public let x       : Int
     public let y       : Int
     
@@ -56,7 +56,7 @@ public class Layer: TiledDecodable, Propertied{
             y = (try? container.decode(Int.self, forKey: .y)) ?? 0
             
             visible = (try? container.decode(Bool.self, forKey: .visible)) ?? true
-            opacity = (try? container.decode(Float.self, forKey: .opacity)) ?? 1.0
+            opacity = (try? container.decode(Double.self, forKey: .opacity)) ?? 1.0
                     
             if let properties = try? decode(from: decoder) {
                 self.properties = properties
@@ -157,6 +157,15 @@ public class ObjectLayer : Layer{
     public enum ObjectLayerCodingKeys : String, CodingKey {
         case object
     }
+    
+    public subscript(id:Int)->Object? {
+        return objects.filter({$0.id == id}).first
+    }
+    
+    public subscript(name:String)->[Object] {
+        return objects.filter({$0.name ?? "" == name})
+    }
+
     
     public required init(from decoder: Decoder) throws {
         guard let decoderContext = decoder.userInfo.decodingContext else {

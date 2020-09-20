@@ -13,15 +13,15 @@
 //    limitations under the License.
 
 public struct Position : Decodable{
-    public let x : Float
-    public let y : Float
+    public let x : Double
+    public let y : Double
     
-    public init(x:Float, y:Float){
+    public init(x:Double, y:Double){
         self.x = x
         self.y = y
     }
     
     public init(x:Int, y:Int){
-        self.init(x: Float(x), y: Float(y))
+        self.init(x: Double(x), y: Double(y))
     }
 }

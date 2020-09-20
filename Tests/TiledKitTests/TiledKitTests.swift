@@ -2,6 +2,11 @@ import XCTest
 @testable import TiledKit
 
 final class TiledKitTests: XCTestCase {
+    
+    fileprivate enum TestError : Error {
+        case message(String)
+    }
+    
     func testResources() {
         XCTAssertNotNil(Bundle.module.path(forResource: "Test Map 1", ofType: "tmx", inDirectory: "Maps"))
     }
@@ -78,13 +83,22 @@ final class TiledKitTests: XCTestCase {
         }
     }
     
+    func loadTestLevel(url:URL? = nil) throws -> Level {
+        guard let url = url ?? Bundle.module.url(forResource: "Test Map 1", withExtension: "tmx", subdirectory: "Maps") else {
+            throw TestError.message("Failed to get URL for default Test Map 1")
+        }
+        
+        return try Level(from: url)
+    }
+    
     func testLevel(){
-        guard let url = Bundle.module.url(forResource: "Test Map 1", withExtension: "tmx", subdirectory: "Maps") else {
-            XCTFail("Could not find Map in bundle")
+        let level : Level
+        do {
+            level = try loadTestLevel()
+        } catch {
+            XCTFail("\(error)")
             return
         }
-
-        let level = try! Level(from:url)
         
         XCTAssertEqual(level.width, 10)
         XCTAssertEqual(level.height, 10)
@@ -108,12 +122,180 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(level.getTileLayers()[0].tiles.count, 100)
     }
     
+    func testColor(){
+        XCTAssertEqual(Color(from: "ff00ff"), Color(r: 255, g: 00, b: 255))
+        XCTAssertEqual(Color(from: "#ff00ff"), Color(r: 255, g: 00, b: 255))
+        XCTAssertEqual(Color(from: "7f000000"), Color(r: 0, g: 0, b: 0, a: 127))
+        XCTAssertEqual(Color(from: "#7f000000"), Color(r: 0, g: 0, b: 0, a: 127))
+        
+        let failure = Color(r: 255, g: 0, b: 255, a: 255)
+        XCTAssertEqual(Color(from: "gggggg"), failure)
+        XCTAssertEqual(Color(from: "#gggggg"), failure)
+        XCTAssertEqual(Color(from: "gggggggg"), failure)
+        XCTAssertEqual(Color(from: "#gggggggg"), failure)
+    }
+    
+    func testObjectLayer(){
+        let level : Level
+        do {
+            level = try loadTestLevel()
+        } catch {
+            XCTFail("\(error)")
+            return
+        }
+        
+        guard let objectLayer = level.getObjectLayers().first else {
+            XCTFail("No object layer")
+            return
+        }
+        
+        XCTAssertEqual(objectLayer["Elipse"].count, 1)
+        guard let imageObject = objectLayer[7] else {
+            XCTFail("Could not find imageObject by id")
+            return
+        }
+
+        XCTAssertEqual(imageObject.name, "Tile")
+    }
+    
+    func testTextObject(){
+        let level : Level
+        do {
+            level = try loadTestLevel()
+        } catch {
+            XCTFail("\(error)")
+            return
+        }
+        
+        guard let objectLayer = level.getObjectLayers().first else {
+            XCTFail("No object layer")
+            return
+        }
+        
+        guard let object = objectLayer["Text"].first else {
+            XCTFail("Could not get object")
+            return
+        }
+        
+        guard let textObject = object as? TextObject else {
+            XCTFail("Object is not a TextObject")
+            return
+        }
+        
+        XCTAssertEqual(textObject.string, "Bottom")
+        XCTAssertEqual(textObject.style.fontFamily, ".SF NS Mono")
+        XCTAssertEqual(textObject.style.pixelSize, 8)
+        XCTAssertEqual(textObject.style.wrap, true)
+        XCTAssertEqual(textObject.style.color, Color(r: 32, g: 255, b: 255, a: 255))
+        XCTAssertEqual(textObject.style.bold, true)
+        XCTAssertEqual(textObject.style.italic, true)
+        XCTAssertEqual(textObject.style.underline, true)
+        XCTAssertEqual(textObject.style.strikeout, true)
+}
+
+    func testElipseObject(){
+        let level : Level
+        do {
+            level = try loadTestLevel()
+        } catch {
+            XCTFail("\(error)")
+            return
+        }
+        
+        guard let objectLayer = level.getObjectLayers().first else {
+            XCTFail("No object layer")
+            return
+        }
+        
+        guard let object = objectLayer["Elipse"].first else {
+            XCTFail("Could not get object")
+            return
+        }
+        
+        guard let elipseObject = object as? EllipseObject else {
+            XCTFail("Object is not an ElipseObject")
+            return
+        }
+        
+        XCTAssertEqual(elipseObject.rotation, 45)
+    }
+
+    func testRectangleObject(){
+        let level : Level
+        do {
+            level = try loadTestLevel()
+        } catch {
+            XCTFail("\(error)")
+            return
+        }
+        
+        guard let objectLayer = level.getObjectLayers().first else {
+            XCTFail("No object layer")
+            return
+        }
+        
+        guard let object = objectLayer["Rectangle"].first else {
+            XCTFail("Could not get object")
+            return
+        }
+        
+        guard let rectangleObject = object as? RectangleObject else {
+            XCTFail("Object is not a RectangleObject")
+            return
+        }
+        
+        XCTAssertEqual(rectangleObject.id, 4)
+        XCTAssertEqual(rectangleObject.x, 128.027)
+        XCTAssertEqual(rectangleObject.y, 19.5807)
+        XCTAssertEqual(rectangleObject.width, 15.8151)
+        XCTAssertEqual(rectangleObject.height, 12.3007)
+        XCTAssertEqual(rectangleObject.rotation, 0)
+    }
+
+    func testImageObject(){
+        let level : Level
+        do {
+            level = try loadTestLevel()
+        } catch {
+            XCTFail("\(error)")
+            return
+        }
+        
+        guard let objectLayer = level.getObjectLayers().first else {
+            XCTFail("No object layer")
+            return
+        }
+        
+        guard let object = objectLayer["Tile"].first else {
+            XCTFail("Could not get object")
+            return
+        }
+        
+        guard let tileObject = object as? TileObject else {
+            XCTFail("Object is not a TileObject")
+            return
+        }
+        
+        guard let tile = level.tiles[tileObject.gid] else {
+            XCTFail("Tile is not in level tile dictionary")
+            return
+        }
+        
+        XCTAssertEqual(tile.tileSet?.name ?? "Tile set not found", "SingleImageAutoTransparency")
+    }
+
+    
     static var allTests = [
         ("testLevel",testLevel),
         ("testMultiImageTileSetWithSingleTile",testMultiImageTileSetWithSingleTile),
         ("testMultiImageTileSet",testMultiImageTileSet),
         ("testSingleImageTileSetWithOptionals", testSingleImageTileSetWithOptionals),
         ("testResources", testResources),
-        ("testSingleImageTileSet", testSingleImageTileSet)
+        ("testSingleImageTileSet", testSingleImageTileSet),
+        ("testColor", testColor),
+        ("testTextObject", testTextObject),
+        ("testElipseObject", testElipseObject),
+        ("testRectangleObject", testRectangleObject),
+        ("testImageObject", testImageObject)
     ]
 }
