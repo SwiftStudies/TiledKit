@@ -19,8 +19,8 @@ public class Layer: TiledDecodable, Propertied{
     public let name    : String
     public let visible : Bool
     public let opacity : Double
-    public let x       : Int
-    public let y       : Int
+    public var x       : Int
+    public var y       : Int
     
     public let parent  : LayerContainer
     
@@ -208,14 +208,52 @@ public final class GroupLayer : Layer, LayerContainer{
 }
 
 public final class ImageLayer : Layer {
-    let offsetx : Double = 0.0
-    let offsety : Double = 0.0
-
+    private struct ImageTag : Codable {
+        let path : String
+        let width : Int
+        let height : Int
+        
+        enum CodingKeys : String, CodingKey {
+            case path = "source", width, height
+        }
+    }
+    
+    private enum CodingKeys : String, CodingKey{
+        case offsetx, offsety, image
+    }
+    
+    var url : URL
+    var width : Int
+    var height : Int
+    
     public required init(from decoder: Decoder) throws {
         guard let decoderContext = decoder.userInfo.decodingContext else {
             throw TiledDecodingError.missingDecoderContext
         }
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        let imageTag = try container.decode(ImageTag.self, forKey: .image)
+        width = imageTag.width
+        height = imageTag.height
+        
+        if imageTag.path.hasPrefix("..") {
+            if let originUrl = decoderContext.originUrl {
+                url = originUrl.appendingPathComponent(imageTag.path)
+            } else {
+                url = URL(fileURLWithPath: imageTag.path)
+            }
+        } else {
+            url = URL(fileURLWithPath: imageTag.path)
+        }
+        
         try super.init(from: decoder)
-        #warning("Image Layers not implemented")
+
+
+        let offsetX = try container.decodeIfPresent(Double.self, forKey: .offsetx) ?? 0
+        let offsetY = try container.decodeIfPresent(Double.self, forKey: .offsety) ?? 0
+        
+        x = Int(offsetX)
+        y = Int(offsetY)
+
     }
 }

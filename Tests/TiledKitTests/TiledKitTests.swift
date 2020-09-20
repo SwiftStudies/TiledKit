@@ -286,6 +286,24 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(tile.tileSet?.name ?? "Tile set not found", "SingleImageAutoTransparency")
     }
 
+    func testImageLayer(){
+        let level : Level
+        do {
+            level = try loadTestLevel()
+        } catch {
+            XCTFail("\(error)")
+            return
+        }
+        
+        guard let imageLayer = (level.getLayers(ofType: .image, named: "Image Layer", matching: [String : PropertyValue](), recursively: false) as? [ImageLayer])?.first else {
+            XCTFail("No image layer")
+            return
+        }
+        
+        XCTAssertEqual(imageLayer.x, 72)
+        XCTAssertEqual(imageLayer.y, 48)
+        XCTAssertTrue(imageLayer.url.standardized.path.hasSuffix("Resources/Images/Individual/F.png"), "URL is incorrect \(imageLayer.url)")
+    }
     
     static var allTests = [
         ("testLevel",testLevel),
@@ -298,6 +316,7 @@ final class TiledKitTests: XCTestCase {
         ("testTextObject", testTextObject),
         ("testElipseObject", testElipseObject),
         ("testRectangleObject", testRectangleObject),
-        ("testImageObject", testImageObject)
+        ("testImageObject", testImageObject),
+        ("testImageLayer", testImageLayer)
     ]
 }
