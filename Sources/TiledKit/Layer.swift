@@ -196,13 +196,17 @@ public final class GroupLayer : Layer, LayerContainer{
     public var layers = [Layer]()
     
     enum LayerCodingKeys : String, CodingKey {
-        case layers = "layer"
+        case layers = "layer", offsetx, offsety
     }
     
     public required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
 
         decoder.userInfo.decodingContext?.layerPath.append(self)
+        
+        let container = try decoder.container(keyedBy: LayerCodingKeys.self)
+        x = try Int(container.decodeIfPresent(Double.self, forKey: .offsetx) ?? 0)
+        y = try Int(container.decodeIfPresent(Double.self, forKey: .offsety) ?? 0)
 
         let layers : [Layer] = try Level.decodeLayers(decoder.container(keyedBy: Level.CodingKeys.self))
         self.layers.append(contentsOf: layers)

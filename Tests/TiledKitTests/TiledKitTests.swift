@@ -314,8 +314,11 @@ final class TiledKitTests: XCTestCase {
             return
         }
         
-        XCTAssertEqual(level.getObjectLayers()[0].x, 0)
-        XCTAssertEqual(level.getObjectLayers()[0].y, 0)
+        XCTAssertEqual(level.getObjectLayers()[0].x, 16)
+        XCTAssertEqual(level.getObjectLayers()[0].y, 16)
+        
+        XCTAssertEqual(level.getGroups()[0].x, 144)
+        XCTAssertEqual(level.getGroups()[0].y, 80)
     }
     
     static var allTests = [
