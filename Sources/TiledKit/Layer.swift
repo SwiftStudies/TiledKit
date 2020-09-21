@@ -156,7 +156,7 @@ public class ObjectLayer : Layer{
     public var objects = [Object] ()
     
     public enum ObjectLayerCodingKeys : String, CodingKey {
-        case object
+        case object, offsetx, offsety
     }
     
     public subscript(id:Int)->Object? {
@@ -176,6 +176,10 @@ public class ObjectLayer : Layer{
         try super.init(from: decoder)
         
         decoderContext.layerPath.append(self)
+        
+        let container = try decoder.container(keyedBy: ObjectLayerCodingKeys.self)
+        x = try Int(container.decodeIfPresent(Double.self, forKey: .offsetx) ?? 0)
+        y = try Int(container.decodeIfPresent(Double.self, forKey: .offsety) ?? 0)
         
         objects = try decodeObjects(from: decoder)
         

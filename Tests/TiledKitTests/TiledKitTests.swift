@@ -305,6 +305,19 @@ final class TiledKitTests: XCTestCase {
         XCTAssertTrue(imageLayer.url.standardized.path.hasSuffix("Resources/Images/Individual/F.png"), "URL is incorrect \(imageLayer.url)")
     }
     
+    func testOneOfEverything(){
+        let level : Level
+        do {
+            level = try loadTestLevel(url: Bundle.module.url(forResource: "One of Everything", withExtension: "tmx", subdirectory: "Maps"))
+        } catch {
+            XCTFail("\(error)")
+            return
+        }
+        
+        XCTAssertEqual(level.getObjectLayers()[0].x, 0)
+        XCTAssertEqual(level.getObjectLayers()[0].y, 0)
+    }
+    
     static var allTests = [
         ("testLevel",testLevel),
         ("testMultiImageTileSetWithSingleTile",testMultiImageTileSetWithSingleTile),
@@ -317,6 +330,7 @@ final class TiledKitTests: XCTestCase {
         ("testElipseObject", testElipseObject),
         ("testRectangleObject", testRectangleObject),
         ("testImageObject", testImageObject),
-        ("testImageLayer", testImageLayer)
+        ("testImageLayer", testImageLayer),
+        ("testOneOfEverything", testOneOfEverything)
     ]
 }
