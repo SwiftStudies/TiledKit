@@ -141,10 +141,11 @@ public class TextObject : RectangleObject{
 
 public class PolygonObject : Object{
     public let points : [Position]
+    public let rotation : Double
     
-    
-    init(id: Int, name: String, visible: Bool, x: Double, y: Double, points:[Position], in parent: ObjectLayer, with properties: [String : PropertyValue]) {
+    init(id: Int, name: String, visible: Bool, x: Double, y: Double, points:[Position], in parent: ObjectLayer, rotation:Double, with properties: [String : PropertyValue]) {
         self.points = points
+        self.rotation = rotation
         super.init(id: id, name: name, visible: true, x: x, y: y, in: parent, with: properties)
     }
 }
@@ -245,9 +246,9 @@ fileprivate struct LoadableObject : Decodable, Propertied {
         case .rectangle:
             return RectangleObject(id: id, name: name, visible: visible, x: x, y: y, width: width!, height: height!, rotatedTo: rotation, in: parent, with: properties)
         case .polygon(points: let points):
-            return PolygonObject(id: id, name: name, visible: visible, x: x, y: y, points: points, in: parent, with: properties)
+            return PolygonObject(id: id, name: name, visible: visible, x: x, y: y, points: points, in: parent, rotation: rotation, with: properties)
         case .polyline(points: let points):
-            return PolylineObject(id: id, name: name, visible: visible, x: x, y: y, points: points, in: parent, with: properties)
+            return PolylineObject(id: id, name: name, visible: visible, x: x, y: y, points: points, in: parent, rotation: rotation, with: properties)
         case .text(let definition):
             return TextObject(id: id, name: name, visible: visible, x: x, y: y, width: width!, height: height!, rotation: rotation, text: definition, in: parent, with: properties)
         }
