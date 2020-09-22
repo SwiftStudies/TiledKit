@@ -211,8 +211,8 @@ public struct TileSet : TiledDecodable, Propertied{
         }
         
         public struct Frame {
-            let tile        : Tile
-            let duration    : Double
+            public let tile        : Tile
+            public let duration    : Double
         }
 
         public var identifier : Identifier
