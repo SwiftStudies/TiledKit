@@ -229,7 +229,7 @@ public struct TileSet : TiledDecodable, Propertied{
         }
         fileprivate var frames : Frames
         
-        internal var animation : [Frame] {
+        public var animation : [Frame] {
             guard let tileSet = tileSet else {
                 fatalError("Tile has no tileSet")
             }
