@@ -51,7 +51,7 @@ public class Layer: TiledDecodable, Propertied{
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
 
-            name = try container.decode(String.self, forKey: .name)
+            name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
             
             x = (try? container.decode(Int.self, forKey: .x)) ?? 0
             y = (try? container.decode(Int.self, forKey: .y)) ?? 0

@@ -121,6 +121,7 @@ public struct TileSheet : Decodable {
             
             let newTile = TileSet.Tile(tileIndex, from: self, for: tileSet, at: (x,y), in: container)
             
+            #warning("Should check for animation data here too")
             if let additionalTileData = data[tileIndex] {
                 newTile.objects = additionalTileData.objects
             }
@@ -170,7 +171,12 @@ public struct TileSet : TiledDecodable, Propertied{
             let spec = try TileSheet(from: decoder)
             type = .sheet(tileSheet: spec)
             // Needed for layers and animations etc
-            let tilesData = try container.decode([Int:Tile].self, forKey: .tiles)
+            let additionalTileData = try container.decode([Tile].self, forKey: .tiles)
+            
+            let tilesData = additionalTileData.reduce(into:[Int:Tile]()) {
+                $0[$1.identifier.integerSource!] = $1
+            }
+            
             tiles = spec.createTiles(for:self, with: tilesData, in: level)
         } else {
             //It's individual files
@@ -227,13 +233,17 @@ public struct TileSet : TiledDecodable, Propertied{
             
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            let tileImage = try container.decode(TileImage.self, forKey: .image)
+            if let tileImage = try container.decodeIfPresent(TileImage.self, forKey: .image){
+                #warning("Should check for .. first")
+                path = decoder.userInfo.decodingContext?.originUrl?.appendingPathComponent(tileImage.source).standardizedFileURL
+            } else {
+                path = nil
+            }
             
-            #warning("Should check for .. first")
-            path = decoder.userInfo.decodingContext?.originUrl?.appendingPathComponent(tileImage.source).standardizedFileURL
                     
             identifier = Identifier(integerLiteral: try container.decode(Int.self, forKey: .identifier))
             
+            #warning("Force unwrap")
             parent = (decoder.userInfo[DecodingContext.key] as! DecodingContext).level!
             objects = try container.decodeIfPresent(ObjectLayer.self, forKey: .objects)
             position = nil
