@@ -119,11 +119,12 @@ public struct TileSheet : Decodable {
                 ((column * 2 * margin ) + margin)
                     
             
-            let newTile = TileSet.Tile(tileIndex, from: self, for: tileSet, at: (x,y), in: container)
+            let newTile = TileSet.Tile(tileIndex, from: self, for: tileSet, at: (x,y),  in: container)
             
             #warning("Should check for animation data here too")
             if let additionalTileData = data[tileIndex] {
                 newTile.objects = additionalTileData.objects
+                newTile.frames = additionalTileData.frames
             }
             
             tiles[tileIndex] = newTile
@@ -197,6 +198,23 @@ public struct TileSet : TiledDecodable, Propertied{
     }
     
     public class Tile: TiledDecodable, LayerContainer {
+        fileprivate struct Frames : Codable {
+            fileprivate struct AnimationFrame : Codable {
+                let tileid : Int
+                let duration : Int
+            }
+            let frames : [AnimationFrame]
+            
+            enum CodingKeys : String, CodingKey {
+                case frames = "frame"
+            }
+        }
+        
+        public struct Frame {
+            let tile        : Tile
+            let duration    : Double
+        }
+
         public var identifier : Identifier
         public var parent : LayerContainer
         public let path    : URL?
@@ -209,18 +227,32 @@ public struct TileSet : TiledDecodable, Propertied{
             }
             return []
         }
+        fileprivate var frames : Frames
+        
+        internal var animation : [Frame] {
+            guard let tileSet = tileSet else {
+                fatalError("Tile has no tileSet")
+            }
+            return frames.frames.map(){
+                guard let tile = tileSet.tiles[$0.tileid] else {
+                    fatalError("Tileset \"\(tileSet.name)\" does not contain tile with id \($0.tileid)")
+                }
+                return Frame(tile: tile, duration: Double($0.duration)/1000)
+            }
+        }
 
         enum CodingKeys : String, CodingKey {
-            case identifier = "id", image, objects = "objectgroup"
+            case identifier = "id", image, objects = "objectgroup", animation, frame
         }
         
         public required init(_ index:Int, from sheet:TileSheet, for set:TileSet, at location: (x:Int,y:Int), in container:LayerContainer){
             identifier = Identifier(stringLiteral: "\(sheet.imagePath):\(index)")
             path = nil
             tileSet = set
-            objects = nil
             position = Position(x:location.x,y:location.y)
             parent = container
+            objects = nil
+            frames = Frames(frames: [Frames.AnimationFrame]())
         }
         
         public required init(from decoder: Decoder) throws{
@@ -246,6 +278,16 @@ public struct TileSet : TiledDecodable, Propertied{
             #warning("Force unwrap")
             parent = (decoder.userInfo[DecodingContext.key] as! DecodingContext).level!
             objects = try container.decodeIfPresent(ObjectLayer.self, forKey: .objects)
+
+            do {
+                let loadedFrames = try container.decode(Frames.self, forKey: .animation)
+                frames = loadedFrames
+            } catch {
+                frames = Frames(frames: [Frames.AnimationFrame]())
+            }
+            
+            print(frames.frames.map(({"\($0.tileid) \($0.duration)ms"})))
+            
             position = nil
         }
         
@@ -266,6 +308,9 @@ public struct TileSet : TiledDecodable, Propertied{
             self.name = loaded.name
             self.type = loaded.type
             self.properties = loaded.properties
+            for tile in self.tiles.values {
+                tile.tileSet = self
+            }
         } catch {
             throw TiledDecodingError.couldNotLoadTileSet(url: url, decodingError: error)
         }

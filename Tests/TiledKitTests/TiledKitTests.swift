@@ -321,6 +321,41 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(level.getGroups()[0].y, 80)
     }
     
+    func testTileSetCollisionObjects(){
+        do {
+            let tileSet = try TileSet(from: Bundle.module.url(forResource: "Animation", withExtension: "tsx", subdirectory: "Tilesets")!)
+            
+            XCTAssertEqual((tileSet.tiles[0]?.objects?.objects.count) ?? 0, 2)
+            XCTAssertEqual((tileSet.tiles[0]?.objects?.objects[0].x) ?? 0, 7.92176)
+            XCTAssertEqual((tileSet.tiles[0]?.objects?.objects[1].y) ?? 0, 3.00272)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testTileSetAnimationFrames(){
+        do {
+            let tileSet = try TileSet(from: Bundle.module.url(forResource: "Animation", withExtension: "tsx", subdirectory: "Tilesets")!)
+            
+            guard let tile = tileSet.tiles[1] else {
+                XCTFail("No tile with id 1")
+                return
+            }
+            
+            XCTAssertEqual(tile.animation.count, 4)
+            XCTAssert(tile.animation[0].tile.identifier.stringSource!.hasSuffix("0"))
+            XCTAssertEqual(tile.animation[0].duration, 1)
+            XCTAssert(tile.animation[1].tile.identifier.stringSource!.hasSuffix("1"))
+            XCTAssertEqual(tile.animation[1].duration, 1)
+            XCTAssert(tile.animation[2].tile.identifier.stringSource!.hasSuffix("2"))
+            XCTAssertEqual(tile.animation[2].duration, 1)
+            XCTAssert(tile.animation[3].tile.identifier.stringSource!.hasSuffix("3"))
+            XCTAssertEqual(tile.animation[3].duration, 1)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
     static var allTests = [
         ("testLevel",testLevel),
         ("testMultiImageTileSetWithSingleTile",testMultiImageTileSetWithSingleTile),
@@ -334,6 +369,8 @@ final class TiledKitTests: XCTestCase {
         ("testRectangleObject", testRectangleObject),
         ("testImageObject", testImageObject),
         ("testImageLayer", testImageLayer),
-        ("testOneOfEverything", testOneOfEverything)
+        ("testOneOfEverything", testOneOfEverything),
+        ("testTileSetCollisionObjects", testTileSetCollisionObjects),
+        ("testTileSetAnimationFrames", testTileSetAnimationFrames),
     ]
 }
