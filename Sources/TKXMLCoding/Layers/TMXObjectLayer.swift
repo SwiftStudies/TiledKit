@@ -12,11 +12,14 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-
-public struct TMXLayer : Codable {
-    public let     type : TMXLayerType
+public struct TMXObjectLayer : TMXInternalLayerRepresentation {
+    public var id: Int
+    public var name: String
+    
+    var xoffset: Double?
+    var yoffset: Double?
+    var visible: Bool?
+    
+    
 }
 
-public enum TMXLayerType : String, Codable{
-    case tile,group,object,image
-}

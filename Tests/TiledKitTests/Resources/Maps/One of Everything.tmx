@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="8">
+ <properties>
+  <property name="Boolean" type="bool" value="true"/>
+  <property name="Color" type="color" value="#fffc0280"/>
+  <property name="File" type="file" value="~/Documents/examples.ttf"/>
+  <property name="Float" type="float" value="42.0001"/>
+  <property name="Integer" type="int" value="42"/>
+  <property name="Object" type="object" value="7"/>
+  <property name="String" value="Value"/>
+ </properties>
  <tileset firstgid="1" source="../Tilesets/SeparateSingleImage.tsx"/>
  <tileset firstgid="2" source="../Tilesets/Animation.tsx"/>
  <layer id="1" name="Tile Layer" width="10" height="10">

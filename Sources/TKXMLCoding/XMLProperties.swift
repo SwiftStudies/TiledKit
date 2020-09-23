@@ -14,10 +14,16 @@
 
 import Foundation
 
-public typealias XMLProperties = [String:XMLProperty]
+protocol XMLPropertied {
+    var properties : XMLProperties {get}
+}
 
-public enum XMLPropertyCodingKeys : String, CodingKey {
-    case properties, property
+public struct XMLProperties : Codable {
+    public let properties : [XMLProperty]
+    
+    enum CodingKeys : String, CodingKey {
+        case properties = "property"
+    }
 }
 
 public enum XMLRawPropertyType : String, Codable {

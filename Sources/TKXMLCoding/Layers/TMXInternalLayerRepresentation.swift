@@ -12,22 +12,33 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import TKXMLCoding
+import Foundation
 
-extension TMXLevel {
-    var tileSets : [TileSet] {
-        return [TileSet]()
+public protocol TMXLayer {
+    var id : Int { get }
+    var name : String { get }
+
+}
+
+protocol TMXInternalLayerRepresentation : Codable, TMXLayer {
+    var id : Int { get }
+    var name : String { get }
+    
+    var xoffset : Double? { get }
+    var yoffset : Double? { get }
+    var visible : Bool? { get }
+}
+
+public extension TMXLayer {
+    var x : Double {
+        return (self as? TMXInternalLayerRepresentation)?.xoffset ?? 0
     }
     
-    var properties : Properties {
-        return Properties()
+    var y : Double {
+        return (self as? TMXInternalLayerRepresentation)?.yoffset ?? 0
     }
     
-    var tiles : [Int : TileSet.Tile ] {
-        return [Int : TileSet.Tile]()
-    }
-    
-    var layers : [Layer] {
-        return [Layer]()
+    var show : Bool {
+        return (self as? TMXInternalLayerRepresentation)?.visible ?? true
     }
 }

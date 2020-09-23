@@ -19,6 +19,6 @@ public struct TMXTileSetReference : Codable {
     public let path     : String
     
     private enum CodingKeys : String, CodingKey {
-        case firstGid = "firstgid", path
+        case firstGid = "firstgid", path = "source"
     }
 }

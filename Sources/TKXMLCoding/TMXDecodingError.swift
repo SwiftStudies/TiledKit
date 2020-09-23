@@ -14,4 +14,5 @@
 
 enum TMXDecodingError : Error {
     case propertyHasNoValue(String, type:XMLRawPropertyType)
+    case unknownLevelElement(String)
 }

@@ -12,22 +12,15 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import TKXMLCoding
+public struct TMXTileLayer : TMXInternalLayerRepresentation {
+    public var id: Int
+    
+    public var name: String
+    
+    var xoffset: Double?
+    var yoffset: Double?
+    var visible: Bool?
 
-extension TMXLevel {
-    var tileSets : [TileSet] {
-        return [TileSet]()
-    }
     
-    var properties : Properties {
-        return Properties()
-    }
     
-    var tiles : [Int : TileSet.Tile ] {
-        return [Int : TileSet.Tile]()
-    }
-    
-    var layers : [Layer] {
-        return [Layer]()
-    }
 }

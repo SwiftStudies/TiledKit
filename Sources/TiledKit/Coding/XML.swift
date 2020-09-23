@@ -17,7 +17,6 @@ import TKXMLCoding
 
 extension XMLProperty {
     var property : PropertyValue {
-
         guard let type = type else {
             return .string(value)
         }

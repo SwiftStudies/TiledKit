@@ -81,9 +81,9 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
 
             #warning("None of this is actually loaded")
             tileSets = tmxLevel.tileSets
-            properties = [String:PropertyValue]()
-            layers = [Layer]()
-            tiles = [Int : TileSet.Tile]()
+            properties = tmxLevel.properties
+            layers = tmxLevel.layers
+            tiles = tmxLevel.tiles
         } catch {
             throw TiledDecodingError.couldNotLoadLevel(url: url, decodingError: error)
         }
