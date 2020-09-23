@@ -15,4 +15,5 @@
 enum TMXDecodingError : Error {
     case propertyHasNoValue(String, type:XMLRawPropertyType)
     case unknownLevelElement(String)
+    case unsupportedTileDataFormat(encoding:TileDataEncoding, compression:TileDataCompression)
 }

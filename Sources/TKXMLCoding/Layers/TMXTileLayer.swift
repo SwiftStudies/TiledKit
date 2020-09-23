@@ -12,12 +12,33 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+enum TileDataEncoding : String, Codable {
+    case csv,base64
+}
+
+enum TileDataCompression : String, Codable {
+    case gzip, zlib, zstd, none
+}
+
+
+struct TMXTileData : Codable {
+    let encoding : TileDataEncoding
+    let compression : TileDataCompression?
+    let data : String
+    
+    enum CodingKeys : String, CodingKey {
+        case encoding, compression, data = ""
+    }
+}
+
 public struct TMXTileLayer : XMLLayer {
     public var id: Int
     public var name: String
     public var x: Double
     public var y: Double
     public var visible: Bool
+    
+    public var data : [UInt32]
 
     public init(from decoder: Decoder) throws {
         let commonAttributes = try XMLLayerCommon(from: decoder)
@@ -27,6 +48,14 @@ public struct TMXTileLayer : XMLLayer {
         x = commonAttributes.xoffset ?? 0
         y = commonAttributes.yoffset ?? 0
         visible = commonAttributes.visible ?? true
+        
+        let rawData = try decoder.container(keyedBy: CodingKeys.self).decode(TMXTileData.self, forKey: .data)
+        
+        if rawData.encoding == .csv && rawData.compression == nil {
+            data = rawData.data.split(separator: ",").map({(UInt32($0) ?? 0)})
+        } else {
+            throw TMXDecodingError.unsupportedTileDataFormat(encoding: rawData.encoding, compression: rawData.compression ?? .none)
+        }
     }
 
     
