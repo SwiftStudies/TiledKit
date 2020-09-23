@@ -24,6 +24,13 @@ public struct XMLProperties : Codable {
     enum CodingKeys : String, CodingKey {
         case properties = "property"
     }
+    
+    static func decode(from decoder:Decoder) throws ->XMLProperties {
+        enum CodingKeys : String, CodingKey {
+            case properties
+        }
+        return try decoder.container(keyedBy: CodingKeys.self).decodeIfPresent(XMLProperties.self, forKey: .properties) ?? XMLProperties(properties: [XMLProperty]())
+    }
 }
 
 public enum XMLRawPropertyType : String, Codable {

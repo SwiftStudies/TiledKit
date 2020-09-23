@@ -14,7 +14,6 @@
 
 public struct TMXGroupLayer : TMXInternalLayerRepresentation {
     public var id: Int
-    
     public var name: String
     
     var xoffset: Double?

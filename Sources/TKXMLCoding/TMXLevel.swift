@@ -20,11 +20,7 @@ public struct TMXElements : Codable {
 
 public struct TMXLevel : Codable, XMLPropertied {
     enum CodingKeys : String, CodingKey {
-        case version, tiledVersion = "tiledversion", orientation, renderOrder = "renderorder", width, height, tileWidth = "tilewidth", tileHeight = "tileheight", infinite
-    }
-    
-    enum ElementCodingKeys : String, CodingKey {
-        case layer, objects = "objectgroup", group, image = "imagelayer", properties, tileset
+        case version, tiledVersion = "tiledversion", orientation, renderOrder = "renderorder", width, height, tileWidth = "tilewidth", tileHeight = "tileheight", infinite, tileSetReference = "tileset"
     }
     
     static var decoder : XMLDecoder {
@@ -47,7 +43,6 @@ public struct TMXLevel : Codable, XMLPropertied {
     public let tileSetReferences : [TMXTileSetReference]
     public let properties : XMLProperties
     
-    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -62,40 +57,12 @@ public struct TMXLevel : Codable, XMLPropertied {
         tileHeight = try container.decode(Int.self, forKey: .tileHeight)
         
         infinite = try container.decode(Bool.self, forKey: .infinite)
-
-        let elementContainer = try decoder.container(keyedBy: ElementCodingKeys.self)
-        let keys = elementContainer.allKeys.compactMap(){ (elementCodingKey) -> ElementCodingKeys? in
-            switch elementCodingKey {
-            case .properties, .tileset: return nil
-            default: return elementCodingKey
-            }
-        }
         
-        tileSetReferences = try elementContainer.decode([TMXTileSetReference].self, forKey: .tileset)
-        properties = try elementContainer.decodeIfPresent(XMLProperties.self, forKey: .properties) ?? XMLProperties(properties: [XMLProperty]())
-                
-        var layers = [TMXInternalLayerRepresentation]()
-        var tileLayers = try elementContainer.decode([TMXTileLayer].self, forKey: .layer)
-        var groupLayers = try elementContainer.decode([TMXGroupLayer].self, forKey: .group)
-        var imageLayers = try elementContainer.decode([TMXImageLayer].self, forKey: .image)
-        var objectLayers = try elementContainer.decode([TMXObjectLayer].self, forKey: .objects)
-
-        for key in keys {
-            switch key {
-            case .layer:
-                layers.append(tileLayers.removeFirst())
-            case .objects:
-                layers.append(objectLayers.removeFirst())
-            case .group:
-                layers.append(groupLayers.removeFirst())
-            case .image:
-                layers.append(imageLayers.removeFirst())
-            default:
-                break
-            }
-        }
+        properties = try XMLProperties.decode(from: decoder)
         
-        self.layers = layers
+        tileSetReferences = try container.decode([TMXTileSetReference].self, forKey: .tileSetReference)
+                        
+        self.layers = try XMLLayerContainer.decodeLayers(from: decoder)
     }
     
     #warning("Not implemented")
