@@ -14,31 +14,21 @@
 
 import Foundation
 
-public protocol TMXLayer {
+public protocol XMLLayer : Codable {
     var id : Int { get }
     var name : String { get }
+    var x : Double {get}
+    var y : Double {get}
+    var visible: Bool {get}
 
 }
 
-protocol TMXInternalLayerRepresentation : Codable, TMXLayer {
-    var id : Int { get }
-    var name : String { get }
+struct XMLLayerCommon : Codable{
+    let id: Int
+    let name : String
+    let xoffset : Double?
+    let yoffset : Double?
+    let visible : Bool?
     
-    var xoffset : Double? { get }
-    var yoffset : Double? { get }
-    var visible : Bool? { get }
 }
 
-public extension TMXLayer {
-    var x : Double {
-        return (self as? TMXInternalLayerRepresentation)?.xoffset ?? 0
-    }
-    
-    var y : Double {
-        return (self as? TMXInternalLayerRepresentation)?.yoffset ?? 0
-    }
-    
-    var show : Bool {
-        return (self as? TMXInternalLayerRepresentation)?.visible ?? true
-    }
-}

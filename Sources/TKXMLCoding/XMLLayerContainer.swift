@@ -17,15 +17,15 @@ struct XMLLayerContainer {
         case layer, objects = "objectgroup", group, image = "imagelayer"
     }
     
-    static func decodeLayers(from decoder:Decoder) throws ->[TMXLayer] {
+    static func decodeLayers(from decoder:Decoder) throws ->[XMLLayer] {
         let elementContainer = try decoder.container(keyedBy: LayerElementCodingKeys.self)
         let keys = elementContainer.allKeys
         
-        var layers = [TMXInternalLayerRepresentation]()
+        var layers = [XMLLayer]()
         var tileLayers = try elementContainer.decode([TMXTileLayer].self, forKey: .layer)
         var groupLayers = try elementContainer.decode([TMXGroupLayer].self, forKey: .group)
         var imageLayers = try elementContainer.decode([TMXImageLayer].self, forKey: .image)
-        var objectLayers = try elementContainer.decode([TMXObjectLayer].self, forKey: .objects)
+        var objectLayers = try elementContainer.decode([XMLObjectLayer].self, forKey: .objects)
 
         for key in keys {
             switch key {

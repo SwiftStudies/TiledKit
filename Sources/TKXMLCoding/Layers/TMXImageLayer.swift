@@ -12,12 +12,12 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-public struct TMXImageLayer : TMXInternalLayerRepresentation {
+public struct TMXImageLayer : XMLLayer {
     public var id: Int
     public var name: String
-    var xoffset: Double?
-    var yoffset: Double?
-    var visible: Bool?
+    public var x: Double
+    public var y: Double
+    public var visible: Bool
 
     private struct ImageElement : Codable {
         let source : String
@@ -38,4 +38,17 @@ public struct TMXImageLayer : TMXInternalLayerRepresentation {
     public var path : String {
         return image.source
     }
+    
+    public init(from decoder: Decoder) throws {
+        let commonAttributes = try XMLLayerCommon(from: decoder)
+        
+        id = commonAttributes.id
+        name = commonAttributes.name
+        x = commonAttributes.xoffset ?? 0
+        y = commonAttributes.yoffset ?? 0
+        visible = commonAttributes.visible ?? true
+        
+        image = try decoder.container(keyedBy: CodingKeys.self).decode(ImageElement.self, forKey: .image)
+    }
+
 }

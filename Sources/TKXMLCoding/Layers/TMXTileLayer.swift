@@ -12,15 +12,22 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-public struct TMXTileLayer : TMXInternalLayerRepresentation {
+public struct TMXTileLayer : XMLLayer {
     public var id: Int
-    
     public var name: String
-    
-    var xoffset: Double?
-    var yoffset: Double?
-    var visible: Bool?
+    public var x: Double
+    public var y: Double
+    public var visible: Bool
 
-    
+    public init(from decoder: Decoder) throws {
+        let commonAttributes = try XMLLayerCommon(from: decoder)
+        
+        id = commonAttributes.id
+        name = commonAttributes.name
+        x = commonAttributes.xoffset ?? 0
+        y = commonAttributes.yoffset ?? 0
+        visible = commonAttributes.visible ?? true
+    }
+
     
 }

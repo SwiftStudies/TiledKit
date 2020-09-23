@@ -39,7 +39,7 @@ public struct TMXLevel : Codable, XMLPropertied {
     public let tileHeight : Int
     public let infinite : Bool
 
-    public let layers : [TMXLayer]
+    public let layers : [XMLLayer]
     public let tileSetReferences : [TMXTileSetReference]
     public let properties : XMLProperties
     

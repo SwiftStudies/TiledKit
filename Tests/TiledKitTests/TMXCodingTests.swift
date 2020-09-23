@@ -40,7 +40,7 @@ final class TMXCodingTests: XCTestCase {
         XCTAssertEqual(level.tileSetReferences[1].path, "../Tilesets/Animation.tsx")
         XCTAssertEqual(level.layers.count, 4)
         XCTAssertTrue(level.layers[0] is TMXTileLayer)
-        XCTAssertTrue(level.layers[1] is TMXObjectLayer)
+        XCTAssertTrue(level.layers[1] is XMLObjectLayer)
         XCTAssertTrue(level.layers[2] is TMXImageLayer)
         XCTAssertTrue(level.layers[3] is TMXGroupLayer)
         XCTAssertEqual(level.properties.properties.count, 7)
