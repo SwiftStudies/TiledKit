@@ -22,6 +22,7 @@ let package = Package(
         .library(
             name: "TiledKit",
             targets: ["TiledKit"]),
+        .library(name: "TKXMLCoding", type: .static, targets: ["TKXMLCoding"])
     ],
     dependencies: [
         .package(url: "https://github.com/MaxDesiatov/XMLCoder.git", from: "0.11.1")
@@ -33,7 +34,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "TiledKit",
-            dependencies: ["XMLCoder"]
+            dependencies: ["TKXMLCoding"]
             ),
         .testTarget(
             name: "TiledKitTests",
@@ -47,6 +48,14 @@ let package = Package(
                 .copy("Resources/Maps"),
                 .copy("Resources/Tilesets"),
                 .copy("Resources/Images")]
+            ),
+        .target(
+            name: "TKXMLCoding",
+            dependencies: ["XMLCoder"]
+            ),
+        .testTarget(
+            name: "TKXMLCodingTests",
+            dependencies: ["TKXMLCoding"]
             ),
     ]
 )
