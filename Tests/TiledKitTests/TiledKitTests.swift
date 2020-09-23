@@ -320,6 +320,19 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(level.getGroups()[0].x, 144)
         XCTAssertEqual(level.getGroups()[0].y, 80)
     }
+
+    func testMultipleProperties(){
+        do {
+            let tileSet = try TileSet(from: Bundle.module.url(forResource: "Animation", withExtension: "tsx", subdirectory: "Tilesets")!)
+
+
+            XCTAssertEqual(tileSet.filteringMode,"nearest")
+            XCTAssertNotNil(tileSet.properties["User Property"])
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+
     
     func testTileSetCollisionObjects(){
         do {

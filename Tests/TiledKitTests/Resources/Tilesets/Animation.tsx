@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.4" tiledversion="1.4.2" name="Animation" tilewidth="16" tileheight="16" tilecount="4" columns="2">
+ <properties>
+  <property name="User Property">This is simply a longer property which means the value isn't in an attribute but rather in the body of the node. 
+
+Probably carriage returns causing that shift. </property>
+  <property name="filteringMode" value="nearest"/>
+ </properties>
  <image source="../Images/4 Tiles.png" width="32" height="32"/>
  <tile id="0">
   <objectgroup draworder="index" id="2">
