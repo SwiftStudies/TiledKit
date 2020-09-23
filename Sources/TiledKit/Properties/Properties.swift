@@ -98,9 +98,30 @@ fileprivate enum RawPropertyType : String, Decodable {
 }
 
 fileprivate struct XMLProperty : Decodable {
+
+    
     let name    : String
     let type    : RawPropertyType?
     private let value : String
+    
+    public enum CodingKeys : String, CodingKey {
+        case name, type, value, element = ""
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        name = try container.decode(String.self, forKey: .name)
+        type = try container.decodeIfPresent(RawPropertyType.self, forKey: .type)
+        
+        if let valueInAttribute = try container.decodeIfPresent(String.self, forKey: .value) {
+            value = valueInAttribute
+        } else if type == nil {
+            value = try container.decode(String.self, forKey: .element)
+        } else {
+            throw TiledDecodingError.propertyHasNoValue
+        }
+    }
     
     var property : PropertyValue {
 

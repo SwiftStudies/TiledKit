@@ -38,4 +38,5 @@ public enum TiledDecodingError : Error {
     case unknownLayerType(layerType:String)
     case cannotCreateSpecialisedLevelOfType(desiredType:String, supportedTypes:[String])
     case missingPathForTileSheetImage
+    case propertyHasNoValue
 }
