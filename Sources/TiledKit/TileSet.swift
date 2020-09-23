@@ -286,8 +286,6 @@ public struct TileSet : TiledDecodable, Propertied{
                 frames = Frames(frames: [Frames.AnimationFrame]())
             }
             
-            print(frames.frames.map(({"\($0.tileid) \($0.duration)ms"})))
-            
             position = nil
         }
         

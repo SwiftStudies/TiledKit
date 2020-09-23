@@ -326,6 +326,7 @@ final class TiledKitTests: XCTestCase {
             let tileSet = try TileSet(from: Bundle.module.url(forResource: "Animation", withExtension: "tsx", subdirectory: "Tilesets")!)
 
 
+            //Confirm loading multiline properties works OK
             XCTAssertEqual(tileSet.filteringMode,"nearest")
             XCTAssertNotNil(tileSet.properties["User Property"])
         } catch {
