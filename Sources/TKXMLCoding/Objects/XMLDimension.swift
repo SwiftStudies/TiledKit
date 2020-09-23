@@ -12,23 +12,18 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import Foundation
-
-public protocol XMLLayer : Codable {
-    var id : Int { get }
-    var name : String { get }
-    var x : Double {get}
-    var y : Double {get}
-    var visible: Bool {get}
-
-}
-
-struct XMLLayerCommon : Codable{
-    let id: Int
-    let name : String
-    let offsetx : Double?
-    let offsety : Double?
-    let visible : Bool?
+public struct XMLDimension {
+    public let width : Double
+    public let height : Double
     
+    private enum CodingKeys : String, CodingKey {
+        case width, height
+    }
+    
+    static func decode(from decoder:Decoder) throws -> XMLDimension {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        return XMLDimension(
+            width: try container.decode(Double.self, forKey: .width),
+            height: try container.decode(Double.self, forKey: .height))
+    }
 }
-

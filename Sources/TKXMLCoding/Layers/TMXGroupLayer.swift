@@ -26,8 +26,8 @@ public struct TMXGroupLayer : XMLLayer {
         
         id = commonAttributes.id
         name = commonAttributes.name
-        x = commonAttributes.xoffset ?? 0
-        y = commonAttributes.yoffset ?? 0
+        x = commonAttributes.offsetx ?? 0
+        y = commonAttributes.offsety ?? 0
         visible = commonAttributes.visible ?? true
         
         layers = try XMLLayerContainer.decodeLayers(from: decoder)

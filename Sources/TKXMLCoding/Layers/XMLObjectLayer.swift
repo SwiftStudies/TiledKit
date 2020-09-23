@@ -19,14 +19,22 @@ public struct XMLObjectLayer : XMLLayer {
     public let y: Double
     public let visible : Bool
     
+    private let object : [XMLObject]
+    
+    public var objects : [XMLObject] {
+        return object
+    }
+    
     public init(from decoder: Decoder) throws {
         let commonAttributes = try XMLLayerCommon(from: decoder)
         
         id = commonAttributes.id
         name = commonAttributes.name
-        x = commonAttributes.xoffset ?? 0
-        y = commonAttributes.yoffset ?? 0
+        x = commonAttributes.offsetx ?? 0
+        y = commonAttributes.offsety ?? 0
         visible = commonAttributes.visible ?? true
+        
+        object = try decoder.container(keyedBy: CodingKeys.self).decode([XMLObject].self, forKey: .object)
     }
 }
 

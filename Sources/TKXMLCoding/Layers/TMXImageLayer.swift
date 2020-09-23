@@ -44,8 +44,8 @@ public struct TMXImageLayer : XMLLayer {
         
         id = commonAttributes.id
         name = commonAttributes.name
-        x = commonAttributes.xoffset ?? 0
-        y = commonAttributes.yoffset ?? 0
+        x = commonAttributes.offsetx ?? 0
+        y = commonAttributes.offsety ?? 0
         visible = commonAttributes.visible ?? true
         
         image = try decoder.container(keyedBy: CodingKeys.self).decode(ImageElement.self, forKey: .image)

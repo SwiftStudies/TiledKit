@@ -14,21 +14,20 @@
 
 import Foundation
 
-public protocol XMLLayer : Codable {
-    var id : Int { get }
-    var name : String { get }
-    var x : Double {get}
-    var y : Double {get}
-    var visible: Bool {get}
+public typealias XMLPoints = [(x:Double, y:Double)]
 
-}
-
-struct XMLLayerCommon : Codable{
-    let id: Int
-    let name : String
-    let offsetx : Double?
-    let offsety : Double?
-    let visible : Bool?
+public struct XMLPologonal : Codable {
+    private let _points : String
     
+    enum CodingKeys : String, CodingKey {
+        case _points = "points"
+    }
+    
+    var points : XMLPoints {
+        return _points.split(separator: " ").map(){
+            let xy = $0.split(separator: ",")
+            
+            return (x:Double(xy[0]) ?? 0, y:Double(xy[1]) ?? 0)
+        }
+    }
 }
-

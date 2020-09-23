@@ -45,8 +45,8 @@ public struct TMXTileLayer : XMLLayer {
         
         id = commonAttributes.id
         name = commonAttributes.name
-        x = commonAttributes.xoffset ?? 0
-        y = commonAttributes.yoffset ?? 0
+        x = commonAttributes.offsetx ?? 0
+        y = commonAttributes.offsety ?? 0
         visible = commonAttributes.visible ?? true
         
         let rawData = try decoder.container(keyedBy: CodingKeys.self).decode(TMXTileData.self, forKey: .data)

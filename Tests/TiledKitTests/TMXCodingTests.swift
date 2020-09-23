@@ -44,6 +44,20 @@ final class TMXCodingTests: XCTestCase {
         XCTAssertTrue(level.layers[2] is TMXImageLayer)
         XCTAssertTrue(level.layers[3] is TMXGroupLayer)
         XCTAssertEqual(level.properties.properties.count, 7)
+        
+        if let objectLayer = level.layers[1] as? XMLObjectLayer {
+            XCTAssertEqual(2, objectLayer.id)
+            XCTAssertEqual("Object Layer", objectLayer.name)
+            XCTAssertEqual(16, objectLayer.x)
+            XCTAssertEqual(16, objectLayer.y)
+            XCTAssertEqual(7, objectLayer.objects.count)
+            XCTAssertEqual(1, objectLayer.objects[0].properties.properties.count)
+            XCTAssertEqual("strokeColor", objectLayer.objects[0].properties.properties[0].name)
+            XCTAssertEqual("color", objectLayer.objects[0].properties.properties[0].type!.rawValue)
+            XCTAssertEqual("#ffff0000", objectLayer.objects[0].properties.properties[0].value)
+        } else {
+            XCTFail("Expected layer to be object layer")
+        }
     }
     
     static var allTests = [
