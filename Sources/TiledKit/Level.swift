@@ -14,6 +14,7 @@
 
 import Foundation
 import XMLCoder
+import TKXMLCoding
 
 //TODO: Move into its own file
 class DecodingContext{
@@ -62,6 +63,32 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
         tileSetReferences = []
     }
 
+    public init(fromTMX url:URL) throws {
+        let data = try Data.withContentsInBundleFirst(url: url)
+        
+        do {
+            let decoder = TiledDecoder(from: url)
+                        
+            let tmxLevel = try decoder.decode(TMXLevel.self, from: data)
+            
+            height = tmxLevel.height
+            width = tmxLevel.width
+            tileWidth = tmxLevel.tileWidth
+            tileHeight = tmxLevel.tileHeight
+
+            #warning("Should not exist in the new factoring of codable")
+            tileSetReferences = [TileSetReference]()
+
+            #warning("None of this is actually loaded")
+            tileSets = tmxLevel.tileSets
+            properties = [String:PropertyValue]()
+            layers = [Layer]()
+            tiles = [Int : TileSet.Tile]()
+        } catch {
+            throw TiledDecodingError.couldNotLoadLevel(url: url, decodingError: error)
+        }
+    }
+    
     public init(from url:URL) throws {
         let data = try  Data.withContentsInBundleFirst(url:url)
         
@@ -95,9 +122,11 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
         tileWidth = try container.decode(Int.self, forKey: .tileWidth)
         tileHeight = try container.decode(Int.self, forKey: .tileHeight)
         tileSetReferences = try container.decode([TileSetReference].self, forKey: .tileSets)
-        if let properties = try? decode(from: decoder) {
-            self.properties = properties
-        }
+        
+        #warning("Properties not decoded")
+//        if let properties = try? decode(from: decoder) {
+//            self.properties = properties
+//        }
         
         
         decoderContext.level = self

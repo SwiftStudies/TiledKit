@@ -59,9 +59,10 @@ public class Layer: TiledDecodable, Propertied{
             visible = (try? container.decode(Bool.self, forKey: .visible)) ?? true
             opacity = (try? container.decode(Double.self, forKey: .opacity)) ?? 1.0
                     
-            if let properties = try? decode(from: decoder) {
-                self.properties = properties
-            }
+            #warning("Properties not decoded")
+//            if let properties = try? decode(from: decoder) {
+//                self.properties = properties
+//            }
         } catch {
             throw error
         }

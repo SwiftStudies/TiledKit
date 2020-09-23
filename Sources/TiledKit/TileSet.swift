@@ -192,9 +192,10 @@ public struct TileSet : TiledDecodable, Propertied{
             
         }
         
-        if let properties = try? decode(from: decoder) {
-            self.properties = properties
-        }
+        #warning("Properties not decoded")
+//        if let properties = try? decode(from: decoder) {
+//            self.properties = properties
+//        }
     }
     
     public class Tile: TiledDecodable, LayerContainer {

@@ -228,9 +228,10 @@ fileprivate struct LoadableObject : Decodable, Propertied {
             kind = .rectangle
         }
         
-        if let properties = try? decode(from: decoder) {
-            self.properties = properties
-        }
+        #warning("Properties not decoded")
+//        if let properties = try? decode(from: decoder) {
+//            self.properties = properties
+//        }
         
     }
     
