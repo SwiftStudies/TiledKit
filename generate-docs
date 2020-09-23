@@ -1,0 +1,1 @@
+/usr/local/bin/jazzy --clean --author SwiftStudies --author_url http://swiftstudies.com --github_url https://github.com/SwiftStudies/TiledKit --module TiledKit --output Documentation/API --swift-build-tool spm
