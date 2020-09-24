@@ -19,6 +19,8 @@ enum MapError : Error {
 }
 
 public struct Map : TKLayerContainer{
+    internal let  url              : URL?
+    
     /// The size of the map in tiles
     public let    mapSize          : TileSize
     

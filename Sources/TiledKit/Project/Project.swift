@@ -67,11 +67,80 @@ public class Project {
         return nil
     }
     
+    /// Resources a url within the project, if it may be relative, then you should supply the URL it is relative to
+    /// - Parameters:
+    ///   - url: The `URL` to be resolved (it does not need to be in the project if it is a fully specified URL)
+    ///   - relativeTo: If the URL could be or is relative, then this will be used as the base
+    /// - Returns: A URL or nil if the the URL is not reachable
+    public func url(`for` url:URL, relativeTo baseUrl:URL?)->URL?{
+        // Start with any relative URL
+        if let baseURL = baseUrl {
+            if let url = url.url(relativeTo: baseURL) {
+                return url
+            }
+        }
+        
+        // Now look within the project itself
+        if let url = url.url(relativeTo: self.fileContainer.baseUrl) {
+            if url.isReachable {
+                return url
+            }
+        }
+        
+        // If it's an image resource, perhaps it's in a bundle and has been processed
+        if let fileType = FileTypes(rawValue: url.lastPathComponent), fileType.isImage {
+            if let url = self.url(for: url.deletingPathExtension().lastPathComponent, in: nil, of: fileType), url.isReachable {
+                return url
+            }
+        }
+        
+        // If I can't find it within the project then give up
+        if url.isReachable {
+            return url
+        }
+        return nil
+    }
+    
     public func get(map fileName:String, in subDirectory:String? = nil) throws -> Map {
         guard let url = url(for: fileName, in: subDirectory, of: .tmx) else {
             throw ProjectError.fileDoesNotExist("\(fileContainer)\(subDirectory ?? "")\\(fileName)")
         }
         
         return try TMXMap.build(in: self, from: url)
+    }
+}
+
+fileprivate extension URL {
+    var isReachable : Bool {
+        return (try? checkResourceIsReachable()) ?? false
+    }
+    
+    var isRelative : Bool {
+        return relativeString.hasPrefix("..")
+    }
+    
+    func url(relativeTo baseURL:URL)->URL?{
+        let relativePathComponents = relativeString.split(separator: "/")
+        var baseURL = baseURL
+        
+        if baseURL.pathExtension != "" {
+            baseURL = baseURL.deletingLastPathComponent()
+        }
+        
+        var firstNonRelativeComponent = 0
+        for pathComponent in relativePathComponents where pathComponent == ".." {
+            firstNonRelativeComponent += 1
+            baseURL = baseURL.deletingLastPathComponent()
+        }
+        
+        for pathComponent in relativePathComponents[firstNonRelativeComponent..<relativePathComponents.count] {
+            baseURL = baseURL.appendingPathComponent(String(pathComponent))
+        }
+        
+        if !baseURL.isReachable {
+            return nil
+        }
+        
+        return baseURL
     }
 }

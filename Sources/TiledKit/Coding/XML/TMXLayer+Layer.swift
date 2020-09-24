@@ -13,6 +13,7 @@
 //    limitations under the License.
 
 import TKXMLCoding
+import Foundation
 
 extension XMLLayer {
     var location : Location {
@@ -20,7 +21,7 @@ extension XMLLayer {
     }
     
     #warning("Does not produce specialised layers yet")
-    func tkLayer(for map:Map) -> TKLayer? {
+    func tkLayer(for map:Map, in project:Project) -> TKLayer? {
         if let tileLayer = self as? TMXTileLayer {
             let grid = tileLayer.tileGrid(for: map)
             return TKLayer(name: tileLayer.name, visible: tileLayer.visible, opacity: tileLayer.opacity, position: tileLayer.location, kind: .tile(grid))
@@ -29,14 +30,22 @@ extension XMLLayer {
             return TKLayer(name: objectLayer.name, visible: objectLayer.visible, opacity: objectLayer.opacity, position: objectLayer.location, kind: .objects(objects))
 
         } else if let groupLayer = self as? TMXGroupLayer {
-            let group = Group(layers: groupLayer.layers.compactMap({$0.tkLayer(for:map)}))
+            let group = Group(layers: groupLayer.layers.compactMap({$0.tkLayer(for:map, in: project)}))
             return TKLayer(name: groupLayer.name, visible: groupLayer.visible, opacity: groupLayer.opacity, position: groupLayer.location, kind: .group(group))
 
         } else if let imageLayer = self as? TMXImageLayer {
-            let image = TKImage()
+            let image = imageLayer.tkImage(in: project, relativeTo: map.url)
             return TKLayer(name: imageLayer.name, visible: imageLayer.visible, opacity: imageLayer.opacity, position: imageLayer.location, kind: .image(image))
         }
         
         return nil
+    }
+}
+
+extension TMXImageLayer {
+    func tkImage(in project:Project, relativeTo url: URL?)->TKImage{
+        let url = project.url(for: URL(fileURLWithPath: path), relativeTo:url) ?? URL(fileURLWithPath: path)
+        
+        return TKImage(url: url, size: PixelSize(width: width, height: height))
     }
 }

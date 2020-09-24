@@ -130,11 +130,12 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(map.tileLayers[0].grid[0,0], TileGID(tileId: 0, flip: []))
         XCTAssertEqual(map.tileLayers[1].grid[0,0], TileGID(tileId: 5, flip: []))
         XCTAssertEqual(map.tileLayers[0].grid.size,  map.mapSize)
-        
+        XCTAssertEqual(nestedImageLayer.image.size, PixelSize(width: 16, height: 16))
+        XCTAssertTrue(nestedImageLayer.image.url.path.hasSuffix("F.png"))
+
         XCTFail("Impelement everything below")
 
 //        XCTAssertEqual(level.getObjectLayers()[0].objects.count, 7)
-//        XCTAssertEqual(level.getTileLayers()[0].tiles.count, 100)
     }
     
     func testColor(){
