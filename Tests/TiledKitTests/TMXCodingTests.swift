@@ -10,14 +10,14 @@ final class TMXCodingTests: XCTestCase {
     }
     
     func testTMXLevel(){
-        let level : TMXLevel
+        let level : TMXMap
         do {
             guard let url = Bundle.module.url(forResource: "One of Everything", withExtension: "tmx", subdirectory: "Maps") else {
                 XCTFail("Could not find map")
                 return
             }
             let data = try Data(contentsOf: url)
-            level = try TMXLevel.decoder.decode(TMXLevel.self, from: data)
+            level = try TMXMap.decoder.decode(TMXMap.self, from: data)
         } catch {
             XCTFail("Error loading \(error)")
             return

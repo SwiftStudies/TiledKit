@@ -12,22 +12,32 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import TKXMLCoding
-
-extension TMXLevel {
-    var tileSets : [TileSet] {
-        return [TileSet]()
+public enum FileTypes : String, CaseIterable {
+    case png, jpeg, gif, tiff, pdf, svg, tmx, tsx, directory
+    
+    var extensions : [String] {
+        switch self {
+        case .png:
+            return [rawValue, "apng"]
+        case .jpeg:
+            return [rawValue, "jpg"]
+        case .directory:
+            return []
+        default:
+            return [rawValue]
+        }
     }
     
-    var properties : Properties {
-        return Properties()
+    var isDirectory : Bool {
+        return self == .directory
     }
     
-    var tiles : [Int : TileSet.Tile ] {
-        return [Int : TileSet.Tile]()
-    }
-    
-    var layers : [Layer] {
-        return [Layer]()
+    var isImage : Bool {
+        switch self {
+        case .png, .jpeg, .gif, .tiff, .pdf, .svg:
+            return true
+        case .tmx, .tsx:
+            return false
+        }
     }
 }

@@ -13,12 +13,13 @@
 //    limitations under the License.
 
 import XMLCoder
+import Foundation
 
 public struct TMXElements : Codable {
     
 }
 
-public struct TMXLevel : Codable, XMLPropertied {
+public struct TMXMap : Codable, XMLPropertied {
     enum CodingKeys : String, CodingKey {
         case version, tiledVersion = "tiledversion", orientation, renderOrder = "renderorder", width, height, tileWidth = "tilewidth", tileHeight = "tileheight", infinite, tileSetReference = "tileset"
     }
@@ -42,6 +43,25 @@ public struct TMXLevel : Codable, XMLPropertied {
     public let layers : [XMLLayer]
     public let tileSetReferences : [TMXTileSetReference]
     public let properties : XMLProperties
+    
+    public init(from url:URL) throws {
+        let data = try Data(contentsOf: url)
+        let loaded = try TMXMap.decoder.decode(TMXMap.self, from: data)
+        
+        version = loaded.version
+        tiledVersion = loaded.tiledVersion
+        orientation = loaded.orientation
+        renderOrder = loaded.renderOrder
+        width = loaded.width
+        height = loaded.height
+        tileWidth = loaded.tileWidth
+        tileHeight = loaded.tileHeight
+        infinite = loaded.infinite
+        
+        layers = loaded.layers
+        tileSetReferences = loaded.tileSetReferences
+        properties = loaded.properties
+    }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

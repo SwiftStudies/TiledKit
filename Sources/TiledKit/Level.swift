@@ -69,7 +69,7 @@ public class Level : TiledDecodable, LayerContainer, Propertied {
         do {
             let decoder = TiledDecoder(from: url)
                         
-            let tmxLevel = try decoder.decode(TMXLevel.self, from: data)
+            let tmxLevel = try decoder.decode(TMXMap.self, from: data)
             
             height = tmxLevel.height
             width = tmxLevel.width
