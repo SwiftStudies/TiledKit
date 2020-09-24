@@ -32,11 +32,15 @@ public enum FileTypes : String, CaseIterable {
         return self == .directory
     }
     
+    var isMap : Bool {
+        return self == .tmx
+    }
+    
     var isImage : Bool {
         switch self {
         case .png, .jpeg, .gif, .tiff, .pdf, .svg:
             return true
-        case .tmx, .tsx:
+        case .tmx, .tsx, .directory:
             return false
         }
     }

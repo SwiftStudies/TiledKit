@@ -12,27 +12,32 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import Foundation
+typealias TilePosition = Point<Int>
+typealias TileSize  = Dimension<Int>
 
-enum MapError : Error {
-    case unknownMapType(String)
+typealias PixelPoint = Point<Int>
+typealias PixelSize  = Dimension<Int>
+
+#warning("Rename this to Position when it's available")
+typealias Location = Point<Double>
+typealias Size = Dimension<Double>
+
+public struct Point<N:Numeric>{
+    var x : N
+    var y : N
+    
+    public init(x:N, y:N){
+        self.x = x
+        self.y = y
+    }
 }
 
-public struct Map {
-    /// The size of the map in tiles
-    let    mapSize          : TileSize
+public struct Dimension<N:Numeric>{
+    var width : N
+    var height : N
     
-    /// The size of a tile in pixels
-    let    tileSize         : PixelSize
-    
-    /// Properties of the map
-    var    properties       = Properties()
-    
-    /// The size of the map in pixels
-    var    pixelSize        : PixelSize {
-        return PixelSize(width: tileSize.width * mapSize.width, height: tileSize.height * mapSize.height)
+    public init(width:N, height:N){
+        self.width = width
+        self.height = height
     }
-    
-    /// The various layers in the map
-    var    layers          = [TKLayer]()
 }

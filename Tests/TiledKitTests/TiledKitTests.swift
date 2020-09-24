@@ -91,35 +91,50 @@ final class TiledKitTests: XCTestCase {
         return try Level(from: url)
     }
     
-    func testLevel(){
-        let level : Level
+    lazy var moduleBundleProject : Project = {
+        Project(using: Bundle.module)
+    }()
+    
+    func loadTestMap(from project:Project, name:String? = nil, in subDirectory:String? = nil) throws -> Map {
+        if let name = name {
+            return try project.get(map: name, in: subDirectory)
+        }
+        return try project.get(map: "Test Map 1", in: "Maps")
+    }
+    
+    func testMap(){
+        let map : Map
         do {
-            level = try loadTestLevel()
+            map = try loadTestMap(from: moduleBundleProject)
         } catch {
             XCTFail("\(error)")
             return
         }
         
-        XCTAssertEqual(level.width, 10)
-        XCTAssertEqual(level.height, 10)
-        XCTAssertEqual(level.tileWidth, 16)
-        XCTAssertEqual(level.tileHeight, 16)
-        XCTAssertEqual(level.layers.count, 6)
-        XCTAssertEqual(level.properties.count, 7)
+        XCTAssertEqual(map.mapSize.width, 10)
+        XCTAssertEqual(map.mapSize.height, 10)
+        XCTAssertEqual(map.tileSize.width, 16)
+        XCTAssertEqual(map.tileSize.height, 16)
+        XCTAssertEqual(map.pixelSize.width, 160)
+        XCTAssertEqual(map.pixelSize.height, 160)
 
-        XCTAssertEqual(level.getTileLayers().count, 2)
-        XCTAssertEqual(level.getObjectLayers().count, 1)
-        XCTAssertEqual(level.getGroups().count, 2)
+        XCTAssertEqual(map.layers.count, 6)
+        XCTAssertEqual(map.properties.count, 7)
 
-        guard let nestedImageLayer = level.getLayers(ofType: .image, named: "Grouped Image Layer", matching: [:], recursively: true)[0] as? ImageLayer else {
-            XCTFail("Could not get nested image layer")
-            return
-        }
-        
-        XCTAssertEqual((nestedImageLayer.parent as? GroupLayer)?.name ?? "FAILED", "Group")
-        
-        XCTAssertEqual(level.getObjectLayers()[0].objects.count, 7)
-        XCTAssertEqual(level.getTileLayers()[0].tiles.count, 100)
+        XCTAssertEqual(0, 2) //level.getTileLayers().count
+        XCTAssertEqual(0, 1) //level.getObjectLayers().count
+        XCTAssertEqual(0, 2) //level.getGroups().count
+
+        XCTFail("Impelement everything below")
+//        guard let nestedImageLayer = level.getLayers(ofType: .image, named: "Grouped Image Layer", matching: [:], recursively: true)[0] as? ImageLayer else {
+//            XCTFail("Could not get nested image layer")
+//            return
+//        }
+//
+//        XCTAssertEqual((nestedImageLayer.parent as? GroupLayer)?.name ?? "FAILED", "Group")
+//
+//        XCTAssertEqual(level.getObjectLayers()[0].objects.count, 7)
+//        XCTAssertEqual(level.getTileLayers()[0].tiles.count, 100)
     }
     
     func testColor(){
@@ -371,7 +386,7 @@ final class TiledKitTests: XCTestCase {
     }
     
     static var allTests = [
-        ("testLevel",testLevel),
+        ("testMap",testMap),
         ("testMultiImageTileSetWithSingleTile",testMultiImageTileSetWithSingleTile),
         ("testMultiImageTileSet",testMultiImageTileSet),
         ("testSingleImageTileSetWithOptionals", testSingleImageTileSetWithOptionals),

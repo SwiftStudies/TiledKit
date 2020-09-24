@@ -12,27 +12,12 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import Foundation
+#warning("Rename to Layer when old class out the way")
 
-enum MapError : Error {
-    case unknownMapType(String)
-}
-
-public struct Map {
-    /// The size of the map in tiles
-    let    mapSize          : TileSize
+public struct TKLayer {
+    let name    : String
+    let visible : Bool
+    let opacity : Double
+    let position: Location
     
-    /// The size of a tile in pixels
-    let    tileSize         : PixelSize
-    
-    /// Properties of the map
-    var    properties       = Properties()
-    
-    /// The size of the map in pixels
-    var    pixelSize        : PixelSize {
-        return PixelSize(width: tileSize.width * mapSize.width, height: tileSize.height * mapSize.height)
-    }
-    
-    /// The various layers in the map
-    var    layers          = [TKLayer]()
 }

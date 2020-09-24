@@ -37,7 +37,8 @@ public struct TMXTileLayer : XMLLayer {
     public var x: Double
     public var y: Double
     public var visible: Bool
-    
+    public var opacity : Double
+
     public var data : [UInt32]
 
     public init(from decoder: Decoder) throws {
@@ -48,7 +49,8 @@ public struct TMXTileLayer : XMLLayer {
         x = commonAttributes.offsetx ?? 0
         y = commonAttributes.offsety ?? 0
         visible = commonAttributes.visible ?? true
-        
+        opacity = commonAttributes.opacity ?? 1
+
         let rawData = try decoder.container(keyedBy: CodingKeys.self).decode(TMXTileData.self, forKey: .data)
         
         if rawData.encoding == .csv && rawData.compression == nil {

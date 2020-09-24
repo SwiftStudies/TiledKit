@@ -24,7 +24,7 @@ public struct TMXMap : Codable, XMLPropertied {
         case version, tiledVersion = "tiledversion", orientation, renderOrder = "renderorder", width, height, tileWidth = "tilewidth", tileHeight = "tileheight", infinite, tileSetReference = "tileset"
     }
     
-    static var decoder : XMLDecoder {
+    public static var decoder : XMLDecoder {
         let decoder = XMLDecoder()
                 
         return decoder

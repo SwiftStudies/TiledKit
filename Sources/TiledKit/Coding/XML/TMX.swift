@@ -19,15 +19,7 @@ extension TMXMap {
         return [TileSet]()
     }
     
-    var properties : Properties {
-        return Properties()
-    }
-    
     var tiles : [Int : TileSet.Tile ] {
         return [Int : TileSet.Tile]()
-    }
-    
-    var layers : [Layer] {
-        return [Layer]()
     }
 }

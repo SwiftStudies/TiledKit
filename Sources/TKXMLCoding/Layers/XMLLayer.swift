@@ -20,7 +20,7 @@ public protocol XMLLayer : Codable {
     var x : Double {get}
     var y : Double {get}
     var visible: Bool {get}
-
+    var opacity : Double {get}
 }
 
 struct XMLLayerCommon : Codable{
@@ -32,9 +32,10 @@ struct XMLLayerCommon : Codable{
     let offsetx : Double?
     let offsety : Double?
     let visible : Bool?
+    let opacity : Double?
     
     enum CodingKeys : String, CodingKey {
-        case id, _name="name", offsetx, offsety, visible
+        case id, _name="name", offsetx, offsety, visible, opacity
     }
 }
 

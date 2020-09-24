@@ -12,6 +12,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+#warning("This should be retired")
 public struct Position : Decodable{
     public let x : Double
     public let y : Double

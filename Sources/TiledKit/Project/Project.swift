@@ -15,6 +15,10 @@
 import Foundation
 import TKXMLCoding
 
+enum ProjectError : Error {
+    case fileDoesNotExist(String)
+}
+
 public class Project {
     let fileContainer   : FileContainer
     let folders         : [String]
@@ -63,14 +67,11 @@ public class Project {
         return nil
     }
     
-    public func get(map fileName:String, in subDirectory:String? = nil) throws -> Map? {
-        let map : TMXMap
+    public func get(map fileName:String, in subDirectory:String? = nil) throws -> Map {
         guard let url = url(for: fileName, in: subDirectory, of: .tmx) else {
-            return nil
+            throw ProjectError.fileDoesNotExist("\(fileContainer)\(subDirectory ?? "")\\(fileName)")
         }
-        let data = try Data(contentsOf: url)
-        let tmxMap = try TMXMap.decoder.decode(TMXMap.self, from: data)
         
-        return tmxMap
+        return try TMXMap.build(in: self, from: url)
     }
 }
