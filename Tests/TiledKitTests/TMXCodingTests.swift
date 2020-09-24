@@ -60,8 +60,131 @@ final class TMXCodingTests: XCTestCase {
         }
     }
     
+    func testSingleImageTileSet(){
+        let tileSet : TSXTileSet
+        do {
+            guard let url = Bundle.module.url(forResource: "SingleImageAutoTransparency", withExtension: "tsx", subdirectory: "Tilesets") else {
+                XCTFail("Could not find TileSet in bundle")
+                return
+            }
+            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: url))
+
+            XCTAssertEqual(tileSet.tileWidth, 16)
+            XCTAssertEqual(tileSet.tileHeight, 16)
+            XCTAssertEqual(tileSet.tileCount, 4)
+            XCTAssertEqual(tileSet.properties.properties.count, 1)
+        
+            XCTAssertEqual(tileSet.properties.properties[0].value, "nearest")
+        } catch {
+            XCTFail("Error thrown \(error)")
+        }
+    }
+    
+    func testSingleImageTileSetWithOptionals(){
+        let tileSet : TSXTileSet
+        do {
+            guard let url = Bundle.module.url(forResource: "SingleImageMarginsAndSpacing", withExtension: "tsx", subdirectory: "Tilesets") else {
+                XCTFail("Could not find TileSet in bundle")
+                return
+            }
+            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: url))
+            XCTAssertEqual(tileSet.tileWidth, 12)
+            XCTAssertEqual(tileSet.tileHeight, 12)
+            XCTAssertEqual(tileSet.tileCount, 4)
+            XCTAssertNotNil(tileSet.image, "Should be a tile sheet")
+            
+            XCTFail("Not dealing with transparent Color")
+        } catch {
+            XCTFail("Error thrown \(error)")
+        }
+    }
+
+    func testMultiImageTileSetWithSingleTile(){
+        let tileSet : TSXTileSet
+        do {
+            guard let url = Bundle.module.url(forResource: "SeparateSingleImage", withExtension: "tsx", subdirectory: "Tilesets") else {
+                XCTFail("Could not find TileSet in bundle")
+                return
+            }
+            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: url))
+            XCTAssertEqual(tileSet.tileWidth, 16)
+            XCTAssertEqual(tileSet.tileHeight, 16)
+            XCTAssertEqual(tileSet.tileCount, 1)
+        } catch {
+            XCTFail("Error thrown \(error)")
+        }
+    }
+    
+    func testMultiImageTileSet(){
+        let tileSet : TSXTileSet
+        do {
+            guard let url = Bundle.module.url(forResource: "SeparateMultipleImages", withExtension: "tsx", subdirectory: "Tilesets") else {
+                XCTFail("Could not find TileSet in bundle")
+                return
+            }
+            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: url))
+            XCTAssertEqual(tileSet.tileWidth, 16)
+            XCTAssertEqual(tileSet.tileHeight, 16)
+            XCTAssertEqual(tileSet.tileCount, 2)
+        } catch {
+            XCTFail("Error thrown \(error)")
+        }
+    }
+
+    func testTileSetCollisionObjects(){
+        let tileSet : TSXTileSet
+        do {
+            guard let url = Bundle.module.url(forResource: "Animation", withExtension: "tsx", subdirectory: "Tilesets") else {
+                XCTFail("Could not find TileSet in bundle")
+                return
+            }
+            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: url))
+
+            XCTFail("Bring tests back")
+
+            
+//            XCTAssertEqual((tileSet.tiles[0]?.objects?.objects.count) ?? 0, 2)
+//            XCTAssertEqual((tileSet.tiles[0]?.objects?.objects[0].x) ?? 0, 7.92176)
+//            XCTAssertEqual((tileSet.tiles[0]?.objects?.objects[1].y) ?? 0, 3.00272)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testTileSetAnimationFrames(){
+        let tileSet : TSXTileSet
+        do {
+            guard let url = Bundle.module.url(forResource: "Animation", withExtension: "tsx", subdirectory: "Tilesets") else {
+                XCTFail("Could not find TileSet in bundle")
+                return
+            }
+            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: url))
+
+            XCTFail("Bring tests back")
+            
+//            XCTAssertEqual(tile.animation.count, 4)
+//            XCTAssert(tile.animation[0].tile.identifier.stringSource!.hasSuffix("0"))
+//            XCTAssertEqual(tile.animation[0].duration, 1)
+//            XCTAssert(tile.animation[1].tile.identifier.stringSource!.hasSuffix("1"))
+//            XCTAssertEqual(tile.animation[1].duration, 1)
+//            XCTAssert(tile.animation[2].tile.identifier.stringSource!.hasSuffix("2"))
+//            XCTAssertEqual(tile.animation[2].duration, 1)
+//            XCTAssert(tile.animation[3].tile.identifier.stringSource!.hasSuffix("3"))
+//            XCTAssertEqual(tile.animation[3].duration, 1)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
     static var allTests = [
         ("testTMXLevel",testTMXLevel),
+        ("testMultiImageTileSetWithSingleTile",testMultiImageTileSetWithSingleTile),
+        ("testMultiImageTileSet",testMultiImageTileSet),
+        ("testSingleImageTileSetWithOptionals", testSingleImageTileSetWithOptionals),
+        ("testSingleImageTileSet", testSingleImageTileSet),
+        ("testTileSetCollisionObjects", testTileSetCollisionObjects),
+        ("testTileSetAnimationFrames", testTileSetAnimationFrames),
+
         ]
  
 }

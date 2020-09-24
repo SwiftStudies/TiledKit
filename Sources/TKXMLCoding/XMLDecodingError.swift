@@ -12,7 +12,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-enum TMXDecodingError : Error {
+enum XMLDecodingError : Error {
     case propertyHasNoValue(String, type:XMLRawPropertyType)
     case unknownLevelElement(String)
     case unsupportedTileDataFormat(encoding:TileDataEncoding, compression:TileDataCompression)

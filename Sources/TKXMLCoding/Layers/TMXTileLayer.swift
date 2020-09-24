@@ -54,7 +54,7 @@ public struct TMXTileLayer : XMLLayer {
         if rawData.encoding == .csv && rawData.compression == nil {
             data = rawData.data.split(separator: ",").map({(UInt32($0) ?? 0)})
         } else {
-            throw TMXDecodingError.unsupportedTileDataFormat(encoding: rawData.encoding, compression: rawData.compression ?? .none)
+            throw XMLDecodingError.unsupportedTileDataFormat(encoding: rawData.encoding, compression: rawData.compression ?? .none)
         }
     }
 

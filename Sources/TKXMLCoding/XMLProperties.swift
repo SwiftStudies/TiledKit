@@ -57,7 +57,7 @@ public struct XMLProperty : Codable {
         } else if type == nil {
             value = try container.decode(String.self, forKey: .element)
         } else {
-            throw TMXDecodingError.propertyHasNoValue(name, type: type ?? .string)
+            throw XMLDecodingError.propertyHasNoValue(name, type: type ?? .string)
         }
     }
 }
