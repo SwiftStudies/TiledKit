@@ -29,7 +29,7 @@ extension XMLLayer {
             return TKLayer(name: objectLayer.name, visible: objectLayer.visible, opacity: objectLayer.opacity, position: objectLayer.location, kind: .objects(objects))
 
         } else if let groupLayer = self as? TMXGroupLayer {
-            let group = Group()
+            let group = Group(layers: groupLayer.layers.compactMap({$0.tkLayer}))
             return TKLayer(name: groupLayer.name, visible: groupLayer.visible, opacity: groupLayer.opacity, position: groupLayer.location, kind: .group(group))
 
         } else if let imageLayer = self as? TMXImageLayer {

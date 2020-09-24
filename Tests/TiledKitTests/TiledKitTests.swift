@@ -125,14 +125,11 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(map.objectLayers.count, 1) //level.getObjectLayers().count
         XCTAssertEqual(map.groupLayers.count, 2) //level.getGroups().count
 
+        let nestedImageLayer = map.groupLayers[0].group.imageLayers[0]
+        XCTAssertEqual(nestedImageLayer.layer.name, "Grouped Image Layer")
+
         XCTFail("Impelement everything below")
-//        guard let nestedImageLayer = level.getLayers(ofType: .image, named: "Grouped Image Layer", matching: [:], recursively: true)[0] as? ImageLayer else {
-//            XCTFail("Could not get nested image layer")
-//            return
-//        }
-//
-//        XCTAssertEqual((nestedImageLayer.parent as? GroupLayer)?.name ?? "FAILED", "Group")
-//
+
 //        XCTAssertEqual(level.getObjectLayers()[0].objects.count, 7)
 //        XCTAssertEqual(level.getTileLayers()[0].tiles.count, 100)
     }
