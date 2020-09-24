@@ -92,8 +92,7 @@ final class TMXCodingTests: XCTestCase {
             XCTAssertEqual(tileSet.tileHeight, 12)
             XCTAssertEqual(tileSet.tileCount, 4)
             XCTAssertNotNil(tileSet.image, "Should be a tile sheet")
-            
-            XCTFail("Not dealing with transparent Color")
+            XCTAssertNotNil(tileSet.image?.transparentColor ?? "", "ff00ff")
         } catch {
             XCTFail("Error thrown \(error)")
         }
@@ -140,12 +139,9 @@ final class TMXCodingTests: XCTestCase {
             }
             tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: url))
 
-            XCTFail("Bring tests back")
-
-            
-//            XCTAssertEqual((tileSet.tiles[0]?.objects?.objects.count) ?? 0, 2)
-//            XCTAssertEqual((tileSet.tiles[0]?.objects?.objects[0].x) ?? 0, 7.92176)
-//            XCTAssertEqual((tileSet.tiles[0]?.objects?.objects[1].y) ?? 0, 3.00272)
+            XCTAssertEqual((tileSet.tileSpecs[0].collisionObject?.objects.count) ?? 0, 2)
+            XCTAssertEqual((tileSet.tileSpecs[0].collisionObject?.objects[0].x) ?? 0, 7.92176)
+            XCTAssertEqual((tileSet.tileSpecs[0].collisionObject?.objects[1].y) ?? 0, 3.00272)
         } catch {
             XCTFail("\(error)")
         }
@@ -160,17 +156,17 @@ final class TMXCodingTests: XCTestCase {
             }
             tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: url))
 
-            XCTFail("Bring tests back")
+            let tile = tileSet.tileSpecs[1]
             
-//            XCTAssertEqual(tile.animation.count, 4)
-//            XCTAssert(tile.animation[0].tile.identifier.stringSource!.hasSuffix("0"))
-//            XCTAssertEqual(tile.animation[0].duration, 1)
-//            XCTAssert(tile.animation[1].tile.identifier.stringSource!.hasSuffix("1"))
-//            XCTAssertEqual(tile.animation[1].duration, 1)
-//            XCTAssert(tile.animation[2].tile.identifier.stringSource!.hasSuffix("2"))
-//            XCTAssertEqual(tile.animation[2].duration, 1)
-//            XCTAssert(tile.animation[3].tile.identifier.stringSource!.hasSuffix("3"))
-//            XCTAssertEqual(tile.animation[3].duration, 1)
+            XCTAssertEqual(tile.animationFrames.count, 4)
+            XCTAssertEqual(tile.animationFrames[0].tileid, 0)
+            XCTAssertEqual(tile.animationFrames[1].tileid, 1)
+            XCTAssertEqual(tile.animationFrames[2].tileid, 2)
+            XCTAssertEqual(tile.animationFrames[3].tileid, 3)
+            XCTAssertEqual(tile.animationFrames[0].duration, 1000)
+            XCTAssertEqual(tile.animationFrames[1].duration, 1000)
+            XCTAssertEqual(tile.animationFrames[2].duration, 1000)
+            XCTAssertEqual(tile.animationFrames[3].duration, 1000)
         } catch {
             XCTFail("\(error)")
         }

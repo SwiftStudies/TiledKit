@@ -25,10 +25,16 @@ public protocol XMLLayer : Codable {
 
 struct XMLLayerCommon : Codable{
     let id: Int
-    let name : String
+    let _name : String?
+    var name : String {
+        return _name ?? ""
+    }
     let offsetx : Double?
     let offsety : Double?
     let visible : Bool?
     
+    enum CodingKeys : String, CodingKey {
+        case id, _name="name", offsetx, offsety, visible
+    }
 }
 

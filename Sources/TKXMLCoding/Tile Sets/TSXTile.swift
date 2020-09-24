@@ -20,10 +20,26 @@ public struct TSXTileFrame : Codable {
 public struct TSXTile : Codable {
     let id : Int
     let collisionObject : XMLObjectLayer?
-    let animationFrames : [TSXTileFrame]?
+    let animationFrames : [TSXTileFrame]
     let image : XMLImageElement?
     
     enum CodingKeys : String, CodingKey {
         case id, collisionObject = "objectgroup", animationFrames = "animation", image
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id = try container.decode(Int.self, forKey: .id)
+        collisionObject = try container.decodeIfPresent(XMLObjectLayer.self, forKey: .collisionObject)
+        image = try container.decodeIfPresent(XMLImageElement.self, forKey: .image)
+        
+        // needs to be nested unkeyed and iterated?
+        var animationFrames = [TSXTileFrame]()
+        var frameContainer = try container.nestedUnkeyedContainer(forKey: .animationFrames)
+        while !frameContainer.isAtEnd{
+            animationFrames.append(try frameContainer.decode(TSXTileFrame.self))
+        }
+        self.animationFrames = animationFrames
     }
 }

@@ -16,4 +16,9 @@ public struct XMLImageElement : Codable {
     let source : String
     let width : Int
     let height : Int
+    let transparentColor : String?
+    
+    private enum CodingKeys : String, CodingKey {
+        case source, width, height, transparentColor = "trans"
+    }
 }
