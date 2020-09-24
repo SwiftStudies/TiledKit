@@ -127,7 +127,10 @@ final class TiledKitTests: XCTestCase {
 
         let nestedImageLayer = map.groupLayers[0].group.imageLayers[0]
         XCTAssertEqual(nestedImageLayer.layer.name, "Grouped Image Layer")
-
+        XCTAssertEqual(map.tileLayers[0].grid[0,0], TileGID(tileId: 0, flip: []))
+        XCTAssertEqual(map.tileLayers[1].grid[0,0], TileGID(tileId: 5, flip: []))
+        XCTAssertEqual(map.tileLayers[0].grid.size,  map.mapSize)
+        
         XCTFail("Impelement everything below")
 
 //        XCTAssertEqual(level.getObjectLayers()[0].objects.count, 7)

@@ -22,7 +22,7 @@ public typealias PixelSize  = Dimension<Int>
 public typealias Location = Point<Double>
 public typealias Size = Dimension<Double>
 
-public struct Point<N:Numeric>{
+public struct Point<N:Numeric> : Equatable{
     var x : N
     var y : N
     
@@ -32,7 +32,7 @@ public struct Point<N:Numeric>{
     }
 }
 
-public struct Dimension<N:Numeric>{
+public struct Dimension<N:Numeric> : Equatable{
     var width : N
     var height : N
     

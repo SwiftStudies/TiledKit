@@ -26,7 +26,12 @@ extension TMXMap {
         let data = try Data(contentsOf: url)
         let tmxMap = try TMXMap.decoder.decode(TMXMap.self, from: data)
 
-        var map = Map(mapSize: TileSize(width: tmxMap.width, height: tmxMap.height), tileSize: PixelSize(width: tmxMap.tileWidth, height: tmxMap.tileHeight))
+        var map = Map(
+            mapSize: TileSize(width: tmxMap.width, height: tmxMap.height),
+            tileSize: PixelSize(width: tmxMap.tileWidth, height: tmxMap.tileHeight),
+            orientation: Orientation(rawValue: tmxMap.orientation) ?? .orthogonal,
+            renderingOrder: RenderingOrder(rawValue: tmxMap.renderOrder) ?? .rightDown
+        )
         
         // Convert properties on the map
         for property in tmxMap.properties.properties {
@@ -39,7 +44,7 @@ extension TMXMap {
         #warning("Not implemented")
         
         // Build layers
-        map.layers.append(contentsOf: tmxMap.layers.compactMap({$0.tkLayer}))
+        map.layers.append(contentsOf: tmxMap.layers.compactMap({$0.tkLayer(for: map)}))
         return map
     }
 }

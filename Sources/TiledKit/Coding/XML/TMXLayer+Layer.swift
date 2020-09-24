@@ -20,16 +20,16 @@ extension XMLLayer {
     }
     
     #warning("Does not produce specialised layers yet")
-    var tkLayer : TKLayer? {
+    func tkLayer(for map:Map) -> TKLayer? {
         if let tileLayer = self as? TMXTileLayer {
-            let grid = TileGrid()
+            let grid = tileLayer.tileGrid(for: map)
             return TKLayer(name: tileLayer.name, visible: tileLayer.visible, opacity: tileLayer.opacity, position: tileLayer.location, kind: .tile(grid))
         } else if let objectLayer = self as? XMLObjectLayer {
             let objects = [TKObject]()
             return TKLayer(name: objectLayer.name, visible: objectLayer.visible, opacity: objectLayer.opacity, position: objectLayer.location, kind: .objects(objects))
 
         } else if let groupLayer = self as? TMXGroupLayer {
-            let group = Group(layers: groupLayer.layers.compactMap({$0.tkLayer}))
+            let group = Group(layers: groupLayer.layers.compactMap({$0.tkLayer(for:map)}))
             return TKLayer(name: groupLayer.name, visible: groupLayer.visible, opacity: groupLayer.opacity, position: groupLayer.location, kind: .group(group))
 
         } else if let imageLayer = self as? TMXImageLayer {

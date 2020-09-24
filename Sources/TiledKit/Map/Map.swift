@@ -33,6 +33,13 @@ public struct Map : TKLayerContainer{
         return PixelSize(width: tileSize.width * mapSize.width, height: tileSize.height * mapSize.height)
     }
     
+    /// The orientation of the map
+    public var    orientation      : Orientation
+
+    /// The rendering order the map was designed in
+    public var    renderingOrder   : RenderingOrder
+
+    
     /// The various layers in the map
     public var    layers          = [TKLayer]()
     
