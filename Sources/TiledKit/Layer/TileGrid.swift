@@ -12,16 +12,6 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-#warning("Rename to Layer when old class out the way")
-
-public struct TKLayer  {
-    public enum Kind {
-        case tile(TileGrid), objects([TKObject]), group(Group), image(TKImage)
-    }
+public struct TileGrid {
     
-    let name    : String
-    let visible : Bool
-    let opacity : Double
-    let position: Location
-    let kind    : Kind
 }

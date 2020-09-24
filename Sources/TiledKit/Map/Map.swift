@@ -18,21 +18,22 @@ enum MapError : Error {
     case unknownMapType(String)
 }
 
-public struct Map {
+public struct Map : TKLayerContainer{
     /// The size of the map in tiles
-    let    mapSize          : TileSize
+    public let    mapSize          : TileSize
     
     /// The size of a tile in pixels
-    let    tileSize         : PixelSize
+    public let    tileSize         : PixelSize
     
     /// Properties of the map
-    var    properties       = Properties()
+    public var    properties       = Properties()
     
     /// The size of the map in pixels
-    var    pixelSize        : PixelSize {
+    public var    pixelSize        : PixelSize {
         return PixelSize(width: tileSize.width * mapSize.width, height: tileSize.height * mapSize.height)
     }
     
     /// The various layers in the map
-    var    layers          = [TKLayer]()
+    public var    layers          = [TKLayer]()
+    
 }

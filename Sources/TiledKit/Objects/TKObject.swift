@@ -12,32 +12,8 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-public typealias TilePosition = Point<Int>
-public typealias TileSize  = Dimension<Int>
+#warning("Rename when old API out the way")
 
-public typealias PixelPoint = Point<Int>
-public typealias PixelSize  = Dimension<Int>
-
-#warning("Rename this to Position when it's available")
-public typealias Location = Point<Double>
-public typealias Size = Dimension<Double>
-
-public struct Point<N:Numeric>{
-    var x : N
-    var y : N
+public struct TKObject {
     
-    public init(x:N, y:N){
-        self.x = x
-        self.y = y
-    }
-}
-
-public struct Dimension<N:Numeric>{
-    var width : N
-    var height : N
-    
-    public init(width:N, height:N){
-        self.width = width
-        self.height = height
-    }
 }

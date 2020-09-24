@@ -22,15 +22,19 @@ extension XMLLayer {
     #warning("Does not produce specialised layers yet")
     var tkLayer : TKLayer? {
         if let tileLayer = self as? TMXTileLayer {
-            return TKLayer(name: tileLayer.name, visible: tileLayer.visible, opacity: tileLayer.opacity, position: tileLayer.location)
+            let grid = TileGrid()
+            return TKLayer(name: tileLayer.name, visible: tileLayer.visible, opacity: tileLayer.opacity, position: tileLayer.location, kind: .tile(grid))
         } else if let objectLayer = self as? XMLObjectLayer {
-            return TKLayer(name: objectLayer.name, visible: objectLayer.visible, opacity: objectLayer.opacity, position: objectLayer.location)
+            let objects = [TKObject]()
+            return TKLayer(name: objectLayer.name, visible: objectLayer.visible, opacity: objectLayer.opacity, position: objectLayer.location, kind: .objects(objects))
 
         } else if let groupLayer = self as? TMXGroupLayer {
-            return TKLayer(name: groupLayer.name, visible: groupLayer.visible, opacity: groupLayer.opacity, position: groupLayer.location)
+            let group = Group()
+            return TKLayer(name: groupLayer.name, visible: groupLayer.visible, opacity: groupLayer.opacity, position: groupLayer.location, kind: .group(group))
 
         } else if let imageLayer = self as? TMXImageLayer {
-            return TKLayer(name: imageLayer.name, visible: imageLayer.visible, opacity: imageLayer.opacity, position: imageLayer.location)
+            let image = TKImage()
+            return TKLayer(name: imageLayer.name, visible: imageLayer.visible, opacity: imageLayer.opacity, position: imageLayer.location, kind: .image(image))
         }
         
         return nil
