@@ -15,5 +15,20 @@
 #warning("Rename when old API out the way")
 
 public struct TKObject {
+    public enum Kind {
+        case point,
+             rectangle(Size, rotation:Double),
+             elipse(Size, rotation:Double),
+             tile(TileGID, size:Size, rotation:Double),
+             text(String, size:Size, rotation:Double, style:TextStyle),
+             polygon(Path, rotation:Double),
+             polyline(Path, rotation:Double)
+    }
     
+    public let id      : Int
+    public let name    : String
+    public let visible : Bool
+    public let position: Location
+    public let properities : Properties
+    public let kind    : Kind
 }

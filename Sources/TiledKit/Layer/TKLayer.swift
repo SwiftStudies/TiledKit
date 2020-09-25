@@ -19,9 +19,19 @@ public struct TKLayer  {
         case tile(TileGrid), objects([TKObject]), group(Group), image(TKImage)
     }
     
-    let name    : String
-    let visible : Bool
-    let opacity : Double
-    let position: Location
-    let kind    : Kind
+    public let name    : String
+    public let visible : Bool
+    public let opacity : Double
+    public let position: Location
+    public let kind    : Kind
+    public let properties : Properties
+    
+    public var objects : [TKObject] {
+        switch kind {
+        case .objects(let objects):
+            return objects
+        default:
+            return [TKObject]()
+        }
+    }
 }

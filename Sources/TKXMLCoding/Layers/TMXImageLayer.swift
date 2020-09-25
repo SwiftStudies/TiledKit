@@ -19,6 +19,7 @@ public struct TMXImageLayer : XMLLayer {
     public var y: Double
     public var visible: Bool
     public var opacity : Double
+    public var properties: XMLProperties
 
     private let image : XMLImageElement
     
@@ -43,6 +44,7 @@ public struct TMXImageLayer : XMLLayer {
         y = commonAttributes.offsety ?? 0
         visible = commonAttributes.visible ?? true
         opacity = commonAttributes.opacity ?? 1
+        properties = try XMLProperties.decode(from: decoder)
 
         image = try decoder.container(keyedBy: CodingKeys.self).decode(XMLImageElement.self, forKey: .image)
     }

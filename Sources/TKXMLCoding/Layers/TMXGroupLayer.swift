@@ -19,6 +19,7 @@ public struct TMXGroupLayer : XMLLayer {
     public var y: Double
     public var visible: Bool
     public var opacity : Double
+    public var properties: XMLProperties
 
     public let layers : [XMLLayer]
     
@@ -31,8 +32,10 @@ public struct TMXGroupLayer : XMLLayer {
         y = commonAttributes.offsety ?? 0
         visible = commonAttributes.visible ?? true
         opacity = commonAttributes.opacity ?? 1
+        properties = try XMLProperties.decode(from: decoder)
 
         layers = try XMLLayerContainer.decodeLayers(from: decoder)
+        
     }
 
     public func encode(to encoder: Encoder) throws {

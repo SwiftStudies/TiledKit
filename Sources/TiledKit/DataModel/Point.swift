@@ -21,6 +21,7 @@ public typealias PixelSize  = Dimension<Int>
 #warning("Rename this to Position when it's available")
 public typealias Location = Point<Double>
 public typealias Size = Dimension<Double>
+public typealias Path = Array<Location>
 
 public struct Point<N:Numeric> : Equatable{
     var x : N

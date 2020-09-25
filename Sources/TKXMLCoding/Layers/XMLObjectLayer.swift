@@ -19,6 +19,7 @@ public struct XMLObjectLayer : XMLLayer {
     public let y: Double
     public let visible : Bool
     public var opacity : Double
+    public var properties: XMLProperties
 
     private let object : [XMLObject]
     
@@ -35,7 +36,8 @@ public struct XMLObjectLayer : XMLLayer {
         y = commonAttributes.offsety ?? 0
         visible = commonAttributes.visible ?? true
         opacity = commonAttributes.opacity ?? 1
-        
+        properties = try XMLProperties.decode(from: decoder)
+
         object = try decoder.container(keyedBy: CodingKeys.self).decode([XMLObject].self, forKey: .object)
     }
 }

@@ -12,31 +12,17 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import Foundation
-
-public protocol XMLLayer : Codable {
-    var id : Int { get }
-    var name : String { get }
-    var x : Double {get}
-    var y : Double {get}
-    var visible: Bool {get}
-    var opacity : Double {get}
-    var properties : XMLProperties {get}
-}
-
-struct XMLLayerCommon : Codable{
-    let id: Int
-    let _name : String?
-    var name : String {
-        return _name ?? ""
+public extension Array where Element == TKObject {
+    subscript(id objectId:Int) -> TKObject? {
+        for object in self {
+            if object.id == objectId {
+                return object
+            }
+        }
+        return nil
     }
-    let offsetx : Double?
-    let offsety : Double?
-    let visible : Bool?
-    let opacity : Double?
-        
-    enum CodingKeys : String, CodingKey {
-        case id, _name="name", offsetx, offsety, visible, opacity
+    
+    subscript(name objectName:String) -> [TKObject] {
+        return filter({$0.name == objectName})
     }
 }
-

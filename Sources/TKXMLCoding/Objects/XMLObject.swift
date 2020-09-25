@@ -26,11 +26,11 @@ public struct XMLObject : Codable{
     public let type : ObjectType
 
     enum CodingKeys : String, CodingKey {
-        case id, name, x, y, visible, width, height, point, elipse, polygon, polyline, text, tile = "gid", properties
+        case id, name, x, y, visible, width, height, point, ellipse, polygon, polyline, text, tile = "gid", properties, rotation
     }
     
     public enum ObjectType {
-        case point, tile(UInt32, size: XMLDimension), rectangle(XMLDimension), elipse(XMLDimension), polyline(XMLPologonal), polygon(XMLPologonal), text(XMLText, size: XMLDimension)
+        case point, tile(UInt32, size: XMLDimension, rotation:Double), rectangle(XMLDimension, rotation:Double), elipse(XMLDimension, rotation:Double), polyline(XMLPologonal, rotation:Double), polygon(XMLPologonal, rotation:Double), text(XMLText, size: XMLDimension, rotation:Double)
     }
     
     public init(from decoder: Decoder) throws {
@@ -43,25 +43,27 @@ public struct XMLObject : Codable{
         visible = try container.decodeIfPresent(Bool.self, forKey: .visible) ?? true
         properties = try XMLProperties.decode(from: decoder)
         
+        let rotation = try container.decodeIfPresent(Double.self, forKey: .rotation) ?? 0
+        
         if container.contains(.point){
             type = .point
-        } else if container.contains(.elipse){
-            type = .elipse(try XMLDimension.decode(from: decoder))
+        } else if container.contains(.ellipse){
+            type = .elipse(try XMLDimension.decode(from: decoder), rotation: rotation)
         } else if container.contains(.polygon) {
-            type = .polygon(try container.decode(XMLPologonal.self, forKey: .polygon))
+            type = .polygon(try container.decode(XMLPologonal.self, forKey: .polygon), rotation: rotation)
         } else if container.contains(.polyline){
-            type = .polyline(try container.decode(XMLPologonal.self, forKey: .polyline))
+            type = .polyline(try container.decode(XMLPologonal.self, forKey: .polyline), rotation: rotation)
         } else if container.contains(.tile){
             type = .tile(
                 try container.decode(UInt32.self, forKey: .tile),
-                size:try XMLDimension.decode(from: decoder))
+                size:try XMLDimension.decode(from: decoder), rotation: rotation)
 
         } else if container.contains(.text){
             type = .text(
                 try container.decode(XMLText.self, forKey: .text),
-                size: try XMLDimension.decode(from: decoder))
+                size: try XMLDimension.decode(from: decoder), rotation: rotation)
         } else {
-            type = .rectangle(try XMLDimension.decode(from: decoder))
+            type = .rectangle(try XMLDimension.decode(from: decoder), rotation:rotation)
         }
     }
     

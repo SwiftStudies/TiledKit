@@ -23,7 +23,7 @@ public struct XMLPologonal : Codable {
         case _points = "points"
     }
     
-    var points : XMLPoints {
+    public var points : XMLPoints {
         return _points.split(separator: " ").map(){
             let xy = $0.split(separator: ",")
             

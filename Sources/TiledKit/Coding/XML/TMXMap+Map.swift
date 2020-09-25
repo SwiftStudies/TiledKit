@@ -35,11 +35,7 @@ extension TMXMap {
         )
         
         // Convert properties on the map
-        for property in tmxMap.properties.properties {
-            if let value = property.propertyValue {
-                map.properties[property.name] = value
-            }
-        }
+        map.properties = tmxMap.properties.interpret(for: map, in: project)
         
         // Load tile sets
         #warning("Not implemented")
