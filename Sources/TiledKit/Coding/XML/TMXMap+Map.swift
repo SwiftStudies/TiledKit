@@ -33,7 +33,7 @@ extension TMXMap {
         )
         
         // Convert properties on the map
-        map.properties = tmxMap.properties.interpret(for: map, in: project)
+        map.properties = tmxMap.properties.interpret(baseUrl: map.url, in: project)
         
         // Load tile sets
         for tileSetReference in tmxMap.tileSetReferences {

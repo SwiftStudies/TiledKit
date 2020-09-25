@@ -16,7 +16,7 @@ import TKXMLCoding
 import Foundation
 
 extension XMLProperty {
-    fileprivate func propertyValue(inContextOf map:Map, and project:Project)->PropertyValue? {
+    fileprivate func propertyValue(baseUrl:URL?, and project:Project)->PropertyValue? {
         guard let type = type else {
             return .string(value)
         }
@@ -30,7 +30,7 @@ extension XMLProperty {
         case .float:
             return .double(Double(value) ?? 0)
         case .file:
-            return .file(url: project.url(for: URL(fileURLWithPath: value), relativeTo: map.url) ?? URL(fileURLWithPath: value))
+            return .file(url: project.url(for: URL(fileURLWithPath: value), relativeTo: baseUrl) ?? URL(fileURLWithPath: value))
         case .color:
             return .color(Color(from: value))
         case .object:
@@ -45,10 +45,10 @@ extension XMLProperty {
 
 extension XMLProperties {
     #warning("This should be done AFTER everything else has been loaded so that files and objects can be fully resolved")
-    func interpret(for map:Map, in project:Project) -> Properties{
+    func interpret(baseUrl:URL?, in project:Project) -> Properties{
         var properties = Properties()
         for property in self.properties {
-            properties[property.name] = property.propertyValue(inContextOf: map, and: project)
+            properties[property.name] = property.propertyValue(baseUrl: baseUrl, and: project)
         }
         return properties
     }

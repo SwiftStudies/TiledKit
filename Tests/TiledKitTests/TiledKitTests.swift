@@ -13,14 +13,10 @@ final class TiledKitTests: XCTestCase {
     
     func testSingleImageTileSet(){
         do {
-            guard let url = Bundle.module.url(forResource: "SingleImageAutoTransparency", withExtension: "tsx", subdirectory: "Tilesets") else {
-                XCTFail("Could not find TileSet in bundle")
-                return
-            }
+            let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "SingleImageAutoTransparency", in: "Tilesets", of: .tsx)!)
             
-            let tileSet = try TileSet(from: url)
-            XCTAssertEqual(tileSet.tileWidth, 16)
-            XCTAssertEqual(tileSet.tileHeight, 16)
+            XCTAssertEqual(tileSet.tileSize.width, 16)
+            XCTAssertEqual(tileSet.tileSize.width, 16)
             XCTAssertEqual(tileSet.tiles.count, 4)
             XCTAssertEqual(tileSet.properties.count, 1)
             XCTAssertEqual(tileSet.properties["filteringMode"], .string("nearest"))
@@ -31,14 +27,10 @@ final class TiledKitTests: XCTestCase {
     
     func testSingleImageTileSetWithOptionals(){
         do {
-            guard let url = Bundle.module.url(forResource: "SingleImageMarginsAndSpacing", withExtension: "tsx", subdirectory: "Tilesets") else {
-                XCTFail("Could not find TileSet in bundle")
-                return
-            }
+            let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "SingleImageMarginsAndSpacing", in: "Tilesets", of: .tsx)!)
             
-            let tileSet = try TileSet(from: url)
-            XCTAssertEqual(tileSet.tileWidth, 12)
-            XCTAssertEqual(tileSet.tileHeight, 12)
+            XCTAssertEqual(tileSet.tileSize.width, 12)
+            XCTAssertEqual(tileSet.tileSize.height, 12)
             XCTAssertEqual(tileSet.tiles.count, 4)
             switch tileSet.type{
             case .sheet(let tileSheet):
@@ -53,14 +45,11 @@ final class TiledKitTests: XCTestCase {
 
     func testMultiImageTileSetWithSingleTile(){
         do {
-            guard let url = Bundle.module.url(forResource: "SeparateSingleImage", withExtension: "tsx", subdirectory: "Tilesets") else {
-                XCTFail("Could not find TileSet in bundle")
-                return
-            }
+            let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "SeparateSingleImage", in: "Tilesets", of: .tsx)!)
+
             
-            let tileSet = try TileSet(from: url)
-            XCTAssertEqual(tileSet.tileWidth, 16)
-            XCTAssertEqual(tileSet.tileHeight, 16)
+            XCTAssertEqual(tileSet.tileSize.width, 16)
+            XCTAssertEqual(tileSet.tileSize.height, 16)
             XCTAssertEqual(tileSet.tiles.count, 1)
         } catch {
             XCTFail("Error thrown \(error)")
@@ -69,14 +58,12 @@ final class TiledKitTests: XCTestCase {
     
     func testMultiImageTileSet(){
         do {
-            guard let url = Bundle.module.url(forResource: "SeparateMultipleImages", withExtension: "tsx", subdirectory: "Tilesets") else {
-                XCTFail("Could not find TileSet in bundle")
-                return
-            }
+            let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "SeparateMultipleImages", in: "Tilesets", of: .tsx)!)
+
             
-            let tileSet = try TileSet(from: url)
-            XCTAssertEqual(tileSet.tileWidth, 16)
-            XCTAssertEqual(tileSet.tileHeight, 16)
+            
+            XCTAssertEqual(tileSet.tileSize.width, 16)
+            XCTAssertEqual(tileSet.tileSize.height, 16)
             XCTAssertEqual(tileSet.tiles.count, 2)
         } catch {
             XCTFail("Error thrown \(error)")
@@ -340,7 +327,7 @@ final class TiledKitTests: XCTestCase {
 
     func testMultipleProperties(){
         do {
-            let tileSet = try TileSet(from: Bundle.module.url(forResource: "Animation", withExtension: "tsx", subdirectory: "Tilesets")!)
+            let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
 
 
             //Confirm loading multiline properties works OK
@@ -354,7 +341,8 @@ final class TiledKitTests: XCTestCase {
     
     func testTileSetCollisionObjects(){
         do {
-            let tileSet = try TileSet(from: Bundle.module.url(forResource: "Animation", withExtension: "tsx", subdirectory: "Tilesets")!)
+            let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
+
             
             XCTAssertEqual((tileSet.tiles[0]?.objects?.objects.count) ?? 0, 2)
             XCTAssertEqual((tileSet.tiles[0]?.objects?.objects[0].x) ?? 0, 7.92176)
@@ -366,7 +354,8 @@ final class TiledKitTests: XCTestCase {
     
     func testTileSetAnimationFrames(){
         do {
-            let tileSet = try TileSet(from: Bundle.module.url(forResource: "Animation", withExtension: "tsx", subdirectory: "Tilesets")!)
+            let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
+
             
             guard let tile = tileSet.tiles[1] else {
                 XCTFail("No tile with id 1")

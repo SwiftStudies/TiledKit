@@ -13,6 +13,7 @@
 //    limitations under the License.
 
 import XMLCoder
+import Foundation
 
 public struct TSXTileSet : Codable {
     public let version : String
@@ -34,6 +35,26 @@ public struct TSXTileSet : Codable {
         let decoder = XMLDecoder()
                 
         return decoder
+    }
+    
+    public init(from url:URL) throws {
+        let data = try Data(contentsOf: url)
+        let loaded = try TSXTileSet.decoder.decode(TSXTileSet.self, from: data)
+        
+        name = loaded.name
+        version = loaded.version
+        tiledVersion = loaded.tiledVersion
+        
+        tileWidth = loaded.tileWidth
+        tileHeight = loaded.tileHeight
+        tileCount = loaded.tileCount
+        columns = loaded.columns
+        
+        image = loaded.image
+        
+        properties = loaded.properties
+        
+        tileSpecs = loaded.tileSpecs
     }
     
     public init(from decoder: Decoder) throws {

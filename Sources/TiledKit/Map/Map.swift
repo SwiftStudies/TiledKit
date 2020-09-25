@@ -13,12 +13,14 @@
 //    limitations under the License.
 
 import Foundation
+import TKXMLCoding
 
 enum MapError : Error {
     case unknownMapType(String)
 }
 
 public struct Map : TKLayerContainer{
+    /// The url the map was loaded from (if any)
     internal let  url              : URL?
     
     /// The size of the map in tiles
@@ -41,8 +43,9 @@ public struct Map : TKLayerContainer{
     /// The rendering order the map was designed in
     public var    renderingOrder   : RenderingOrder
 
-    
     /// The various layers in the map
     public var    layers          = [TKLayer]()
     
+    /// The tilesets used by the project
+    public var    tileSets  = [TKTileSetReference]()    
 }

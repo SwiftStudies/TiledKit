@@ -12,17 +12,20 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import TKXMLCoding
-import Foundation
-
-extension TSXTileSet {
-    static func build(in project:Project, from url:URL) throws -> TKTileSet {
-        let tileSetXML = try TSXTileSet(from: url)
-        
-        let tileSet = TKTileSet(name: tileSetXML.name, tileSize: PixelSize(width: tileSetXML.tileWidth, height: tileSetXML.tileHeight), properties: tileSetXML.properties.interpret(baseUrl: url, in: project))
-        
-        #warning("Not actually generating tiles!")
-        
-        return tileSet
+public class TKTileSet {
+    public let name : String
+    public let tileSize : PixelSize
+    public var tiles = [Tile]()
+    public let properties : Properties
+    
+    public init(name:String, tileSize : PixelSize, properties:Properties){
+        self.name = name
+        self.tileSize = tileSize
+        self.properties = properties
     }
+}
+
+public struct TKTileSetReference {
+    public let firstGid : UInt32
+    public let tileSet : TKTileSet
 }
