@@ -96,34 +96,51 @@ public class TileObject : RectangleObject{
     }
 }
 
-public class TextObject : RectangleObject{
-    public struct TextStyle {
-        public let wrap : Bool
-        public let fontFamily : String?
-        public let pixelSize : Int
-        public let color : Color
-        public let verticalAlignment : VerticalTextAlignment
-        public let horizontalAlignment : HorizontalTextAlignment
-        public let bold : Bool
-        public let italic : Bool
-        public let underline : Bool
-        public let strikeout : Bool
-        public let kerning : Bool
-        
-        internal init(from definition:TextDefinition){
-            self.wrap = definition.wrap
-            self.fontFamily = definition.fontFamily
-            self.pixelSize = definition.pixelSize
-            self.color = definition.color
-            self.verticalAlignment = definition.verticalAlignment
-            self.horizontalAlignment = definition.horizontalAlignment
-            self.bold = definition.bold
-            self.italic = definition.italic
-            self.underline = definition.underline
-            self.strikeout = definition.strikeout
-            self.kerning = definition.kerning
-        }
+public struct TextStyle {
+    public let wrap : Bool
+    public let fontFamily : String?
+    public let pixelSize : Int
+    public let color : Color
+    public let verticalAlignment : VerticalTextAlignment
+    public let horizontalAlignment : HorizontalTextAlignment
+    public let bold : Bool
+    public let italic : Bool
+    public let underline : Bool
+    public let strikeout : Bool
+    public let kerning : Bool
+    
+    internal init(from definition:TextDefinition){
+        self.wrap = definition.wrap
+        self.fontFamily = definition.fontFamily
+        self.pixelSize = definition.pixelSize
+        self.color = definition.color
+        self.verticalAlignment = definition.verticalAlignment
+        self.horizontalAlignment = definition.horizontalAlignment
+        self.bold = definition.bold
+        self.italic = definition.italic
+        self.underline = definition.underline
+        self.strikeout = definition.strikeout
+        self.kerning = definition.kerning
     }
+    
+    public init(fontFamily:String? = nil, size:Int = 16, color:Color = Color(r: 255, g: 255, b: 255), verticalAlignment: VerticalTextAlignment = .top, horizontalAlignment:HorizontalTextAlignment = .left, bold: Bool = false, italic: Bool = false, underline:Bool = false, strikeout:Bool = false, kerning:Bool = true,  wrap:Bool = true){
+        self.wrap = wrap
+        self.fontFamily = fontFamily
+        self.pixelSize = size
+        self.color = color
+        self.verticalAlignment = verticalAlignment
+        self.horizontalAlignment = horizontalAlignment
+        self.bold = bold
+        self.italic = italic
+        self.underline = underline
+        self.strikeout = strikeout
+        self.kerning = kerning
+
+    }
+}
+
+public class TextObject : RectangleObject{
+
     
     public let string : String
     public let style : TextStyle
