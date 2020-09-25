@@ -17,12 +17,15 @@ import TKXMLCoding
 
 enum ProjectError : Error {
     case fileDoesNotExist(String)
+    case noResourceLoaderSpecified
 }
 
 public class Project {
     let fileContainer   : FileContainer
     let folders         : [String]
     let objectTypes     : [String:String]
+    var resourceCache   = ResourceCache()
+    
 
     public static let `default` : Project = Project(at: Bundle.main.bundleURL)
 
@@ -30,9 +33,11 @@ public class Project {
         fileContainer = FileContainer.bundle(bundle)
         self.folders = folders ?? [String]()
         objectTypes = types ?? [String:String]()
+        
+        resourceCache.registerLoader(MapLoader(project: self), forType: Map.self)
+        resourceCache.registerLoader(TileSetLoader(project: self), forType: TKTileSet.self)
     }
 
-    
     public init(at url:URL, with folders:[String]? = nil, and types:[String:String]? = nil){
         fileContainer = FileContainer.folder(url)
         self.folders = folders ?? [String]()
@@ -101,12 +106,20 @@ public class Project {
         return nil
     }
     
+    public func retrieve<R>(asType:R.Type, from url:URL, relativeTo baseUrl:URL? = nil) throws ->R{
+        guard let resolvedUrl = self.url(for: url, relativeTo: baseUrl) else {
+            throw ProjectError.fileDoesNotExist(url.standardized.absoluteString)
+        }
+        return try resourceCache.retrieve(as: R.self, from: resolvedUrl)
+
+    }
+    
     public func get(map fileName:String, in subDirectory:String? = nil) throws -> Map {
         guard let url = url(for: fileName, in: subDirectory, of: .tmx) else {
             throw ProjectError.fileDoesNotExist("\(fileContainer)\(subDirectory ?? "")\\(fileName)")
         }
         
-        return try TMXMap.build(in: self, from: url)
+        return try resourceCache.retrieve(as: Map.self, from: url)
     }
 }
 

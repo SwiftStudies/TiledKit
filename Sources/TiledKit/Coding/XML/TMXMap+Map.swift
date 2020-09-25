@@ -17,9 +17,7 @@ import Foundation
 
 extension TMXMap {
     static func build(in project:Project, from url:URL) throws -> Map {
-        let baseUrl = url.deletingLastPathComponent()
-        let file    = url.lastPathComponent
-        guard let type = FileTypes(rawValue: url.pathExtension) else {
+        guard let _ = FileTypes(rawValue: url.pathExtension) else {
             throw MapError.unknownMapType(url.pathExtension)
         }
 
@@ -38,7 +36,11 @@ extension TMXMap {
         map.properties = tmxMap.properties.interpret(for: map, in: project)
         
         // Load tile sets
-        #warning("Not implemented")
+        for tileSetReference in tmxMap.tileSetReferences {
+            let tileSet = try project.retrieve(asType: TKTileSet.self, from: URL(fileURLWithPath: tileSetReference.path), relativeTo: url)
+            
+            map.tileSets.append(TKTileSetReference(firstGid: UInt32(tileSetReference.firstGid), tileSet: tileSet))
+        }
         
         // Build layers
         map.layers.append(contentsOf: tmxMap.layers.compactMap({$0.tkLayer(for: map, in: project)}))
