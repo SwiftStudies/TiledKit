@@ -17,6 +17,7 @@ public typealias TileSize  = Dimension<Int>
 
 public typealias PixelPoint = Point<Int>
 public typealias PixelSize  = Dimension<Int>
+public typealias PixelBounds = Rectangle<Int>
 
 #warning("Rename this to Position when it's available")
 public typealias Location = Point<Double>
@@ -40,5 +41,20 @@ public struct Dimension<N:Numeric> : Equatable{
     public init(width:N, height:N){
         self.width = width
         self.height = height
+    }
+}
+
+public struct Rectangle<N:Numeric> : Equatable{
+    var origin : Point<N>
+    var size   : Dimension<N>
+    
+    public init(x:N, y:N, width:N, height:N){
+        origin = Point(x: x, y: y)
+        size = Dimension(width: width, height: height)
+    }
+    
+    public init(origin:Point<N>, size:Dimension<N>){
+        self.origin = origin
+        self.size = size
     }
 }
