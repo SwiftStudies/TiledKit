@@ -17,7 +17,7 @@
     <a title="Kind Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../../index.html">TiledKit Docs</a> (16% documented)</p>
+        <p><a href="../../index.html">TiledKit Docs</a> (71% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../../search.json">
@@ -182,10 +182,10 @@
                 <a href="../../Typealiases.html#/s:8TiledKit4Sizea">Size</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Typealiases.html#/s:8TiledKit12TilePositiona">TilePosition</a>
+                <a href="../../Typealiases.html#/s:8TiledKit16TileGridPositiona">TileGridPosition</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Typealiases.html#/s:8TiledKit8TileSizea">TileSize</a>
+                <a href="../../Typealiases.html#/s:8TiledKit12TileGridSizea">TileGridSize</a>
               </li>
             </ul>
           </li>
@@ -202,7 +202,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>The kind of object, together with attached data specific to that kind of object</p>
 
           </section>
           <section class="section task-group-section">
@@ -221,7 +221,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The object is a single point (use the <code><a href="../../Structs/Object.html#/s:8TiledKit6ObjectV8positionAA5PointVySdGvp">position</a></code> property for its coordinate</p>
 
                       </div>
                       <div class="declaration">
@@ -239,8 +239,8 @@
                   <div>
                     <code>
                     <a name="/s:8TiledKit6ObjectV4KindO9rectangleyAeA9DimensionVySdG_SdtcAEmF"></a>
-                    <a name="//apple_ref/swift/Element/rectangle(_:rotation:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit6ObjectV4KindO9rectangleyAeA9DimensionVySdG_SdtcAEmF">rectangle(_:<wbr>rotation:<wbr>)</a>
+                    <a name="//apple_ref/swift/Element/rectangle(_:angle:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6ObjectV4KindO9rectangleyAeA9DimensionVySdG_SdtcAEmF">rectangle(_:<wbr>angle:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -248,14 +248,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A rectangle (with origin at <code><a href="../../Structs/Object.html#/s:8TiledKit6ObjectV8positionAA5PointVySdGvp">position</a></code>) of the specied <code><a href="../../Typealiases.html#/s:8TiledKit4Sizea">Size</a></code> and <code>angle</code> (in degrees)</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">rectangle</span><span class="p">(</span><span class="kt"><a href="../../Typealiases.html#/s:8TiledKit4Sizea">Size</a></span><span class="p">,</span> <span class="nv">rotation</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">rectangle</span><span class="p">(</span><span class="kt"><a href="../../Typealiases.html#/s:8TiledKit4Sizea">Size</a></span><span class="p">,</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -265,9 +265,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit6ObjectV4KindO6elipseyAeA9DimensionVySdG_SdtcAEmF"></a>
-                    <a name="//apple_ref/swift/Element/elipse(_:rotation:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit6ObjectV4KindO6elipseyAeA9DimensionVySdG_SdtcAEmF">elipse(_:<wbr>rotation:<wbr>)</a>
+                    <a name="/s:8TiledKit6ObjectV4KindO7ellipseyAeA9DimensionVySdG_SdtcAEmF"></a>
+                    <a name="//apple_ref/swift/Element/ellipse(_:angle:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6ObjectV4KindO7ellipseyAeA9DimensionVySdG_SdtcAEmF">ellipse(_:<wbr>angle:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -275,14 +275,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>An ellipse  (with origin at <code><a href="../../Structs/Object.html#/s:8TiledKit6ObjectV8positionAA5PointVySdGvp">position</a></code>) of the specied <code><a href="../../Typealiases.html#/s:8TiledKit4Sizea">Size</a></code> and <code>angle</code> (in degrees)</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">elipse</span><span class="p">(</span><span class="kt"><a href="../../Typealiases.html#/s:8TiledKit4Sizea">Size</a></span><span class="p">,</span> <span class="nv">rotation</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">ellipse</span><span class="p">(</span><span class="kt"><a href="../../Typealiases.html#/s:8TiledKit4Sizea">Size</a></span><span class="p">,</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -293,8 +293,8 @@
                   <div>
                     <code>
                     <a name="/s:8TiledKit6ObjectV4KindO4tileyAeA7TileGIDV_AA9DimensionVySdGSdtcAEmF"></a>
-                    <a name="//apple_ref/swift/Element/tile(_:size:rotation:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit6ObjectV4KindO4tileyAeA7TileGIDV_AA9DimensionVySdGSdtcAEmF">tile(_:<wbr>size:<wbr>rotation:<wbr>)</a>
+                    <a name="//apple_ref/swift/Element/tile(_:size:angle:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6ObjectV4KindO4tileyAeA7TileGIDV_AA9DimensionVySdGSdtcAEmF">tile(_:<wbr>size:<wbr>angle:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -302,14 +302,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A reference to a <code><a href="../../Structs/Map.html">Map</a></code> <code><a href="../../Classes/Tile.html">Tile</a></code> (you must used the <code><a href="../../Structs/Map.html">Map</a></code> to retreive the correct tile) and a specied <code>angle</code> (in degrees) to draw it at</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">tile</span><span class="p">(</span><span class="kt"><a href="../../Structs/TileGID.html">TileGID</a></span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="kt"><a href="../../Typealiases.html#/s:8TiledKit4Sizea">Size</a></span><span class="p">,</span> <span class="nv">rotation</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">tile</span><span class="p">(</span><span class="kt"><a href="../../Structs/TileGID.html">TileGID</a></span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="kt"><a href="../../Typealiases.html#/s:8TiledKit4Sizea">Size</a></span><span class="p">,</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -320,8 +320,8 @@
                   <div>
                     <code>
                     <a name="/s:8TiledKit6ObjectV4KindO4textyAESS_AA9DimensionVySdGSdAA9TextStyleVtcAEmF"></a>
-                    <a name="//apple_ref/swift/Element/text(_:size:rotation:style:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit6ObjectV4KindO4textyAESS_AA9DimensionVySdGSdAA9TextStyleVtcAEmF">text(_:<wbr>size:<wbr>rotation:<wbr>style:<wbr>)</a>
+                    <a name="//apple_ref/swift/Element/text(_:size:angle:style:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6ObjectV4KindO4textyAESS_AA9DimensionVySdGSdAA9TextStyleVtcAEmF">text(_:<wbr>size:<wbr>angle:<wbr>style:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -329,14 +329,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>a <code>String</code> to render within the specied <code><a href="../../Typealiases.html#/s:8TiledKit4Sizea">Size</a></code>, at the specified <code>angle</code> (in degrees). The <code><a href="../../Structs/TextStyle.html">TextStyle</a></code> defines the <code>style</code> that should be used to
+render the <code>String</code></p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">text</span><span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="kt"><a href="../../Typealiases.html#/s:8TiledKit4Sizea">Size</a></span><span class="p">,</span> <span class="nv">rotation</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="nv">style</span><span class="p">:</span> <span class="kt"><a href="../../Structs/TextStyle.html">TextStyle</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">text</span><span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="kt"><a href="../../Typealiases.html#/s:8TiledKit4Sizea">Size</a></span><span class="p">,</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="nv">style</span><span class="p">:</span> <span class="kt"><a href="../../Structs/TextStyle.html">TextStyle</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -347,8 +348,8 @@
                   <div>
                     <code>
                     <a name="/s:8TiledKit6ObjectV4KindO7polygonyAESayAA5PointVySdGG_SdtcAEmF"></a>
-                    <a name="//apple_ref/swift/Element/polygon(_:rotation:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit6ObjectV4KindO7polygonyAESayAA5PointVySdGG_SdtcAEmF">polygon(_:<wbr>rotation:<wbr>)</a>
+                    <a name="//apple_ref/swift/Element/polygon(_:angle:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6ObjectV4KindO7polygonyAESayAA5PointVySdGG_SdtcAEmF">polygon(_:<wbr>angle:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -356,14 +357,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A closed polygon  (with origin at <code><a href="../../Structs/Object.html#/s:8TiledKit6ObjectV8positionAA5PointVySdGvp">position</a></code>) with the specied <code><a href="../../Typealiases.html#/s:8TiledKit4Patha">Path</a></code> and <code>angle</code> (in degrees)</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">polygon</span><span class="p">(</span><span class="kt"><a href="../../Typealiases.html#/s:8TiledKit4Patha">Path</a></span><span class="p">,</span> <span class="nv">rotation</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">polygon</span><span class="p">(</span><span class="kt"><a href="../../Typealiases.html#/s:8TiledKit4Patha">Path</a></span><span class="p">,</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -374,8 +375,8 @@
                   <div>
                     <code>
                     <a name="/s:8TiledKit6ObjectV4KindO8polylineyAESayAA5PointVySdGG_SdtcAEmF"></a>
-                    <a name="//apple_ref/swift/Element/polyline(_:rotation:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit6ObjectV4KindO8polylineyAESayAA5PointVySdGG_SdtcAEmF">polyline(_:<wbr>rotation:<wbr>)</a>
+                    <a name="//apple_ref/swift/Element/polyline(_:angle:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6ObjectV4KindO8polylineyAESayAA5PointVySdGG_SdtcAEmF">polyline(_:<wbr>angle:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -383,14 +384,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>An open polygon  (with origin at <code><a href="../../Structs/Object.html#/s:8TiledKit6ObjectV8positionAA5PointVySdGvp">position</a></code>) with the specied <code><a href="../../Typealiases.html#/s:8TiledKit4Patha">Path</a></code> and <code>angle</code> (in degrees)</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">polyline</span><span class="p">(</span><span class="kt"><a href="../../Typealiases.html#/s:8TiledKit4Patha">Path</a></span><span class="p">,</span> <span class="nv">rotation</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">polyline</span><span class="p">(</span><span class="kt"><a href="../../Typealiases.html#/s:8TiledKit4Patha">Path</a></span><span class="p">,</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>

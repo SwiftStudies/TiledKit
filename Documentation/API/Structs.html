@@ -17,7 +17,7 @@
     <a title="Structures  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">TiledKit Docs</a> (16% documented)</p>
+        <p><a href="index.html">TiledKit Docs</a> (71% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="search.json">
@@ -182,10 +182,10 @@
                 <a href="Typealiases.html#/s:8TiledKit4Sizea">Size</a>
               </li>
               <li class="nav-group-task">
-                <a href="Typealiases.html#/s:8TiledKit12TilePositiona">TilePosition</a>
+                <a href="Typealiases.html#/s:8TiledKit16TileGridPositiona">TileGridPosition</a>
               </li>
               <li class="nav-group-task">
-                <a href="Typealiases.html#/s:8TiledKit8TileSizea">TileSize</a>
+                <a href="Typealiases.html#/s:8TiledKit12TileGridSizea">TileGridSize</a>
               </li>
             </ul>
           </li>
@@ -214,7 +214,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Captures colors in a platform independent way for subsequent specialization.</p>
 
                         <a href="Structs/Color.html" class="slightly-smaller">See more</a>
                       </div>
@@ -242,7 +242,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The <code>Point</code> generic captures a single in space.</p>
 
                         <a href="Structs/Point.html" class="slightly-smaller">See more</a>
                       </div>
@@ -270,7 +270,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A generic type that stores a 2D dimenion (with width and height)</p>
 
                         <a href="Structs/Dimension.html" class="slightly-smaller">See more</a>
                       </div>
@@ -298,7 +298,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A generic type that captrues a rectangular region in 2D space with an origin and size</p>
 
                         <a href="Structs/Rectangle.html" class="slightly-smaller">See more</a>
                       </div>
@@ -326,7 +326,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Captures a resolved reference to an image, including its dimensions</p>
 
                         <a href="Structs/ImageReference.html" class="slightly-smaller">See more</a>
                       </div>
@@ -354,7 +354,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A <code>Group</code> represents the collection of <code><a href="Structs/Layer.html">Layer</a></code>s a Tiled Group Layer contains (a <code><a href="Structs/Layer/Kind.html">Layer.Kind</a></code> of <code>.group</code>)</p>
 
                         <a href="Structs/Group.html" class="slightly-smaller">See more</a>
                       </div>
@@ -382,7 +382,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Layers capture the contents of a <code><a href="Structs/Map.html">Map</a></code> can be one of four kinds</p>
+
+<ul>
+<li><strong>Tile</strong> A grid of <code><a href="Classes/Tile.html">Tile</a></code>s</li>
+<li>__ Object__ A collection of <code><a href="Structs/Object.html">Object</a></code>s</li>
+<li><strong>Group</strong> A collection of <code>Layer</code>s enabling hierarchy within the <code><a href="Structs/Map.html">Map</a></code></li>
+<li><strong>Image</strong> An image not in a <code><a href="Classes/TileSet.html">TileSet</a></code></li>
+</ul>
+
+<p>Every layer has a set of common attributes (such as an offest) and can capture user specified properites too.</p>
 
                         <a href="Structs/Layer.html" class="slightly-smaller">See more</a>
                       </div>
@@ -410,7 +419,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Captures if and how a <code><a href="Classes/Tile.html">Tile</a></code> should be rendered</p>
 
                         <a href="Structs/TileFlip.html" class="slightly-smaller">See more</a>
                       </div>
@@ -438,7 +447,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Represents the reference to a specific <code><a href="Classes/Tile.html">Tile</a></code> in a tile <code><a href="Structs/Layer.html">Layer</a></code> for a given <code><a href="Structs/Map.html">Map</a></code>. It captures not only an identifier uniquely identifying the <code><a href="Classes/Tile.html">Tile</a></code> (and the <code><a href="Classes/TileSet.html">TileSet</a></code> it is in) but also if the <code><a href="Classes/Tile.html">Tile</a></code> should be flipped (see <code><a href="Structs/TileFlip.html">TileFlip</a></code>)</p>
 
                         <a href="Structs/TileGID.html" class="slightly-smaller">See more</a>
                       </div>
@@ -466,7 +475,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Represents a two dimensional grid of tiles (such as that in a tile <code><a href="Structs/Layer.html">Layer</a></code></p>
 
                         <a href="Structs/TileGrid.html" class="slightly-smaller">See more</a>
                       </div>
@@ -494,7 +503,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Represents a Tiled map which can be loaded from a Tiled <code>tmx</code> file (other Tiled formats can be supported in the future, such as JSON). It contains the root collection of <code><a href="Structs/Layer.html">Layer</a></code>s as well as carrying the references to the <code><a href="Classes/TileSet.html">TileSet</a></code>s used by the <code>Map</code></p>
 
                         <a href="Structs/Map.html" class="slightly-smaller">See more</a>
                       </div>
@@ -522,7 +531,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Represents a Tiled object (which are contained inside Object <code><a href="Structs/Layer.html">Layer</a></code>s). All objects share some common attributes (e.g. their position inside their containing <code><a href="Structs/Layer.html">Layer</a></code>).</p>
 
                         <a href="Structs/Object.html" class="slightly-smaller">See more</a>
                       </div>
@@ -550,7 +559,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Represents the formating and style of text <code><a href="Structs/Object.html">Object</a></code>s.</p>
 
                         <a href="Structs/TextStyle.html" class="slightly-smaller">See more</a>
                       </div>
@@ -578,7 +587,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Frames are attached to <code><a href="Classes/Tile.html">Tile</a></code>s and reference another <code><a href="Classes/Tile.html">Tile</a></code> within the same Tile Set as well as the duration it that <code><a href="Classes/Tile.html">Tile</a></code> should be displayed
+when shown as part of an animation</p>
 
                         <a href="Structs/Frame.html" class="slightly-smaller">See more</a>
                       </div>

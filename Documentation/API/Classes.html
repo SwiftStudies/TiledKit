@@ -17,7 +17,7 @@
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">TiledKit Docs</a> (16% documented)</p>
+        <p><a href="index.html">TiledKit Docs</a> (71% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="search.json">
@@ -182,10 +182,10 @@
                 <a href="Typealiases.html#/s:8TiledKit4Sizea">Size</a>
               </li>
               <li class="nav-group-task">
-                <a href="Typealiases.html#/s:8TiledKit12TilePositiona">TilePosition</a>
+                <a href="Typealiases.html#/s:8TiledKit16TileGridPositiona">TileGridPosition</a>
               </li>
               <li class="nav-group-task">
-                <a href="Typealiases.html#/s:8TiledKit8TileSizea">TileSize</a>
+                <a href="Typealiases.html#/s:8TiledKit12TileGridSizea">TileGridSize</a>
               </li>
             </ul>
           </li>
@@ -214,7 +214,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Projects are the primary entry point for <code>TiledKit</code>. The project represents the root of all <code><a href="Structs/Map.html">Map</a></code>s and <code><a href="Classes/TileSet.html">TileSet</a></code>s and the resources (such as images) that support them.
+The default <code>Project</code> will use the <code>main</code> Bundle as its root, making it very easy to include in a Swift Package Manager or Xcode module.</p>
+<pre class="highlight swift"><code>    <span class="k">let</span> <span class="nv">myMap</span> <span class="o">=</span> <span class="kt">Project</span><span class="o">.</span><span class="k">default</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"mymap"</span><span class="p">)</span>
+</code></pre>
+
+<p>The above code will retrieve a file named &lsquo;mymap.tmx&rsquo; from the root of the main <code>Bundle</code>. You may create instances of <code>Project</code>s that have a different root (such as an
+actual Tiled project directory, or different <code>Bundle</code>) using the standard constructurs.</p>
+
+<p><code>Project</code>s are critical as they enable the relative processing of any resources referenced in the Tiled files and provide the key entry point for specializing TiledKit for a
+a specific game engine. Specializations only require the registration of a specific <code><a href="Protocols/ResourceLoader.html">ResourceLoader</a></code> for the type of object required by the game engine. See
+ <a href="https://github.com/SwiftStudies/SKTiledKit">SKTiledKit</a> for an example of a specialization.</p>
+
+<p><code>Project</code>s also provide resource caching capabilities, ensuring that the contents of any <code>URL</code> are loaded only once. If you add your own <code><a href="Protocols/ResourceLoader.html">ResourceLoader</a></code> for types
+you can specify that if the created object should be cached or not.</p>
 
                         <a href="Classes/Project.html" class="slightly-smaller">See more</a>
                       </div>
@@ -242,7 +255,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A <code>Tile</code> represents a 2D image that should be rendered when referenced on by an <code><a href="Structs/Object.html">Object</a></code> or <code><a href="Structs/Layer.html">Layer</a></code>.
+It contains a reference to the image, and the portion of that image that should be used to generate the image.</p>
 
                         <a href="Classes/Tile.html" class="slightly-smaller">See more</a>
                       </div>

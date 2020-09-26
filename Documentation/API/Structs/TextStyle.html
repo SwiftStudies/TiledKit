@@ -17,7 +17,7 @@
     <a title="TextStyle Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TiledKit Docs</a> (16% documented)</p>
+        <p><a href="../index.html">TiledKit Docs</a> (71% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -182,10 +182,10 @@
                 <a href="../Typealiases.html#/s:8TiledKit4Sizea">Size</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Typealiases.html#/s:8TiledKit12TilePositiona">TilePosition</a>
+                <a href="../Typealiases.html#/s:8TiledKit16TileGridPositiona">TileGridPosition</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Typealiases.html#/s:8TiledKit8TileSizea">TileSize</a>
+                <a href="../Typealiases.html#/s:8TiledKit12TileGridSizea">TileGridSize</a>
               </li>
             </ul>
           </li>
@@ -202,7 +202,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Represents the formating and style of text <code><a href="../Structs/Object.html">Object</a></code>s.</p>
 
           </section>
           <section class="section task-group-section">
@@ -221,7 +221,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Text should be wrapped inside the bounding rectangle</p>
 
                       </div>
                       <div class="declaration">
@@ -248,7 +248,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The desired font (if any) of the text</p>
 
                       </div>
                       <div class="declaration">
@@ -275,7 +275,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The size in pixels the text should be rendered at</p>
 
                       </div>
                       <div class="declaration">
@@ -302,7 +302,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The color the text should be rendered in</p>
 
                       </div>
                       <div class="declaration">
@@ -329,7 +329,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The vertical alignment of the text within the bounding rectangle</p>
 
                       </div>
                       <div class="declaration">
@@ -356,7 +356,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The horizontal alignement of the text within the bounding rectangle</p>
 
                       </div>
                       <div class="declaration">
@@ -383,7 +383,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Specifies if the text should be rendered in bold</p>
 
                       </div>
                       <div class="declaration">
@@ -410,7 +410,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Specifies if the text should be rendered with italics</p>
 
                       </div>
                       <div class="declaration">
@@ -437,7 +437,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Specifies if the text should be underlined when rendered</p>
 
                       </div>
                       <div class="declaration">
@@ -464,7 +464,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Specifies if the text should be struck out when rendered</p>
 
                       </div>
                       <div class="declaration">
@@ -491,7 +491,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Specifies if kerning should be applied to the rendered text</p>
 
                       </div>
                       <div class="declaration">
@@ -518,7 +518,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a new instance of a <code>TextStyle</code> object</p>
 
                       </div>
                       <div class="declaration">
@@ -528,6 +528,145 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">fontFamily</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span> <span class="nv">color</span><span class="p">:</span> <span class="kt"><a href="../Structs/Color.html">Color</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/Color.html">Color</a></span><span class="p">(</span><span class="nv">r</span><span class="p">:</span> <span class="mi">255</span><span class="p">,</span> <span class="nv">g</span><span class="p">:</span> <span class="mi">255</span><span class="p">,</span> <span class="nv">b</span><span class="p">:</span> <span class="mi">255</span><span class="p">),</span> <span class="nv">verticalAlignment</span><span class="p">:</span> <span class="kt"><a href="../Enums/VerticalTextAlignment.html">VerticalTextAlignment</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">top</span><span class="p">,</span> <span class="nv">horizontalAlignment</span><span class="p">:</span> <span class="kt"><a href="../Enums/HorizontalTextAlignment.html">HorizontalTextAlignment</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="nv">bold</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">italic</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">underline</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">strikeout</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">kerning</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">wrap</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fontFamily</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired font family (can be and defaults to <code>nil</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>size</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired size of the text</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>color</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired color of the text</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>verticalAlignment</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired horizontal alignment of the text inside the text <code><a href="../Structs/Object.html">Object</a></code>s bounding rectangle</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>horizontalAlignment</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired vertical alignment of the text inside the text <code><a href="../Structs/Object.html">Object</a></code>s bounding rectangle</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>bold</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>true</code> if the text should be rendered in bold</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>italic</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>true</code> if the text should be rendered in italics</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>underline</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>true</code> if the text should be underlined</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>strikeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>true</code> if the text should be struck out</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>kerning</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>true</code> if the kerning should be applied during text rendering</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>wrap</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>true</code> if the text should be wrapped within the text <code><a href="../Structs/Object.html">Object</a></code>s bounding rectangle</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>

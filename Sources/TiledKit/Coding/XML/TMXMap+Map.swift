@@ -26,7 +26,7 @@ extension TMXMap {
 
         var map = Map(
             url: url,
-            mapSize: TileSize(width: tmxMap.width, height: tmxMap.height),
+            mapSize: TileGridSize(width: tmxMap.width, height: tmxMap.height),
             tileSize: PixelSize(width: tmxMap.tileWidth, height: tmxMap.tileHeight),
             orientation: Orientation(rawValue: tmxMap.orientation) ?? .orthogonal,
             renderingOrder: RenderingOrder(rawValue: tmxMap.renderOrder) ?? .rightDown

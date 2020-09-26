@@ -17,7 +17,7 @@
     <a title="TileGID Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TiledKit Docs</a> (16% documented)</p>
+        <p><a href="../index.html">TiledKit Docs</a> (71% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -182,10 +182,10 @@
                 <a href="../Typealiases.html#/s:8TiledKit4Sizea">Size</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Typealiases.html#/s:8TiledKit12TilePositiona">TilePosition</a>
+                <a href="../Typealiases.html#/s:8TiledKit16TileGridPositiona">TileGridPosition</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Typealiases.html#/s:8TiledKit8TileSizea">TileSize</a>
+                <a href="../Typealiases.html#/s:8TiledKit12TileGridSizea">TileGridSize</a>
               </li>
             </ul>
           </li>
@@ -202,7 +202,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Represents the reference to a specific <code><a href="../Classes/Tile.html">Tile</a></code> in a tile <code><a href="../Structs/Layer.html">Layer</a></code> for a given <code><a href="../Structs/Map.html">Map</a></code>. It captures not only an identifier uniquely identifying the <code><a href="../Classes/Tile.html">Tile</a></code> (and the <code><a href="../Classes/TileSet.html">TileSet</a></code> it is in) but also if the <code><a href="../Classes/Tile.html">Tile</a></code> should be flipped (see <code><a href="../Structs/TileFlip.html">TileFlip</a></code>)</p>
 
           </section>
           <section class="section task-group-section">
@@ -237,9 +237,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s27ExpressibleByIntegerLiteralP07integerD0x0cD4TypeQz_tcfc"></a>
+                    <a name="/s:8TiledKit7TileGIDV14integerLiteralACs6UInt32V_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(integerLiteral:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s27ExpressibleByIntegerLiteralP07integerD0x0cD4TypeQz_tcfc">init(integerLiteral:<wbr>)</a>
+                    <a class="token" href="#/s:8TiledKit7TileGIDV14integerLiteralACs6UInt32V_tcfc">init(integerLiteral:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -247,7 +247,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Create a new instance with the given raw value, note that unless you are creating a customized <code><a href="../Protocols/ResourceLoader.html">ResourceLoader</a></code> you will not need this.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -256,6 +257,25 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">integerLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UInt32</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The raw value (see TMX format description in the Tiled documentation)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -273,7 +293,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a new instance for the supplied <code><a href="../Structs/Map.html">Map</a></code> <code>globalTileOffset</code></p>
 
                       </div>
                       <div class="declaration">
@@ -283,6 +303,37 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">tileId</span><span class="p">:</span> <span class="kt">UInt32</span><span class="p">,</span> <span class="nv">flip</span><span class="p">:</span> <span class="kt"><a href="../Structs/TileFlip.html">TileFlip</a></span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tileId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The id of the tile in the set of <code><a href="../Classes/TileSet.html">TileSet</a></code>s for a <code><a href="../Structs/Map.html">Map</a></code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flip</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Any transformations that should be applied</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -300,7 +351,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>true</code> if the tile should be flipped horizontally</p>
 
                       </div>
                       <div class="declaration">
@@ -327,7 +378,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>true</code> if the tile should be flipped vertically</p>
 
                       </div>
                       <div class="declaration">
@@ -354,7 +405,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>true</code> if the tile should be flipped diagonally</p>
 
                       </div>
                       <div class="declaration">

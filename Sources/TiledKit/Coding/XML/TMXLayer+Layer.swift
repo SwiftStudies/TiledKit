@@ -43,6 +43,6 @@ extension TMXImageLayer {
     func tkImage(in project:Project, relativeTo url: URL?)->ImageReference{
         let url = project.resolve(URL(fileURLWithPath: path), relativeTo:url) ?? URL(fileURLWithPath: path)
         
-        return ImageReference(url: url, size: PixelSize(width: width, height: height))
+        return ImageReference(source: url, size: PixelSize(width: width, height: height))
     }
 }

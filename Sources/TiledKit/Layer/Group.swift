@@ -14,6 +14,9 @@
 
 import Foundation
 
+///  A `Group` represents the collection of `Layer`s a Tiled Group Layer contains (a `Layer.Kind` of `.group`)
 public struct Group : LayerContainer {
+    
+    /// The `Layer`s in the group
     public var layers: [Layer]
 }

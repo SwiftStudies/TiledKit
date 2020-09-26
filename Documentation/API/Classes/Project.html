@@ -17,7 +17,7 @@
     <a title="Project Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TiledKit Docs</a> (16% documented)</p>
+        <p><a href="../index.html">TiledKit Docs</a> (71% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -182,10 +182,10 @@
                 <a href="../Typealiases.html#/s:8TiledKit4Sizea">Size</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Typealiases.html#/s:8TiledKit12TilePositiona">TilePosition</a>
+                <a href="../Typealiases.html#/s:8TiledKit16TileGridPositiona">TileGridPosition</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Typealiases.html#/s:8TiledKit8TileSizea">TileSize</a>
+                <a href="../Typealiases.html#/s:8TiledKit12TileGridSizea">TileGridSize</a>
               </li>
             </ul>
           </li>
@@ -202,7 +202,20 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Projects are the primary entry point for <code>TiledKit</code>. The project represents the root of all <code><a href="../Structs/Map.html">Map</a></code>s and <code><a href="../Classes/TileSet.html">TileSet</a></code>s and the resources (such as images) that support them.
+The default <code>Project</code> will use the <code>main</code> Bundle as its root, making it very easy to include in a Swift Package Manager or Xcode module.</p>
+<pre class="highlight swift"><code>    <span class="k">let</span> <span class="nv">myMap</span> <span class="o">=</span> <span class="kt">Project</span><span class="o">.</span><span class="k">default</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"mymap"</span><span class="p">)</span>
+</code></pre>
+
+<p>The above code will retrieve a file named &lsquo;mymap.tmx&rsquo; from the root of the main <code>Bundle</code>. You may create instances of <code>Project</code>s that have a different root (such as an
+actual Tiled project directory, or different <code>Bundle</code>) using the standard constructurs.</p>
+
+<p><code>Project</code>s are critical as they enable the relative processing of any resources referenced in the Tiled files and provide the key entry point for specializing TiledKit for a
+a specific game engine. Specializations only require the registration of a specific <code><a href="../Protocols/ResourceLoader.html">ResourceLoader</a></code> for the type of object required by the game engine. See
+ <a href="https://github.com/SwiftStudies/SKTiledKit">SKTiledKit</a> for an example of a specialization.</p>
+
+<p><code>Project</code>s also provide resource caching capabilities, ensuring that the contents of any <code>URL</code> are loaded only once. If you add your own <code><a href="../Protocols/ResourceLoader.html">ResourceLoader</a></code> for types
+you can specify that if the created object should be cached or not.</p>
 
           </section>
           <section class="section task-group-section">
@@ -221,7 +234,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The default <code>Project</code> which uses the <code>Bundle.main</code> as its resource root</p>
 
                       </div>
                       <div class="declaration">
@@ -238,9 +251,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit7ProjectC5using4with3andACSo8NSBundleC_SaySSGSgSDyS2SGSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(using:with:and:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit7ProjectC5using4with3andACSo8NSBundleC_SaySSGSgSDyS2SGSgtcfc">init(using:<wbr>with:<wbr>and:<wbr>)</a>
+                    <a name="/s:8TiledKit7ProjectC5usingACSo8NSBundleC_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(using:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit7ProjectC5usingACSo8NSBundleC_tcfc">init(using:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -248,16 +261,35 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a new instance of a <code>Project</code> that uses a different bundle as a root.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">using</span> <span class="nv">bundle</span><span class="p">:</span> <span class="kt">Bundle</span><span class="p">,</span> <span class="n">with</span> <span class="nv">folders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">and</span> <span class="nv">types</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">using</span> <span class="nv">bundle</span><span class="p">:</span> <span class="kt">Bundle</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>bundle</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>Bundle</code> to use</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -265,9 +297,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit7ProjectC2at4with3andAC10Foundation3URLV_SaySSGSgSDyS2SGSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(at:with:and:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit7ProjectC2at4with3andAC10Foundation3URLV_SaySSGSgSDyS2SGSgtcfc">init(at:<wbr>with:<wbr>and:<wbr>)</a>
+                    <a name="/s:8TiledKit7ProjectC2atAC10Foundation3URLV_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(at:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit7ProjectC2atAC10Foundation3URLV_tcfc">init(at:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -275,16 +307,35 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a new instance of a <code>Project</code> that uses the specied directory as its root</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">at</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="n">with</span> <span class="nv">folders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">and</span> <span class="nv">types</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">at</span> <span class="nv">rootDirectory</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rootDirectory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>URL</code> of a directory on the local machine</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -302,7 +353,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Retrieves the <code>URL</code> for a resource within the project</p>
 
                       </div>
                       <div class="declaration">
@@ -312,6 +363,53 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">url</span><span class="p">(</span><span class="k">for</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="k">in</span> <span class="nv">subDirectory</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">of</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/FileTypes.html">FileTypes</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">URL</span><span class="p">?</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the file, excluding any extension</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subDirectory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The sub-directory path if it is not located at the root</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of file</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>URL</code> for the file in the <code>Project</code> or <code>nil</code> if it could not be found</p>
                       </div>
                     </section>
                   </div>
@@ -391,7 +489,12 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Loads a URL for a resource (which can be relative to another resource in the project, very useful as Tiled often uses relative paths within projects, or across Maps and Tile Sets).</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Any errors thrown while the resource is being retreived (for example, the resource can&rsquo;t be found)
+
+</div>
 
                       </div>
                       <div class="declaration">
@@ -402,15 +505,62 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>asType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired type</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>resourceUrl</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>URL</code> of the resource (can be relative)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>baseUrl</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>URL</code> to use as the starting point if <code>resourceURL</code> is relative. Otherwise the project root will be used</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An instance of the resource</p>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit7ProjectC3get3map2inAA3MapVSS_SSSgtKF"></a>
-                    <a name="//apple_ref/swift/Method/get(map:in:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit7ProjectC3get3map2inAA3MapVSS_SSSgtKF">get(map:<wbr>in:<wbr>)</a>
+                    <a name="/s:8TiledKit7ProjectC3get_2inAA3MapVSS_SSSgtKF"></a>
+                    <a name="//apple_ref/swift/Method/get(_:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit7ProjectC3get_2inAA3MapVSS_SSSgtKF">get(_:<wbr>in:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -418,16 +568,57 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Gets a map from the project.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Any error while loading the map
+
+</div>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">get</span><span class="p">(</span><span class="n">map</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="k">in</span> <span class="nv">subDirectory</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"Use retreive(Map.self, from: url(fileName,subDirectory﹚﹚ instead"</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">get</span><span class="p">(</span><span class="n">_</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="k">in</span> <span class="nv">subDirectory</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fileName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The filename (excluding the extension) of the map</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subDirectory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The subdirectory (if any, supply <code>nil</code> if the map is in the root of the project) of the map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An instance of the <code><a href="../Structs/Map.html">Map</a></code></p>
                       </div>
                     </section>
                   </div>

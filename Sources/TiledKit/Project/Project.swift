@@ -20,6 +20,20 @@ enum ProjectError : Error {
     case noResourceLoaderSpecified
 }
 
+/// Projects are the primary entry point for `TiledKit`. The project represents the root of all `Map`s and `TileSet`s and the resources (such as images) that support them.
+/// The default `Project` will use the `main` Bundle as its root, making it very easy to include in a Swift Package Manager or Xcode module.
+///
+///         let myMap = Project.default.get("mymap")
+///
+/// The above code will retrieve a file named 'mymap.tmx' from the root of the main `Bundle`. You may create instances of `Project`s that have a different root (such as an
+/// actual Tiled project directory, or different `Bundle`) using the standard constructurs.
+///
+/// `Project`s are critical as they enable the relative processing of any resources referenced in the Tiled files and provide the key entry point for specializing TiledKit for a
+/// a specific game engine. Specializations only require the registration of a specific `ResourceLoader` for the type of object required by the game engine. See
+///  [SKTiledKit](https://github.com/SwiftStudies/SKTiledKit) for an example of a specialization.
+///
+/// `Project`s also provide resource caching capabilities, ensuring that the contents of any `URL` are loaded only once. If you add your own `ResourceLoader` for types
+/// you can specify that if the created object should be cached or not.
 public class Project {
     let fileContainer   : FileContainer
     let folders         : [String]
@@ -27,23 +41,39 @@ public class Project {
     var resourceCache   = ResourceCache()
     
 
+    /// The default `Project` which uses the `Bundle.main` as its resource root
     public static let `default` : Project = Project(at: Bundle.main.bundleURL)
 
-    public init(using bundle:Bundle, with folders:[String]? = nil, and types:[String:String]? = nil){
+    
+    /// Creates a new instance of a `Project` that uses a different bundle as a root.
+    ///
+    /// - Parameters:
+    ///   - bundle: The `Bundle` to use
+    public init(using bundle:Bundle){
         fileContainer = FileContainer.bundle(bundle)
-        self.folders = folders ?? [String]()
-        objectTypes = types ?? [String:String]()
+        folders = []
+        objectTypes = [:]
         
         resourceCache.registerLoader(MapLoader(project: self), forType: Map.self)
         resourceCache.registerLoader(TileSetLoader(project: self), forType: TileSet.self)
     }
 
-    public init(at url:URL, with folders:[String]? = nil, and types:[String:String]? = nil){
-        fileContainer = FileContainer.folder(url)
-        self.folders = folders ?? [String]()
-        objectTypes = types ?? [String:String]()
+    /// Creates a new instance of a `Project` that uses the specied directory as its root
+    ///
+    /// - Parameter rootDirectory: The `URL` of a directory on the local machine
+    public init(at rootDirectory:URL){
+        fileContainer = FileContainer.folder(rootDirectory)
+        folders = []
+        objectTypes = [:]
     }
     
+    
+    /// Retrieves the `URL` for a resource within the project
+    /// - Parameters:
+    ///   - file: The name of the file, excluding any extension
+    ///   - subDirectory: The sub-directory path if it is not located at the root
+    ///   - type: The type of file
+    /// - Returns: A `URL` for the file in the `Project` or `nil` if it could not be found
     public func url(for file:String, in subDirectory:String? = nil, of type:FileTypes? = nil) -> URL? {
         guard let type = type else {
             return fileContainer.url(of: file, in: subDirectory)
@@ -106,6 +136,14 @@ public class Project {
         return nil
     }
     
+    
+    /// Loads a URL for a resource (which can be relative to another resource in the project, very useful as Tiled often uses relative paths within projects, or across Maps and Tile Sets).
+    /// - Parameters:
+    ///   - asType: The desired type
+    ///   - resourceUrl: The `URL` of the resource (can be relative)
+    ///   - baseUrl: The `URL` to use as the starting point if `resourceURL` is relative. Otherwise the project root will be used
+    /// - Throws: Any errors thrown while the resource is being retreived (for example, the resource can't be found)
+    /// - Returns: An instance of the resource
     public func retrieve<R>(asType:R.Type, from resourceUrl:URL, relativeTo baseUrl:URL? = nil) throws ->R{
         guard let resolvedUrl = resolve(resourceUrl, relativeTo: baseUrl) else {
             throw ProjectError.fileDoesNotExist(resourceUrl.standardized.absoluteString)
@@ -114,7 +152,14 @@ public class Project {
 
     }
     
-    public func get(map fileName:String, in subDirectory:String? = nil) throws -> Map {
+    /// Gets a map from the project.
+    /// - Parameters:
+    ///   - fileName: The filename (excluding the extension) of the map
+    ///   - subDirectory: The subdirectory (if any, supply `nil` if the map is in the root of the project) of the map.
+    /// - Throws: Any error while loading the map
+    /// - Returns: An instance of the `Map`
+    @available(*, deprecated, message: "Use retreive(Map.self, from: url(fileName,subDirectory)) instead")
+    public func get(_ fileName:String, in subDirectory:String? = nil) throws -> Map {
         guard let url = url(for: fileName, in: subDirectory, of: .tmx) else {
             throw ProjectError.fileDoesNotExist("\(fileContainer)\(subDirectory ?? "")\\(fileName)")
         }

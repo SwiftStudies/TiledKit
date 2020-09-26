@@ -49,8 +49,7 @@ extension TSXTileSet {
                 
                 let tile = Tile(
                     tileImageUrl,
-                    transparentColor: transparentColor,
-                    bounds: PixelBounds(origin: origin, size: tileSet.tileSize))
+                    bounds: PixelBounds(origin: origin, size: tileSet.tileSize), transparentColor: transparentColor)
                 
                 tileSet[UInt32(tileId)] = tile
             }
@@ -67,8 +66,7 @@ extension TSXTileSet {
                     
                     let tile = Tile(
                         tileImageUrl,
-                        transparentColor: transparentColor,
-                        bounds: PixelBounds(origin: PixelPoint.zero, size: PixelSize(width: tileImage.width, height: tileImage.height)))
+                        bounds: PixelBounds(origin: PixelPoint.zero, size: PixelSize(width: tileImage.width, height: tileImage.height)), transparentColor: transparentColor)
                     
                     tileSet[xmlTile.id] = tile
                 }

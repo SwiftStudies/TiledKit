@@ -13,7 +13,11 @@
 //    limitations under the License.
 import Foundation
 
+/// Captures a resolved reference to an image, including its dimensions
 public struct ImageReference {
-    public var  url : URL
+    /// The `URL` of the image
+    public var  source : URL
+    
+    /// The size of the image
     public var  size : PixelSize
 }

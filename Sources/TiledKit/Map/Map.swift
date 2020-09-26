@@ -19,12 +19,13 @@ enum MapError : Error {
     case unknownMapType(String)
 }
 
+/// Represents a Tiled map which can be loaded from a Tiled `tmx` file (other Tiled formats can be supported in the future, such as JSON). It contains the root collection of `Layer`s as well as carrying the references to the `TileSet`s used by the `Map`
 public struct Map : LayerContainer{
     /// The url the map was loaded from (if any)
     internal let  url              : URL?
     
     /// The size of the map in tiles
-    public let    mapSize          : TileSize
+    public let    mapSize          : TileGridSize
     
     /// The size of a tile in pixels
     public let    tileSize         : PixelSize
@@ -49,7 +50,7 @@ public struct Map : LayerContainer{
     /// The tilesets used by the project
     internal var    tileSetReferences  = [TileSetReference]()
     
-    /// Retreive a tile
+    /// Retreive a tile based on its `TileGID`
     public subscript(_ tile:TileGID)->Tile? {
         let tileSetTileId = tile.globalTileOffset
         

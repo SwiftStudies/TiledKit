@@ -17,7 +17,7 @@
     <a title="Layer Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TiledKit Docs</a> (16% documented)</p>
+        <p><a href="../index.html">TiledKit Docs</a> (71% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -182,10 +182,10 @@
                 <a href="../Typealiases.html#/s:8TiledKit4Sizea">Size</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Typealiases.html#/s:8TiledKit12TilePositiona">TilePosition</a>
+                <a href="../Typealiases.html#/s:8TiledKit16TileGridPositiona">TileGridPosition</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Typealiases.html#/s:8TiledKit8TileSizea">TileSize</a>
+                <a href="../Typealiases.html#/s:8TiledKit12TileGridSizea">TileGridSize</a>
               </li>
             </ul>
           </li>
@@ -202,7 +202,16 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Layers capture the contents of a <code><a href="../Structs/Map.html">Map</a></code> can be one of four kinds</p>
+
+<ul>
+<li><strong>Tile</strong> A grid of <code><a href="../Classes/Tile.html">Tile</a></code>s</li>
+<li>__ Object__ A collection of <code><a href="../Structs/Object.html">Object</a></code>s</li>
+<li><strong>Group</strong> A collection of <code>Layer</code>s enabling hierarchy within the <code><a href="../Structs/Map.html">Map</a></code></li>
+<li><strong>Image</strong> An image not in a <code><a href="../Classes/TileSet.html">TileSet</a></code></li>
+</ul>
+
+<p>Every layer has a set of common attributes (such as an offest) and can capture user specified properites too.</p>
 
           </section>
           <section class="section task-group-section">
@@ -221,7 +230,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>An enumeration for each kind of layer, together with the specifc information about that kind of layer (e.g. the <code><a href="../Structs/ImageReference.html">ImageReference</a></code> for an Image Layer</p>
 
                         <a href="../Structs/Layer/Kind.html" class="slightly-smaller">See more</a>
                       </div>
@@ -249,7 +258,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The name of the layer, or an empty <code>String</code> if non was specified</p>
 
                       </div>
                       <div class="declaration">
@@ -276,7 +285,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>true</code> if the layer should be visible</p>
 
                       </div>
                       <div class="declaration">
@@ -303,7 +312,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A level of transparent the layer (and therefore its contents) should be rendered with</p>
 
                       </div>
                       <div class="declaration">
@@ -330,7 +339,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>An offset from the <code>Layer</code>s parent&rsquo;s origin</p>
 
                       </div>
                       <div class="declaration">
@@ -357,7 +366,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The <code><a href="../Structs/Layer/Kind.html">Layer.Kind</a></code> of the <code>Layer</code> together with the information specific to that kind</p>
 
                       </div>
                       <div class="declaration">
@@ -384,7 +393,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>User specified <code><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></code> of the layer</p>
 
                       </div>
                       <div class="declaration">
@@ -411,7 +420,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The <code><a href="../Structs/Object.html">Object</a></code>s contained in the <code>Layer</code>. Will be an empty <code>Array</code> if it is not an object <code>Layer</code></p>
 
                       </div>
                       <div class="declaration">

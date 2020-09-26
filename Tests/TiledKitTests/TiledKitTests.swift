@@ -71,9 +71,9 @@ final class TiledKitTests: XCTestCase {
     
     func loadTestMap(from project:Project, name:String? = nil, in subDirectory:String = "Maps") throws -> Map {
         if let name = name {
-            return try project.get(map: name, in: subDirectory)
+            return try project.get(name, in: subDirectory)
         }
-        return try project.get(map: "Test Map 1", in: "Maps")
+        return try project.get("Test Map 1", in: "Maps")
     }
     
     func testMap(){
@@ -105,7 +105,7 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(map.tileLayers[1].grid[0,0], TileGID(tileId: 5, flip: []))
         XCTAssertEqual(map.tileLayers[0].grid.size,  map.mapSize)
         XCTAssertEqual(nestedImageLayer.image.size, PixelSize(width: 16, height: 16))
-        XCTAssertTrue(nestedImageLayer.image.url.path.hasSuffix("F.png"))
+        XCTAssertTrue(nestedImageLayer.image.source.path.hasSuffix("F.png"))
         XCTAssertEqual(map.objectLayers[0].objects.count, 7)
     }
     
@@ -205,7 +205,7 @@ final class TiledKitTests: XCTestCase {
         }
         
         switch object.kind {
-        case .elipse(let size, let rotation):
+        case .ellipse(let size, let rotation):
             XCTAssertEqual(rotation, 45)
             XCTAssertEqual(size, Size(width: 96, height: 96))
         default:
@@ -277,7 +277,7 @@ final class TiledKitTests: XCTestCase {
                 return
             }
             
-            XCTAssertEqual(tile.image.lastPathComponent, "4 Tiles.png")
+            XCTAssertEqual(tile.imageSource.lastPathComponent, "4 Tiles.png")
             XCTAssertEqual(tile.bounds, PixelBounds(origin: Point.zero, size: Dimension(width:16,height: 16)))
         default:
             XCTFail("Object is not a Tile")
@@ -301,7 +301,7 @@ final class TiledKitTests: XCTestCase {
         
         XCTAssertEqual(imageLayer.layer.position.x, 72)
         XCTAssertEqual(imageLayer.layer.position.y, 48)
-        XCTAssertTrue(imageLayer.image.url.standardized.path.hasSuffix("Resources/Images/Individual/F.png"), "URL is incorrect \(imageLayer.image.url)")
+        XCTAssertTrue(imageLayer.image.source.standardized.path.hasSuffix("Resources/Images/Individual/F.png"), "URL is incorrect \(imageLayer.image.source)")
     }
     
     func testOneOfEverything(){

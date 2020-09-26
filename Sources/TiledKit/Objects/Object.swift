@@ -12,21 +12,49 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+/// Represents a Tiled object (which are contained inside Object `Layer`s). All objects share some common attributes (e.g. their position inside their containing `Layer`).
 public struct Object {
+    /// The kind of object, together with attached data specific to that kind of object
     public enum Kind {
-        case point,
-             rectangle(Size, rotation:Double),
-             elipse(Size, rotation:Double),
-             tile(TileGID, size:Size, rotation:Double),
-             text(String, size:Size, rotation:Double, style:TextStyle),
-             polygon(Path, rotation:Double),
-             polyline(Path, rotation:Double)
+        /// The object is a single point (use the `position` property for its coordinate
+        case point
+        
+        /// A rectangle (with origin at `position`) of the specied `Size` and `angle` (in degrees)
+        case rectangle(Size, angle:Double)
+                
+        /// An ellipse  (with origin at `position`) of the specied `Size` and `angle` (in degrees)
+        case ellipse(Size, angle:Double)
+        
+        /// A reference to a `Map` `Tile` (you must used the `Map` to retreive the correct tile) and a specied `angle` (in degrees) to draw it at
+        case tile(TileGID, size:Size, angle:Double)
+                
+        /// a `String` to render within the specied `Size`, at the specified `angle` (in degrees). The `TextStyle` defines the `style` that should be used to
+        /// render the `String`
+        case text(String, size:Size, angle:Double, style:TextStyle)
+                
+        /// A closed polygon  (with origin at `position`) with the specied `Path` and `angle` (in degrees)
+        case polygon(Path, angle:Double)
+        
+        
+        /// An open polygon  (with origin at `position`) with the specied `Path` and `angle` (in degrees)
+        case polyline(Path, angle:Double)
     }
     
+    /// An identifier for an `Object` that is unique with the `Map`
     public let id      : Int
+    
+    /// The name of the `Object`, or an empty `String`
     public let name    : String
+    
+    /// `true` if the `Object` should be rendered
     public let visible : Bool
+    
+    /// The location of the `Object` relative to its containing `Layer`
     public let position: Position
+    
+    /// User specified properties of the `Object`
     public let properities : Properties
+    
+    /// The type of `Object` together with any type specific attributes
     public let kind    : Kind
 }
