@@ -272,13 +272,13 @@ final class TiledKitTests: XCTestCase {
             XCTAssertEqual(gid, TileGID(tileId: 1, flip: []))
             XCTAssertEqual(rotation, 45)
             XCTAssertEqual(size, Size(width: 16, height: 16))
-            XCTFail("Test items below")
-//            guard let tile = level.tiles[tileObject.gid] else {
-//                XCTFail("Tile is not in level tile dictionary")
-//                return
-//            }
-//
-//            XCTAssertEqual(tile.tileSet?.name ?? "Tile set not found", "SingleImageAutoTransparency")
+            guard let tile = map[gid] else {
+                XCTFail("Tile is not in level tile dictionary")
+                return
+            }
+            
+            XCTAssertEqual(tile.image.lastPathComponent, "4 Tiles.png")
+            XCTAssertEqual(tile.bounds, PixelBounds(origin: Point.zero, size: Dimension(width:16,height: 16)))
         default:
             XCTFail("Object is not a Tile")
         }
