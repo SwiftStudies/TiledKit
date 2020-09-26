@@ -12,8 +12,8 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-public extension Array where Element == TKObject {
-    subscript(id objectId:Int) -> TKObject? {
+public extension Array where Element == Object {
+    subscript(id objectId:Int) -> Object? {
         for object in self {
             if object.id == objectId {
                 return object
@@ -22,7 +22,7 @@ public extension Array where Element == TKObject {
         return nil
     }
     
-    subscript(name objectName:String) -> [TKObject] {
+    subscript(name objectName:String) -> [Object] {
         return filter({$0.name == objectName})
     }
 }

@@ -12,6 +12,14 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+public enum HorizontalTextAlignment : String, Codable {
+    case left, center, right, justified
+}
+
+public enum VerticalTextAlignment : String, Codable {
+    case top, middle = "center", bottom
+}
+
 public struct TextStyle {
     public let wrap : Bool
     public let fontFamily : String?

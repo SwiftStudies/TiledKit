@@ -12,9 +12,18 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import Foundation
+/// Explicit type for bytes
+public typealias Byte = UInt8
 
-public struct Color : Decodable, Equatable{
+fileprivate extension String {
+    subscript(_ range:Range<Int>)->String{
+        let lower = index(startIndex, offsetBy: range.lowerBound)
+        let upper = index(startIndex, offsetBy: range.upperBound)
+        return String(self[lower..<upper])
+    }
+}
+
+public struct Color : Equatable{
     public let red:Byte, green:Byte, blue:Byte, alpha:Byte
     
     //Tiled represents colors in the form of a string #AARRGGBB
@@ -55,14 +64,9 @@ public struct Color : Decodable, Equatable{
         alpha = a
     }
     
-    public init(from decoder:Decoder) throws {
-        let stringValue = try decoder.singleValueContainer().decode(String.self)
-        let colorObject = Color(from: stringValue)
-        red = colorObject.red
-        green = colorObject.green
-        blue = colorObject.blue
-        alpha = colorObject.alpha
-    }
+    public static let white = Color(r: 255, g: 255, b: 255)
+    public static let black = Color(r: 0, g: 0, b: 0)
+    public static let clear = Color(r: 0, g: 0, b: 0, a: 0)
 }
 
 

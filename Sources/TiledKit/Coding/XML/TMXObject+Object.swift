@@ -18,40 +18,40 @@ import Foundation
 
 extension XMLPoints {
     var path : Path {
-        return map({Location(x: $0.x, y: $0.y)})
+        return map({Position(x: $0.x, y: $0.y)})
     }
 }
 
 extension XMLObject {
-    var location : Location {
-        return Location(x: x, y: y)
+    var location : Position {
+        return Position(x: x, y: y)
     }
 
-    func tkGeometricObject(relativeTo baseUrl:URL?, in project:Project) -> TKObject? {
+    func tkGeometricObject(relativeTo baseUrl:URL?, in project:Project) -> Object? {
         switch type {
         case .point:
-            return TKObject(id: id, name: name, visible: visible, position: location, properities: properties.interpret(baseUrl: baseUrl, in: project), kind: .point)
+            return Object(id: id, name: name, visible: visible, position: location, properities: properties.interpret(baseUrl: baseUrl, in: project), kind: .point)
         case .rectangle(let size, let rotation):
-            return TKObject(id: id, name: name, visible: visible, position: location, properities: properties.interpret(baseUrl: baseUrl, in: project), kind: .rectangle(Size(width: size.width, height: size.height), rotation: rotation))
+            return Object(id: id, name: name, visible: visible, position: location, properities: properties.interpret(baseUrl: baseUrl, in: project), kind: .rectangle(Size(width: size.width, height: size.height), rotation: rotation))
         case .elipse(let size, let rotation):
-            return TKObject(id: id, name: name, visible: visible, position: location, properities: properties.interpret(baseUrl: baseUrl, in: project), kind: .elipse(Size(width: size.width, height: size.height), rotation: rotation))
+            return Object(id: id, name: name, visible: visible, position: location, properities: properties.interpret(baseUrl: baseUrl, in: project), kind: .elipse(Size(width: size.width, height: size.height), rotation: rotation))
         case .polyline(let path, let rotation):
-            return TKObject(id: id, name: name, visible: visible, position: location, properities: properties.interpret(baseUrl: baseUrl, in: project), kind: .polyline(path.points.path, rotation: rotation))
+            return Object(id: id, name: name, visible: visible, position: location, properities: properties.interpret(baseUrl: baseUrl, in: project), kind: .polyline(path.points.path, rotation: rotation))
         case .polygon(let path, let rotation):
-            return TKObject(id: id, name: name, visible: visible, position: location, properities: properties.interpret(baseUrl: baseUrl, in: project), kind: .polygon(path.points.path, rotation: rotation))
+            return Object(id: id, name: name, visible: visible, position: location, properities: properties.interpret(baseUrl: baseUrl, in: project), kind: .polygon(path.points.path, rotation: rotation))
         default:
             return nil
         }
     }
     
-    func tkObject(for map:Map, in project:Project)->TKObject {
+    func tkObject(for map:Map, in project:Project)->Object {
         switch type {
         case .point, .rectangle, .elipse, .polyline, .polygon:
             return tkGeometricObject(relativeTo: map.url, in: project)!
         case .tile(let rawTileGid,let size, let rotation):
-            return TKObject(id: id, name: name, visible: visible, position: location, properities: properties.interpret(baseUrl: map.url, in: project), kind: .tile(TileGID(integerLiteral: rawTileGid), size:Size(width: size.width, height: size.height),  rotation: rotation))
+            return Object(id: id, name: name, visible: visible, position: location, properities: properties.interpret(baseUrl: map.url, in: project), kind: .tile(TileGID(integerLiteral: rawTileGid), size:Size(width: size.width, height: size.height),  rotation: rotation))
         case .text(let style, let size, let rotation):
-            return TKObject(id: id, name: name, visible: visible, position: location, properities: properties.interpret(baseUrl: map.url, in: project), kind: .text( style.string, size:Size(width: size.width, height: size.height), rotation: rotation, style: style.textStyle))
+            return Object(id: id, name: name, visible: visible, position: location, properities: properties.interpret(baseUrl: map.url, in: project), kind: .text( style.string, size:Size(width: size.width, height: size.height), rotation: rotation, style: style.textStyle))
         }
     }
 }

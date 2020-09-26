@@ -12,15 +12,13 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-#warning("Rename when I move the old API out")
-
-public protocol TKLayerContainer {
-    var     layers : [TKLayer] {get}
+public protocol LayerContainer {
+    var     layers : [Layer] {get}
 }
 
-public extension TKLayerContainer {
+public extension LayerContainer {
     /// Retreives a layer with the specified name
-    subscript(layerNamed name:String)->TKLayer?{
+    subscript(layerNamed name:String)->Layer?{
         for layer in layers {
             if layer.name == name {
                 return layer
@@ -30,9 +28,9 @@ public extension TKLayerContainer {
     }
     
     /// Retrieves all tile layers in a tuple container both the generic layer and the tile grid
-    var tileLayers : [(layer:TKLayer, grid:TileGrid)] {
-        return layers.compactMap(){ (layer) -> (TKLayer, TileGrid)? in
-            if case let TKLayer.Kind.tile(tileGrid) = layer.kind {
+    var tileLayers : [(layer:Layer, grid:TileGrid)] {
+        return layers.compactMap(){ (layer) -> (Layer, TileGrid)? in
+            if case let Layer.Kind.tile(tileGrid) = layer.kind {
                 return (layer,tileGrid)
             }
             return nil
@@ -40,9 +38,9 @@ public extension TKLayerContainer {
     }
     
     /// Retrieves all group layers in a tuple container both the generic layer and the grouped layers
-    var groupLayers : [(layer:TKLayer, group:Group)] {
-        return layers.compactMap(){ (layer) -> (TKLayer, Group)? in
-            if case let TKLayer.Kind.group(group) = layer.kind {
+    var groupLayers : [(layer:Layer, group:Group)] {
+        return layers.compactMap(){ (layer) -> (Layer, Group)? in
+            if case let Layer.Kind.group(group) = layer.kind {
                 return (layer,group)
             }
             return nil
@@ -50,9 +48,9 @@ public extension TKLayerContainer {
     }
     
     /// Retrieves all object layers in a tuple container both the generic layer and the contained objects
-    var objectLayers : [(layer:TKLayer, objects:[TKObject])] {
-        return layers.compactMap(){ (layer) -> (TKLayer, [TKObject])? in
-            if case let TKLayer.Kind.objects(objects) = layer.kind {
+    var objectLayers : [(layer:Layer, objects:[Object])] {
+        return layers.compactMap(){ (layer) -> (Layer, [Object])? in
+            if case let Layer.Kind.objects(objects) = layer.kind {
                 return (layer,objects)
             }
             return nil
@@ -61,9 +59,9 @@ public extension TKLayerContainer {
 
     
     /// Retrieves all image layers in a tuple container both the generic layer and the associated image
-    var imageLayers : [(layer:TKLayer, image:TKImage)] {
-        return layers.compactMap(){ (layer) -> (TKLayer, TKImage)? in
-            if case let TKLayer.Kind.image(image) = layer.kind {
+    var imageLayers : [(layer:Layer, image:ImageReference)] {
+        return layers.compactMap(){ (layer) -> (Layer, ImageReference)? in
+            if case let Layer.Kind.image(image) = layer.kind {
                 return (layer,image)
             }
             return nil

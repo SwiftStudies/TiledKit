@@ -12,15 +12,26 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+#warning("Rename to Layer when old class out the way")
 
-import Foundation
-
-public enum HorizontalTextAlignment : String, Codable {
-    case left, center, right, justified
+public struct Layer  {
+    public enum Kind {
+        case tile(TileGrid), objects([Object]), group(Group), image(ImageReference)
+    }
+    
+    public let name    : String
+    public let visible : Bool
+    public let opacity : Double
+    public let position: Position
+    public let kind    : Kind
+    public let properties : Properties
+    
+    public var objects : [Object] {
+        switch kind {
+        case .objects(let objects):
+            return objects
+        default:
+            return [Object]()
+        }
+    }
 }
-
-public enum VerticalTextAlignment : String, Codable {
-    case top, middle = "center", bottom
-}
-
-

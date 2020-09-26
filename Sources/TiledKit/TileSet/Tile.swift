@@ -28,7 +28,7 @@ public class Tile {
     public let bounds : PixelBounds
     
     public var frames : [Frame]? = nil
-    public var collisionBodies : [TKObject]? = nil
+    public var collisionBodies : [Object]? = nil
 
     public var uuid : String {
         return "\(image.absoluteString):\(bounds)"

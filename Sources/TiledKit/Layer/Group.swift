@@ -14,6 +14,6 @@
 
 import Foundation
 
-public struct Group : TKLayerContainer {
-    public var layers: [TKLayer]
+public struct Group : LayerContainer {
+    public var layers: [Layer]
 }

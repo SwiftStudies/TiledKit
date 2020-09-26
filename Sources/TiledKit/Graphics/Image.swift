@@ -13,7 +13,7 @@
 //    limitations under the License.
 import Foundation
 
-public struct TKImage {
+public struct ImageReference {
     public var  url : URL
     public var  size : PixelSize
 }

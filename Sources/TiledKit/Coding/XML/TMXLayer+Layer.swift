@@ -16,23 +16,23 @@ import TKXMLCoding
 import Foundation
 
 extension XMLLayer {
-    var location : Location {
-        return Location(x: x, y: y)
+    var location : Position {
+        return Position(x: x, y: y)
     }
     
-    func tkLayer(for map:Map, in project:Project) -> TKLayer? {
+    func tkLayer(for map:Map, in project:Project) -> Layer? {
         if let tileLayer = self as? TMXTileLayer {
             let grid = tileLayer.tileGrid(for: map)
-            return TKLayer(name: tileLayer.name, visible: tileLayer.visible, opacity: tileLayer.opacity, position: tileLayer.location, kind: .tile(grid), properties: tileLayer.properties.interpret(baseUrl: map.url, in: project))
+            return Layer(name: tileLayer.name, visible: tileLayer.visible, opacity: tileLayer.opacity, position: tileLayer.location, kind: .tile(grid), properties: tileLayer.properties.interpret(baseUrl: map.url, in: project))
         } else if let objectLayer = self as? XMLObjectLayer {
             let objects = objectLayer.objects.map({$0.tkObject(for: map, in: project)})
-            return TKLayer(name: objectLayer.name, visible: objectLayer.visible, opacity: objectLayer.opacity, position: objectLayer.location, kind: .objects(objects), properties: objectLayer.properties.interpret(baseUrl: map.url, in: project))
+            return Layer(name: objectLayer.name, visible: objectLayer.visible, opacity: objectLayer.opacity, position: objectLayer.location, kind: .objects(objects), properties: objectLayer.properties.interpret(baseUrl: map.url, in: project))
         } else if let groupLayer = self as? TMXGroupLayer {
             let group = Group(layers: groupLayer.layers.compactMap({$0.tkLayer(for:map, in: project)}))
-            return TKLayer(name: groupLayer.name, visible: groupLayer.visible, opacity: groupLayer.opacity, position: groupLayer.location, kind: .group(group), properties: groupLayer.properties.interpret(baseUrl: map.url, in: project))
+            return Layer(name: groupLayer.name, visible: groupLayer.visible, opacity: groupLayer.opacity, position: groupLayer.location, kind: .group(group), properties: groupLayer.properties.interpret(baseUrl: map.url, in: project))
         } else if let imageLayer = self as? TMXImageLayer {
             let image = imageLayer.tkImage(in: project, relativeTo: map.url)
-            return TKLayer(name: imageLayer.name, visible: imageLayer.visible, opacity: imageLayer.opacity, position: imageLayer.location, kind: .image(image), properties: imageLayer.properties.interpret(baseUrl: map.url, in: project))
+            return Layer(name: imageLayer.name, visible: imageLayer.visible, opacity: imageLayer.opacity, position: imageLayer.location, kind: .image(image), properties: imageLayer.properties.interpret(baseUrl: map.url, in: project))
         }
         
         return nil
@@ -40,9 +40,9 @@ extension XMLLayer {
 }
 
 extension TMXImageLayer {
-    func tkImage(in project:Project, relativeTo url: URL?)->TKImage{
+    func tkImage(in project:Project, relativeTo url: URL?)->ImageReference{
         let url = project.resolve(URL(fileURLWithPath: path), relativeTo:url) ?? URL(fileURLWithPath: path)
         
-        return TKImage(url: url, size: PixelSize(width: width, height: height))
+        return ImageReference(url: url, size: PixelSize(width: width, height: height))
     }
 }

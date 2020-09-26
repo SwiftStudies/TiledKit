@@ -19,7 +19,7 @@ enum MapError : Error {
     case unknownMapType(String)
 }
 
-public struct Map : TKLayerContainer{
+public struct Map : LayerContainer{
     /// The url the map was loaded from (if any)
     internal let  url              : URL?
     
@@ -44,7 +44,7 @@ public struct Map : TKLayerContainer{
     public var    renderingOrder   : RenderingOrder
 
     /// The various layers in the map
-    public var    layers          = [TKLayer]()
+    public var    layers          = [Layer]()
     
     #warning("Rename to tileSetReferences")
     /// The tilesets used by the project
