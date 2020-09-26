@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>FileTypes Enumeration Reference</title>
+    <title>Loadable Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,11 +13,11 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Enum/FileTypes" class="dashAnchor"></a>
-    <a title="FileTypes Enumeration Reference"></a>
+    <a name="//apple_ref/swift/Protocol/Loadable" class="dashAnchor"></a>
+    <a title="Loadable Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TiledKit Docs</a> (71% documented)</p>
+        <p><a href="../index.html">TiledKit Docs</a> (99% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">TiledKit Reference</a>
         <img id="carat" src="../img/carat.png" />
-        FileTypes Enumeration Reference
+        Loadable Protocol Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -54,7 +54,7 @@
             <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Enums/FileTypes.html">FileTypes</a>
+                <a href="../Enums/FileType.html">FileType</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/HorizontalTextAlignment.html">HorizontalTextAlignment</a>
@@ -67,9 +67,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/RenderingOrder.html">RenderingOrder</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Enums/ResourceLoadingError.html">ResourceLoadingError</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/VerticalTextAlignment.html">VerticalTextAlignment</a>
@@ -89,6 +86,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Protocols/LayerContainer.html">LayerContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Loadable.html">Loadable</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Propertied.html">Propertied</a>
@@ -194,15 +194,16 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>FileTypes</h1>
+            <h1>Loadable</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">FileTypes</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">CaseIterable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Loadable</span></code></pre>
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Implemented by any type that wants to be loaded (and cached, and instanced) through the TiledKit <code><a href="../Classes/Project.html">Project</a></code>
+system. This makes it very easy to extend to a specific game engine.</p>
 
           </section>
           <section class="section task-group-section">
@@ -211,9 +212,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit9FileTypesO3pngyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/png" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit9FileTypesO3pngyA2CmF">png</a>
+                    <a name="/s:8TiledKit8LoadableP6loader3forAA14ResourceLoader_pAA7ProjectC_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/loader(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit8LoadableP6loader3forAA14ResourceLoader_pAA7ProjectC_tFZ">loader(for:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -221,14 +222,60 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Construct and return a <code><a href="../Protocols/ResourceLoader.html">ResourceLoader</a></code> suitable for the protocol implementer</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">png</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">loader</span><span class="p">(</span><span class="k">for</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ResourceLoader.html">ResourceLoader</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Classes/Project.html">Project</a></code> the <code><a href="../Protocols/ResourceLoader.html">ResourceLoader</a></code> should work through to get any additional resources</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit8LoadableP5cacheSbvp"></a>
+                    <a name="//apple_ref/swift/Property/cache" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit8LoadableP5cacheSbvp">cache</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Instances should return <code>false</code> if they should not be cached (perhaps they are very large, temporary, or change over time)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">cache</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -238,9 +285,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit9FileTypesO4jpegyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/jpeg" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit9FileTypesO4jpegyA2CmF">jpeg</a>
+                    <a name="/s:8TiledKit8LoadableP11newInstancexyF"></a>
+                    <a name="//apple_ref/swift/Method/newInstance()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit8LoadableP11newInstancexyF">newInstance()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -248,203 +295,17 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>When the <code>Loadable</code> has been cached this method will be called and if the object should create a copy of itself it can do it here.
+This is especially important for types that are classes as unless the instance is exactly the same (such as an image) and will not have
+been changed by previous instances, a copy should have been created. If it is acceptable that every instance of the <code>Loadable</code> is
+exactly the same object, the function can return <code>self</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">jpeg</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8TiledKit9FileTypesO3gifyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/gif" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit9FileTypesO3gifyA2CmF">gif</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">gif</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8TiledKit9FileTypesO4tiffyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/tiff" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit9FileTypesO4tiffyA2CmF">tiff</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">tiff</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8TiledKit9FileTypesO3pdfyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/pdf" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit9FileTypesO3pdfyA2CmF">pdf</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">pdf</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8TiledKit9FileTypesO3svgyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/svg" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit9FileTypesO3svgyA2CmF">svg</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">svg</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8TiledKit9FileTypesO3tmxyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/tmx" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit9FileTypesO3tmxyA2CmF">tmx</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">tmx</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8TiledKit9FileTypesO3tsxyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/tsx" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit9FileTypesO3tsxyA2CmF">tsx</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">tsx</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8TiledKit9FileTypesO9directoryyA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/directory" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit9FileTypesO9directoryyA2CmF">directory</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">directory</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">newInstance</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>

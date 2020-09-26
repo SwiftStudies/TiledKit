@@ -2,14 +2,14 @@
   "warnings": [
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
-      "line": 63,
+      "line": 80,
       "symbol": "TileSetReference.firstGid",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
-      "line": 64,
+      "line": 81,
       "symbol": "TileSetReference.tileSet",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"

@@ -15,35 +15,56 @@
 import Foundation
 
 class ResourceCache {
+    internal    var project         : Project? = nil
     private     var resourceLoaders = [String:ResourceLoader]()
-    private     var cache           = [URL:Any]()
+    private     var cache           = [URL:Loadable]()
     
     init(){
-        
     }
 
     private func typeKey<T>(_ type:T.Type)->String{
         return "\(type)"
     }
     
-    func registerLoader<ResourceType>(_ loader:ResourceLoader, forType type:ResourceType.Type){
+    func registerLoader<ResourceType:Loadable>(_ loader:ResourceLoader, forType type:ResourceType.Type){
         resourceLoaders[typeKey(type)] = loader
     }
     
-    func retrieve<R>(as type:R.Type, from url:URL, relativeTo baseURL:URL? = nil) throws ->R{
+    /// Stores an asset in the `ResourceCache` for later retreival via the supplied `URL`. In this way `ResourceLoaders` can exploit the ability
+    /// to create common cached assets. A `ResourceLoader` will not be created (or needed if every `URL` is cached as they are created lazily.
+    /// - Parameters:
+    ///   - asset: The asset
+    ///   - assetUrl: The URL of the asset/resource
+    public func store<R:Loadable>(_ asset:R, as assetUrl:URL) {
+        cache[assetUrl] = asset
+    }
+
+    
+    func retrieve<R:Loadable>(as type:R.Type, from url:URL, relativeTo baseURL:URL? = nil) throws ->R{
         let typeKey = self.typeKey(type)
         
         if let cachedResource = cache[url] as? R {
             return cachedResource
         }
+
+        let loader : ResourceLoader
+        if let existingLoader = resourceLoaders[typeKey] {
+            loader = existingLoader
+        } else {
+            guard let project = project else {
+                throw ResourceLoadingError.noProjectSpecifiedForResourceCache
+            }
+            loader = R.loader(for: project)
+            registerLoader(loader, forType: R.self)
+        }
+                
+        let loadedResource = try loader.retrieve(asType: type, from: url)
         
-        guard let loader = resourceLoaders[typeKey] else {
-            throw ResourceLoadingError.unknownType(unknownType: "\(typeKey)")
+        // Only cache if appropriate
+        if loadedResource.cache {
+            cache[url] = loadedResource
         }
         
-        let loadedResource = try loader.retrieve(asType: type, from: url)
-        cache[url] = loadedResource
-        
-        return loadedResource
+        return loadedResource.newInstance()
     }
 }

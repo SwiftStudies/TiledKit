@@ -17,6 +17,7 @@ import Foundation
 enum ResourceLoadingError : Error {
     case unknownType(unknownType:String)
     case unsupportedType(loaderType:String, unsupportedType:String)
+    case noProjectSpecifiedForResourceCache
 }
 
 /// You can extend the range of resources and even the way resources are loaded by implementing your own `ResourceLoader`.
@@ -27,5 +28,5 @@ public protocol ResourceLoader {
     /// - Parameters:
     ///   - asType: The type that the `ResourceLoader` should retreive
     ///   - url: The `URL` of the resource
-    func retrieve<R>(asType:R.Type, from url:URL) throws ->R
+    func retrieve<R:Loadable>(asType:R.Type, from url:URL) throws ->R
 }

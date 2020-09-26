@@ -13,7 +13,7 @@
 //    limitations under the License.
 
 /// A `TileSet` represents a Tiled tile set, most typically loaded as part of loading a `Map`.
-public class TileSet {
+public class TileSet : Loadable {
     /// The name of the `TileSet`
     public let name : String
     
@@ -54,6 +54,23 @@ public class TileSet {
         set {
             tiles[tileId] = newValue
         }
+    }
+    
+    /// Creates and returns an instance of `TileSetLoader` which will load tilesets from Tiled tsx files
+    /// - Parameter project: The project the `TileSet` will be loaded connected to
+    /// - Returns: An instance of `TileSetLoader`
+    public static func loader(for project: Project) -> ResourceLoader {
+        return TileSetLoader(project: project)
+    }
+    
+    /// Maps should be cached, as they are value types a new instance is created anyway so there will not be unintended side effects
+    public let cache = true
+    
+    
+    /// A `TileSet` should be the same across all `Map`s in a project so no deep copy is done
+    /// - Returns: `self`
+    public func newInstance() -> Self {
+        return self
     }
 }
 

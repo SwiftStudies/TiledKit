@@ -20,7 +20,7 @@ enum MapError : Error {
 }
 
 /// Represents a Tiled map which can be loaded from a Tiled `tmx` file (other Tiled formats can be supported in the future, such as JSON). It contains the root collection of `Layer`s as well as carrying the references to the `TileSet`s used by the `Map`
-public struct Map : LayerContainer{
+public struct Map : LayerContainer, Loadable{
     /// The url the map was loaded from (if any)
     internal let  url              : URL?
     
@@ -61,5 +61,23 @@ public struct Map : LayerContainer{
         }
         
         return nil
+    }
+    
+    
+    /// Creates and returns an instance of `MapLoader` which will load maps from Tiled tmx files
+    /// - Parameter project: The project the `Map` will be loaded into
+    /// - Returns: An instance of `MapLoader`
+    public static func loader(for project: Project) -> ResourceLoader {
+        return MapLoader(project: project)
+    }
+    
+    /// Maps should be cached, as they are value types a new instance is created anyway so there will not be unintended side effects
+    public let cache = true
+    
+    
+    /// Returns `self` as it is a value type
+    /// - Returns: This value
+    public func newInstance() -> Map {
+        return self
     }
 }

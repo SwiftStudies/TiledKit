@@ -38,7 +38,7 @@ public class Project {
     let fileContainer   : FileContainer
     let folders         : [String]
     let objectTypes     : [String:String]
-    var resourceCache   = ResourceCache()
+    var resourceCache   : ResourceCache
     
 
     /// The default `Project` which uses the `Bundle.main` as its resource root
@@ -54,8 +54,8 @@ public class Project {
         folders = []
         objectTypes = [:]
         
-        resourceCache.registerLoader(MapLoader(project: self), forType: Map.self)
-        resourceCache.registerLoader(TileSetLoader(project: self), forType: TileSet.self)
+        resourceCache = ResourceCache()
+        resourceCache.project = self
     }
 
     /// Creates a new instance of a `Project` that uses the specied directory as its root
@@ -65,6 +65,8 @@ public class Project {
         fileContainer = FileContainer.folder(rootDirectory)
         folders = []
         objectTypes = [:]
+        resourceCache = ResourceCache()
+        resourceCache.project = self
     }
     
     
@@ -144,12 +146,21 @@ public class Project {
     ///   - baseUrl: The `URL` to use as the starting point if `resourceURL` is relative. Otherwise the project root will be used
     /// - Throws: Any errors thrown while the resource is being retreived (for example, the resource can't be found)
     /// - Returns: An instance of the resource
-    public func retrieve<R>(asType:R.Type, from resourceUrl:URL, relativeTo baseUrl:URL? = nil) throws ->R{
+    public func retrieve<R:Loadable>(asType:R.Type, from resourceUrl:URL, relativeTo baseUrl:URL? = nil) throws ->R{
         guard let resolvedUrl = resolve(resourceUrl, relativeTo: baseUrl) else {
             throw ProjectError.fileDoesNotExist(resourceUrl.standardized.absoluteString)
         }
         return try resourceCache.retrieve(as: R.self, from: resolvedUrl)
+    }
+    
+    /// Stores an asset in the `Project`s resource cache for later retreival via the supplied `URL`. In this way `ResourceLoaders` can exploit the ability
+    /// to create common cached assets
+    /// - Parameters:
+    ///   - asset: The asset
+    ///   - assetUrl: The URL of the asset/resource
+    public func store<R:Loadable>(_ asset:R, as assetUrl:URL) {
 
+        return resourceCache.store(asset, as: assetUrl)
     }
     
     /// Gets a map from the project.
