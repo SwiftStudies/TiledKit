@@ -18,8 +18,8 @@ public struct Frame {
     /// The tile to display
     public let tile : Tile
     
-    /// Duration the frame should be displayed in milliseconds
-    public let duration : UInt
+    /// Duration the frame should be displayed in seconds
+    public let duration : Double
 }
 
 public class Tile {

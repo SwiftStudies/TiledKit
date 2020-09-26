@@ -326,7 +326,7 @@ final class TiledKitTests: XCTestCase {
 
 
             //Confirm loading multiline properties works OK
-            XCTAssertEqual(tileSet.properties["fileteringMode"],"nearest")
+            XCTAssertEqual(tileSet.properties["filteringMode"],"nearest")
             XCTAssertNotNil(tileSet.properties["User Property"])
         } catch {
             XCTFail("\(error)")
@@ -338,10 +338,14 @@ final class TiledKitTests: XCTestCase {
         do {
             let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
 
+            guard let collisionBodies = tileSet[0]?.collisionBodies else {
+                XCTFail("Tile or collision bodies not found")
+                return
+            }
             
-            XCTAssertEqual(tileSet[0]?.collisionBodies?.count, 2)
-            XCTAssertEqual(tileSet[0]?.collisionBodies?[id: 0]?.position.x, 7.92176)
-            XCTAssertEqual(tileSet[0]?.collisionBodies?[id: 1]?.position.y, 3.00272)
+            XCTAssertEqual(collisionBodies.count, 2)
+            XCTAssertLessThan(collisionBodies[0].position.x - 7.92176, 0.1)
+            XCTAssertLessThan(collisionBodies[1].position.y - 3.00272, 0.1)
         } catch {
             XCTFail("\(error)")
         }
@@ -352,20 +356,20 @@ final class TiledKitTests: XCTestCase {
             let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
 
             
-            guard let tile = tileSet[0] else {
-                XCTFail("No tile with id 1")
+            guard let frames = tileSet[1]?.frames else {
+                XCTFail("No tile with id 1, or no frames")
                 return
             }
             
-            XCTAssertEqual(tile.frames?.count, 4)
-            XCTAssert(tile.frames?[0].tile.uuid.hasSuffix("0") ?? false)
-            XCTAssertEqual(tile.frames?[0].duration, 1)
-            XCTAssert(tile.frames?[0].tile.uuid.hasSuffix("1") ?? false)
-            XCTAssertEqual(tile.frames?[1].duration, 1)
-            XCTAssert(tile.frames?[0].tile.uuid.hasSuffix("2") ?? false)
-            XCTAssertEqual(tile.frames?[2].duration, 1)
-            XCTAssert(tile.frames?[0].tile.uuid.hasSuffix("3") ?? false)
-            XCTAssertEqual(tile.frames?[3].duration, 1)
+            XCTAssertEqual(frames.count, 4)
+            XCTAssertEqual(frames[0].tile.bounds.origin, Point(x: 0, y: 0))
+            XCTAssertEqual(frames[0].duration, 1)
+            XCTAssertEqual(frames[1].tile.bounds.origin, Point(x: 16, y: 0))
+            XCTAssertEqual(frames[1].duration, 1)
+            XCTAssertEqual(frames[2].tile.bounds.origin, Point(x: 0, y: 16))
+            XCTAssertEqual(frames[2].duration, 1)
+            XCTAssertEqual(frames[3].tile.bounds.origin, Point(x: 16, y: 16))
+            XCTAssertEqual(frames[3].duration, 1)
         } catch {
             XCTFail("\(error)")
         }

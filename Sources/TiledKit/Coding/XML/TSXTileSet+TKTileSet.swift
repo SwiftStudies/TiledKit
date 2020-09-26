@@ -44,8 +44,8 @@ extension TSXTileSet {
             // Calculate the bounds for each tile and add them to the tile set
             for tileId in 0..<tileSetXML.tileCount {
                 let origin = PixelPoint(
-                    x: tileId % tileSetXML.columns,
-                    y: tileId / tileSetXML.columns)
+                    x: (tileId % tileSetXML.columns) * tileSetXML.tileWidth,
+                    y: (tileId / tileSetXML.columns) * tileSetXML.tileHeight)
                 
                 let tile = Tile(
                     tileImageUrl,
@@ -86,7 +86,7 @@ extension TSXTileSet {
                 guard let frameTile = tileSet[xmlFrame.tileid] else {
                     throw TileSetLoadingError.tileForFrameDoesNotExist(xmlFrame.tileid)
                 }
-                return Frame(tile: frameTile, duration: UInt(xmlFrame.duration))
+                return Frame(tile: frameTile, duration: Double(xmlFrame.duration)/1000)
             })
             
             if frames.count > 0 {
