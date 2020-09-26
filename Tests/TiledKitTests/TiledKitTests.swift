@@ -13,15 +13,11 @@ final class TiledKitTests: XCTestCase {
     
     func testSingleImageTileSet(){
         do {
-            guard let url = Bundle.module.url(forResource: "SingleImageAutoTransparency", withExtension: "tsx", subdirectory: "Tilesets") else {
-                XCTFail("Could not find TileSet in bundle")
-                return
-            }
+            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "SingleImageAutoTransparency", in: "Tilesets", of: .tsx)!)
             
-            let tileSet = try TileSet(from: url)
-            XCTAssertEqual(tileSet.tileWidth, 16)
-            XCTAssertEqual(tileSet.tileHeight, 16)
-            XCTAssertEqual(tileSet.tiles.count, 4)
+            XCTAssertEqual(tileSet.tileSize.width, 16)
+            XCTAssertEqual(tileSet.tileSize.width, 16)
+            XCTAssertEqual(tileSet.count, 4)
             XCTAssertEqual(tileSet.properties.count, 1)
             XCTAssertEqual(tileSet.properties["filteringMode"], .string("nearest"))
         } catch {
@@ -31,21 +27,12 @@ final class TiledKitTests: XCTestCase {
     
     func testSingleImageTileSetWithOptionals(){
         do {
-            guard let url = Bundle.module.url(forResource: "SingleImageMarginsAndSpacing", withExtension: "tsx", subdirectory: "Tilesets") else {
-                XCTFail("Could not find TileSet in bundle")
-                return
-            }
+            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "SingleImageMarginsAndSpacing", in: "Tilesets", of: .tsx)!)
             
-            let tileSet = try TileSet(from: url)
-            XCTAssertEqual(tileSet.tileWidth, 12)
-            XCTAssertEqual(tileSet.tileHeight, 12)
-            XCTAssertEqual(tileSet.tiles.count, 4)
-            switch tileSet.type{
-            case .sheet(let tileSheet):
-                XCTAssertEqual(tileSheet.transparentColor, Color(r: 255, g: 0, b: 255))
-            default:
-                XCTFail("Should be a tilesheet")
-            }
+            XCTAssertEqual(tileSet.tileSize.width, 12)
+            XCTAssertEqual(tileSet.tileSize.height, 12)
+            XCTAssertEqual(tileSet.count, 4)
+            XCTAssertEqual(tileSet[0]?.transparentColor ?? Color(r: 0, g: 0, b: 0), Color(r: 255, g: 0, b: 255))
         } catch {
             XCTFail("Error thrown \(error)")
         }
@@ -53,15 +40,12 @@ final class TiledKitTests: XCTestCase {
 
     func testMultiImageTileSetWithSingleTile(){
         do {
-            guard let url = Bundle.module.url(forResource: "SeparateSingleImage", withExtension: "tsx", subdirectory: "Tilesets") else {
-                XCTFail("Could not find TileSet in bundle")
-                return
-            }
+            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "SeparateSingleImage", in: "Tilesets", of: .tsx)!)
+
             
-            let tileSet = try TileSet(from: url)
-            XCTAssertEqual(tileSet.tileWidth, 16)
-            XCTAssertEqual(tileSet.tileHeight, 16)
-            XCTAssertEqual(tileSet.tiles.count, 1)
+            XCTAssertEqual(tileSet.tileSize.width, 16)
+            XCTAssertEqual(tileSet.tileSize.height, 16)
+            XCTAssertEqual(tileSet.count, 1)
         } catch {
             XCTFail("Error thrown \(error)")
         }
@@ -69,57 +53,60 @@ final class TiledKitTests: XCTestCase {
     
     func testMultiImageTileSet(){
         do {
-            guard let url = Bundle.module.url(forResource: "SeparateMultipleImages", withExtension: "tsx", subdirectory: "Tilesets") else {
-                XCTFail("Could not find TileSet in bundle")
-                return
-            }
+            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "SeparateMultipleImages", in: "Tilesets", of: .tsx)!)
+
             
-            let tileSet = try TileSet(from: url)
-            XCTAssertEqual(tileSet.tileWidth, 16)
-            XCTAssertEqual(tileSet.tileHeight, 16)
-            XCTAssertEqual(tileSet.tiles.count, 2)
+            
+            XCTAssertEqual(tileSet.tileSize.width, 16)
+            XCTAssertEqual(tileSet.tileSize.height, 16)
+            XCTAssertEqual(tileSet.count, 2)
         } catch {
             XCTFail("Error thrown \(error)")
         }
     }
     
-    func loadTestLevel(url:URL? = nil) throws -> Level {
-        guard let url = url ?? Bundle.module.url(forResource: "Test Map 1", withExtension: "tmx", subdirectory: "Maps") else {
-            throw TestError.message("Failed to get URL for default Test Map 1")
+    lazy var moduleBundleProject : Project = {
+        Project(using: Bundle.module)
+    }()
+    
+    func loadTestMap(from project:Project, name:String? = nil, in subDirectory:String = "Maps") throws -> Map {
+        if let name = name {
+            return try project.get(name, in: subDirectory)
         }
-        
-        return try Level(from: url)
+        return try project.get("Test Map 1", in: "Maps")
     }
     
-    func testLevel(){
-        let level : Level
+    func testMap(){
+        let map : Map
         do {
-            level = try loadTestLevel()
+            map = try loadTestMap(from: moduleBundleProject)
         } catch {
             XCTFail("\(error)")
             return
         }
         
-        XCTAssertEqual(level.width, 10)
-        XCTAssertEqual(level.height, 10)
-        XCTAssertEqual(level.tileWidth, 16)
-        XCTAssertEqual(level.tileHeight, 16)
-        XCTAssertEqual(level.layers.count, 6)
-        XCTAssertEqual(level.properties.count, 7)
+        XCTAssertEqual(map.mapSize.width, 10)
+        XCTAssertEqual(map.mapSize.height, 10)
+        XCTAssertEqual(map.tileSize.width, 16)
+        XCTAssertEqual(map.tileSize.height, 16)
+        XCTAssertEqual(map.pixelSize.width, 160)
+        XCTAssertEqual(map.pixelSize.height, 160)
 
-        XCTAssertEqual(level.getTileLayers().count, 2)
-        XCTAssertEqual(level.getObjectLayers().count, 1)
-        XCTAssertEqual(level.getGroups().count, 2)
+        XCTAssertEqual(map.layers.count, 6)
+        XCTAssertEqual(map.properties.count, 7)
 
-        guard let nestedImageLayer = level.getLayers(ofType: .image, named: "Grouped Image Layer", matching: [:], recursively: true)[0] as? ImageLayer else {
-            XCTFail("Could not get nested image layer")
-            return
-        }
-        
-        XCTAssertEqual((nestedImageLayer.parent as? GroupLayer)?.name ?? "FAILED", "Group")
-        
-        XCTAssertEqual(level.getObjectLayers()[0].objects.count, 7)
-        XCTAssertEqual(level.getTileLayers()[0].tiles.count, 100)
+        XCTAssertEqual(map.tileLayers.count, 2) //level.getTileLayers().count
+        XCTAssertEqual(map.objectLayers.count, 1) //level.getObjectLayers().count
+        XCTAssertEqual(map.groupLayers.count, 2) //level.getGroups().count
+
+        let nestedImageLayer = map.groupLayers[0].group.imageLayers[0]
+        XCTAssertEqual(nestedImageLayer.layer.name, "Grouped Image Layer")
+        XCTAssertEqual(map.tileLayers[0].grid[0,0], TileGID(tileId: 0, flip: []))
+        XCTAssertEqual(map.tileLayers[1].grid[0,0], TileGID(tileId: 5, flip: []))
+        XCTAssertEqual(map.tileLayers[0].grid.size,  map.mapSize)
+        XCTAssertEqual(nestedImageLayer.image.size, PixelSize(width: 16, height: 16))
+        XCTAssertTrue(nestedImageLayer.image.source.path.hasSuffix("F.png"))
+        XCTAssertEqual(map.objectLayers[0].objects.count, 7)
     }
     
     func testColor(){
@@ -136,21 +123,21 @@ final class TiledKitTests: XCTestCase {
     }
     
     func testObjectLayer(){
-        let level : Level
+        let map : Map
         do {
-            level = try loadTestLevel()
+            map = try loadTestMap(from: moduleBundleProject)
         } catch {
             XCTFail("\(error)")
             return
         }
         
-        guard let objectLayer = level.getObjectLayers().first else {
+        guard let objectLayer = map.objectLayers.first else {
             XCTFail("No object layer")
             return
         }
         
-        XCTAssertEqual(objectLayer["Elipse"].count, 1)
-        guard let imageObject = objectLayer[7] else {
+        XCTAssertEqual(objectLayer.objects[name: "Elipse"].count, 1)
+        guard let imageObject = objectLayer.objects[id:7] else {
             XCTFail("Could not find imageObject by id")
             return
         }
@@ -159,175 +146,187 @@ final class TiledKitTests: XCTestCase {
     }
     
     func testTextObject(){
-        let level : Level
+        let map : Map
         do {
-            level = try loadTestLevel()
+            map = try loadTestMap(from: moduleBundleProject)
         } catch {
             XCTFail("\(error)")
             return
         }
         
-        guard let objectLayer = level.getObjectLayers().first else {
+        guard let objectLayer = map.objectLayers.first else {
             XCTFail("No object layer")
             return
         }
         
-        guard let object = objectLayer["Text"].first else {
+        guard let object = objectLayer.objects[name:"Text"].first else {
             XCTFail("Could not get object")
             return
         }
         
-        guard let textObject = object as? TextObject else {
-            XCTFail("Object is not a TextObject")
-            return
+        switch  object.kind {
+        case .text(let string, let size, let rotation, let style):
+            XCTAssertEqual(string, "Bottom")
+            XCTAssertEqual(style.horizontalAlignment, .left)
+            XCTAssertEqual(style.verticalAlignment, .top)
+            XCTAssertEqual(style.fontFamily, "Courier New")
+            XCTAssertEqual(style.pixelSize, 8)
+            XCTAssertEqual(style.wrap, true)
+            XCTAssertEqual(style.color, Color(r: 32, g: 255, b: 255, a: 255))
+            XCTAssertEqual(style.bold, false)
+            XCTAssertEqual(style.italic, false)
+            XCTAssertEqual(style.underline, false)
+            XCTAssertEqual(style.strikeout, false)
+            XCTAssertEqual(rotation, 0)
+            XCTAssertEqual(size, Size(width: 31.5087, height: 8.20547))
+        default:
+            XCTFail("Object is not a text object")
         }
-        
-        XCTAssertEqual(textObject.string, "Bottom")
-        XCTAssertEqual(textObject.style.horizontalAlignment, .left)
-        XCTAssertEqual(textObject.style.verticalAlignment, .top)
-        XCTAssertEqual(textObject.style.fontFamily, "Courier New")
-        XCTAssertEqual(textObject.style.pixelSize, 8)
-        XCTAssertEqual(textObject.style.wrap, true)
-        XCTAssertEqual(textObject.style.color, Color(r: 32, g: 255, b: 255, a: 255))
-        XCTAssertEqual(textObject.style.bold, false)
-        XCTAssertEqual(textObject.style.italic, false)
-        XCTAssertEqual(textObject.style.underline, false)
-        XCTAssertEqual(textObject.style.strikeout, false)
+                
 }
 
     func testElipseObject(){
-        let level : Level
+        let map : Map
         do {
-            level = try loadTestLevel()
+            map = try loadTestMap(from: moduleBundleProject)
         } catch {
             XCTFail("\(error)")
             return
         }
         
-        guard let objectLayer = level.getObjectLayers().first else {
+        guard let objectLayer = map.objectLayers.first else {
             XCTFail("No object layer")
             return
         }
         
-        guard let object = objectLayer["Elipse"].first else {
+        guard let object = objectLayer.objects[name: "Elipse"].first else {
             XCTFail("Could not get object")
             return
         }
         
-        guard let elipseObject = object as? EllipseObject else {
+        switch object.kind {
+        case .ellipse(let size, let rotation):
+            XCTAssertEqual(rotation, 45)
+            XCTAssertEqual(size, Size(width: 96, height: 96))
+        default:
             XCTFail("Object is not an ElipseObject")
-            return
         }
         
-        XCTAssertEqual(elipseObject.rotation, 45)
     }
 
     func testRectangleObject(){
-        let level : Level
+        let map : Map
         do {
-            level = try loadTestLevel()
+            map = try loadTestMap(from: moduleBundleProject)
         } catch {
             XCTFail("\(error)")
             return
         }
         
-        guard let objectLayer = level.getObjectLayers().first else {
+        guard let objectLayer = map.objectLayers.first else {
             XCTFail("No object layer")
             return
         }
         
-        guard let object = objectLayer["Rectangle"].first else {
+        guard let object = objectLayer.objects[name: "Rectangle"].first else {
             XCTFail("Could not get object")
             return
         }
-        
-        guard let rectangleObject = object as? RectangleObject else {
-            XCTFail("Object is not a RectangleObject")
-            return
+        XCTAssertEqual(object.id, 4)
+        XCTAssertEqual(object.position.x, 128.027)
+        XCTAssertEqual(object.position.y, 19.5807)
+
+        switch object.kind {
+        case .rectangle(let size, let rotation):
+            XCTAssertEqual(rotation, 0)
+            XCTAssertEqual(size, Size(width: 15.8151, height: 12.3007))
+        default:
+            XCTFail("Object is not a Rectangle")
         }
-        
-        XCTAssertEqual(rectangleObject.id, 4)
-        XCTAssertEqual(rectangleObject.x, 128.027)
-        XCTAssertEqual(rectangleObject.y, 19.5807)
-        XCTAssertEqual(rectangleObject.width, 15.8151)
-        XCTAssertEqual(rectangleObject.height, 12.3007)
-        XCTAssertEqual(rectangleObject.rotation, 0)
     }
 
     func testImageObject(){
-        let level : Level
+        let map : Map
         do {
-            level = try loadTestLevel()
+            map = try loadTestMap(from: moduleBundleProject)
         } catch {
             XCTFail("\(error)")
             return
         }
         
-        guard let objectLayer = level.getObjectLayers().first else {
+        guard let objectLayer = map.objectLayers.first else {
             XCTFail("No object layer")
             return
         }
         
-        guard let object = objectLayer["Tile"].first else {
+        guard let object = objectLayer.objects[name: "Tile"].first else {
             XCTFail("Could not get object")
             return
         }
-        
-        guard let tileObject = object as? TileObject else {
-            XCTFail("Object is not a TileObject")
-            return
+        XCTAssertEqual(object.id, 7)
+        XCTAssertEqual(object.position.x, 13.2425)
+        XCTAssertEqual(object.position.y, 40.4335)
+
+        switch object.kind {
+        case .tile(let gid, let size, let rotation):
+            XCTAssertEqual(gid, TileGID(tileId: 1, flip: []))
+            XCTAssertEqual(rotation, 45)
+            XCTAssertEqual(size, Size(width: 16, height: 16))
+            guard let tile = map[gid] else {
+                XCTFail("Tile is not in level tile dictionary")
+                return
+            }
+            
+            XCTAssertEqual(tile.imageSource.lastPathComponent, "4 Tiles.png")
+            XCTAssertEqual(tile.bounds, PixelBounds(origin: Point.zero, size: Dimension(width:16,height: 16)))
+        default:
+            XCTFail("Object is not a Tile")
         }
-        
-        guard let tile = level.tiles[tileObject.gid] else {
-            XCTFail("Tile is not in level tile dictionary")
-            return
-        }
-        
-        XCTAssertEqual(tile.tileSet?.name ?? "Tile set not found", "SingleImageAutoTransparency")
     }
 
     func testImageLayer(){
-        let level : Level
+        let map : Map
         do {
-            level = try loadTestLevel()
+            map = try loadTestMap(from: moduleBundleProject)
         } catch {
             XCTFail("\(error)")
             return
         }
         
-        guard let imageLayer = (level.getLayers(ofType: .image, named: "Image Layer", matching: [String : PropertyValue](), recursively: false) as? [ImageLayer])?.first else {
+        guard let imageLayer = map.imageLayers.first else {
             XCTFail("No image layer")
             return
         }
         
-        XCTAssertEqual(imageLayer.x, 72)
-        XCTAssertEqual(imageLayer.y, 48)
-        XCTAssertTrue(imageLayer.url.standardized.path.hasSuffix("Resources/Images/Individual/F.png"), "URL is incorrect \(imageLayer.url)")
+        
+        XCTAssertEqual(imageLayer.layer.position.x, 72)
+        XCTAssertEqual(imageLayer.layer.position.y, 48)
+        XCTAssertTrue(imageLayer.image.source.standardized.path.hasSuffix("Resources/Images/Individual/F.png"), "URL is incorrect \(imageLayer.image.source)")
     }
     
     func testOneOfEverything(){
-        let level : Level
+        let map : Map
         do {
-            level = try loadTestLevel(url: Bundle.module.url(forResource: "One of Everything", withExtension: "tmx", subdirectory: "Maps"))
+            map = try loadTestMap(from: moduleBundleProject, name: "One of Everything" )
         } catch {
             XCTFail("\(error)")
             return
         }
+
+        XCTAssertEqual(map.objectLayers[0].layer.position.x, 16)
+        XCTAssertEqual(map.objectLayers[0].layer.position.y, 16)
         
-        XCTAssertEqual(level.getObjectLayers()[0].x, 16)
-        XCTAssertEqual(level.getObjectLayers()[0].y, 16)
-        
-        XCTAssertEqual(level.getGroups()[0].x, 144)
-        XCTAssertEqual(level.getGroups()[0].y, 80)
+        XCTAssertEqual(map.groupLayers[0].layer.position.x, 144)
+        XCTAssertEqual(map.groupLayers[0].layer.position.y, 80)
     }
 
     func testMultipleProperties(){
         do {
-            let tileSet = try TileSet(from: Bundle.module.url(forResource: "Animation", withExtension: "tsx", subdirectory: "Tilesets")!)
+            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
 
 
             //Confirm loading multiline properties works OK
-            XCTAssertEqual(tileSet.filteringMode,"nearest")
+            XCTAssertEqual(tileSet.properties["filteringMode"],"nearest")
             XCTAssertNotNil(tileSet.properties["User Property"])
         } catch {
             XCTFail("\(error)")
@@ -337,11 +336,16 @@ final class TiledKitTests: XCTestCase {
     
     func testTileSetCollisionObjects(){
         do {
-            let tileSet = try TileSet(from: Bundle.module.url(forResource: "Animation", withExtension: "tsx", subdirectory: "Tilesets")!)
+            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
+
+            guard let collisionBodies = tileSet[0]?.collisionBodies else {
+                XCTFail("Tile or collision bodies not found")
+                return
+            }
             
-            XCTAssertEqual((tileSet.tiles[0]?.objects?.objects.count) ?? 0, 2)
-            XCTAssertEqual((tileSet.tiles[0]?.objects?.objects[0].x) ?? 0, 7.92176)
-            XCTAssertEqual((tileSet.tiles[0]?.objects?.objects[1].y) ?? 0, 3.00272)
+            XCTAssertEqual(collisionBodies.count, 2)
+            XCTAssertLessThan(collisionBodies[0].position.x - 7.92176, 0.1)
+            XCTAssertLessThan(collisionBodies[1].position.y - 3.00272, 0.1)
         } catch {
             XCTFail("\(error)")
         }
@@ -349,29 +353,30 @@ final class TiledKitTests: XCTestCase {
     
     func testTileSetAnimationFrames(){
         do {
-            let tileSet = try TileSet(from: Bundle.module.url(forResource: "Animation", withExtension: "tsx", subdirectory: "Tilesets")!)
+            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
+
             
-            guard let tile = tileSet.tiles[1] else {
-                XCTFail("No tile with id 1")
+            guard let frames = tileSet[1]?.frames else {
+                XCTFail("No tile with id 1, or no frames")
                 return
             }
             
-            XCTAssertEqual(tile.animation.count, 4)
-            XCTAssert(tile.animation[0].tile.identifier.stringSource!.hasSuffix("0"))
-            XCTAssertEqual(tile.animation[0].duration, 1)
-            XCTAssert(tile.animation[1].tile.identifier.stringSource!.hasSuffix("1"))
-            XCTAssertEqual(tile.animation[1].duration, 1)
-            XCTAssert(tile.animation[2].tile.identifier.stringSource!.hasSuffix("2"))
-            XCTAssertEqual(tile.animation[2].duration, 1)
-            XCTAssert(tile.animation[3].tile.identifier.stringSource!.hasSuffix("3"))
-            XCTAssertEqual(tile.animation[3].duration, 1)
+            XCTAssertEqual(frames.count, 4)
+            XCTAssertEqual(frames[0].tile.bounds.origin, Point(x: 0, y: 0))
+            XCTAssertEqual(frames[0].duration, 1)
+            XCTAssertEqual(frames[1].tile.bounds.origin, Point(x: 16, y: 0))
+            XCTAssertEqual(frames[1].duration, 1)
+            XCTAssertEqual(frames[2].tile.bounds.origin, Point(x: 0, y: 16))
+            XCTAssertEqual(frames[2].duration, 1)
+            XCTAssertEqual(frames[3].tile.bounds.origin, Point(x: 16, y: 16))
+            XCTAssertEqual(frames[3].duration, 1)
         } catch {
             XCTFail("\(error)")
         }
     }
     
     static var allTests = [
-        ("testLevel",testLevel),
+        ("testMap",testMap),
         ("testMultiImageTileSetWithSingleTile",testMultiImageTileSetWithSingleTile),
         ("testMultiImageTileSet",testMultiImageTileSet),
         ("testSingleImageTileSetWithOptionals", testSingleImageTileSetWithOptionals),

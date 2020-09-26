@@ -12,23 +12,27 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-
 import Foundation
 
-fileprivate enum PropertyXMLCodingKeys : String, CodingKey {
-    case properties, property
-}
+/// A `Dictionary` of named `PropertyValue`s used with any Tiled object that can have user defined properties (captured in `PropertyValue`)
+public typealias Properties = [String : PropertyValue]
 
+/// Any TiledKit object that can have user defined properties
 public protocol Propertied {
-    var  properties : [String : PropertyValue] {get set}
+    /// The `Properties` of the object
+    var  properties : Properties {get set}
 }
 
-public enum PropertyValue : Equatable{
-    case string(String), bool(Bool), int(Int), double(Double), file(url:URL), color(color:Color), object(id:Int), error(type:String, value:String)
-}
-
+/// Extends any `Propertied` object to support dynamic member resolution for the dedicated types. 
 public extension Propertied {
     
+    /// Retreives a `Color` from an object that can have user properties dynamically.
+    ///
+    ///             let fillColor : Color = layer.fillColor ?? Color.white
+    ///
+    /// - Parameters:
+    ///   - member: The name of the property
+    /// - returns: The  `Color` value or `nil` if the property does not exist, or is not of the right type
     subscript(dynamicMember member:String)->Color? {
         guard let property = properties[member] else {
             return nil
@@ -39,7 +43,13 @@ public extension Propertied {
         return nil
     }
 
-    
+    /// Retreives a `URL` from an object that can have user properties dynamically.
+    ///
+    ///             let levelTheme : URL? = layer.levelMP3
+    ///
+    /// - Parameters:
+    ///   - member: The name of the property
+    /// - returns: The  `URL` value or `nil` if the property does not exist, or is not of the right type
     subscript(dynamicMember member:String)->URL? {
         guard let property = properties[member] else {
             return nil
@@ -50,7 +60,13 @@ public extension Propertied {
         return nil
     }
 
-    
+    /// Retreives a `Double` from an object that can have user properties dynamically.
+    ///
+    ///             let weight : Double = object.weight ?? 100.0
+    ///
+    /// - Parameters:
+    ///   - member: The name of the property
+    /// - returns: The  `Double` value or `nil` if the property does not exist, or is not of the right type
     subscript(dynamicMember member:String)->Double? {
         guard let property = properties[member] else {
             return nil
@@ -62,6 +78,13 @@ public extension Propertied {
     }
 
     
+    /// Retreives a `Int` from an object that can have user properties dynamically.
+    ///
+    ///             let extraLives : Int = layer.bonusLives ?? 0
+    ///
+    /// - Parameters:
+    ///   - member: The name of the property
+    /// - returns: The  `Int` value or `nil` if the property does not exist, or is not of the right type
     subscript(dynamicMember member:String)->Int? {
         guard let property = properties[member] else {
             return nil
@@ -72,6 +95,13 @@ public extension Propertied {
         return nil
     }
 
+    /// Retreives a `Bool` from an object that can have user properties dynamically.
+    ///
+    ///             let pausable : Bool = layer.pausable ?? true
+    ///
+    /// - Parameters:
+    ///   - member: The name of the property
+    /// - returns: The  `Bool` value or `nil` if the property does not exist, or is not of the right type
     subscript(dynamicMember member:String)->Bool? {
         guard let property = properties[member] else {
             return nil
@@ -82,6 +112,13 @@ public extension Propertied {
         return nil
     }
 
+    /// Retreives a `String` from an object that can have user properties dynamically.
+    ///
+    ///             let gameOverText : String = layer.gameOverText ?? "Game Over"
+    ///
+    /// - Parameters:
+    ///   - member: The name of the property
+    /// - returns: The  `String` value or `nil` if the property does not exist, or is not of the right type
     subscript(dynamicMember member:String)->String? {
         guard let property = properties[member] else {
             return nil
@@ -93,79 +130,6 @@ public extension Propertied {
     }
 }
 
-fileprivate enum RawPropertyType : String, Decodable {
-    case string, bool, int, float, file, color, object
-}
 
-fileprivate struct XMLProperty : Decodable {
 
-    
-    let name    : String
-    let type    : RawPropertyType?
-    private let value : String
-    
-    public enum CodingKeys : String, CodingKey {
-        case name, type, value, element = ""
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        name = try container.decode(String.self, forKey: .name)
-        type = try container.decodeIfPresent(RawPropertyType.self, forKey: .type)
-        
-        if let valueInAttribute = try container.decodeIfPresent(String.self, forKey: .value) {
-            value = valueInAttribute
-        } else if type == nil {
-            value = try container.decode(String.self, forKey: .element)
-        } else {
-            throw TiledDecodingError.propertyHasNoValue
-        }
-    }
-    
-    var property : PropertyValue {
 
-        guard let type = type else {
-            return .string(value)
-        }
-        
-        switch type {
-        case .string:
-            return .string(value)
-        case .bool:
-            return .bool(value == "true")
-        case .int:
-            if let intValue = Int(value) {
-                return .int(intValue)
-            }
-        case .float:
-            if let value = Double(value) {
-                return .double(value)
-            }
-        case .file:
-            return .file(url: URL(fileURLWithPath: value))
-        case .color:
-            return .color(color: Color(from: value))
-        case .object:
-            if let objectId = Int(value) {
-                return .object(id: objectId)
-            }
-        }
-        
-        return .error(type: "\(type)", value: value)
-    }
-}
-
-extension Decodable where Self : Propertied {
-    func decode(from decoder:Decoder) throws -> [String : PropertyValue] {
-        let container = try decoder.container(keyedBy: PropertyXMLCodingKeys.self)
-        
-        let propertiesContainer = try container.nestedContainer(keyedBy: PropertyXMLCodingKeys.self, forKey: .properties)
-        
-        let properties = try propertiesContainer.decode([XMLProperty].self, forKey: .property).reduce(into:[String:PropertyValue]()){
-            $0[$1.name] = $1.property
-        }
-        
-        return properties
-    }
-}

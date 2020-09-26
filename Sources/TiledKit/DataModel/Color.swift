@@ -12,13 +12,26 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import Foundation
+/// Explicit type for bytes
+public typealias Byte = UInt8
 
-public struct Color : Decodable, Equatable{
-    public let red:Byte, green:Byte, blue:Byte, alpha:Byte
+
+/// Captures colors in a platform independent way for subsequent specialization.
+public struct Color : Equatable{
+    /// The amount of red in the color from 0 to 255
+    public let red:Byte
+
+    /// The amount of green in the color from 0 to 255
+    public let green:Byte
+
+    /// The amount of blue in the color from 0 to 255
+    public let blue:Byte
+
+    /// The opacity of color from 0 to 255
+    public let alpha:Byte
     
-    //Tiled represents colors in the form of a string #AARRGGBB
-    public init(from string:String){
+    /// Construct a color from any of the different string forms they appear in in Tiled
+    init(from string:String){
         if string.hasPrefix("#") {
             if string.count == 7 {
                 alpha = 255
@@ -48,6 +61,14 @@ public struct Color : Decodable, Equatable{
         }
     }
     
+    
+    /// Constructs a new `Color` instance with the specified RGBA (alpha is optional)
+    ///
+    /// - Parameters:
+    ///   - r: The amount of red in the color from 0 to 255
+    ///   - g: The amount of green in the color from 0 to 255
+    ///   - b: The amount of blue in the color from 0 to 255
+    ///   - a: The opacity of the color from 0 to 255 (0 fully transparent, 255 fully opaque)
     public init(r:Byte, g:Byte, b:Byte, a:Byte = 255){
         red = r
         green = g
@@ -55,14 +76,21 @@ public struct Color : Decodable, Equatable{
         alpha = a
     }
     
-    public init(from decoder:Decoder) throws {
-        let stringValue = try decoder.singleValueContainer().decode(String.self)
-        let colorObject = Color(from: stringValue)
-        red = colorObject.red
-        green = colorObject.green
-        blue = colorObject.blue
-        alpha = colorObject.alpha
-    }
+    /// Predefined white color
+    public static let white = Color(r: 255, g: 255, b: 255)
+    
+    /// Predefined black color
+    public static let black = Color(r: 0, g: 0, b: 0)
+    
+    /// Predefined clear color (transparent black)
+    public static let clear = Color(r: 0, g: 0, b: 0, a: 0)
 }
 
-
+/// Convenience extension for parsing the color string
+fileprivate extension String {
+    subscript(_ range:Range<Int>)->String{
+        let lower = index(startIndex, offsetBy: range.lowerBound)
+        let upper = index(startIndex, offsetBy: range.upperBound)
+        return String(self[lower..<upper])
+    }
+}

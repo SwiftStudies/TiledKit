@@ -1,0 +1,19 @@
+{
+  "warnings": [
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
+      "line": 63,
+      "symbol": "TileSetReference.firstGid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
+      "line": 64,
+      "symbol": "TileSetReference.tileSet",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit"
+}

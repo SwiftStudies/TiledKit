@@ -48,6 +48,20 @@
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "TKXMLCoding"
+               BuildableName = "TKXMLCoding"
+               BlueprintName = "TKXMLCoding"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -80,6 +94,16 @@
                BlueprintIdentifier = "TiledKitTests"
                BuildableName = "TiledKitTests"
                BlueprintName = "TiledKitTests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "TKXMLCodingTests"
+               BuildableName = "TKXMLCodingTests"
+               BlueprintName = "TKXMLCodingTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
