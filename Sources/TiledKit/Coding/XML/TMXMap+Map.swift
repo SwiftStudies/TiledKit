@@ -17,7 +17,7 @@ import Foundation
 
 extension TMXMap {
     static func build(in project:Project, from url:URL) throws -> Map {
-        guard let _ = FileTypes(rawValue: url.pathExtension) else {
+        guard let _ = FileType(rawValue: url.pathExtension) else {
             throw MapError.unknownMapType(url.pathExtension)
         }
 

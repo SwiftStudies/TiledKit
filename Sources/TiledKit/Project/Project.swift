@@ -74,7 +74,7 @@ public class Project {
     ///   - subDirectory: The sub-directory path if it is not located at the root
     ///   - type: The type of file
     /// - Returns: A `URL` for the file in the `Project` or `nil` if it could not be found
-    public func url(for file:String, in subDirectory:String? = nil, of type:FileTypes? = nil) -> URL? {
+    public func url(for file:String, in subDirectory:String? = nil, of type:FileType? = nil) -> URL? {
         guard let type = type else {
             return fileContainer.url(of: file, in: subDirectory)
         }
@@ -123,7 +123,7 @@ public class Project {
         }
         
         // If it's an image resource, perhaps it's in a bundle and has been processed
-        if let fileType = FileTypes(rawValue: url.lastPathComponent), fileType.isImage {
+        if let fileType = FileType(rawValue: url.lastPathComponent), fileType.isImage {
             if let url = self.url(for: url.deletingPathExtension().lastPathComponent, in: nil, of: fileType), url.isReachable {
                 return url
             }

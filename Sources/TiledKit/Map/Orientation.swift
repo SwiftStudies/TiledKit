@@ -12,7 +12,18 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-
+/// Captures the different orientations supported by Tiled `Map`s
 public enum Orientation : String, Codable, CaseIterable{
-    case orthogonal, isometric, staggered, hexagonal
+    
+    /// A top-down/side-on view
+    case orthogonal
+    
+    /// 2D plane of the map rotated around the z axis by 45 degrees
+    case isometric
+    
+    /// A staggered view
+    case staggered
+    
+    /// A hexagonal grid (all tiles have 6 sides)
+    case hexagonal
 }

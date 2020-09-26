@@ -12,12 +12,19 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+/// Implemented by any object that can contain `Layer`s (such as a `Map`)
 public protocol LayerContainer {
+    /// The `Layer`s inside the container
     var     layers : [Layer] {get}
 }
 
+/// Standard functions provided by all `LayerContainer`s
 public extension LayerContainer {
-    /// Retreives a layer with the specified name
+
+    /// Retreives the first `Layer` with the specified name
+    ///     - Parameters:
+    ///         - name : The name of the `Layer`
+    ///     - returns: The `Layer` or `nil` if not found
     subscript(layerNamed name:String)->Layer?{
         for layer in layers {
             if layer.name == name {
@@ -27,7 +34,7 @@ public extension LayerContainer {
         return nil
     }
     
-    /// Retrieves all tile layers in a tuple container both the generic layer and the tile grid
+    /// All tile `Layer`s in the container together with their `TileGrid`
     var tileLayers : [(layer:Layer, grid:TileGrid)] {
         return layers.compactMap(){ (layer) -> (Layer, TileGrid)? in
             if case let Layer.Kind.tile(tileGrid) = layer.kind {
@@ -37,7 +44,7 @@ public extension LayerContainer {
         }
     }
     
-    /// Retrieves all group layers in a tuple container both the generic layer and the grouped layers
+    /// All group `Layer`s in the container together with the `Group` object, which is itself a `LayerContainer`
     var groupLayers : [(layer:Layer, group:Group)] {
         return layers.compactMap(){ (layer) -> (Layer, Group)? in
             if case let Layer.Kind.group(group) = layer.kind {
@@ -47,7 +54,7 @@ public extension LayerContainer {
         }
     }
     
-    /// Retrieves all object layers in a tuple container both the generic layer and the contained objects
+    /// All object `Layer`s in the container together with their `Object`s
     var objectLayers : [(layer:Layer, objects:[Object])] {
         return layers.compactMap(){ (layer) -> (Layer, [Object])? in
             if case let Layer.Kind.objects(objects) = layer.kind {
@@ -58,7 +65,7 @@ public extension LayerContainer {
     }
 
     
-    /// Retrieves all image layers in a tuple container both the generic layer and the associated image
+    /// All image `Layer`s in the container together with their `ImageReference`s
     var imageLayers : [(layer:Layer, image:ImageReference)] {
         return layers.compactMap(){ (layer) -> (Layer, ImageReference)? in
             if case let Layer.Kind.image(image) = layer.kind {

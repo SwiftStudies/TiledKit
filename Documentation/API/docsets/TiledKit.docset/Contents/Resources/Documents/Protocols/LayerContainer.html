@@ -17,7 +17,7 @@
     <a title="LayerContainer Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TiledKit Docs</a> (71% documented)</p>
+        <p><a href="../index.html">TiledKit Docs</a> (99% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -54,7 +54,7 @@
             <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Enums/FileTypes.html">FileTypes</a>
+                <a href="../Enums/FileType.html">FileType</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/HorizontalTextAlignment.html">HorizontalTextAlignment</a>
@@ -67,9 +67,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/RenderingOrder.html">RenderingOrder</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Enums/ResourceLoadingError.html">ResourceLoadingError</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/VerticalTextAlignment.html">VerticalTextAlignment</a>
@@ -202,7 +199,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Implemented by any object that can contain <code><a href="../Structs/Layer.html">Layer</a></code>s (such as a <code><a href="../Structs/Map.html">Map</a></code>)</p>
 
           </section>
           <section class="section task-group-section">
@@ -221,7 +218,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The <code><a href="../Structs/Layer.html">Layer</a></code>s inside the container</p>
 
                       </div>
                       <div class="declaration">
@@ -251,7 +248,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Retreives a layer with the specified name</p>
+                        <p>Retreives the first <code><a href="../Structs/Layer.html">Layer</a></code> with the specified name
+    - Parameters:
+        - name : The name of the <code><a href="../Structs/Layer.html">Layer</a></code>
+    - returns: The <code><a href="../Structs/Layer.html">Layer</a></code> or <code>nil</code> if not found</p>
 
                       </div>
                       <div class="declaration">
@@ -281,7 +281,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Retrieves all tile layers in a tuple container both the generic layer and the tile grid</p>
+                        <p>All tile <code><a href="../Structs/Layer.html">Layer</a></code>s in the container together with their <code><a href="../Structs/TileGrid.html">TileGrid</a></code></p>
 
                       </div>
                       <div class="declaration">
@@ -311,7 +311,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Retrieves all group layers in a tuple container both the generic layer and the grouped layers</p>
+                        <p>All group <code><a href="../Structs/Layer.html">Layer</a></code>s in the container together with the <code><a href="../Structs/Group.html">Group</a></code> object, which is itself a <code>LayerContainer</code></p>
 
                       </div>
                       <div class="declaration">
@@ -341,7 +341,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Retrieves all object layers in a tuple container both the generic layer and the contained objects</p>
+                        <p>All object <code><a href="../Structs/Layer.html">Layer</a></code>s in the container together with their <code><a href="../Structs/Object.html">Object</a></code>s</p>
 
                       </div>
                       <div class="declaration">
@@ -371,7 +371,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Retrieves all image layers in a tuple container both the generic layer and the associated image</p>
+                        <p>All image <code><a href="../Structs/Layer.html">Layer</a></code>s in the container together with their <code><a href="../Structs/ImageReference.html">ImageReference</a></code>s</p>
 
                       </div>
                       <div class="declaration">

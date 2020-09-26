@@ -17,7 +17,7 @@
     <a title="TileSet Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TiledKit Docs</a> (71% documented)</p>
+        <p><a href="../index.html">TiledKit Docs</a> (99% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -54,7 +54,7 @@
             <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Enums/FileTypes.html">FileTypes</a>
+                <a href="../Enums/FileType.html">FileType</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/HorizontalTextAlignment.html">HorizontalTextAlignment</a>
@@ -67,9 +67,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/RenderingOrder.html">RenderingOrder</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Enums/ResourceLoadingError.html">ResourceLoadingError</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/VerticalTextAlignment.html">VerticalTextAlignment</a>
@@ -202,7 +199,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>A <code>TileSet</code> represents a Tiled tile set, most typically loaded as part of loading a <code><a href="../Structs/Map.html">Map</a></code>.</p>
 
           </section>
           <section class="section task-group-section">
@@ -221,7 +218,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The name of the <code>TileSet</code></p>
 
                       </div>
                       <div class="declaration">
@@ -248,7 +245,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The size in pixels of a <code><a href="../Classes/Tile.html">Tile</a></code>. Note that individual <code><a href="../Classes/Tile.html">Tile</a></code>s may differ in size but this size will be used as an assumption</p>
 
                       </div>
                       <div class="declaration">
@@ -275,7 +272,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The user specified <code><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></code> of the <code>TileSet</code></p>
 
                       </div>
                       <div class="declaration">
@@ -302,7 +299,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The number of tiles in the <code>TileSet</code></p>
 
                       </div>
                       <div class="declaration">
@@ -329,7 +326,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a new instance of the a <code>TileSet</code></p>
 
                       </div>
                       <div class="declaration">
@@ -339,6 +336,49 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">tileSize</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8TiledKit9PixelSizea">PixelSize</a></span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the <code>TileSet</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tileSize</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The size of the <code><a href="../Classes/Tile.html">Tile</a></code>s in the <code>TileSet</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Any user specified <code><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></code></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -356,7 +396,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Retreives the <code><a href="../Classes/Tile.html">Tile</a></code> specified by the index from the <code>TileSet</code></p>
 
                       </div>
                       <div class="declaration">
@@ -366,6 +406,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="nv">tileId</span><span class="p">:</span> <span class="kt">UInt32</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Tile.html">Tile</a></span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tileId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The index of the <code><a href="../Classes/Tile.html">Tile</a></code> starting at 0</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The <code><a href="../Classes/Tile.html">Tile</a></code> or <code>nil</code> if no <code><a href="../Classes/Tile.html">Tile</a></code> with the specified <code>id</code> exists</p>
                       </div>
                     </section>
                   </div>

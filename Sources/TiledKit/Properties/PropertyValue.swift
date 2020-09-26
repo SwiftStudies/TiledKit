@@ -14,16 +14,25 @@
 
 import Foundation
 
+/// Tiled user defined properties are typed, and captured as one of a number of `PropertyValue` cases with attached data for the specific typed value
 public enum PropertyValue : Equatable, CustomStringConvertible, ExpressibleByStringLiteral, ExpressibleByIntegerLiteral, ExpressibleByFloatLiteral, ExpressibleByBooleanLiteral, ExpressibleByArrayLiteral {
     
+    /// String properties
     case string(String)
+    /// Boolean properties
     case bool(Bool)
+    /// Integer properties
     case int(Int)
+    /// Float properties (represented in TiledKit as a `Double`)
     case double(Double)
+    /// File properties
     case file(url:URL)
+    /// Color properties
     case color(Color)
     #warning("The public API should have a value that is explicitly the object")
+    /// Object properties
     case object(id:Int)
+    /// Unknown types
     case error(type:String, value:String)
     
     public typealias ArrayLiteralElement = Byte

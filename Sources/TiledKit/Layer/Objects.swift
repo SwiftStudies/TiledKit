@@ -12,7 +12,13 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+/// Extends `Array`s of objects (as returned by `LayerContainer`s) so that `Object`s can be esily retreived
 public extension Array where Element == Object {
+    
+    /// Get an `Object` from the array with matching based on the `objectId`
+    /// - Parameters
+    ///     - objectId: The desired id of the object
+    /// - returns `nil` if no `Object` is found with that id
     subscript(id objectId:Int) -> Object? {
         for object in self {
             if object.id == objectId {
@@ -22,6 +28,10 @@ public extension Array where Element == Object {
         return nil
     }
     
+    /// Get an `Object` from the array with matching based on the object's `name`
+    /// - Parameters
+    ///     - objectName: The desired name of the object
+    /// - returns `nil` if no `Object` is found with that name.
     subscript(name objectName:String) -> [Object] {
         return filter({$0.name == objectName})
     }
