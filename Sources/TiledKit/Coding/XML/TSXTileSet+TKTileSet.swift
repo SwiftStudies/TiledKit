@@ -29,7 +29,7 @@ extension TSXTileSet {
         if let xmlImage = tileSetXML.image {
             
             // Resolve the source of the image
-            guard let tileImageUrl = project.url(for: URL(fileURLWithPath: xmlImage.source), relativeTo: url) else {
+            guard let tileImageUrl = project.resolve(URL(fileURLWithPath: xmlImage.source), relativeTo: url) else {
                 throw TileSetLoadingError.imageForTileSheetCantBeFound(URL(fileURLWithPath: xmlImage.source))
             }
             
@@ -56,7 +56,7 @@ extension TSXTileSet {
             }
         } else {
             for xmlTile in tileSetXML.tileSpecs {
-                if let tileImage = xmlTile.image, let tileImageUrl = project.url(for: URL(fileURLWithPath: tileImage.source), relativeTo: url) {
+                if let tileImage = xmlTile.image, let tileImageUrl = project.resolve(URL(fileURLWithPath: tileImage.source), relativeTo: url) {
                     let transparentColor : Color?
                     
                     if let colorString = xmlTile.image?.transparentColor ?? tileSetXML.image?.transparentColor{

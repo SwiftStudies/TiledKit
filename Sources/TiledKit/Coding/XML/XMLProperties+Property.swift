@@ -30,7 +30,7 @@ extension XMLProperty {
         case .float:
             return .double(Double(value) ?? 0)
         case .file:
-            return .file(url: project.url(for: URL(fileURLWithPath: value), relativeTo: baseUrl) ?? URL(fileURLWithPath: value))
+            return .file(url: project.resolve(URL(fileURLWithPath: value), relativeTo: baseUrl) ?? URL(fileURLWithPath: value))
         case .color:
             return .color(Color(from: value))
         case .object:

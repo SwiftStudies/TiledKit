@@ -77,7 +77,7 @@ public class Project {
     ///   - url: The `URL` to be resolved (it does not need to be in the project if it is a fully specified URL)
     ///   - relativeTo: If the URL could be or is relative, then this will be used as the base
     /// - Returns: A URL or nil if the the URL is not reachable
-    public func url(`for` url:URL, relativeTo baseUrl:URL?)->URL?{
+    public func resolve(_ url:URL, relativeTo baseUrl:URL?)->URL?{
         // Start with any relative URL
         if let baseURL = baseUrl {
             if let url = url.url(relativeTo: baseURL) {
@@ -106,9 +106,9 @@ public class Project {
         return nil
     }
     
-    public func retrieve<R>(asType:R.Type, from url:URL, relativeTo baseUrl:URL? = nil) throws ->R{
-        guard let resolvedUrl = self.url(for: url, relativeTo: baseUrl) else {
-            throw ProjectError.fileDoesNotExist(url.standardized.absoluteString)
+    public func retrieve<R>(asType:R.Type, from resourceUrl:URL, relativeTo baseUrl:URL? = nil) throws ->R{
+        guard let resolvedUrl = resolve(resourceUrl, relativeTo: baseUrl) else {
+            throw ProjectError.fileDoesNotExist(resourceUrl.standardized.absoluteString)
         }
         return try resourceCache.retrieve(as: R.self, from: resolvedUrl)
 
@@ -125,7 +125,12 @@ public class Project {
 
 fileprivate extension URL {
     var isReachable : Bool {
-        return (try? checkResourceIsReachable()) ?? false
+        do {
+            let reachable = try checkResourceIsReachable()
+            return reachable
+        } catch {
+            return false
+        }
     }
     
     var isRelative : Bool {
@@ -133,7 +138,7 @@ fileprivate extension URL {
     }
     
     func url(relativeTo baseURL:URL)->URL?{
-        let relativePathComponents = relativeString.split(separator: "/")
+        let relativePathComponents = relativeString.split(separator: "/").map({String($0).removingPercentEncoding ?? String($0)})
         var baseURL = baseURL
         
         if baseURL.pathExtension != "" {

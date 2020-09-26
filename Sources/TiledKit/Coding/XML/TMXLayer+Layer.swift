@@ -41,7 +41,7 @@ extension XMLLayer {
 
 extension TMXImageLayer {
     func tkImage(in project:Project, relativeTo url: URL?)->TKImage{
-        let url = project.url(for: URL(fileURLWithPath: path), relativeTo:url) ?? URL(fileURLWithPath: path)
+        let url = project.resolve(URL(fileURLWithPath: path), relativeTo:url) ?? URL(fileURLWithPath: path)
         
         return TKImage(url: url, size: PixelSize(width: width, height: height))
     }
