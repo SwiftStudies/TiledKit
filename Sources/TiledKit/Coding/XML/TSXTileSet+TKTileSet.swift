@@ -21,10 +21,10 @@ enum TileSetLoadingError : Error {
 }
 
 extension TSXTileSet {
-    static func build(in project:Project, from url:URL) throws -> TKTileSet {
+    static func build(in project:Project, from url:URL) throws -> TileSet {
         let tileSetXML = try TSXTileSet(from: url)
         
-        let tileSet = TKTileSet(name: tileSetXML.name, tileSize: PixelSize(width: tileSetXML.tileWidth, height: tileSetXML.tileHeight), properties: tileSetXML.properties.interpret(baseUrl: url, in: project))
+        let tileSet = TileSet(name: tileSetXML.name, tileSize: PixelSize(width: tileSetXML.tileWidth, height: tileSetXML.tileHeight), properties: tileSetXML.properties.interpret(baseUrl: url, in: project))
         
         if let xmlImage = tileSetXML.image {
             

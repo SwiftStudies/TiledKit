@@ -37,9 +37,9 @@ extension TMXMap {
         
         // Load tile sets
         for tileSetReference in tmxMap.tileSetReferences {
-            let tileSet = try project.retrieve(asType: TKTileSet.self, from: URL(fileURLWithPath: tileSetReference.path), relativeTo: url)
+            let tileSet = try project.retrieve(asType: TileSet.self, from: URL(fileURLWithPath: tileSetReference.path), relativeTo: url)
             
-            map.tileSets.append(TKTileSetReference(firstGid: UInt32(tileSetReference.firstGid), tileSet: tileSet))
+            map.tileSetReferences.append(TileSetReference(firstGid: UInt32(tileSetReference.firstGid), tileSet: tileSet))
         }
         
         // Build layers

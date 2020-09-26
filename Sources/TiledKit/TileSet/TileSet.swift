@@ -12,7 +12,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-public class TKTileSet {
+public class TileSet {
     public let name : String
     public let tileSize : PixelSize
     public let properties : Properties
@@ -39,7 +39,7 @@ public class TKTileSet {
     }
 }
 
-public struct TKTileSetReference {
+public struct TileSetReference {
     public let firstGid : UInt32
-    public let tileSet : TKTileSet
+    public let tileSet : TileSet
 }

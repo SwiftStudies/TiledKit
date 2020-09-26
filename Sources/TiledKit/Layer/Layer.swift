@@ -12,8 +12,6 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-#warning("Rename to Layer when old class out the way")
-
 public struct Layer  {
     public enum Kind {
         case tile(TileGrid), objects([Object]), group(Group), image(ImageReference)

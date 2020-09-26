@@ -46,15 +46,14 @@ public struct Map : LayerContainer{
     /// The various layers in the map
     public var    layers          = [Layer]()
     
-    #warning("Rename to tileSetReferences")
     /// The tilesets used by the project
-    internal var    tileSets  = [TKTileSetReference]()
+    internal var    tileSetReferences  = [TileSetReference]()
     
     /// Retreive a tile
     public subscript(_ tile:TileGID)->Tile? {
         let tileSetTileId = tile.globalTileOffset
         
-        for tileSetReference in tileSets.reversed() {
+        for tileSetReference in tileSetReferences.reversed() {
             if tileSetReference.firstGid <= tile.globalTileOffset {
                 return tileSetReference.tileSet[tileSetTileId - tileSetReference.firstGid]
             }

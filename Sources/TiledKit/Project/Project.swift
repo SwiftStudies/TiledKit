@@ -35,7 +35,7 @@ public class Project {
         objectTypes = types ?? [String:String]()
         
         resourceCache.registerLoader(MapLoader(project: self), forType: Map.self)
-        resourceCache.registerLoader(TileSetLoader(project: self), forType: TKTileSet.self)
+        resourceCache.registerLoader(TileSetLoader(project: self), forType: TileSet.self)
     }
 
     public init(at url:URL, with folders:[String]? = nil, and types:[String:String]? = nil){

@@ -13,7 +13,7 @@ final class TiledKitTests: XCTestCase {
     
     func testSingleImageTileSet(){
         do {
-            let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "SingleImageAutoTransparency", in: "Tilesets", of: .tsx)!)
+            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "SingleImageAutoTransparency", in: "Tilesets", of: .tsx)!)
             
             XCTAssertEqual(tileSet.tileSize.width, 16)
             XCTAssertEqual(tileSet.tileSize.width, 16)
@@ -27,7 +27,7 @@ final class TiledKitTests: XCTestCase {
     
     func testSingleImageTileSetWithOptionals(){
         do {
-            let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "SingleImageMarginsAndSpacing", in: "Tilesets", of: .tsx)!)
+            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "SingleImageMarginsAndSpacing", in: "Tilesets", of: .tsx)!)
             
             XCTAssertEqual(tileSet.tileSize.width, 12)
             XCTAssertEqual(tileSet.tileSize.height, 12)
@@ -40,7 +40,7 @@ final class TiledKitTests: XCTestCase {
 
     func testMultiImageTileSetWithSingleTile(){
         do {
-            let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "SeparateSingleImage", in: "Tilesets", of: .tsx)!)
+            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "SeparateSingleImage", in: "Tilesets", of: .tsx)!)
 
             
             XCTAssertEqual(tileSet.tileSize.width, 16)
@@ -53,7 +53,7 @@ final class TiledKitTests: XCTestCase {
     
     func testMultiImageTileSet(){
         do {
-            let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "SeparateMultipleImages", in: "Tilesets", of: .tsx)!)
+            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "SeparateMultipleImages", in: "Tilesets", of: .tsx)!)
 
             
             
@@ -322,7 +322,7 @@ final class TiledKitTests: XCTestCase {
 
     func testMultipleProperties(){
         do {
-            let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
+            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
 
 
             //Confirm loading multiline properties works OK
@@ -336,7 +336,7 @@ final class TiledKitTests: XCTestCase {
     
     func testTileSetCollisionObjects(){
         do {
-            let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
+            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
 
             guard let collisionBodies = tileSet[0]?.collisionBodies else {
                 XCTFail("Tile or collision bodies not found")
@@ -353,7 +353,7 @@ final class TiledKitTests: XCTestCase {
     
     func testTileSetAnimationFrames(){
         do {
-            let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
+            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
 
             
             guard let frames = tileSet[1]?.frames else {
