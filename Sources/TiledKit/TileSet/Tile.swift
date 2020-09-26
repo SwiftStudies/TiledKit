@@ -12,6 +12,31 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-public struct Tile {
+import Foundation
+
+public struct Frame {
+    /// The tile to display
+    public let tile : Tile
     
+    /// Duration the frame should be displayed in milliseconds
+    public let duration : UInt
+}
+
+public class Tile {
+    public let image : URL
+    public let transparentColor : Color? 
+    public let bounds : PixelBounds
+    
+    public var frames : [Frame]? = nil
+    public var collisionBodies : [TKObject]? = nil
+
+    public var uuid : String {
+        return "\(image.absoluteString):\(bounds)"
+    }
+    
+    public init(_  imageSource:URL, transparentColor:Color? = nil, bounds : PixelBounds){
+        self.image = imageSource
+        self.transparentColor = transparentColor
+        self.bounds = bounds
+    }
 }

@@ -32,7 +32,10 @@ public struct TileGID : ExpressibleByIntegerLiteral, Equatable {
     
     private static let tileIdMask : UInt32    = ~(TileFlip.horizontally | TileFlip.vertically | TileFlip.diagonally)
 
-    private let value : UInt32
+    let value : UInt32
+    var globalTileOffset : UInt32 {
+        return value & TileGID.tileIdMask
+    }
     
     fileprivate init(_ rawValue:UInt32){
         value = rawValue

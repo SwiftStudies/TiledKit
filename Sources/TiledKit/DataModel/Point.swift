@@ -32,6 +32,10 @@ public struct Point<N:Numeric> : Equatable{
         self.x = x
         self.y = y
     }
+    
+    public static var zero : Self {
+        return Self(x:0, y:0)
+    }
 }
 
 public struct Dimension<N:Numeric> : Equatable{

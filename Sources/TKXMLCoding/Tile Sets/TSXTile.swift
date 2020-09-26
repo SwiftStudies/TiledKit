@@ -13,15 +13,15 @@
 //    limitations under the License.
 
 public struct TSXTileFrame : Codable {
-    let tileid : Int
-    let duration : Int
+    public let tileid : UInt32
+    public let duration : Int
 }
 
 public struct TSXTile : Codable {
-    let id : Int
-    let collisionObject : XMLObjectLayer?
-    let animationFrames : [TSXTileFrame]
-    let image : XMLImageElement?
+    public let id : UInt32
+    public let collisionObject : XMLObjectLayer?
+    public let animationFrames : [TSXTileFrame]
+    public let image : XMLImageElement?
     
     enum CodingKeys : String, CodingKey {
         case id, collisionObject = "objectgroup", animationFrames = "animation", image
@@ -30,7 +30,7 @@ public struct TSXTile : Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        id = try container.decode(Int.self, forKey: .id)
+        id = try container.decode(UInt32.self, forKey: .id)
         collisionObject = try container.decodeIfPresent(XMLObjectLayer.self, forKey: .collisionObject)
         image = try container.decodeIfPresent(XMLImageElement.self, forKey: .image)
         

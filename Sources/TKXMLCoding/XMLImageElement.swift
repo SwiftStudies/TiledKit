@@ -13,10 +13,10 @@
 //    limitations under the License.
 
 public struct XMLImageElement : Codable {
-    let source : String
-    let width : Int
-    let height : Int
-    let transparentColor : String?
+    public let source : String
+    public let width : Int
+    public let height : Int
+    public let transparentColor : String?
     
     private enum CodingKeys : String, CodingKey {
         case source, width, height, transparentColor = "trans"

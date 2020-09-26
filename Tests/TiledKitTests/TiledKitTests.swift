@@ -17,7 +17,7 @@ final class TiledKitTests: XCTestCase {
             
             XCTAssertEqual(tileSet.tileSize.width, 16)
             XCTAssertEqual(tileSet.tileSize.width, 16)
-            XCTAssertEqual(tileSet.tiles.count, 4)
+            XCTAssertEqual(tileSet.count, 4)
             XCTAssertEqual(tileSet.properties.count, 1)
             XCTAssertEqual(tileSet.properties["filteringMode"], .string("nearest"))
         } catch {
@@ -31,13 +31,8 @@ final class TiledKitTests: XCTestCase {
             
             XCTAssertEqual(tileSet.tileSize.width, 12)
             XCTAssertEqual(tileSet.tileSize.height, 12)
-            XCTAssertEqual(tileSet.tiles.count, 4)
-            switch tileSet.type{
-            case .sheet(let tileSheet):
-                XCTAssertEqual(tileSheet.transparentColor, Color(r: 255, g: 0, b: 255))
-            default:
-                XCTFail("Should be a tilesheet")
-            }
+            XCTAssertEqual(tileSet.count, 4)
+            XCTAssertEqual(tileSet[0]?.transparentColor ?? Color(r: 0, g: 0, b: 0), Color(r: 255, g: 0, b: 255))
         } catch {
             XCTFail("Error thrown \(error)")
         }
@@ -50,7 +45,7 @@ final class TiledKitTests: XCTestCase {
             
             XCTAssertEqual(tileSet.tileSize.width, 16)
             XCTAssertEqual(tileSet.tileSize.height, 16)
-            XCTAssertEqual(tileSet.tiles.count, 1)
+            XCTAssertEqual(tileSet.count, 1)
         } catch {
             XCTFail("Error thrown \(error)")
         }
@@ -64,7 +59,7 @@ final class TiledKitTests: XCTestCase {
             
             XCTAssertEqual(tileSet.tileSize.width, 16)
             XCTAssertEqual(tileSet.tileSize.height, 16)
-            XCTAssertEqual(tileSet.tiles.count, 2)
+            XCTAssertEqual(tileSet.count, 2)
         } catch {
             XCTFail("Error thrown \(error)")
         }
@@ -331,7 +326,7 @@ final class TiledKitTests: XCTestCase {
 
 
             //Confirm loading multiline properties works OK
-            XCTAssertEqual(tileSet.filteringMode,"nearest")
+            XCTAssertEqual(tileSet.properties["fileteringMode"],"nearest")
             XCTAssertNotNil(tileSet.properties["User Property"])
         } catch {
             XCTFail("\(error)")
@@ -344,9 +339,9 @@ final class TiledKitTests: XCTestCase {
             let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
 
             
-            XCTAssertEqual((tileSet.tiles[0]?.objects?.objects.count) ?? 0, 2)
-            XCTAssertEqual((tileSet.tiles[0]?.objects?.objects[0].x) ?? 0, 7.92176)
-            XCTAssertEqual((tileSet.tiles[0]?.objects?.objects[1].y) ?? 0, 3.00272)
+            XCTAssertEqual(tileSet[0]?.collisionBodies?.count, 2)
+            XCTAssertEqual(tileSet[0]?.collisionBodies?[id: 0]?.position.x, 7.92176)
+            XCTAssertEqual(tileSet[0]?.collisionBodies?[id: 1]?.position.y, 3.00272)
         } catch {
             XCTFail("\(error)")
         }
@@ -357,20 +352,20 @@ final class TiledKitTests: XCTestCase {
             let tileSet = try moduleBundleProject.retrieve(asType: TKTileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
 
             
-            guard let tile = tileSet.tiles[1] else {
+            guard let tile = tileSet[0] else {
                 XCTFail("No tile with id 1")
                 return
             }
             
-            XCTAssertEqual(tile.animation.count, 4)
-            XCTAssert(tile.animation[0].tile.identifier.stringSource!.hasSuffix("0"))
-            XCTAssertEqual(tile.animation[0].duration, 1)
-            XCTAssert(tile.animation[1].tile.identifier.stringSource!.hasSuffix("1"))
-            XCTAssertEqual(tile.animation[1].duration, 1)
-            XCTAssert(tile.animation[2].tile.identifier.stringSource!.hasSuffix("2"))
-            XCTAssertEqual(tile.animation[2].duration, 1)
-            XCTAssert(tile.animation[3].tile.identifier.stringSource!.hasSuffix("3"))
-            XCTAssertEqual(tile.animation[3].duration, 1)
+            XCTAssertEqual(tile.frames?.count, 4)
+            XCTAssert(tile.frames?[0].tile.uuid.hasSuffix("0") ?? false)
+            XCTAssertEqual(tile.frames?[0].duration, 1)
+            XCTAssert(tile.frames?[0].tile.uuid.hasSuffix("1") ?? false)
+            XCTAssertEqual(tile.frames?[1].duration, 1)
+            XCTAssert(tile.frames?[0].tile.uuid.hasSuffix("2") ?? false)
+            XCTAssertEqual(tile.frames?[2].duration, 1)
+            XCTAssert(tile.frames?[0].tile.uuid.hasSuffix("3") ?? false)
+            XCTAssertEqual(tile.frames?[3].duration, 1)
         } catch {
             XCTFail("\(error)")
         }

@@ -15,13 +15,27 @@
 public class TKTileSet {
     public let name : String
     public let tileSize : PixelSize
-    public var tiles = [Tile]()
     public let properties : Properties
-    
+
+    private var tiles = [UInt32:Tile]()
+    public  var count : Int {
+        return tiles.count
+    }
+
     public init(name:String, tileSize : PixelSize, properties:Properties){
         self.name = name
         self.tileSize = tileSize
         self.properties = properties
+    }
+    
+    public subscript(_ tileId:UInt32)->Tile? {
+        get {
+            return tiles[tileId]
+        }
+        
+        set {
+            tiles[tileId] = newValue
+        }
     }
 }
 
