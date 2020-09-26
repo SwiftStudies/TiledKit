@@ -1,1571 +1,1193 @@
 {
   "warnings": [
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/BinaryRepresentations.swift",
-      "line": 17,
-      "symbol": "Byte",
-      "symbol_kind": "source.lang.swift.decl.typealias",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Container/LayerContainer.swift",
+      "line": 15,
+      "symbol": "LayerContainer",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Container/LayerContainer.swift",
+      "line": 16,
+      "symbol": "LayerContainer.layers",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Container/LayerContainer.swift",
+      "line": 19,
+      "symbol": "LayerContainer",
+      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Color.swift",
-      "line": 17,
+      "line": 26,
       "symbol": "Color",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Color.swift",
-      "line": 18,
+      "line": 27,
       "symbol": "Color.alpha",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Color.swift",
-      "line": 18,
+      "line": 27,
       "symbol": "Color.blue",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Color.swift",
-      "line": 18,
+      "line": 27,
       "symbol": "Color.green",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Color.swift",
-      "line": 18,
+      "line": 27,
       "symbol": "Color.red",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Color.swift",
-      "line": 21,
+      "line": 30,
       "symbol": "Color.init(from:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Color.swift",
-      "line": 51,
+      "line": 60,
       "symbol": "Color.init(r:g:b:a:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Identifier.swift",
-      "line": 17,
-      "symbol": "Identifier",
-      "symbol_kind": "source.lang.swift.decl.struct",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Color.swift",
+      "line": 67,
+      "symbol": "Color.white",
+      "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Identifier.swift",
-      "line": 33,
-      "symbol": "Identifier",
-      "symbol_kind": "source.lang.swift.decl.extension",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Color.swift",
+      "line": 68,
+      "symbol": "Color.black",
+      "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Identifier.swift",
-      "line": 42,
-      "symbol": "Identifier",
-      "symbol_kind": "source.lang.swift.decl.extension",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Color.swift",
+      "line": 69,
+      "symbol": "Color.clear",
+      "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Identifier.swift",
-      "line": 51,
-      "symbol": "Identifier",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Identifier.swift",
-      "line": 57,
-      "symbol": "Identifier",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Literal+Types.swift",
-      "line": 17,
-      "symbol": "String.init(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Literal+Types.swift",
-      "line": 31,
-      "symbol": "Int.init(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Literal+Types.swift",
-      "line": 44,
-      "symbol": "Bool.init(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Literal+Types.swift",
-      "line": 57,
-      "symbol": "Float.init(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Literal+Types.swift",
-      "line": 70,
-      "symbol": "URL.init(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Literal.swift",
-      "line": 17,
-      "symbol": "Literal",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Literal.swift",
-      "line": 101,
-      "symbol": "Literal.string(value:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Literal.swift",
-      "line": 102,
-      "symbol": "Literal.bool(value:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Literal.swift",
-      "line": 103,
-      "symbol": "Literal.int(value:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Literal.swift",
-      "line": 104,
-      "symbol": "Literal.float(value:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Literal.swift",
-      "line": 105,
-      "symbol": "Literal.file(value:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Literal.swift",
-      "line": 106,
-      "symbol": "Literal.color(value:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Position.swift",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
       "line": 15,
+      "symbol": "TilePosition",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
+      "line": 16,
+      "symbol": "TileSize",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
+      "line": 18,
+      "symbol": "PixelPoint",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
+      "line": 19,
+      "symbol": "PixelSize",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
+      "line": 20,
+      "symbol": "PixelBounds",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
+      "line": 22,
       "symbol": "Position",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
+      "line": 23,
+      "symbol": "Size",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
+      "line": 24,
+      "symbol": "Path",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
+      "line": 26,
+      "symbol": "Point",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Position.swift",
-      "line": 16,
-      "symbol": "Position.x",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
+      "line": 30,
+      "symbol": "Point.init(x:y:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Position.swift",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
+      "line": 35,
+      "symbol": "Point.zero",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
+      "line": 40,
+      "symbol": "Dimension",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
+      "line": 44,
+      "symbol": "Dimension.init(width:height:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
+      "line": 50,
+      "symbol": "Rectangle",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
+      "line": 54,
+      "symbol": "Rectangle.init(x:y:width:height:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Point.swift",
+      "line": 59,
+      "symbol": "Rectangle.init(origin:size:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Graphics/Image.swift",
+      "line": 16,
+      "symbol": "ImageReference",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Graphics/Image.swift",
       "line": 17,
-      "symbol": "Position.y",
+      "symbol": "ImageReference.url",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Position.swift",
-      "line": 19,
-      "symbol": "Position.init(x:y:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Position.swift",
-      "line": 24,
-      "symbol": "Position.init(x:y:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/String Extensions.swift",
-      "line": 16,
-      "symbol": "String.subscript(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.subscript",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Text.swift",
-      "line": 10,
-      "symbol": "HorizontalTextAlignment",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Text.swift",
-      "line": 11,
-      "symbol": "HorizontalTextAlignment.center",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Text.swift",
-      "line": 11,
-      "symbol": "HorizontalTextAlignment.justified",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Text.swift",
-      "line": 11,
-      "symbol": "HorizontalTextAlignment.left",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Text.swift",
-      "line": 11,
-      "symbol": "HorizontalTextAlignment.right",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Text.swift",
-      "line": 14,
-      "symbol": "VerticalTextAlignment",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Text.swift",
-      "line": 15,
-      "symbol": "VerticalTextAlignment.bottom",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Text.swift",
-      "line": 15,
-      "symbol": "VerticalTextAlignment.middle",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/DataModel/Text.swift",
-      "line": 15,
-      "symbol": "VerticalTextAlignment.top",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Integration/Data+BundleExternalLoading.swift",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Graphics/Image.swift",
       "line": 18,
-      "symbol": "Data.withContentsInBundleFirst(url:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "symbol": "ImageReference.size",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Group.swift",
+      "line": 17,
+      "symbol": "Group",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Group.swift",
       "line": 18,
+      "symbol": "Group.layers",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Layer.swift",
+      "line": 15,
       "symbol": "Layer",
-      "symbol_kind": "source.lang.swift.decl.class",
+      "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 19,
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Layer.swift",
+      "line": 16,
+      "symbol": "Layer.Kind",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Layer.swift",
+      "line": 17,
+      "symbol": "Layer.Kind.group(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Layer.swift",
+      "line": 17,
+      "symbol": "Layer.Kind.image(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Layer.swift",
+      "line": 17,
+      "symbol": "Layer.Kind.objects(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Layer.swift",
+      "line": 17,
+      "symbol": "Layer.Kind.tile(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Layer.swift",
+      "line": 20,
       "symbol": "Layer.name",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 20,
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Layer.swift",
+      "line": 21,
       "symbol": "Layer.visible",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 21,
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Layer.swift",
+      "line": 22,
       "symbol": "Layer.opacity",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 22,
-      "symbol": "Layer.x",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Layer.swift",
       "line": 23,
-      "symbol": "Layer.y",
+      "symbol": "Layer.position",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Layer.swift",
+      "line": 24,
+      "symbol": "Layer.kind",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Layer.swift",
       "line": 25,
-      "symbol": "Layer.parent",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 27,
       "symbol": "Layer.properties",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 29,
-      "symbol": "Layer.level",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Layer.swift",
+      "line": 27,
+      "symbol": "Layer.objects",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 71,
-      "symbol": "Layer",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 72,
-      "symbol": "Layer.subscript(_:)",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Objects.swift",
+      "line": 16,
+      "symbol": "Array.subscript(id:)",
       "symbol_kind": "source.lang.swift.decl.function.subscript",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 76,
-      "symbol": "Layer.subscript(_:defaultingTo:)",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Objects.swift",
+      "line": 25,
+      "symbol": "Array.subscript(name:)",
       "symbol_kind": "source.lang.swift.decl.function.subscript",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 85,
-      "symbol": "LayerContainer.subscript(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.subscript",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Tile/TileGID.swift",
+      "line": 15,
+      "symbol": "TileFlip",
+      "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 89,
-      "symbol": "LayerContainer.subscript(_:defaultingTo:)",
-      "symbol_kind": "source.lang.swift.decl.function.subscript",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Tile/TileGID.swift",
+      "line": 25,
+      "symbol": "TileFlip.horizontally",
+      "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 126,
-      "symbol": "TileLayer",
-      "symbol_kind": "source.lang.swift.decl.class",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Tile/TileGID.swift",
+      "line": 26,
+      "symbol": "TileFlip.vertically",
+      "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 127,
-      "symbol": "TileLayer.width",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Tile/TileGID.swift",
+      "line": 27,
+      "symbol": "TileFlip.diagonally",
+      "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 128,
-      "symbol": "TileLayer.height",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Tile/TileGID.swift",
+      "line": 30,
+      "symbol": "TileGID",
+      "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 129,
-      "symbol": "TileLayer.tiles",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 130,
-      "symbol": "TileLayer.offset",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 136,
-      "symbol": "TileLayer.init(from:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 150,
-      "symbol": "TileLayer.subscript(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.subscript",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 155,
-      "symbol": "ObjectLayer",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 156,
-      "symbol": "ObjectLayer.objects",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 158,
-      "symbol": "ObjectLayer.ObjectLayerCodingKeys",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 159,
-      "symbol": "ObjectLayer.ObjectLayerCodingKeys.object",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 159,
-      "symbol": "ObjectLayer.ObjectLayerCodingKeys.offsetx",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 159,
-      "symbol": "ObjectLayer.ObjectLayerCodingKeys.offsety",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 162,
-      "symbol": "ObjectLayer.subscript(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.subscript",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 166,
-      "symbol": "ObjectLayer.subscript(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.subscript",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 171,
-      "symbol": "ObjectLayer.init(from:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 194,
-      "symbol": "GroupLayer",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 196,
-      "symbol": "GroupLayer.layers",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 202,
-      "symbol": "GroupLayer.init(from:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 218,
-      "symbol": "ImageLayer",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 233,
-      "symbol": "ImageLayer.url",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 234,
-      "symbol": "ImageLayer.width",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 235,
-      "symbol": "ImageLayer.height",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer.swift",
-      "line": 237,
-      "symbol": "ImageLayer.init(from:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/LayerContainer.swift",
-      "line": 18,
-      "symbol": "LayerType",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/LayerContainer.swift",
-      "line": 19,
-      "symbol": "LayerType.group",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/LayerContainer.swift",
-      "line": 19,
-      "symbol": "LayerType.image",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/LayerContainer.swift",
-      "line": 19,
-      "symbol": "LayerType.object",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/LayerContainer.swift",
-      "line": 19,
-      "symbol": "LayerType.tile",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/LayerContainer.swift",
-      "line": 46,
-      "symbol": "LayerContainer",
-      "symbol_kind": "source.lang.swift.decl.protocol",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/LayerContainer.swift",
-      "line": 47,
-      "symbol": "LayerContainer.parent",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/LayerContainer.swift",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Tile/TileGID.swift",
       "line": 48,
-      "symbol": "LayerContainer.layers",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/LayerContainer.swift",
-      "line": 51,
-      "symbol": "LayerContainer",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/LayerContainer.swift",
-      "line": 61,
-      "symbol": "LayerContainer.getGroups(named:matching:recursively:)",
+      "symbol": "TileGID.init(tileId:flip:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/LayerContainer.swift",
-      "line": 65,
-      "symbol": "LayerContainer.getObjectLayers(named:matching:recursively:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/LayerContainer.swift",
-      "line": 69,
-      "symbol": "LayerContainer.getTileLayers(named:matching:recursively:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/LayerContainer.swift",
-      "line": 73,
-      "symbol": "LayerContainer.getLayers(ofType:named:matching:recursively:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/LayerContainer.swift",
-      "line": 84,
-      "symbol": "LayerContainer",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Level+TileSet+Objects.swift",
-      "line": 19,
-      "symbol": "Level.tileObjectLayers",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Level.swift",
-      "line": 18,
-      "symbol": "Level",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Level.swift",
-      "line": 43,
-      "symbol": "Level",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Level.swift",
-      "line": 44,
-      "symbol": "Level.parent",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Level.swift",
-      "line": 47,
-      "symbol": "Level.layers",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Level.swift",
-      "line": 48,
-      "symbol": "Level.height",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Level.swift",
-      "line": 49,
-      "symbol": "Level.width",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Level.swift",
-      "line": 50,
-      "symbol": "Level.tileWidth",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Level.swift",
-      "line": 51,
-      "symbol": "Level.tileHeight",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Level.swift",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Tile/TileGID.swift",
       "line": 52,
-      "symbol": "Level.properties",
+      "symbol": "TileGID.flipHorizontally",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Level.swift",
-      "line": 55,
-      "symbol": "Level.tiles",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Tile/TileGID.swift",
+      "line": 56,
+      "symbol": "TileGID.flipVertically",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Level.swift",
-      "line": 57,
-      "symbol": "Level.init()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Tile/TileGID.swift",
+      "line": 60,
+      "symbol": "TileGID.flipDiagonally",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Level.swift",
-      "line": 65,
-      "symbol": "Level.init(from:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Tile/TileGrid.swift",
+      "line": 17,
+      "symbol": "TileGrid",
+      "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Tile/TileGrid.swift",
       "line": 19,
-      "symbol": "Object",
-      "symbol_kind": "source.lang.swift.decl.class",
+      "symbol": "TileGrid.size",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 28,
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Tile/TileGrid.swift",
+      "line": 21,
+      "symbol": "TileGrid.subscript(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.subscript",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Tile/TileGrid.swift",
+      "line": 25,
+      "symbol": "TileGrid.init(_:size:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Map/Map.swift",
+      "line": 22,
+      "symbol": "Map",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Map/Orientation.swift",
+      "line": 16,
+      "symbol": "Orientation",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Map/Orientation.swift",
+      "line": 17,
+      "symbol": "Orientation.hexagonal",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Map/Orientation.swift",
+      "line": 17,
+      "symbol": "Orientation.isometric",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Map/Orientation.swift",
+      "line": 17,
+      "symbol": "Orientation.orthogonal",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Map/Orientation.swift",
+      "line": 17,
+      "symbol": "Orientation.staggered",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Map/RenderingOrder.swift",
+      "line": 16,
+      "symbol": "RenderingOrder",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Map/RenderingOrder.swift",
+      "line": 17,
+      "symbol": "RenderingOrder.rightDown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Map/RenderingOrder.swift",
+      "line": 18,
+      "symbol": "RenderingOrder.rightUp",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Map/RenderingOrder.swift",
+      "line": 19,
+      "symbol": "RenderingOrder.leftDown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Map/RenderingOrder.swift",
+      "line": 20,
+      "symbol": "RenderingOrder.leftUp",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/Object.swift",
+      "line": 15,
+      "symbol": "Object",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/Object.swift",
+      "line": 16,
+      "symbol": "Object.Kind",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/Object.swift",
+      "line": 17,
+      "symbol": "Object.Kind.point",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/Object.swift",
+      "line": 18,
+      "symbol": "Object.Kind.rectangle(_:rotation:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/Object.swift",
+      "line": 19,
+      "symbol": "Object.Kind.elipse(_:rotation:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/Object.swift",
+      "line": 20,
+      "symbol": "Object.Kind.tile(_:size:rotation:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/Object.swift",
+      "line": 21,
+      "symbol": "Object.Kind.text(_:size:rotation:style:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/Object.swift",
+      "line": 22,
+      "symbol": "Object.Kind.polygon(_:rotation:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/Object.swift",
+      "line": 23,
+      "symbol": "Object.Kind.polyline(_:rotation:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/Object.swift",
+      "line": 26,
       "symbol": "Object.id",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 29,
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/Object.swift",
+      "line": 27,
       "symbol": "Object.name",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 30,
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/Object.swift",
+      "line": 28,
       "symbol": "Object.visible",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/Object.swift",
+      "line": 29,
+      "symbol": "Object.position",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/Object.swift",
+      "line": 30,
+      "symbol": "Object.properities",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/Object.swift",
       "line": 31,
-      "symbol": "Object.x",
+      "symbol": "Object.kind",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 32,
-      "symbol": "Object.y",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 15,
+      "symbol": "HorizontalTextAlignment",
+      "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 33,
-      "symbol": "Object.parent",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 16,
+      "symbol": "HorizontalTextAlignment.center",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 35,
-      "symbol": "Object.properties",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 16,
+      "symbol": "HorizontalTextAlignment.justified",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 37,
-      "symbol": "Object.level",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 16,
+      "symbol": "HorizontalTextAlignment.left",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 52,
-      "symbol": "Object",
-      "symbol_kind": "source.lang.swift.decl.extension",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 16,
+      "symbol": "HorizontalTextAlignment.right",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 53,
-      "symbol": "Object.subscript(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.subscript",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 19,
+      "symbol": "VerticalTextAlignment",
+      "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 57,
-      "symbol": "Object.subscript(_:defaultingTo:)",
-      "symbol_kind": "source.lang.swift.decl.function.subscript",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 20,
+      "symbol": "VerticalTextAlignment.bottom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 65,
-      "symbol": "PointObject",
-      "symbol_kind": "source.lang.swift.decl.class",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 20,
+      "symbol": "VerticalTextAlignment.middle",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 68,
-      "symbol": "RectangleObject",
-      "symbol_kind": "source.lang.swift.decl.class",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 20,
+      "symbol": "VerticalTextAlignment.top",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 69,
-      "symbol": "RectangleObject.width",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 70,
-      "symbol": "RectangleObject.height",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 71,
-      "symbol": "RectangleObject.rotation",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 81,
-      "symbol": "EllipseObject",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 85,
-      "symbol": "TileObject",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 87,
-      "symbol": "TileObject.gid",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 88,
-      "symbol": "TileObject.tile",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 99,
-      "symbol": "TextObject",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 100,
-      "symbol": "TextObject.TextStyle",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 23,
+      "symbol": "TextStyle",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 101,
-      "symbol": "TextObject.TextStyle.wrap",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 24,
+      "symbol": "TextStyle.wrap",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 102,
-      "symbol": "TextObject.TextStyle.fontFamily",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 25,
+      "symbol": "TextStyle.fontFamily",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 103,
-      "symbol": "TextObject.TextStyle.pixelSize",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 26,
+      "symbol": "TextStyle.pixelSize",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 104,
-      "symbol": "TextObject.TextStyle.color",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 27,
+      "symbol": "TextStyle.color",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 105,
-      "symbol": "TextObject.TextStyle.verticalAlignment",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 28,
+      "symbol": "TextStyle.verticalAlignment",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 106,
-      "symbol": "TextObject.TextStyle.horizontalAlignment",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 29,
+      "symbol": "TextStyle.horizontalAlignment",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 107,
-      "symbol": "TextObject.TextStyle.bold",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 30,
+      "symbol": "TextStyle.bold",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 108,
-      "symbol": "TextObject.TextStyle.italic",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 31,
+      "symbol": "TextStyle.italic",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 32,
+      "symbol": "TextStyle.underline",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 33,
+      "symbol": "TextStyle.strikeout",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 34,
+      "symbol": "TextStyle.kerning",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/TextStyle.swift",
+      "line": 36,
+      "symbol": "TextStyle.init(fontFamily:size:color:verticalAlignment:horizontalAlignment:bold:italic:underline:strikeout:kerning:wrap:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/FileTypes.swift",
+      "line": 15,
+      "symbol": "FileTypes",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/FileTypes.swift",
+      "line": 16,
+      "symbol": "FileTypes.directory",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/FileTypes.swift",
+      "line": 16,
+      "symbol": "FileTypes.gif",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/FileTypes.swift",
+      "line": 16,
+      "symbol": "FileTypes.jpeg",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/FileTypes.swift",
+      "line": 16,
+      "symbol": "FileTypes.pdf",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/FileTypes.swift",
+      "line": 16,
+      "symbol": "FileTypes.png",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/FileTypes.swift",
+      "line": 16,
+      "symbol": "FileTypes.svg",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/FileTypes.swift",
+      "line": 16,
+      "symbol": "FileTypes.tiff",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/FileTypes.swift",
+      "line": 16,
+      "symbol": "FileTypes.tmx",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/FileTypes.swift",
+      "line": 16,
+      "symbol": "FileTypes.tsx",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/Project.swift",
+      "line": 23,
+      "symbol": "Project",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/Project.swift",
+      "line": 30,
+      "symbol": "Project.default",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/Project.swift",
+      "line": 32,
+      "symbol": "Project.init(using:with:and:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/Project.swift",
+      "line": 41,
+      "symbol": "Project.init(at:with:and:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/Project.swift",
+      "line": 47,
+      "symbol": "Project.url(for:in:of:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/Project.swift",
       "line": 109,
-      "symbol": "TextObject.TextStyle.underline",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "symbol": "Project.retrieve(asType:from:relativeTo:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 110,
-      "symbol": "TextObject.TextStyle.strikeout",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/Project.swift",
+      "line": 117,
+      "symbol": "Project.get(map:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 111,
-      "symbol": "TextObject.TextStyle.kerning",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/ResourceLoader.swift",
+      "line": 17,
+      "symbol": "ResourceLoadingError",
+      "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 128,
-      "symbol": "TextObject.string",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/ResourceLoader.swift",
+      "line": 18,
+      "symbol": "ResourceLoadingError.unknownType(unknownType:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 129,
-      "symbol": "TextObject.style",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/ResourceLoader.swift",
+      "line": 19,
+      "symbol": "ResourceLoadingError.unsupportedType(loaderType:unsupportedType:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 142,
-      "symbol": "PolygonObject",
-      "symbol_kind": "source.lang.swift.decl.class",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/ResourceLoader.swift",
+      "line": 22,
+      "symbol": "ResourceLoader",
+      "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 143,
-      "symbol": "PolygonObject.points",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 144,
-      "symbol": "PolygonObject.rotation",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Object.swift",
-      "line": 153,
-      "symbol": "PolylineObject",
-      "symbol_kind": "source.lang.swift.decl.class",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/ResourceLoader.swift",
+      "line": 23,
+      "symbol": "ResourceLoader.retrieve(asType:from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 22,
+      "line": 17,
+      "symbol": "Properties",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
+      "line": 19,
       "symbol": "Propertied",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 23,
+      "line": 20,
       "symbol": "Propertied.properties",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 26,
-      "symbol": "PropertyValue",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 27,
-      "symbol": "PropertyValue.bool(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 27,
-      "symbol": "PropertyValue.color(color:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 27,
-      "symbol": "PropertyValue.double(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 27,
-      "symbol": "PropertyValue.error(type:value:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 27,
-      "symbol": "PropertyValue.file(url:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 27,
-      "symbol": "PropertyValue.int(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 27,
-      "symbol": "PropertyValue.object(id:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 27,
-      "symbol": "PropertyValue.string(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 30,
+      "line": 23,
       "symbol": "Propertied",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 32,
-      "symbol": "Propertied.subscript(dynamicMember:)",
-      "symbol_kind": "source.lang.swift.decl.function.subscript",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 43,
-      "symbol": "Propertied.subscript(dynamicMember:)",
-      "symbol_kind": "source.lang.swift.decl.function.subscript",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 54,
-      "symbol": "Propertied.subscript(dynamicMember:)",
-      "symbol_kind": "source.lang.swift.decl.function.subscript",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 65,
-      "symbol": "Propertied.subscript(dynamicMember:)",
-      "symbol_kind": "source.lang.swift.decl.function.subscript",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 75,
-      "symbol": "Propertied.subscript(dynamicMember:)",
-      "symbol_kind": "source.lang.swift.decl.function.subscript",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
-      "line": 85,
-      "symbol": "Propertied.subscript(dynamicMember:)",
-      "symbol_kind": "source.lang.swift.decl.function.subscript",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Specialization/SpecializedLevel.swift",
-      "line": 17,
-      "symbol": "SpecializedLevel",
-      "symbol_kind": "source.lang.swift.decl.protocol",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Specialization/SpecializedLevel.swift",
-      "line": 18,
-      "symbol": "SpecializedLevel.Container",
-      "symbol_kind": "source.lang.swift.decl.associatedtype",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Specialization/SpecializedLevel.swift",
-      "line": 20,
-      "symbol": "SpecializedLevel.primaryContainer",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Specialization/SpecializedLevel.swift",
-      "line": 22,
-      "symbol": "SpecializedLevel.init()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Specialization/SpecializedLevel.swift",
-      "line": 23,
-      "symbol": "SpecializedLevel.apply(tiledLevel:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Specialization/SpecializedLevel.swift",
       "line": 25,
-      "symbol": "SpecializedLevel.create(tileSet:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "symbol": "Propertied.subscript(dynamicMember:)",
+      "symbol_kind": "source.lang.swift.decl.function.subscript",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Specialization/SpecializedLevel.swift",
-      "line": 26,
-      "symbol": "SpecializedLevel.add(tile:to:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
+      "line": 36,
+      "symbol": "Propertied.subscript(dynamicMember:)",
+      "symbol_kind": "source.lang.swift.decl.function.subscript",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Specialization/SpecializedLevel.swift",
-      "line": 28,
-      "symbol": "SpecializedLevel.add(tileLayer:to:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
+      "line": 47,
+      "symbol": "Propertied.subscript(dynamicMember:)",
+      "symbol_kind": "source.lang.swift.decl.function.subscript",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Specialization/SpecializedLevel.swift",
-      "line": 29,
-      "symbol": "SpecializedLevel.add(group:to:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
+      "line": 58,
+      "symbol": "Propertied.subscript(dynamicMember:)",
+      "symbol_kind": "source.lang.swift.decl.function.subscript",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Specialization/SpecializedLevel.swift",
-      "line": 30,
-      "symbol": "SpecializedLevel.add(image:to:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
+      "line": 68,
+      "symbol": "Propertied.subscript(dynamicMember:)",
+      "symbol_kind": "source.lang.swift.decl.function.subscript",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Specialization/SpecializedLevel.swift",
-      "line": 31,
-      "symbol": "SpecializedLevel.add(objects:to:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/Properties.swift",
+      "line": 78,
+      "symbol": "Propertied.subscript(dynamicMember:)",
+      "symbol_kind": "source.lang.swift.decl.function.subscript",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Specialization/SpecializedLevel.swift",
-      "line": 34,
-      "symbol": "SpecializedLevel",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Specialization/SpecializedLevel.swift",
-      "line": 35,
-      "symbol": "SpecializedLevel.init(tiledLevel:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 57,
-      "symbol": "TileSetType",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/PropertyValue.swift",
+      "line": 17,
+      "symbol": "PropertyValue",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 58,
-      "symbol": "TileSetType.files",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/PropertyValue.swift",
+      "line": 19,
+      "symbol": "PropertyValue.string(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 59,
-      "symbol": "TileSetType.sheet(tileSheet:)",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/PropertyValue.swift",
+      "line": 20,
+      "symbol": "PropertyValue.bool(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 62,
-      "symbol": "TileSheet",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/PropertyValue.swift",
+      "line": 21,
+      "symbol": "PropertyValue.int(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/PropertyValue.swift",
+      "line": 22,
+      "symbol": "PropertyValue.double(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/PropertyValue.swift",
+      "line": 23,
+      "symbol": "PropertyValue.file(url:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/PropertyValue.swift",
+      "line": 24,
+      "symbol": "PropertyValue.color(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/PropertyValue.swift",
+      "line": 26,
+      "symbol": "PropertyValue.object(id:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Properties/PropertyValue.swift",
+      "line": 27,
+      "symbol": "PropertyValue.error(type:value:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/Tile.swift",
+      "line": 17,
+      "symbol": "Frame",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 63,
-      "symbol": "TileSheet.imagePath",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/Tile.swift",
+      "line": 25,
+      "symbol": "Tile",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/Tile.swift",
+      "line": 26,
+      "symbol": "Tile.image",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 137,
-      "symbol": "TileSet",
-      "symbol_kind": "source.lang.swift.decl.struct",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/Tile.swift",
+      "line": 27,
+      "symbol": "Tile.transparentColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 138,
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/Tile.swift",
+      "line": 28,
+      "symbol": "Tile.bounds",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/Tile.swift",
+      "line": 30,
+      "symbol": "Tile.frames",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/Tile.swift",
+      "line": 31,
+      "symbol": "Tile.collisionBodies",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/Tile.swift",
+      "line": 33,
+      "symbol": "Tile.uuid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/Tile.swift",
+      "line": 37,
+      "symbol": "Tile.init(_:transparentColor:bounds:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
+      "line": 15,
+      "symbol": "TileSet",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
+      "line": 16,
       "symbol": "TileSet.name",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 139,
-      "symbol": "TileSet.tileWidth",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
+      "line": 17,
+      "symbol": "TileSet.tileSize",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 140,
-      "symbol": "TileSet.tileHeight",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 141,
-      "symbol": "TileSet.tiles",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 142,
-      "symbol": "TileSet.type",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 144,
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
+      "line": 18,
       "symbol": "TileSet.properties",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 146,
-      "symbol": "TileSet.CodingKeys",
-      "symbol_kind": "source.lang.swift.decl.enum",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
+      "line": 21,
+      "symbol": "TileSet.count",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 147,
-      "symbol": "TileSet.CodingKeys.tiles",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
+      "line": 25,
+      "symbol": "TileSet.init(name:tileSize:properties:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 148,
-      "symbol": "TileSet.CodingKeys.tileWidth",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
+      "line": 31,
+      "symbol": "TileSet.subscript(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.subscript",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 149,
-      "symbol": "TileSet.CodingKeys.tileHeight",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 150,
-      "symbol": "TileSet.CodingKeys.name",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 151,
-      "symbol": "TileSet.CodingKeys.image",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 152,
-      "symbol": "TileSet.CodingKeys.properties",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 200,
-      "symbol": "TileSet.Tile",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 213,
-      "symbol": "TileSet.Tile.Frame",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
+      "line": 42,
+      "symbol": "TileSetReference",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 214,
-      "symbol": "TileSet.Tile.Frame.tile",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
+      "line": 43,
+      "symbol": "TileSetReference.firstGid",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 215,
-      "symbol": "TileSet.Tile.Frame.duration",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
+      "line": 44,
+      "symbol": "TileSetReference.tileSet",
       "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 218,
-      "symbol": "TileSet.Tile.identifier",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 219,
-      "symbol": "TileSet.Tile.parent",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 220,
-      "symbol": "TileSet.Tile.path",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 221,
-      "symbol": "TileSet.Tile.objects",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 222,
-      "symbol": "TileSet.Tile.tileSet",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 223,
-      "symbol": "TileSet.Tile.position",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 224,
-      "symbol": "TileSet.Tile.layers",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 232,
-      "symbol": "TileSet.Tile.animation",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 248,
-      "symbol": "TileSet.Tile.init(_:from:for:at:in:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 295,
-      "symbol": "TileSet.init(from:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet.swift",
-      "line": 317,
-      "symbol": "TileSet.init(named:tileWidth:tileHeight:of:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TiledDecoder.swift",
-      "line": 29,
-      "symbol": "TiledDecodingError",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TiledDecoder.swift",
-      "line": 30,
-      "symbol": "TiledDecodingError.noGameEngineSpecified",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TiledDecoder.swift",
-      "line": 31,
-      "symbol": "TiledDecodingError.missingDecoderContext",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TiledDecoder.swift",
-      "line": 32,
-      "symbol": "TiledDecodingError.couldNotReadTextDefinition",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TiledDecoder.swift",
-      "line": 33,
-      "symbol": "TiledDecodingError.noContainerForLayer(layerPath:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TiledDecoder.swift",
-      "line": 34,
-      "symbol": "TiledDecodingError.couldNotLoadFile(url:message:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TiledDecoder.swift",
-      "line": 35,
-      "symbol": "TiledDecodingError.couldNotLoadLevel(url:decodingError:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TiledDecoder.swift",
-      "line": 36,
-      "symbol": "TiledDecodingError.couldNotLoadTileSet(url:decodingError:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TiledDecoder.swift",
-      "line": 37,
-      "symbol": "TiledDecodingError.objectNotContainedInObjectLayer(layerPath:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TiledDecoder.swift",
-      "line": 38,
-      "symbol": "TiledDecodingError.unknownLayerType(layerType:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TiledDecoder.swift",
-      "line": 39,
-      "symbol": "TiledDecodingError.cannotCreateSpecialisedLevelOfType(desiredType:supportedTypes:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TiledDecoder.swift",
-      "line": 40,
-      "symbol": "TiledDecodingError.missingPathForTileSheetImage",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TiledDecoder.swift",
-      "line": 41,
-      "symbol": "TiledDecodingError.propertyHasNoValue",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     }
   ],
