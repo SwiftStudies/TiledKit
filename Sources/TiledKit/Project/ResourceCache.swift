@@ -70,7 +70,7 @@ class ResourceCache {
         let typeKey = self.typeKey(type)
         
         if let cachedResource = cache[url] as? R {
-            return cachedResource
+            return cachedResource.newInstance()
         }
 
         let loader : ResourceLoader
@@ -91,6 +91,6 @@ class ResourceCache {
             cache[url] = loadedResource
         }
         
-        return loadedResource.newInstance()
+        return loadedResource
     }
 }
