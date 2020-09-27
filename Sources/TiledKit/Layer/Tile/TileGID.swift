@@ -44,7 +44,7 @@ public struct TileGID : ExpressibleByIntegerLiteral, Equatable {
     let value : UInt32
     
     /// The gobal tile offset which uniquely identifies the `Tile` for a given `Map`
-    var globalTileOffset : UInt32 {
+    public var globalTileOffset : UInt32 {
         return value & TileGID.tileIdMask
     }
     
