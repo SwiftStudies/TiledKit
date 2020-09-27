@@ -20,7 +20,7 @@
 ///  - __Image__ An image not in a `TileSet`
 ///
 /// Every layer has a set of common attributes (such as an offest) and can capture user specified properites too.
-public struct Layer  {
+public struct Layer : Propertied {
     
     /// An enumeration for each kind of layer, together with the specifc information about that kind of layer (e.g. the `ImageReference` for an Image Layer
     public enum Kind {
@@ -53,7 +53,7 @@ public struct Layer  {
     public let kind    : Kind
     
     /// User specified `Properties` of the layer
-    public let properties : Properties
+    public var properties : Properties
     
     
     /// The `Object`s contained in the `Layer`. Will be an empty `Array` if it is not an object `Layer`
