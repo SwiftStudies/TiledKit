@@ -13,7 +13,7 @@
 //    limitations under the License.
 
 /// A `TileSet` represents a Tiled tile set, most typically loaded as part of loading a `Map`.
-public class TileSet : Loadable {
+public class TileSet : Loadable, Propertied {
     /// The name of the `TileSet`
     public let name : String
     
@@ -21,7 +21,7 @@ public class TileSet : Loadable {
     public let tileSize : PixelSize
     
     /// The user specified `Properties` of the `TileSet`
-    public let properties : Properties
+    public var properties : Properties
 
     private var tiles = [UInt32:Tile]()
     
