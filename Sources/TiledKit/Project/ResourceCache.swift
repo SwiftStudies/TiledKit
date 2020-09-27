@@ -14,6 +14,32 @@
 
 import Foundation
 
+/// Add's a new initializer that is used for identifying in memory assets that should be cached and restored
+public extension URL {
+    /// The name for the protocol to use to identify in memory resources
+    internal static var tiledKitResouceCacheScheme : String {
+        return "tkrc"
+    }
+    
+    internal var isInMemoryResource : Bool {
+        return scheme ?? "Unknown" == URL.tiledKitResouceCacheScheme
+    }
+    
+    
+    /// Creates a new instance of a URL intended for retrieving in memory objects from a TiledKit `Project`'s
+    /// cache
+    ///
+    /// - Parameter path: The elements of the `URL`'s path that will be used to reference the object
+    init?(inMemory path:String ...){
+        
+        let objectPath = path.reduce("\(URL.tiledKitResouceCacheScheme)://", {
+            "\($0)/\($1)"
+        })
+        
+        self.init(string: objectPath)
+    }
+}
+
 class ResourceCache {
     internal    var project         : Project? = nil
     private     var resourceLoaders = [String:ResourceLoader]()

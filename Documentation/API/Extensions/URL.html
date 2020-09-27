@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Loadable Protocol Reference</title>
+    <title>URL Extension Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Protocol/Loadable" class="dashAnchor"></a>
-    <a title="Loadable Protocol Reference"></a>
+    <a name="//apple_ref/swift/Extension/URL" class="dashAnchor"></a>
+    <a title="URL Extension Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">TiledKit Docs</a> (99% documented)</p>
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">TiledKit Reference</a>
         <img id="carat" src="../img/carat.png" />
-        Loadable Protocol Reference
+        URL Extension Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -197,16 +197,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Loadable</h1>
+            <h1>URL</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Loadable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">URL</span></code></pre>
 
                 </div>
               </div>
-            <p>Implemented by any type that wants to be loaded (and cached, and instanced) through the TiledKit <code><a href="../Classes/Project.html">Project</a></code>
-system. This makes it very easy to extend to a specific game engine.</p>
+            <p>Add&rsquo;s a new initializer that is used for identifying in memory assets that should be cached and restored</p>
 
           </section>
           <section class="section task-group-section">
@@ -215,9 +214,9 @@ system. This makes it very easy to extend to a specific game engine.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit8LoadableP6loader3forAA14ResourceLoader_pAA7ProjectC_tFZ"></a>
-                    <a name="//apple_ref/swift/Method/loader(for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit8LoadableP6loader3forAA14ResourceLoader_pAA7ProjectC_tFZ">loader(for:<wbr>)</a>
+                    <a name="/s:10Foundation3URLV8TiledKitE8inMemoryACSgSSd_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(inMemory:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Foundation3URLV8TiledKitE8inMemoryACSgSSd_tcfc">init(inMemory:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -225,14 +224,15 @@ system. This makes it very easy to extend to a specific game engine.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Construct and return a <code><a href="../Protocols/ResourceLoader.html">ResourceLoader</a></code> suitable for the protocol implementer</p>
+                        <p>Creates a new instance of a URL intended for retrieving in memory objects from a TiledKit <code><a href="../Classes/Project.html">Project</a></code>&lsquo;s
+cache</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">loader</span><span class="p">(</span><span class="k">for</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ResourceLoader.html">ResourceLoader</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">?(</span><span class="n">inMemory</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="o">...</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -243,74 +243,17 @@ system. This makes it very easy to extend to a specific game engine.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>project</em>
+                                <em>path</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The <code><a href="../Classes/Project.html">Project</a></code> the <code><a href="../Protocols/ResourceLoader.html">ResourceLoader</a></code> should work through to get any additional resources</p>
+                                  <p>The elements of the <code>URL</code>&lsquo;s path that will be used to reference the object</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8TiledKit8LoadableP5cacheSbvp"></a>
-                    <a name="//apple_ref/swift/Property/cache" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit8LoadableP5cacheSbvp">cache</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Instances should return <code>false</code> if they should not be cached (perhaps they are very large, temporary, or change over time)</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">cache</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8TiledKit8LoadableP11newInstancexyF"></a>
-                    <a name="//apple_ref/swift/Method/newInstance()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit8LoadableP11newInstancexyF">newInstance()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>When the <code>Loadable</code> has been cached this method will be called and if the object should create a copy of itself it can do it here.
-This is especially important for types that are classes as unless the instance is exactly the same (such as an image) and will not have
-been changed by previous instances, a copy should have been created. If it is acceptable that every instance of the <code>Loadable</code> is
-exactly the same object, the function can return <code>self</code>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">newInstance</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
-
-                        </div>
                       </div>
                     </section>
                   </div>

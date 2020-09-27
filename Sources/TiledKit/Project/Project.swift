@@ -147,6 +147,9 @@ public class Project {
     /// - Throws: Any errors thrown while the resource is being retreived (for example, the resource can't be found)
     /// - Returns: An instance of the resource
     public func retrieve<R:Loadable>(asType:R.Type, from resourceUrl:URL, relativeTo baseUrl:URL? = nil) throws ->R{
+        if resourceUrl.isInMemoryResource {
+            return try resourceCache.retrieve(as: R.self, from: resourceUrl)
+        }
         guard let resolvedUrl = resolve(resourceUrl, relativeTo: baseUrl) else {
             throw ProjectError.fileDoesNotExist(resourceUrl.standardized.absoluteString)
         }
