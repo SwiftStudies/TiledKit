@@ -50,6 +50,11 @@ public struct Map : LayerContainer, Loadable, Propertied{
     /// The tilesets used by the project
     internal var    tileSetReferences  = [TileSetReference]()
     
+    /// The tilesets the map uses
+    public var tileSets : [TileSet] {
+        return tileSetReferences.map({$0.tileSet})
+    }
+    
     /// Retreive a tile based on its `TileGID`
     public subscript(_ tile:TileGID)->Tile? {
         let tileSetTileId = tile.globalTileOffset
