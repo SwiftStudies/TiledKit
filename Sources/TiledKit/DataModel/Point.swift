@@ -14,7 +14,7 @@
 
 
 /// The `Point` generic captures a single in space.
-public struct Point<N:Numeric> : Equatable{
+public struct Point<N:Numeric> : Equatable, CustomStringConvertible{
     /// The x coordinate of the point
     public var x : N
     
@@ -35,10 +35,15 @@ public struct Point<N:Numeric> : Equatable{
     public static var zero : Self {
         return Self(x:0, y:0)
     }
+    
+    /// The description of the point
+    public var description: String {
+        return "(\(x),\(y)"
+    }
 }
 
 /// A generic type that stores a 2D dimenion (with width and height)
-public struct Dimension<N:Numeric> : Equatable{
+public struct Dimension<N:Numeric> : Equatable, CustomStringConvertible{
     /// The width of the dimension
     public var width : N
     
@@ -54,10 +59,15 @@ public struct Dimension<N:Numeric> : Equatable{
         self.width = width
         self.height = height
     }
+
+    /// The description of the point
+    public var description: String {
+        return "\(width)x\(height)"
+    }
 }
 
 /// A generic type that captrues a rectangular region in 2D space with an origin and size
-public struct Rectangle<N:Numeric> : Equatable{
+public struct Rectangle<N:Numeric> : Equatable, CustomStringConvertible {
     /// The origin of the rectangle
     public var origin : Point<N>
     /// The size of the rectangle
@@ -82,6 +92,11 @@ public struct Rectangle<N:Numeric> : Equatable{
     public init(origin:Point<N>, size:Dimension<N>){
         self.origin = origin
         self.size = size
+    }
+    
+    /// The description of the rectangle
+    public var description: String {
+        return "origin=\(origin) size=\(size)"
     }
 }
 
