@@ -12,6 +12,8 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+import Foundation
+
 enum TileDataEncoding : String, Codable {
     case csv,base64
 }
@@ -56,7 +58,7 @@ public struct TMXTileLayer : XMLLayer {
         let rawData = try decoder.container(keyedBy: CodingKeys.self).decode(TMXTileData.self, forKey: .data)
         
         if rawData.encoding == .csv && rawData.compression == nil {
-            data = rawData.data.split(separator: ",").map({(UInt32($0) ?? 0)})
+            data = rawData.data.replacingOccurrences(of: "\n", with: "").split(separator: ",").map({(UInt32($0) ?? 0)})
         } else {
             throw XMLDecodingError.unsupportedTileDataFormat(encoding: rawData.encoding, compression: rawData.compression ?? .none)
         }

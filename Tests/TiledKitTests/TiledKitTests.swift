@@ -109,6 +109,18 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(map.objectLayers[0].objects.count, 7)
     }
     
+    func testTileGrid(){
+        
+        guard let url = moduleBundleProject.url(for: "One of Everything", in: "Maps", of: .tmx), let map = try? moduleBundleProject.retrieve(asType: Map.self, from: url) else {
+            XCTFail("Could not load map")
+            return
+        }
+        
+        XCTAssertEqual(map.tileLayers[0].grid[0,1], 3)
+        XCTAssertEqual(map.tileLayers[0].grid[0,8], 3)
+        XCTAssertEqual(map.tileLayers[0].grid[9,9], 1)
+    }
+    
     func testColor(){
         XCTAssertEqual(Color(from: "ff00ff"), Color(r: 255, g: 00, b: 255))
         XCTAssertEqual(Color(from: "#ff00ff"), Color(r: 255, g: 00, b: 255))
@@ -376,6 +388,7 @@ final class TiledKitTests: XCTestCase {
     }
     
     static var allTests = [
+        ("testTileGrid", testTileGrid),
         ("testMap",testMap),
         ("testMultiImageTileSetWithSingleTile",testMultiImageTileSetWithSingleTile),
         ("testMultiImageTileSet",testMultiImageTileSet),
