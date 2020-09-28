@@ -12,6 +12,8 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+import Foundation
+
 /// Layers capture the contents of a `Map` can be one of four kinds
 ///
 ///  - __Tile__ A grid of `Tile`s
@@ -20,7 +22,7 @@
 ///  - __Image__ An image not in a `TileSet`
 ///
 /// Every layer has a set of common attributes (such as an offest) and can capture user specified properites too.
-public struct Layer : Propertied {
+public struct Layer : LayerProtocol, MutablePropertied {
     
     /// An enumeration for each kind of layer, together with the specifc information about that kind of layer (e.g. the `ImageReference` for an Image Layer
     public enum Kind {
@@ -35,6 +37,12 @@ public struct Layer : Propertied {
         
         /// Provides an `ImageReference` to an image
         case image(ImageReference)
+    }
+    
+    public static func named(_ name:String)->LayerFilter {
+        return BlockFilter { (layer) -> Bool in
+            return layer.name == name
+        }
     }
     
     /// The name of the layer, or an empty `String` if non was specified

@@ -17,13 +17,20 @@ import Foundation
 /// A `Dictionary` of named `PropertyValue`s used with any Tiled object that can have user defined properties (captured in `PropertyValue`)
 public typealias Properties = [String : PropertyValue]
 
-/// Any TiledKit object that can have user defined properties
+/// Any TiledKit object that can have user defined properties, that supports writing of properties
 public protocol Propertied {
+    /// The `Properties` of the object
+    var  properties : Properties { get }
+}
+
+
+/// Any TiledKit object that can have user defined properties, that supports writing of properties
+public protocol MutablePropertied {
     /// The `Properties` of the object
     var  properties : Properties {get set}
 }
 
-/// Extends any `Propertied` object to support dynamic member resolution for the dedicated types. 
+/// Extends any `Propertied` object to support dynamic member resolution for the dedicated types.
 public extension Propertied {
     
     /// Retreives a `Color` from an object that can have user properties dynamically.
