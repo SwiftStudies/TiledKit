@@ -35,7 +35,7 @@ extension TMXMap {
             url: url,
             mapSize: TileGridSize(width: tmxMap.width, height: tmxMap.height),
             tileSize: PixelSize(width: tmxMap.tileWidth, height: tmxMap.tileHeight),
-            orientation: Orientation(rawValue: tmxMap.orientation) ?? .orthogonal,
+            orientation: tmxMap.orientation == nil ? .orthogonal : Orientation(rawValue: tmxMap.orientation!) ?? .orthogonal,
             renderingOrder: RenderingOrder(rawValue: tmxMap.renderOrder) ?? .rightDown,
             backgroundColor: backgroundColor
         )

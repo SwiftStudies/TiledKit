@@ -32,7 +32,7 @@ public struct TMXMap : Codable, XMLPropertied {
     
     public let version : String
     public let tiledVersion : String
-    public let orientation : String
+    public let orientation : String?
     public let renderOrder : String
     public let width : Int
     public let height : Int
@@ -70,7 +70,7 @@ public struct TMXMap : Codable, XMLPropertied {
         
         version = try container.decode(String.self, forKey: .version)
         tiledVersion = try container.decode(String.self, forKey: .tiledVersion)
-        orientation = try container.decode(String.self, forKey: .orientation)
+        orientation = try container.decodeIfPresent(String.self, forKey: .orientation)
         renderOrder = try container.decode(String.self, forKey: .renderOrder)
         backgroundColor = try container.decodeIfPresent(String.self, forKey: .backgroundColor)
         
