@@ -95,18 +95,27 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(map.layers.count, 6)
         XCTAssertEqual(map.properties.count, 7)
 
-        XCTAssertEqual(map.tileLayers.count, 2) //level.getTileLayers().count
-        XCTAssertEqual(map.objectLayers.count, 1) //level.getObjectLayers().count
-        XCTAssertEqual(map.groupLayers.count, 2) //level.getGroups().count
+        do {
+            XCTAssertEqual(try map.layers(TileLayer.kind).count, 2) //level.getTileLayers().count
+            
+            XCTAssertEqual(try? map.layers(ObjectLayer.kind).count, 1) //level.getObjectLayers().count
+            XCTAssertEqual(try? map.layers(GroupLayer.kind).count, 2) //level.getGroups().count
 
-        let nestedImageLayer = map.groupLayers[0].group.imageLayers[0]
-        XCTAssertEqual(nestedImageLayer.layer.name, "Grouped Image Layer")
-        XCTAssertEqual(map.tileLayers[0].grid[0,0], TileGID(tileId: 0, flip: []))
-        XCTAssertEqual(map.tileLayers[1].grid[0,0], TileGID(tileId: 5, flip: []))
-        XCTAssertEqual(map.tileLayers[0].grid.size,  map.mapSize)
-        XCTAssertEqual(nestedImageLayer.image.size, PixelSize(width: 16, height: 16))
-        XCTAssertTrue(nestedImageLayer.image.source.path.hasSuffix("F.png"))
-        XCTAssertEqual(map.objectLayers[0].objects.count, 7)
+            let nestedImageLayer = try map.groupLayer(Layer.named("Group")).imageLayer(Layer.named("Grouped Image Layer"))
+                        
+            XCTAssertEqual(nestedImageLayer.name, "Grouped Image Layer")
+            XCTAssertEqual(try map.tileLayer(TileLayer.kind, at:0).grid[0,0], TileGID(tileId: 0, flip: []))
+            
+            XCTAssertEqual(try map.tileLayer(TileLayer.kind,at:1).grid[0,0], TileGID(tileId: 5, flip: []))
+            XCTAssertEqual(try map.tileLayer(TileLayer.kind, at:0).grid.size,  map.mapSize)
+            XCTAssertEqual(nestedImageLayer.image.size, PixelSize(width: 16, height: 16))
+            XCTAssertTrue(nestedImageLayer.image.source.path.hasSuffix("F.png"))
+            XCTAssertEqual(try? map.layers(ObjectLayer.kind)[0].objects.count, 7)
+        } catch {
+            return XCTFail("Failed to filter layers \(error)")
+        }
+
+        
     }
     
     func testTileGrid(){
@@ -116,9 +125,9 @@ final class TiledKitTests: XCTestCase {
             return
         }
         
-        XCTAssertEqual(map.tileLayers[0].grid[0,1], 3)
-        XCTAssertEqual(map.tileLayers[0].grid[0,8], 3)
-        XCTAssertEqual(map.tileLayers[0].grid[9,9], 1)
+        XCTAssertEqual(try? map.tileLayer(TileLayer.kind, at:0).grid[0,1], 3)
+        XCTAssertEqual(try? map.tileLayer(TileLayer.kind, at:0).grid[0,8], 3)
+        XCTAssertEqual(try? map.tileLayer(TileLayer.kind, at:0).grid[9,9], 1)
     }
     
     func testColor(){
@@ -143,7 +152,7 @@ final class TiledKitTests: XCTestCase {
             return
         }
         
-        guard let objectLayer = map.objectLayers.first else {
+        guard let objectLayer = try? map.layers(ObjectLayer.kind).first else {
             XCTFail("No object layer")
             return
         }
@@ -166,7 +175,7 @@ final class TiledKitTests: XCTestCase {
             return
         }
         
-        guard let objectLayer = map.objectLayers.first else {
+        guard let objectLayer = try? map.layers(ObjectLayer.kind).first else {
             XCTFail("No object layer")
             return
         }
@@ -206,7 +215,7 @@ final class TiledKitTests: XCTestCase {
             return
         }
         
-        guard let objectLayer = map.objectLayers.first else {
+        guard let objectLayer = try? map.layers(ObjectLayer.kind).first else {
             XCTFail("No object layer")
             return
         }
@@ -235,7 +244,7 @@ final class TiledKitTests: XCTestCase {
             return
         }
         
-        guard let objectLayer = map.objectLayers.first else {
+        guard let objectLayer = try? map.layers(ObjectLayer.kind).first else {
             XCTFail("No object layer")
             return
         }
@@ -266,7 +275,7 @@ final class TiledKitTests: XCTestCase {
             return
         }
         
-        guard let objectLayer = map.objectLayers.first else {
+        guard let objectLayer = try? map.layers(ObjectLayer.kind).first else {
             XCTFail("No object layer")
             return
         }
@@ -305,14 +314,14 @@ final class TiledKitTests: XCTestCase {
             return
         }
         
-        guard let imageLayer = map.imageLayers.first else {
+        guard let imageLayer = try? map.imageLayer(ImageLayer.kind, at:0 ) else {
             XCTFail("No image layer")
             return
         }
         
         
-        XCTAssertEqual(imageLayer.layer.position.x, 72)
-        XCTAssertEqual(imageLayer.layer.position.y, 48)
+        XCTAssertEqual(imageLayer.position.x, 72)
+        XCTAssertEqual(imageLayer.position.y, 48)
         XCTAssertTrue(imageLayer.image.source.standardized.path.hasSuffix("Resources/Images/Individual/F.png"), "URL is incorrect \(imageLayer.image.source)")
     }
     
@@ -325,11 +334,19 @@ final class TiledKitTests: XCTestCase {
             return
         }
 
-        XCTAssertEqual(map.objectLayers[0].layer.position.x, 16)
-        XCTAssertEqual(map.objectLayers[0].layer.position.y, 16)
+        guard let objectLayer = try? map.layers(ObjectLayer.kind).first else {
+            return XCTFail("Could not find object layer")
+        }
+
+        guard let groupLayer = try? map.layers(GroupLayer.kind).first else {
+            return XCTFail("Could not find group layer")
+        }
         
-        XCTAssertEqual(map.groupLayers[0].layer.position.x, 144)
-        XCTAssertEqual(map.groupLayers[0].layer.position.y, 80)
+        XCTAssertEqual(objectLayer.position.x, 16)
+        XCTAssertEqual(objectLayer.position.y, 16)
+        
+        XCTAssertEqual(groupLayer.position.x, 144)
+        XCTAssertEqual(groupLayer.position.y, 80)
     }
 
     func testMultipleProperties(){
@@ -387,7 +404,34 @@ final class TiledKitTests: XCTestCase {
         }
     }
     
+    func testTileObjectScaling(){
+        guard let map = try? loadTestMap(from: moduleBundleProject) else {
+            XCTFail("Could not load map")
+            return
+        }
+        
+        let objectLayer : ObjectLayer
+        do {
+            objectLayer = try map.groupLayer(Layer.named("Translating Group")).layers.objectLayer(Layer.named("Translated Objects"))
+        } catch {
+            return XCTFail("Failed to get object layer \(error)")
+        }
+        
+        if let tileObject = objectLayer.objects(named: "Stretched Tile")?.first {
+            if case let Object.Kind.tile(_,size,_) = tileObject.kind {
+                XCTAssertEqual(size, Size(width: 16, height: 32))
+                return
+            } else {
+                XCTFail("Incorrect object type")
+            }
+        } else {
+            XCTFail("Could not find object with name")
+        }
+        
+    }
+    
     static var allTests = [
+        ("testTileObjectScaling",testTileObjectScaling),
         ("testTileGrid", testTileGrid),
         ("testMap",testMap),
         ("testMultiImageTileSetWithSingleTile",testMultiImageTileSetWithSingleTile),

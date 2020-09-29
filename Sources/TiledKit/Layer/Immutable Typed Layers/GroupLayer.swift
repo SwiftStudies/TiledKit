@@ -1,0 +1,67 @@
+//    Copyright 2020 Swift Studies
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
+public struct GroupLayer : LayerProtocol, LayerContainer {
+    private let     layer   : Layer
+    private let     allLayers : [Layer]
+
+    /// A filter that can be used for selecting layers that have the `Layer.kind` attribute of group
+    public static let kind: LayerFilter = KindLayerFilter()
+    
+    internal init(_ layer:Layer, children:[Layer]){
+        self.layer = layer
+        allLayers = children
+    }
+    
+    /// The name of the layer, or an empty `String` if none was specified
+    public var name    : String {
+        return layer.name
+    }
+    
+    /// `true` if the layer should be visible
+    public var visible : Bool {
+        return layer.visible
+    }
+    
+    /// A level of transparent the layer (and therefore its contents) should be rendered with
+    public var opacity : Double {
+        return layer.opacity
+    }
+    
+    /// An offset from the `Layer`s parent's origin
+    public var position: Position {
+        return layer.position
+    }
+    
+    /// User specified `Properties` of the layer
+    public var properties : Properties {
+        return layer.properties
+    }
+
+    
+    public var layers: [Layer]  {
+        return allLayers
+    }
+
+}
+
+fileprivate struct KindLayerFilter : LayerFilter {
+    func matches(_ layer: Layer) -> Bool {
+        if case Layer.Kind.group = layer.kind {
+            return true
+        }
+        
+        return false
+    }
+}

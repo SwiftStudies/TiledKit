@@ -97,7 +97,7 @@
     </properties>
     <polygon points="0,0 0,-31.3794 27.6139,-31.8815 31.3794,-28.8691 31.6305,-0.251036"/>
    </object>
-   <object id="12" gid="5" x="16" y="48" width="16" height="32" rotation="90"/>
+   <object id="12" name="Stretched Tile" gid="5" x="16" y="48" width="16" height="32" rotation="90"/>
   </objectgroup>
  </group>
 </map>

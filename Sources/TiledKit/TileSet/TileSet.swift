@@ -13,7 +13,7 @@
 //    limitations under the License.
 
 /// A `TileSet` represents a Tiled tile set, most typically loaded as part of loading a `Map`.
-public class TileSet : Loadable, Propertied {
+public class TileSet : Loadable, MutablePropertied {
     /// The name of the `TileSet`
     public let name : String
     
