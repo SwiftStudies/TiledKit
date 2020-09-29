@@ -25,7 +25,7 @@ public protocol Propertied {
 
 
 /// Any TiledKit object that can have user defined properties, that supports writing of properties
-public protocol MutablePropertied {
+public protocol MutablePropertied : Propertied{
     /// The `Properties` of the object
     var  properties : Properties {get set}
 }
