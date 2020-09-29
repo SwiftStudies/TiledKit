@@ -21,7 +21,7 @@ public struct TMXElements : Codable {
 
 public struct TMXMap : Codable, XMLPropertied {
     enum CodingKeys : String, CodingKey {
-        case version, tiledVersion = "tiledversion", orientation, renderOrder = "renderorder", width, height, tileWidth = "tilewidth", tileHeight = "tileheight", infinite, tileSetReference = "tileset"
+        case version, tiledVersion = "tiledversion", orientation, renderOrder = "renderorder", width, height, tileWidth = "tilewidth", tileHeight = "tileheight", infinite, tileSetReference = "tileset", backgroundColor = "backgroundcolor"
     }
     
     public static var decoder : XMLDecoder {
@@ -39,6 +39,7 @@ public struct TMXMap : Codable, XMLPropertied {
     public let tileWidth : Int
     public let tileHeight : Int
     public let infinite : Bool
+    public let backgroundColor : String?
 
     public let layers : [XMLLayer]
     public let tileSetReferences : [TMXTileSetReference]
@@ -61,6 +62,7 @@ public struct TMXMap : Codable, XMLPropertied {
         layers = loaded.layers
         tileSetReferences = loaded.tileSetReferences
         properties = loaded.properties
+        backgroundColor = loaded.backgroundColor
     }
     
     public init(from decoder: Decoder) throws {
@@ -70,6 +72,7 @@ public struct TMXMap : Codable, XMLPropertied {
         tiledVersion = try container.decode(String.self, forKey: .tiledVersion)
         orientation = try container.decode(String.self, forKey: .orientation)
         renderOrder = try container.decode(String.self, forKey: .renderOrder)
+        backgroundColor = try container.decodeIfPresent(String.self, forKey: .backgroundColor)
         
         width = try container.decode(Int.self, forKey: .width)
         height = try container.decode(Int.self, forKey: .height)

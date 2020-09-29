@@ -24,12 +24,20 @@ extension TMXMap {
         let data = try Data(contentsOf: url)
         let tmxMap = try TMXMap.decoder.decode(TMXMap.self, from: data)
 
+        let backgroundColor : Color?
+        if let rawBackgroundColor = tmxMap.backgroundColor {
+            backgroundColor = Color(from: rawBackgroundColor)
+        } else {
+            backgroundColor = nil
+        }
+        
         var map = Map(
             url: url,
             mapSize: TileGridSize(width: tmxMap.width, height: tmxMap.height),
             tileSize: PixelSize(width: tmxMap.tileWidth, height: tmxMap.tileHeight),
             orientation: Orientation(rawValue: tmxMap.orientation) ?? .orthogonal,
-            renderingOrder: RenderingOrder(rawValue: tmxMap.renderOrder) ?? .rightDown
+            renderingOrder: RenderingOrder(rawValue: tmxMap.renderOrder) ?? .rightDown,
+            backgroundColor: backgroundColor
         )
         
         // Convert properties on the map

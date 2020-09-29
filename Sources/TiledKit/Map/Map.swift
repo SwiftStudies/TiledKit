@@ -44,6 +44,9 @@ public struct Map : LayerContainer, Loadable, MutablePropertied{
     /// The rendering order the map was designed in
     public var    renderingOrder   : RenderingOrder
 
+    /// The color that should be used to render the background of the map
+    public var    backgroundColor  : Color?
+    
     /// The various layers in the map
     public var    layers          = [Layer]()
     
@@ -67,7 +70,6 @@ public struct Map : LayerContainer, Loadable, MutablePropertied{
         
         return nil
     }
-    
     
     /// Creates and returns an instance of `MapLoader` which will load maps from Tiled tmx files
     /// - Parameter project: The project the `Map` will be loaded into
