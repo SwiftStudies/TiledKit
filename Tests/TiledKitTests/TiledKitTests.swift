@@ -96,21 +96,18 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(map.properties.count, 7)
 
         do {
-            XCTAssertEqual(map.tileLayers.count, 2) //level.getTileLayers().count
+            XCTAssertEqual(try map.layers(TileLayer.kind).count, 2) //level.getTileLayers().count
             
             XCTAssertEqual(try? map.layers(ObjectLayer.kind).count, 1) //level.getObjectLayers().count
             XCTAssertEqual(try? map.layers(GroupLayer.kind).count, 2) //level.getGroups().count
 
-            let groupLayer = try map.groupLayer(Layer.named("Group"))
-
-            guard let nestedImageLayer = groupLayer.imageLayers.first else  {
-                return XCTFail("Could not get image layer")
-            }
-
-            XCTAssertEqual(nestedImageLayer.layer.name, "Grouped Image Layer")
-            XCTAssertEqual(map.tileLayers[0].grid[0,0], TileGID(tileId: 0, flip: []))
-            XCTAssertEqual(map.tileLayers[1].grid[0,0], TileGID(tileId: 5, flip: []))
-            XCTAssertEqual(map.tileLayers[0].grid.size,  map.mapSize)
+            let nestedImageLayer = try map.groupLayer(Layer.named("Group")).imageLayer(Layer.named("Grouped Image Layer"))
+                        
+            XCTAssertEqual(nestedImageLayer.name, "Grouped Image Layer")
+            XCTAssertEqual(try map.tileLayer(TileLayer.kind, at:0).grid[0,0], TileGID(tileId: 0, flip: []))
+            
+            XCTAssertEqual(try map.tileLayer(TileLayer.kind,at:1).grid[0,0], TileGID(tileId: 5, flip: []))
+            XCTAssertEqual(try map.tileLayer(TileLayer.kind, at:0).grid.size,  map.mapSize)
             XCTAssertEqual(nestedImageLayer.image.size, PixelSize(width: 16, height: 16))
             XCTAssertTrue(nestedImageLayer.image.source.path.hasSuffix("F.png"))
             XCTAssertEqual(try? map.layers(ObjectLayer.kind)[0].objects.count, 7)
@@ -128,9 +125,9 @@ final class TiledKitTests: XCTestCase {
             return
         }
         
-        XCTAssertEqual(map.tileLayers[0].grid[0,1], 3)
-        XCTAssertEqual(map.tileLayers[0].grid[0,8], 3)
-        XCTAssertEqual(map.tileLayers[0].grid[9,9], 1)
+        XCTAssertEqual(try? map.tileLayer(TileLayer.kind, at:0).grid[0,1], 3)
+        XCTAssertEqual(try? map.tileLayer(TileLayer.kind, at:0).grid[0,8], 3)
+        XCTAssertEqual(try? map.tileLayer(TileLayer.kind, at:0).grid[9,9], 1)
     }
     
     func testColor(){
@@ -317,14 +314,14 @@ final class TiledKitTests: XCTestCase {
             return
         }
         
-        guard let imageLayer = map.imageLayers.first else {
+        guard let imageLayer = try? map.imageLayer(ImageLayer.kind, at:0 ) else {
             XCTFail("No image layer")
             return
         }
         
         
-        XCTAssertEqual(imageLayer.layer.position.x, 72)
-        XCTAssertEqual(imageLayer.layer.position.y, 48)
+        XCTAssertEqual(imageLayer.position.x, 72)
+        XCTAssertEqual(imageLayer.position.y, 48)
         XCTAssertTrue(imageLayer.image.source.standardized.path.hasSuffix("Resources/Images/Individual/F.png"), "URL is incorrect \(imageLayer.image.source)")
     }
     

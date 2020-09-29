@@ -41,10 +41,13 @@ public enum LayerMatchingError : Error {
     /// When trying to select a specific layer type (e.g. with `objectLayer()`) and the single matching
     /// layer is of the wrong kind. The layer is included to assist with diagnostics
     case matchedLayerNonMatchingKind(Layer)
+    
+    /// Insufficient `Layer`s matched the filters to meet the `index` requirement
+    case indexOutOfMatchedRange(Int, actualCount:Int)
 }
 
 /// Core filtering function
-public extension LayerContainer {
+internal extension LayerContainer {
     func layers(filteredBy filters:[LayerFilter]) throws -> [Layer]{
         if filters.count == 0 {
             throw LayerMatchingError.noFiltersSpecified
@@ -56,6 +59,7 @@ public extension LayerContainer {
                     return false
                 }
             }
+
             return true
         }
         
@@ -65,6 +69,23 @@ public extension LayerContainer {
         
         return results
     }
+    
+    func prefilterLimitedMatch(_ matching:[LayerFilter],at index:Int? = nil) throws -> Layer {
+        let matchingLayers = try layers(filteredBy: matching)
+        
+        if matchingLayers.count > 1 && index == nil {
+            throw LayerMatchingError.multipleLayersMatchedFilters(matchingLayers)
+        }
+        
+        let index = index ?? 0
+        
+        if matchingLayers.count <= index {
+            throw LayerMatchingError.indexOutOfMatchedRange(index, actualCount: matchingLayers.count)
+        }
+        
+        return matchingLayers[index]
+    }
+
 }
 /// Standard functions provided by all `LayerContainer`s
 public extension LayerContainer {
@@ -83,16 +104,11 @@ public extension LayerContainer {
     
     /// Returns a single `GroupLayer` that matches the supplied filters
     /// - Parameter matching: The filters that should result in a single `Layer` being identified
+    /// - Parameter index: If you know that the filters which match multiple and want a specific result specify it here
     /// - Throws: Any exception will be thrown if there are no filters, no layers match, or more than one layer matches the supplied filters
     /// - Returns: The matching `GroupLayer`
-    func groupLayer(_ matching:LayerFilter...) throws -> GroupLayer {
-        let matchingLayers = try layers(filteredBy: matching)
-        
-        if matchingLayers.count > 1 {
-            throw LayerMatchingError.multipleLayersMatchedFilters(matchingLayers)
-        }
-        
-        let matchedLayer = matchingLayers[0]
+    public func groupLayer(_ matching:LayerFilter...,at index:Int? = nil) throws -> GroupLayer {
+        let matchedLayer = try prefilterLimitedMatch(matching, at: index)
         
         if case let Layer.Kind.group(groupedLayers) = matchedLayer.kind {
             return GroupLayer(matchedLayer, children: groupedLayers.layers)
@@ -104,16 +120,10 @@ public extension LayerContainer {
     /// Returns a single `ObjectLayer` that matches the supplied filters
     /// - Parameter matching: The filters that should result in a single `Layer` being identified
     /// - Throws: Any exception will be thrown if there are no filters, no layers match, or more than one layer matches the supplied filters
-    /// - Returns: The matching `GroupLayer`
-    func objectLayer(_ matching:LayerFilter...) throws -> ObjectLayer {
-        let matchingLayers = try layers(filteredBy: matching)
-        
-        if matchingLayers.count > 1 {
-            throw LayerMatchingError.multipleLayersMatchedFilters(matchingLayers)
-        }
-        
-        let matchedLayer = matchingLayers[0]
-        
+    /// - Returns: The matching `ObjectLayer`
+    func objectLayer(_ matching:LayerFilter...,at index:Int? = nil) throws -> ObjectLayer {
+        let matchedLayer = try prefilterLimitedMatch(matching, at: index)
+
         if case let Layer.Kind.objects(objects) = matchedLayer.kind {
             return ObjectLayer(matchedLayer, objects: objects)
         } else {
@@ -121,27 +131,31 @@ public extension LayerContainer {
         }
     }
 
-    
-    /// All tile `Layer`s in the container together with their `TileGrid`
-    var tileLayers : [(layer:Layer, grid:TileGrid)] {
-        return layers.compactMap(){ (layer) -> (Layer, TileGrid)? in
-            if case let Layer.Kind.tile(tileGrid) = layer.kind {
-                return (layer,tileGrid)
-            }
-            return nil
+    /// Returns a single `TileLayer` that matches the supplied filters
+    /// - Parameter matching: The filters that should result in a single `Layer` being identified
+    /// - Throws: Any exception will be thrown if there are no filters, no layers match, or more than one layer matches the supplied filters
+    /// - Returns: The matching `TileLayer`
+    func tileLayer(_ matching:LayerFilter...,at index:Int? = nil) throws -> TileLayer {
+        let matchedLayer = try prefilterLimitedMatch(matching, at: index)
+
+        if case let Layer.Kind.tile(tileGrid) = matchedLayer.kind {
+            return TileLayer(matchedLayer, grid: tileGrid)
+        } else {
+            throw LayerMatchingError.matchedLayerNonMatchingKind(matchedLayer)
         }
     }
-
     
-    /// All image `Layer`s in the container together with their `ImageReference`s
-    var imageLayers : [(layer:Layer, image:ImageReference)] {
-        return layers.compactMap(){ (layer) -> (Layer, ImageReference)? in
-            if case let Layer.Kind.image(image) = layer.kind {
-                return (layer,image)
-            }
-            return nil
+    /// Returns a single `ImageLayer` that matches the supplied filters
+    /// - Parameter matching: The filters that should result in a single `Layer` being identified
+    /// - Throws: Any exception will be thrown if there are no filters, no layers match, or more than one layer matches the supplied filters
+    /// - Returns: The matching `ImageLayer`
+    func imageLayer(_ matching:LayerFilter...,at index:Int? = nil) throws -> ImageLayer {
+        let matchedLayer = try prefilterLimitedMatch(matching, at: index)
+
+        if case let Layer.Kind.image(reference) = matchedLayer.kind {
+            return ImageLayer(matchedLayer, image: reference)
+        } else {
+            throw LayerMatchingError.matchedLayerNonMatchingKind(matchedLayer)
         }
     }
-
-
 }

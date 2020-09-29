@@ -39,6 +39,8 @@ public struct Layer : LayerProtocol, MutablePropertied {
         case image(ImageReference)
     }
     
+    /// A `LayerFilter` that matches against the `name` property of the `Layer`. Note that in Tiled
+    /// layer names are not unique.
     public static func named(_ name:String)->LayerFilter {
         return BlockFilter { (layer) -> Bool in
             return layer.name == name
