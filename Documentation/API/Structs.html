@@ -17,7 +17,7 @@
     <a title="Structures  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">TiledKit Docs</a> (99% documented)</p>
+        <p><a href="index.html">TiledKit Docs</a> (97% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="search.json">
@@ -60,6 +60,9 @@
                 <a href="Enums/HorizontalTextAlignment.html">HorizontalTextAlignment</a>
               </li>
               <li class="nav-group-task">
+                <a href="Enums/LayerMatchingError.html">LayerMatchingError</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/Orientation.html">Orientation</a>
               </li>
               <li class="nav-group-task">
@@ -91,7 +94,16 @@
                 <a href="Protocols/LayerContainer.html">LayerContainer</a>
               </li>
               <li class="nav-group-task">
+                <a href="Protocols/LayerFilter.html">LayerFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/LayerProtocol.html">LayerProtocol</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/Loadable.html">Loadable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/MutablePropertied.html">MutablePropertied</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/Propertied.html">Propertied</a>
@@ -117,6 +129,12 @@
                 <a href="Structs/Group.html">Group</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/GroupLayer.html">GroupLayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ImageLayer.html">ImageLayer</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/ImageReference.html">ImageReference</a>
               </li>
               <li class="nav-group-task">
@@ -135,6 +153,9 @@
                 <a href="Structs/Object/Kind.html">– Kind</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/ObjectLayer.html">ObjectLayer</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/Point.html">Point</a>
               </li>
               <li class="nav-group-task">
@@ -151,6 +172,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/TileGrid.html">TileGrid</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TileLayer.html">TileLayer</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/TileSetReference.html">TileSetReference</a>
@@ -253,7 +277,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Point</span><span class="o">&lt;</span><span class="kt">N</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">Equatable</span> <span class="k">where</span> <span class="kt">N</span> <span class="p">:</span> <span class="kt">Numeric</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Point</span><span class="o">&lt;</span><span class="kt">N</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">CustomStringConvertible</span> <span class="k">where</span> <span class="kt">N</span> <span class="p">:</span> <span class="kt">Numeric</span></code></pre>
 
                         </div>
                       </div>
@@ -281,7 +305,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Dimension</span><span class="o">&lt;</span><span class="kt">N</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">Equatable</span> <span class="k">where</span> <span class="kt">N</span> <span class="p">:</span> <span class="kt">Numeric</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Dimension</span><span class="o">&lt;</span><span class="kt">N</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">CustomStringConvertible</span> <span class="k">where</span> <span class="kt">N</span> <span class="p">:</span> <span class="kt">Numeric</span></code></pre>
 
                         </div>
                       </div>
@@ -309,7 +333,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Rectangle</span><span class="o">&lt;</span><span class="kt">N</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">Equatable</span> <span class="k">where</span> <span class="kt">N</span> <span class="p">:</span> <span class="kt">Numeric</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Rectangle</span><span class="o">&lt;</span><span class="kt">N</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">CustomStringConvertible</span> <span class="k">where</span> <span class="kt">N</span> <span class="p">:</span> <span class="kt">Numeric</span></code></pre>
 
                         </div>
                       </div>
@@ -375,6 +399,118 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:8TiledKit10GroupLayerV"></a>
+                    <a name="//apple_ref/swift/Struct/GroupLayer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit10GroupLayerV">GroupLayer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GroupLayer.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GroupLayer</span> <span class="p">:</span> <span class="kt"><a href="Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/LayerContainer.html">LayerContainer</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit10ImageLayerV"></a>
+                    <a name="//apple_ref/swift/Struct/ImageLayer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit10ImageLayerV">ImageLayer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/ImageLayer.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ImageLayer</span> <span class="p">:</span> <span class="kt"><a href="Protocols/LayerProtocol.html">LayerProtocol</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit11ObjectLayerV"></a>
+                    <a name="//apple_ref/swift/Struct/ObjectLayer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit11ObjectLayerV">ObjectLayer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides an immutable view of a <code><a href="Structs/Layer.html">Layer</a></code> that is an object layer</p>
+
+                        <a href="Structs/ObjectLayer.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectLayer</span> <span class="p">:</span> <span class="kt"><a href="Protocols/LayerProtocol.html">LayerProtocol</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit9TileLayerV"></a>
+                    <a name="//apple_ref/swift/Struct/TileLayer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit9TileLayerV">TileLayer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/TileLayer.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TileLayer</span> <span class="p">:</span> <span class="kt"><a href="Protocols/LayerProtocol.html">LayerProtocol</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:8TiledKit5LayerV"></a>
                     <a name="//apple_ref/swift/Struct/Layer" class="dashAnchor"></a>
                     <a class="token" href="#/s:8TiledKit5LayerV">Layer</a>
@@ -402,7 +538,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Layer</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Layer</span> <span class="p">:</span> <span class="kt"><a href="Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/MutablePropertied.html">MutablePropertied</a></span></code></pre>
 
                         </div>
                       </div>
@@ -514,7 +650,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Map</span> <span class="p">:</span> <span class="kt"><a href="Protocols/LayerContainer.html">LayerContainer</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/Loadable.html">Loadable</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/Propertied.html">Propertied</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Map</span> <span class="p">:</span> <span class="kt"><a href="Protocols/LayerContainer.html">LayerContainer</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/Loadable.html">Loadable</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/MutablePropertied.html">MutablePropertied</a></span></code></pre>
 
                         </div>
                       </div>
@@ -542,7 +678,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Object</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Object</span> <span class="p">:</span> <span class="kt"><a href="Protocols/MutablePropertied.html">MutablePropertied</a></span></code></pre>
 
                         </div>
                       </div>
@@ -640,7 +776,7 @@ captures both the first <code><a href="Structs/TileGID.html">TileGID</a></code> 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="http://swiftstudies.com" target="_blank" rel="external">SwiftStudies</a>. All rights reserved. (Last updated: 2020-09-27)</p>
+          <p>&copy; 2020 <a class="link" href="http://swiftstudies.com" target="_blank" rel="external">SwiftStudies</a>. All rights reserved. (Last updated: 2020-09-28)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
