@@ -15,13 +15,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Immutable Typed Layers/ImageLayer.swift",
-      "line": 17,
-      "symbol": "ImageLayer.image",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Immutable Typed Layers/TileLayer.swift",
       "line": 15,
       "symbol": "TileLayer",
@@ -39,6 +32,13 @@
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/LayerFilter.swift",
       "line": 18,
       "symbol": "LayerFilter.matches(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/Project.swift",
+      "line": 198,
+      "symbol": "Project.retrieve(asType:from:in:of:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },

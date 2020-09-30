@@ -17,7 +17,7 @@
     <a title="Project Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TiledKit Docs</a> (97% documented)</p>
+        <p><a href="../index.html">TiledKit</a> (97% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -154,6 +154,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ObjectLayer.html">ObjectLayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ObjectType.html">ObjectType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ObjectTypes.html">ObjectTypes</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Point.html">Point</a>
@@ -506,6 +512,142 @@ you can specify that if the created object should be cached or not.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:8TiledKit7ProjectC8retrieve3map2inAA3MapVSS_SSSgtKF"></a>
+                    <a name="//apple_ref/swift/Method/retrieve(map:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit7ProjectC8retrieve3map2inAA3MapVSS_SSSgtKF">retrieve(map:<wbr>in:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Loads a <code><a href="../Structs/Map.html">Map</a></code> from the project with the specied name (and optionally subdirectory). Note that you do not have to include the
+file extension <code>.tmx</code> in the name (although if you do the <code><a href="../Structs/Map.html">Map</a></code> will still be loaded).</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Any errors finding or loading the <code><a href="../Structs/Map.html">Map</a></code> will be thrown here
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">retrieve</span><span class="p">(</span><span class="n">map</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="k">in</span> <span class="nv">subdirectory</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the map&rsquo;s file. You can ommit the &ldquo;.tmx &rdquo; extension, but it is acceptable to include it.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subdirectory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The sub-directory path (from the root of the project)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The desired <code><a href="../Structs/Map.html">Map</a></code></p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit7ProjectC8retrieve7tileset2inAA7TileSetCSS_SSSgtKF"></a>
+                    <a name="//apple_ref/swift/Method/retrieve(tileset:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit7ProjectC8retrieve7tileset2inAA7TileSetCSS_SSSgtKF">retrieve(tileset:<wbr>in:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Loads a <code><a href="../Classes/TileSet.html">TileSet</a></code> from the project with the specied name (and optionally subdirectory). Note that you do not have to include the
+file extension <code>.tsx</code> in the name (although if you do the <code><a href="../Classes/TileSet.html">TileSet</a></code> will still be loaded).</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Any errors finding or loading the <code><a href="../Classes/TileSet.html">TileSet</a></code> will be thrown here
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">retrieve</span><span class="p">(</span><span class="n">tileset</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="k">in</span> <span class="nv">subdirectory</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TileSet.html">TileSet</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the tileset&rsquo;s file. You can ommit the &ldquo;.tsx &rdquo; extension, but it is acceptable to include it.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subdirectory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The sub-directory path (from the root of the project)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The desired <code><a href="../Classes/TileSet.html">TileSet</a></code></p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:8TiledKit7ProjectC8retrieve6asType4from10relativeToxxm_10Foundation3URLVAJSgtKAA8LoadableRzlF"></a>
                     <a name="//apple_ref/swift/Method/retrieve(asType:from:relativeTo:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:8TiledKit7ProjectC8retrieve6asType4from10relativeToxxm_10Foundation3URLVAJSgtKAA8LoadableRzlF">retrieve(asType:<wbr>from:<wbr>relativeTo:<wbr>)</a>
@@ -578,6 +720,33 @@ you can specify that if the created object should be cached or not.</p>
                       <div>
                         <h4>Return Value</h4>
                         <p>An instance of the resource</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit7ProjectC8retrieve6asType4from2in2ofxxm_S2SSgAA04FileF0OSgtKAA8LoadableRzlF"></a>
+                    <a name="//apple_ref/swift/Method/retrieve(asType:from:in:of:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit7ProjectC8retrieve6asType4from2in2ofxxm_S2SSgAA04FileF0OSgtKAA8LoadableRzlF">retrieve(asType:<wbr>from:<wbr>in:<wbr>of:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">retrieve</span><span class="o">&lt;</span><span class="kt">R</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">asType</span><span class="p">:</span> <span class="kt">R</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span> <span class="n">from</span> <span class="nv">fileName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="k">in</span> <span class="nv">subdirectory</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">of</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/FileType.html">FileType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">R</span> <span class="k">where</span> <span class="kt">R</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Loadable.html">Loadable</a></span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -714,7 +883,7 @@ to create common cached assets</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="http://swiftstudies.com" target="_blank" rel="external">SwiftStudies</a>. All rights reserved. (Last updated: 2020-09-29)</p>
+          <p>(c) 2020 SwiftStudies. All rights reserved</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
