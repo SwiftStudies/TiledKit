@@ -43,6 +43,7 @@ let package = Package(
                 "Resources/Test Project.tiled-session"
             ],
             resources: [
+                .copy("Resources/Object Types.xml"),
                 .copy("Resources/Test Project.tiled-project"),
                 .copy("Resources/Maps"),
                 .copy("Resources/Tilesets"),

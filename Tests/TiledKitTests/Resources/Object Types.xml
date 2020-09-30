@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objecttypes>
+ <objecttype name="Object Type" color="#fd6fcf">
+  <property name="Bool" type="bool" default="true"/>
+  <property name="Color Set" type="color" default="#ff808003"/>
+  <property name="Color Unset" type="color" default=""/>
+  <property name="File Set" type="file" default="Tilesets/Animation.tsx"/>
+  <property name="File Unset" type="file" default=""/>
+  <property name="Float" type="float" default="0"/>
+  <property name="Int" type="int" default="0"/>
+  <property name="Object Set" type="string" default="3"/>
+  <property name="Object Unset" type="object" default="0"/>
+  <property name="String Set" type="string" default="Some value"/>
+  <property name="String Unset" type="string"/>
+ </objecttype>
+</objecttypes>
