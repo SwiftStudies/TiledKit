@@ -40,6 +40,8 @@ public struct TMXTileLayer : XMLLayer {
     public var y: Double
     public var visible: Bool
     public var opacity : Double
+    public var locked : Bool
+    public var tintColor : String?
     public var properties: XMLProperties
 
     public var data : [UInt32]
@@ -53,6 +55,9 @@ public struct TMXTileLayer : XMLLayer {
         y = commonAttributes.offsety ?? 0
         visible = commonAttributes.visible ?? true
         opacity = commonAttributes.opacity ?? 1
+        locked = commonAttributes.locked ?? false
+        tintColor = commonAttributes.tintColor
+        
         properties = try XMLProperties.decode(from: decoder)
 
         let rawData = try decoder.container(keyedBy: CodingKeys.self).decode(TMXTileData.self, forKey: .data)

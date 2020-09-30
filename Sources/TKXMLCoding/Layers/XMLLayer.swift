@@ -22,6 +22,8 @@ public protocol XMLLayer : Codable {
     var visible: Bool {get}
     var opacity : Double {get}
     var properties : XMLProperties {get}
+    var locked : Bool { get }
+    var tintColor : String? { get }
 }
 
 struct XMLLayerCommon : Codable{
@@ -34,9 +36,11 @@ struct XMLLayerCommon : Codable{
     let offsety : Double?
     let visible : Bool?
     let opacity : Double?
+    let locked  : Bool?
+    let tintColor : String?
         
     enum CodingKeys : String, CodingKey {
-        case id, _name="name", offsetx, offsety, visible, opacity
+        case id, _name="name", offsetx, offsety, visible, opacity, locked, tintColor = "tintcolor"
     }
 }
 

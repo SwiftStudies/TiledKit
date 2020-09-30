@@ -427,10 +427,28 @@ final class TiledKitTests: XCTestCase {
         } else {
             XCTFail("Could not find object with name")
         }
+    }
+    
+    func testObjectTypeDefinitions(){
+        guard var objectTypes = try? moduleBundleProject.retrieve(asType: ObjectTypes.self, from: "Object Types", of: .objectTypeDefinitionFile) else {
+            return XCTFail("Could not load object type definitions")
+        }
         
+        XCTAssertEqual(objectTypes.count, 1)
+        XCTAssertEqual(objectTypes.allDefinitions[0].color, Color(from: "#fd6fcf"))
+        XCTAssertEqual(objectTypes.allDefinitions[0]["File Unset"], .file(url: URL(fileURLWithPath: "")))
+        XCTAssertEqual(objectTypes.allDefinitions[0].allPropertyNames.count, 11)
+        
+        var objectDefinition = objectTypes["Object Type"]!
+        objectDefinition["File Unset"] = .file(url: URL(fileURLWithPath: "Something else"))
+        
+        objectTypes.set(objectType: objectDefinition)
+        
+        XCTAssertNotEqual(objectTypes.allDefinitions[0]["File Unset"], .file(url: URL(fileURLWithPath: "")))
     }
     
     static var allTests = [
+        ("testObjectTypeDefinitions", testObjectTypeDefinitions),
         ("testTileObjectScaling",testTileObjectScaling),
         ("testTileGrid", testTileGrid),
         ("testMap",testMap),

@@ -9,6 +9,35 @@ final class TMXCodingTests: XCTestCase {
         case message(String)
     }
     
+    func testObjectTypesFile() {
+        let objectTypes : XMLObjectTypes
+        do {
+            guard let url = Bundle.module.url(forResource: "Object Types", withExtension: "xml") else {
+                return XCTFail("Could not find object types file")
+            }
+            objectTypes = try XMLObjectTypes(from: url)
+        } catch {
+            return XCTFail("Error loading \(error)")
+        }
+        
+        XCTAssertEqual(objectTypes.types.count, 1)
+        
+        let objectType = objectTypes.types[0]
+        
+        XCTAssertEqual(objectType.name, "Object Type")
+        XCTAssertEqual(objectType.color, "#fd6fcf")
+        
+        let properties = objectType.properties
+        
+        XCTAssertEqual(properties[0].name, "Bool")
+        XCTAssertEqual(properties[0].type, "bool")
+        XCTAssertEqual(properties[0].default, "true")
+
+        XCTAssertEqual(properties[10].name, "String Unset")
+        XCTAssertEqual(properties[10].type, "string")
+        XCTAssertEqual(properties[10].default, nil)
+    }
+    
     func testTMXLevel(){
         let level : TMXMap
         do {
@@ -180,6 +209,7 @@ final class TMXCodingTests: XCTestCase {
         ("testSingleImageTileSet", testSingleImageTileSet),
         ("testTileSetCollisionObjects", testTileSetCollisionObjects),
         ("testTileSetAnimationFrames", testTileSetAnimationFrames),
+        ("testObjectTypesFile", testObjectTypesFile),
 
         ]
  

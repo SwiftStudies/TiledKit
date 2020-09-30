@@ -65,6 +65,36 @@ public enum PropertyValue : Equatable, CustomStringConvertible, ExpressibleByStr
             self = .color(Color(r: elements[0], g: elements[1], b: elements[2], a: elements[3]))
         }
     }
+    
+    init(as type:String, with value:String){
+        switch type {
+        case "string":
+            self = .string(value)
+        case "file":
+            self = .file(url: URL(fileURLWithPath: value))
+        case "bool":
+            switch value {
+            case "1","true","TRUE","YES","yes":
+                self = .bool(true)
+            default:
+                self = .bool(false)
+            }
+        case "int":
+            self = .int(Int(value) ?? 0)
+        case "float":
+            self = .double(Double(value) ?? 0)
+        case "color":
+            if value.isEmpty {
+                self = .color(Color.clear)
+            } else {
+                self = .color(Color(from: value))
+            }
+        case "object":
+            self = .object(id: Int(value) ?? 0)
+        default:
+            self = .error(type: type, value: value)
+        }
+    }
 
     public var description: String {
         switch self {

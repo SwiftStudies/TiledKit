@@ -61,6 +61,15 @@ public struct Color : Equatable{
         }
     }
     
+    /// Construct a color from any of the different string forms they appear in in Tiled
+    init?(from string:String?){
+        if let string = string {
+            self.init(from: string)
+        } else {
+            return nil
+        }
+    }
+    
     
     /// Constructs a new `Color` instance with the specified RGBA (alpha is optional)
     ///

@@ -60,5 +60,5 @@
  <imagelayer id="3" name="Image Layer" offsetx="0" offsety="72">
   <image source="../Images/Individual/F.png" width="16" height="16"/>
  </imagelayer>
- <group id="4" name="Group Layer" offsetx="144" offsety="80"/>
+ <group id="4" name="Group Layer" locked="1" offsetx="144" offsety="80"/>
 </map>

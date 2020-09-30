@@ -138,6 +138,45 @@ public class Project {
         return nil
     }
     
+    /// Loads a `Map` from the project with the specied name (and optionally subdirectory). Note that you do not have to include the
+    /// file extension `.tmx` in the name (although if you do the `Map` will still be loaded).
+    /// - Parameters:
+    ///   - name: The name of the map's file. You can ommit the ".tmx " extension, but it is acceptable to include it.
+    ///   - subdirectory: The sub-directory path (from the root of the project)
+    /// - Throws: Any errors finding or loading the `Map` will be thrown here
+    /// - Returns: The desired `Map`
+    public func retrieve(map name: String, in subdirectory:String? = nil) throws -> Map {
+        let mapUrl : URL
+        if let url = url(for: name, in: subdirectory, of: .tmx) {
+            mapUrl = url
+        } else if let url = url(for: name, in: subdirectory, of: nil) {
+            mapUrl = url
+        } else {
+            throw ResourceLoadingError.fileNotFound("\(fileContainer.baseUrl)/\(subdirectory == nil ? "" : "\(subdirectory!)/")\(name)")
+        }
+        
+        return try retrieve(asType: Map.self, from: mapUrl)
+    }
+
+    /// Loads a `TileSet` from the project with the specied name (and optionally subdirectory). Note that you do not have to include the
+    /// file extension `.tsx` in the name (although if you do the `TileSet` will still be loaded).
+    /// - Parameters:
+    ///   - name: The name of the tileset's file. You can ommit the ".tsx " extension, but it is acceptable to include it.
+    ///   - subdirectory: The sub-directory path (from the root of the project)
+    /// - Throws: Any errors finding or loading the `TileSet` will be thrown here
+    /// - Returns: The desired `TileSet`
+    public func retrieve(tileset name: String, in subdirectory:String? = nil) throws -> TileSet {
+        let tileSet : URL
+        if let url = url(for: name, in: subdirectory, of: .tmx) {
+            tileSet = url
+        } else if let url = url(for: name, in: subdirectory, of: nil) {
+            tileSet = url
+        } else {
+            throw ResourceLoadingError.fileNotFound("\(fileContainer.baseUrl)/\(subdirectory == nil ? "" : "\(subdirectory!)/")\(name)")
+        }
+        
+        return try retrieve(asType: TileSet.self, from: tileSet)
+    }
     
     /// Loads a URL for a resource (which can be relative to another resource in the project, very useful as Tiled often uses relative paths within projects, or across Maps and Tile Sets).
     /// - Parameters:
@@ -154,6 +193,15 @@ public class Project {
             throw ProjectError.fileDoesNotExist(resourceUrl.standardized.absoluteString)
         }
         return try resourceCache.retrieve(as: R.self, from: resolvedUrl)
+    }
+
+    public func retrieve<R:Loadable>(asType:R.Type, from fileName:String, in subdirectory:String? = nil, of type:FileType?=nil) throws ->R{
+
+        guard let url = url(for: fileName, in: subdirectory, of: type) else {
+            throw ResourceLoadingError.fileNotFound("\(fileContainer.baseUrl)/\(subdirectory == nil ? "" : "\(subdirectory!)/")\(fileName)")
+        }
+        
+        return try retrieve(asType: R.self, from: url)
     }
     
     /// Stores an asset in the `Project`s resource cache for later retreival via the supplied `URL`. In this way `ResourceLoaders` can exploit the ability

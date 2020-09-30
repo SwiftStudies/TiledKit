@@ -18,6 +18,7 @@ enum ResourceLoadingError : Error {
     case unknownType(unknownType:String)
     case unsupportedType(loaderType:String, unsupportedType:String)
     case noProjectSpecifiedForResourceCache
+    case fileNotFound(String)
 }
 
 /// You can extend the range of resources and even the way resources are loaded by implementing your own `ResourceLoader`.
