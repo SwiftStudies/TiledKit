@@ -26,6 +26,6 @@ TiledKit is distributed as a Swift package to be built with SPM. You can include
   
 ## Documentation
 
-[Full API documentation](https://rawgit.com/SwiftStudies/TiledKit/master/Documentation/API/index.html) is available for TiledKit
+[Full API documentation](https://swiftstudies.github.io/TiledKit/Documentation/API/) is available for TiledKit
   
   
