@@ -2,6 +2,8 @@
 
 # TiledKit
 
+![TiledKit Logo](Documentation/Images/TiledKit.png)
+
 A Swift Package for reading [Tiled](https://www.mapeditor.org) levels that makes it easy to specialize the loaded level/sheets etc for a specifc game engine. 
 
 To simply load a map and any associated tilesets it is as simple as 
