@@ -1,4 +1,12 @@
-[![Build Status](https://travis-ci.org/SwiftStudies/TiledKit.svg?branch=master)](https://travis-ci.org/SwiftStudies/TiledKit)
+<p align="center">
+<a href="https://swift.org/"><img src="https://img.shields.io/badge/Swift-5.3-orange.svg?style=flat" style="max-height: 300px;" alt="Swift"/></a>
+<img src="https://img.shields.io/badge/platforms-Linux%20%7C%20MacOS%20%7C%20iOS%20%7C%20tvOS%20%7C%20watchOS-green.svg" alt="Platforms">
+
+<a href="https://travis-ci.org/SwiftStudies/OysterKit">
+<img src="https://travis-ci.org/SwiftStudies/TiledKit.svg?branch=master" alt="Build Status - Master">
+</a>
+<img src="https://img.shields.io/badge/documentation-98%25-brightgreen.svg" alt="Documentation Coverage">
+</p>
 
 # TiledKit
 
