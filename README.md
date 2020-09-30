@@ -2,9 +2,7 @@
 
 # TiledKit
 
-<img src="Documentation/Images/TiledKit.png" width="200" />
-
-![TiledKit Logo](Documentation/Images/TiledKit.png)
+<p align="center"><img src="Documentation/Images/TiledKit.png" width="200" /></p>
 
 A Swift Package for reading [Tiled](https://www.mapeditor.org) levels that makes it easy to specialize the loaded level/sheets etc for a specifc game engine. 
 
