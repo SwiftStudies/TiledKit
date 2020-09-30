@@ -107,7 +107,7 @@ public extension LayerContainer {
     /// - Parameter index: If you know that the filters which match multiple and want a specific result specify it here
     /// - Throws: Any exception will be thrown if there are no filters, no layers match, or more than one layer matches the supplied filters
     /// - Returns: The matching `GroupLayer`
-    public func groupLayer(_ matching:LayerFilter...,at index:Int? = nil) throws -> GroupLayer {
+    func groupLayer(_ matching:LayerFilter...,at index:Int? = nil) throws -> GroupLayer {
         let matchedLayer = try prefilterLimitedMatch(matching, at: index)
         
         if case let Layer.Kind.group(groupedLayers) = matchedLayer.kind {

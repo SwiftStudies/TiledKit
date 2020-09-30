@@ -55,6 +55,16 @@ public struct ObjectLayer : LayerProtocol {
         return allObjects
     }
     
+    /// If `true` no editing operations should be applied to the `Layer`
+    public var locked: Bool {
+        return layer.locked
+    }
+    
+    /// Any tint that should be applied to the `Layer`, or none if `nil`
+    public var tintColor: Color? {
+        return layer.tintColor
+    }
+    
     /// Retreive `Object`s based on their name
     ///  - Parameter name: The name of the desired `Object`
     ///  - returns: An array containing all the matching `Object`s or `nil` if none match

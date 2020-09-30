@@ -27,4 +27,9 @@ public protocol LayerProtocol : Propertied {
     /// An offset from the `Layer`s parent's origin
     var position: Position { get }
 
+    /// Any tint color that should be applied to the `Layer` and its contents. If nil then no tint should be applied
+    var tintColor : Color? { get }
+    
+    /// If true the layer is locked. If you are providing editing functionality no changes should be made to this layer
+    var locked : Bool { get }
 }

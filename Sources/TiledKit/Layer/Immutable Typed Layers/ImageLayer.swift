@@ -14,6 +14,8 @@
 
 public struct ImageLayer : LayerProtocol {
     private let     layer   : Layer
+    
+    /// The reference to the image, that you can use to load the image
     public  let     image:ImageReference
 
     /// A filter that can be used for selecting layers that have the `Layer.kind` attribute of group
@@ -48,6 +50,17 @@ public struct ImageLayer : LayerProtocol {
     public var properties : Properties {
         return layer.properties
     }
+    
+    /// If `true` no editing operations should be applied to the `Layer`
+    public var locked: Bool {
+        return layer.locked
+    }
+    
+    /// Any tint that should be applied to the `Layer`, or none if `nil`
+    public var tintColor: Color? {
+        return layer.tintColor
+    }
+
 
 }
 

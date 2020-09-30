@@ -62,6 +62,12 @@ public struct Layer : LayerProtocol, MutablePropertied {
     /// The `Layer.Kind` of the `Layer` together with the information specific to that kind
     public let kind    : Kind
     
+    /// If `true` any editing operations should not be applied to this `Layer`
+    public var locked: Bool
+    
+    /// Any tint that should be applied to the `Layer` and its contents
+    public var tintColor : Color? 
+    
     /// User specified `Properties` of the layer
     public var properties : Properties
     
