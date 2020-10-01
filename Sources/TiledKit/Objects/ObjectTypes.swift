@@ -12,6 +12,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+import XMLCoder
 import TKCoding
 import Foundation
 
@@ -50,6 +51,25 @@ public struct ObjectTypes : Loadable {
         set {
             definitions[named] = newValue
         }
+    }
+    
+    public func write(to url:URL) throws {
+        let types = definitions.map { (name,objectType) -> XMLObjectType in
+            
+            let properties = objectType.allPropertyNames.map { (propertyName) -> XMLObjectTypeProperty in
+                let propertyValue = objectType[propertyName]!
+                
+                return XMLObjectTypeProperty(propertyName, type: propertyValue.xmlType.rawValue, default: propertyValue.xmlValue)
+            }
+            
+            return XMLObjectType(name, color: objectType.color.tiledFormatDescription, properties: properties)
+        }
+        
+        let xmlVersion = XMLObjectTypes(with:types)
+        
+        let data = try XMLEncoder().encode(xmlVersion)
+        
+        try data.write(to: url)
     }
     
     /// Creates a new instance of an ObjectTypes object

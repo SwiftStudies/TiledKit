@@ -85,6 +85,11 @@ public struct Color : Equatable{
         alpha = a
     }
     
+    internal var tiledFormatDescription : String {
+        let format = "%02hhx"
+        return "#\(String(format: format , red))\(String(format: format , green))\(String(format: format , blue))"
+    }
+    
     /// Predefined white color
     public static let white = Color(r: 255, g: 255, b: 255)
     

@@ -448,7 +448,20 @@ final class TiledKitTests: XCTestCase {
         XCTAssertNotEqual(objectTypes["Object Type"]?["File Unset"], .file(url: URL(fileURLWithPath: "")))
     }
     
+    func testWritingObjectTypeDefinition(){
+        var objectTypes = ObjectTypes()
+        
+        objectTypes["Test"] = ObjectType(color: Color(r: 255, g: 0, b: 0))
+        objectTypes["Test"]?["String Property"] = "Hello"
+
+        try! objectTypes.write(to: FileManager.default.temporaryDirectory.appendingPathComponent("test write.xml"))
+
+        XCTAssertNoThrow({
+        })
+    }
+    
     static var allTests = [
+        ("testWritingObjectTypeDefinition",testWritingObjectTypeDefinition),
         ("testObjectTypeDefinitions", testObjectTypeDefinitions),
         ("testTileObjectScaling",testTileObjectScaling),
         ("testTileGrid", testTileGrid),
