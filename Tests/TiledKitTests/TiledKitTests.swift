@@ -449,15 +449,43 @@ final class TiledKitTests: XCTestCase {
     }
     
     func testWritingObjectTypeDefinition(){
-        var objectTypes = ObjectTypes()
-        
-        objectTypes["Test"] = ObjectType(color: Color(r: 255, g: 0, b: 0))
-        objectTypes["Test"]?["String Property"] = "Hello"
+        do {
+            var objectTypes = ObjectTypes()
+            
+            objectTypes["Test"] = ObjectType(color: Color(r: 255, g: 0, b: 0))
+            objectTypes["Test"]?["String Property"] = "Hello"
+            objectTypes["Test"]?["Int Property"] = 42
 
-        try! objectTypes.write(to: FileManager.default.temporaryDirectory.appendingPathComponent("test write.xml"))
+            objectTypes["Test 2"] = ObjectType(color: Color(r: 0, g: 0, b: 255))
+            objectTypes["Test 2"]?["Float Property"] = 42.42
+            objectTypes["Test 2"]?["Bool Property"] = true
 
-        XCTAssertNoThrow({
-        })
+            let url = FileManager.default.temporaryDirectory.appendingPathComponent("test write.xml")
+            try objectTypes.write(to: url)
+            
+            let readObjectTypes = try Project.default.retrieve(asType: ObjectTypes.self, from: url)
+            
+            XCTAssertEqual(readObjectTypes.count, objectTypes.count)
+            XCTAssertEqual(readObjectTypes.allNames.sorted(), objectTypes.allNames.sorted())
+            for objectTypeName in readObjectTypes.allNames {
+                guard let originalObjectType = objectTypes[objectTypeName] else {
+                    return XCTFail("Could not get original object type")
+                }
+                guard let writtenAndReadObjectType = readObjectTypes[objectTypeName] else {
+                    return XCTFail("Could not get re-read object type")
+                }
+                
+                XCTAssertEqual(originalObjectType.color, writtenAndReadObjectType.color)
+                XCTAssertEqual(originalObjectType.allPropertyNames.sorted(), writtenAndReadObjectType.allPropertyNames.sorted())
+                for property in writtenAndReadObjectType.allPropertyNames {
+                    let originalProperty = originalObjectType[property]
+                    let writtenAndReadProperty = writtenAndReadObjectType[property]
+                    XCTAssertEqual(originalProperty, writtenAndReadProperty)
+                }
+            }
+        } catch {
+            return XCTFail("Could not write object types")
+        }
     }
     
     static var allTests = [

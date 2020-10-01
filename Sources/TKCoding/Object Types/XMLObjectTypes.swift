@@ -18,6 +18,10 @@ import Foundation
 public struct XMLObjectTypes : Encodable {
     public let types : [XMLObjectType]
     
+    public enum CodingKeys : String, CodingKey {
+        case types = "objectype"
+    }
+    
     public init(from url:URL) throws {
         let data = try Data(contentsOf: url)
         types = try XMLDecoder().decode([XMLObjectType].self, from: data)
@@ -28,7 +32,7 @@ public struct XMLObjectTypes : Encodable {
     }
 }
 
-public struct XMLObjectType : Codable {
+public struct XMLObjectType : Codable, DynamicNodeEncoding {
     public let name : String
     public let color : String
     
@@ -36,6 +40,15 @@ public struct XMLObjectType : Codable {
     
     enum CodingKeys : String, CodingKey {
         case name, color, properties = "property"
+    }
+    
+    public static func nodeEncoding(for key: CodingKey) -> XMLEncoder.NodeEncoding {
+        switch key.stringValue {
+        case CodingKeys.name.stringValue, CodingKeys.color.stringValue:
+            return .attribute
+        default:
+            return .element
+        }
     }
     
     public init(_ name:String, color:String, properties:[XMLObjectTypeProperty]){

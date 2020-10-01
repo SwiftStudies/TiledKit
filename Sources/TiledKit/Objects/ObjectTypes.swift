@@ -53,6 +53,11 @@ public struct ObjectTypes : Loadable {
         }
     }
     
+    /// The names of all defined `ObjectType`s
+    var allNames : [String] {
+        return definitions.keys.map({$0.description})
+    }
+    
     public func write(to url:URL) throws {
         let types = definitions.map { (name,objectType) -> XMLObjectType in
             
@@ -66,9 +71,10 @@ public struct ObjectTypes : Loadable {
         }
         
         let xmlVersion = XMLObjectTypes(with:types)
-        
-        let data = try XMLEncoder().encode(xmlVersion)
-        
+        let encoder = XMLEncoder()
+        encoder.outputFormatting = [.prettyPrinted]
+        let data = try encoder.encode(xmlVersion, withRootKey: "objecttypes", rootAttributes: nil, header: XMLHeader(version: 1.0, encoding: "UTF-8", standalone: nil))
+
         try data.write(to: url)
     }
     
