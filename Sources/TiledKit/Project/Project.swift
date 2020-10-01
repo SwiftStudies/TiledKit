@@ -37,7 +37,13 @@ enum ProjectError : Error {
 public class Project {
     var fileContainer   : FileContainer
     var folders         : [String]
-    var objectTypes     : ObjectTypes
+    
+    /// The object types associated with the project
+    public var objectTypes     : ObjectTypes
+    
+    /// The location the project defines for storing the `ObjectTypes` file
+    public var objectTypesUrl  : URL
+    
     var resourceCache   : ResourceCache
     
 
@@ -55,6 +61,7 @@ public class Project {
         fileContainer = FileContainer.bundle(bundle)
         folders = []
         objectTypes = ObjectTypes()
+        objectTypesUrl = fileContainer.baseUrl.appendingPathComponent("ObjectTypes.xml")
         
         resourceCache = ResourceCache()
         resourceCache.project = self
@@ -73,6 +80,8 @@ public class Project {
         fileContainer = FileContainer.folder(rootDirectory)
         folders = []
         objectTypes = ObjectTypes()
+        objectTypesUrl = fileContainer.baseUrl.appendingPathComponent("ObjectTypes.xml")
+
         resourceCache = ResourceCache()
         resourceCache.project = self
         if autodiscover {
@@ -110,7 +119,8 @@ public class Project {
     private func applyJsonProject(_ jsonProject:JSONProject) throws {
         folders = jsonProject.folders
         if let objectTypesPath = jsonProject.objectTypesFile, !objectTypesPath.isEmpty {
-            objectTypes = try retrieve(asType: ObjectTypes.self, from: URL(fileURLWithPath: objectTypesPath))
+            objectTypesUrl = URL(fileURLWithPath: objectTypesPath)
+            objectTypes = try retrieve(asType: ObjectTypes.self, from: objectTypesUrl)
         }
     }
     
