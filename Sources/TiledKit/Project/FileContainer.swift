@@ -28,9 +28,12 @@ fileprivate extension URL {
 enum FileContainer {
     case bundle(Bundle)
     case folder(URL)
+    case project(URL)
     
     var baseUrl : URL {
         switch self {
+        case .project(let projectFileUrl):
+            return projectFileUrl.deletingLastPathComponent()
         case .bundle(let bundle):
             return bundle.bundleURL
         case .folder(let url):
@@ -40,6 +43,8 @@ enum FileContainer {
     
     func url(of file:String, in subDirectory:String? = nil, with extension:String? = nil) -> URL?{
         switch self {
+        case .project:
+            return FileContainer.folder(baseUrl).url(of: file, in: subDirectory, with: `extension`)
         case .bundle(let bundle):
             if let subDirectory = subDirectory {
                 return bundle.url(forResource: file, withExtension: `extension`, subdirectory: subDirectory)

@@ -12,7 +12,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import TKXMLCoding
+import TKCoding
 import Foundation
 
 /// Object types represent pre-defined sets of objects that can be applied to Tiled objects. `ObjectTypes` captures
@@ -34,41 +34,34 @@ public struct ObjectTypes : Loadable {
         return definitions.count
     }
     
-    /// All of the object definitions
-    public var allDefinitions : [ObjectType] {
-        return definitions
-    }
-    
     /// Creates a new instance of this object
     public func newInstance() -> ObjectTypes {
         return self
     }
     
     /// The defined `ObjectType`s
-    fileprivate var definitions : [ObjectType]
+    fileprivate var definitions : [String:ObjectType]
     
-    /// Returns the `ObjectType` with the specified name
-    public subscript(_ typeDefinitionNamed:String) -> ObjectType?{
-        return definitions.filter({$0.name == typeDefinitionNamed}).first
-    }
-    
-    /// Add or update an object type definition
-    /// - Parameter definition: The updated values
-    public mutating func set(objectType definition:ObjectType){
-        definitions = definitions.filter({$0.name != definition.name})
-        definitions.append(definition)
+    /// Get or set an object with the specified name
+    public subscript(_ named:String) -> ObjectType?{
+        get {
+            return definitions[named]
+        }
+        set {
+            definitions[named] = newValue
+        }
     }
     
     /// Creates a new instance of an ObjectTypes object
     public init(){
         url = nil
-        definitions = []
+        definitions = [:]
     }
     
     /// Does not load, just sets the url the definitions were loaded from
     init(_ url:URL){
         self.url = url
-        definitions = []
+        definitions = [:]
     }
     
     private var url : URL?
@@ -89,10 +82,7 @@ public struct ObjectType  {
             properties[name] = newValue
         }
     }
-    
-    /// The name of the object type
-    public var name : String
-    
+        
     /// The color objects of this type should be rendered in
     public var color : Color
     
@@ -103,10 +93,8 @@ public struct ObjectType  {
     
     /// Creates a new instance of `ObjectType` with the specified name and color
     /// - Parameters:
-    ///   - name: The name of the object type
     ///   - color: The color of the object type
-    public init(_ name:String, color:Color) {
-        self.name = name
+    public init(color:Color) {
         self.color = color
     }
 }
@@ -119,13 +107,13 @@ struct ObjectTypesLoader : ResourceLoader {
         
         var objectTypes = ObjectTypes(url)
         for type in types.types {
-            var objectType = ObjectType(type.name, color: Color(from: type.color))
+            var objectType = ObjectType(color: Color(from: type.color))
             
             for property in type.properties {
                 objectType[property.name] = PropertyValue(as: property.type, with: property.default ?? "")
             }
             
-            objectTypes.definitions.append(objectType)
+            objectTypes[type.name] = objectType
         }
         
         

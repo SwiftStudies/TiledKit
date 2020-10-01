@@ -12,16 +12,14 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import TKCoding
 import Foundation
 
-struct TileSetLoader : ResourceLoader {
-    let project : Project
-    
-    func retrieve<R>(asType: R.Type, from url: URL) throws -> R {
-        guard let loadedResource = try TSXTileSet.build(in: project, from: url) as? R else {
-            throw ResourceLoadingError.unsupportedType(loaderType: "\(type(of: self))", unsupportedType: "\(R.self)")
-        }
-        return loadedResource
-    }
+public class JSONCommand : Codable {
+    public let arguments : String
+    public let command : String
+    public let enabled : Bool
+    public let saveBeforeExecute: Bool
+    public let shortcut : String?
+    public let showOutput : Bool
+    public let workingDirectory : String
 }

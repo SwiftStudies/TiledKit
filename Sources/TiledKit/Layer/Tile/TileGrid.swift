@@ -12,7 +12,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import TKXMLCoding
+import TKCoding
 
 /// Represents a two dimensional grid of tiles (such as that in a tile `Layer`
 public struct TileGrid {

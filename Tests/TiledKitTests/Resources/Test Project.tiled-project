@@ -1,6 +1,16 @@
 {
     "automappingRulesFile": "",
     "commands": [
+        {
+            "arguments": "%mapfile --window-size 1024x768",
+            "command": "/usr/local/bin/sktiled",
+            "enabled": false,
+            "name": "Test Map",
+            "saveBeforeExecute": true,
+            "shortcut": null,
+            "showOutput": true,
+            "workingDirectory": ""
+        }
     ],
     "extensionsPath": "extensions",
     "folders": [
@@ -8,5 +18,5 @@
         "Images",
         "Maps"
     ],
-    "objectTypesFile": ""
+    "objectTypesFile": "Object Types.xml"
 }
