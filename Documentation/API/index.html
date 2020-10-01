@@ -230,12 +230,33 @@
             <p><a href="https://travis-ci.org/SwiftStudies/TiledKit"><img src="https://travis-ci.org/SwiftStudies/TiledKit.svg?branch=master" alt="Build Status"></a></p>
 <h1 id='tiledkit' class='heading'>TiledKit</h1>
 
+<p><img src="Documentation/Images/TiledKit.png" width="200" /></p>
+
+<p><img src="Documentation/Images/TiledKit.png" alt="TiledKit Logo"></p>
+
 <p>A Swift Package for reading <a href="https://www.mapeditor.org">Tiled</a> levels that makes it easy to specialize the loaded level/sheets etc for a specifc game engine. </p>
+
+<p>To simply load a map and any associated tilesets it is as simple as </p>
+<pre class="highlight plaintext"><code>    import TiledKit
+
+    let map = Project.default.retreive(map: "Test Map")
+    print ("Hello, \(map.name)!")
+</code></pre>
+
+<p>TiledKit works on all Apple &amp; Linux platforms supporting Swift 5.3 or later. </p>
+<h2 id='installation' class='heading'>Installation</h2>
+
+<p>TiledKit is distributed as a Swift package to be built with SPM. You can include it in your project by adding the following dependency to your <code>Package.swift</code> file</p>
+<pre class="highlight plaintext"><code>.package(url: "https://github.com/SwiftStudies/TiledKit", from: "0.4")
+</code></pre>
 <h2 id='available-specializations' class='heading'>Available Specializations</h2>
 
 <ul>
 <li><a href="https://github.com/SwiftStudies/SKTiledKit">SpriteKit</a></li>
 </ul>
+<h2 id='documentation' class='heading'>Documentation</h2>
+
+<p><a href="https://swiftstudies.github.io/TiledKit/Documentation/API/">Full API documentation</a> is available for TiledKit</p>
 
           </section>
         </section>
