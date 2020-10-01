@@ -34,6 +34,8 @@ public enum FileType : String, CaseIterable {
     case directory
     /// An `ObjectType` definitinion file
     case objectTypeDefinitionFile
+    /// A  Tiled project file
+    case project
     
     /// Returns the standard extension for the `FileType`
     var extensions : [String] {
@@ -46,6 +48,8 @@ public enum FileType : String, CaseIterable {
             return []
         case .objectTypeDefinitionFile:
             return ["xml"]
+        case .project:
+            return ["tiled-project"]
         default:
             return [rawValue]
         }
@@ -66,7 +70,7 @@ public enum FileType : String, CaseIterable {
         switch self {
         case .png, .jpeg, .gif, .tiff, .pdf, .svg:
             return true
-        case .tmx, .tsx, .directory, .objectTypeDefinitionFile:
+        case .tmx, .tsx, .directory, .objectTypeDefinitionFile, .project:
             return false
         }
     }

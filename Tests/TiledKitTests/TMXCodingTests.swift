@@ -9,6 +9,25 @@ final class TMXCodingTests: XCTestCase {
         case message(String)
     }
     
+    func testProjectFile(){
+        let project : JSONProject
+        do {
+            guard let url = Bundle.module.url(forResource: "Test Project", withExtension: "tiled-project") else {
+                return XCTFail("Could not find project file")
+            }
+            project = try JSONProject(from: url)
+        } catch {
+            return XCTFail("Error loading \(error)")
+        }
+        
+        XCTAssertEqual(project.objectTypesFile, "Object Types.xml")
+        XCTAssertEqual(project.extensionsPath, "extensions")
+        XCTAssertEqual(project.automappingRulesFile, "")
+        XCTAssertEqual(project.commands.count, 1)
+        XCTAssertEqual(project.folders.count, 3)
+        XCTAssertEqual(project.folders[1], "Images")
+    }
+    
     func testObjectTypesFile() {
         let objectTypes : XMLObjectTypes
         do {
@@ -210,7 +229,7 @@ final class TMXCodingTests: XCTestCase {
         ("testTileSetCollisionObjects", testTileSetCollisionObjects),
         ("testTileSetAnimationFrames", testTileSetAnimationFrames),
         ("testObjectTypesFile", testObjectTypesFile),
-
+        ("testProjectFile",testProjectFile),
         ]
  
 }
