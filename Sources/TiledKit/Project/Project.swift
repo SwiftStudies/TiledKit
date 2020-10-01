@@ -35,9 +35,9 @@ enum ProjectError : Error {
 /// `Project`s also provide resource caching capabilities, ensuring that the contents of any `URL` are loaded only once. If you add your own `ResourceLoader` for types
 /// you can specify that if the created object should be cached or not.
 public class Project {
-    let fileContainer   : FileContainer
-    let folders         : [String]
-    let objectTypes     : [String:String]
+    var fileContainer   : FileContainer
+    var folders         : [String]
+    var objectTypes     : ObjectTypes
     var resourceCache   : ResourceCache
     
 
@@ -49,26 +49,88 @@ public class Project {
     ///
     /// - Parameters:
     ///   - bundle: The `Bundle` to use
-    public init(using bundle:Bundle){
+    ///   - autodiscover: Will do a deep search in the bundle for a `.tiled-project` file and if found load it and set the base URL
+    ///     to the folder containing it.
+    public init(using bundle:Bundle, searchForProjectFile autodiscover:Bool = true){
         fileContainer = FileContainer.bundle(bundle)
         folders = []
-        objectTypes = [:]
+        objectTypes = ObjectTypes()
         
         resourceCache = ResourceCache()
         resourceCache.project = self
+        if autodiscover {
+            searchForAndLoadProject()
+        }
     }
 
     /// Creates a new instance of a `Project` that uses the specied directory as its root
     ///
-    /// - Parameter rootDirectory: The `URL` of a directory on the local machine
-    public init(at rootDirectory:URL){
+    /// - Parameters:
+    ///   -  rootDirectory: The `URL` of a directory on the local machine
+    ///   - autodiscover: Will do a deep search in the folder for a `.tiled-project` file and if found load it and set the base URL
+    ///     to the folder containing it.
+    public init(at rootDirectory:URL, searchForProjectFile autodiscover:Bool = true){
         fileContainer = FileContainer.folder(rootDirectory)
         folders = []
-        objectTypes = [:]
+        objectTypes = ObjectTypes()
         resourceCache = ResourceCache()
         resourceCache.project = self
+        if autodiscover {
+            searchForAndLoadProject()
+        }
     }
     
+    /// Tries to find and load any project file at the baseURL of the object
+    private func searchForAndLoadProject() {
+        do {
+            let basePath = fileContainer.baseUrl.standardizedFileURL.path
+            if let enumerator = FileManager.default.enumerator(atPath: basePath){
+                var candidates = [URL]()
+                while let object = enumerator.nextObject() as? String{
+                    if object.hasSuffix(FileType.project.extensions[0]){
+                        candidates.append(URL(fileURLWithPath: object))
+                    }
+                }
+                
+                if candidates.count == 1 {
+                    let url = fileContainer.baseUrl.appendingPathComponent(candidates[0].relativePath)
+                    if url.deletingLastPathComponent().isReachable {
+                        fileContainer = .folder(url.deletingLastPathComponent())
+                        try applyJsonProject(try JSONProject(from: url.standardized))
+                    }
+                }
+            }
+            
+        } catch {
+            print("Warning: Could not configure project from file: \(error)")
+            return
+        }
+    }
+    
+    private func applyJsonProject(_ jsonProject:JSONProject) throws {
+        folders = jsonProject.folders
+        if let objectTypesPath = jsonProject.objectTypesFile, !objectTypesPath.isEmpty {
+            objectTypes = try retrieve(asType: ObjectTypes.self, from: URL(fileURLWithPath: objectTypesPath))
+        }
+    }
+    
+    /// Creates a new instance of a `Project` that uses the specified project file URL
+    /// to provide both the root of the project for relative paths, and will load the contents
+    /// of the file to provide the object types and folders
+    ///
+    /// - Parameter rootDirectory: The `URL` of the `.tiled-project` file
+    /// - throws: If the file does not exist or cannot be decoded
+    public init(from projectFile:URL) throws {
+        fileContainer = FileContainer.project(projectFile)
+                
+        objectTypes = ObjectTypes()
+        resourceCache = ResourceCache()
+        folders = []
+        resourceCache.project = self
+        
+        let jsonProject = try JSONProject(from: projectFile)
+        try applyJsonProject(jsonProject)
+    }
     
     /// Retrieves the `URL` for a resource within the project
     /// - Parameters:
