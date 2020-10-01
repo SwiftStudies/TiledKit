@@ -12,7 +12,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import TKXMLCoding
+import TKCoding
 import Foundation
 
 /// Object types represent pre-defined sets of objects that can be applied to Tiled objects. `ObjectTypes` captures

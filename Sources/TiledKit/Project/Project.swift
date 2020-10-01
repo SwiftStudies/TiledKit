@@ -13,7 +13,7 @@
 //    limitations under the License.
 
 import Foundation
-import TKXMLCoding
+import TKCoding
 
 enum ProjectError : Error {
     case fileDoesNotExist(String)

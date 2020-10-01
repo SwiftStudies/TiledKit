@@ -1,6 +1,6 @@
 import XCTest
 
-@testable import TKXMLCoding
+@testable import TKCoding
 import XMLCoder
 
 final class TMXCodingTests: XCTestCase {
