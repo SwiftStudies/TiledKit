@@ -435,16 +435,17 @@ final class TiledKitTests: XCTestCase {
         }
         
         XCTAssertEqual(objectTypes.count, 1)
-        XCTAssertEqual(objectTypes.allDefinitions[0].color, Color(from: "#fd6fcf"))
-        XCTAssertEqual(objectTypes.allDefinitions[0]["File Unset"], .file(url: URL(fileURLWithPath: "")))
-        XCTAssertEqual(objectTypes.allDefinitions[0].allPropertyNames.count, 11)
+        XCTAssertEqual(objectTypes["Object Type"]?.color, Color(from: "#fd6fcf"))
+        XCTAssertEqual(objectTypes["Object Type"]?["File Unset"], .file(url: URL(fileURLWithPath: "")))
+        XCTAssertEqual(objectTypes["Object Type"]?.allPropertyNames.count, 11)
         
         var objectDefinition = objectTypes["Object Type"]!
         objectDefinition["File Unset"] = .file(url: URL(fileURLWithPath: "Something else"))
         
-        objectTypes.set(objectType: objectDefinition)
         
-        XCTAssertNotEqual(objectTypes.allDefinitions[0]["File Unset"], .file(url: URL(fileURLWithPath: "")))
+        objectTypes["Object Type"] = objectDefinition
+        
+        XCTAssertNotEqual(objectTypes["Object Type"]?["File Unset"], .file(url: URL(fileURLWithPath: "")))
     }
     
     static var allTests = [
