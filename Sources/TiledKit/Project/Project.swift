@@ -133,6 +133,7 @@ public class Project {
     public init(from projectFile:URL) throws {
         fileContainer = FileContainer.project(projectFile)
                 
+        objectTypesUrl = fileContainer.baseUrl.appendingPathComponent("ObjectTypes.xml")
         objectTypes = ObjectTypes()
         resourceCache = ResourceCache()
         folders = []
