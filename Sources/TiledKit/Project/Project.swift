@@ -119,6 +119,7 @@ public class Project {
     private func applyJsonProject(_ jsonProject:JSONProject) throws {
         folders = jsonProject.folders
         if let objectTypesPath = jsonProject.objectTypesFile, !objectTypesPath.isEmpty {
+            objectTypesUrl = fileContainer.baseUrl.appendingPathComponent(objectTypesPath)
             objectTypesUrl = URL(fileURLWithPath: objectTypesPath)
             objectTypes = try retrieve(asType: ObjectTypes.self, from: objectTypesUrl)
         }
