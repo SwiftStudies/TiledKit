@@ -54,7 +54,7 @@ public struct ObjectTypes : Loadable {
     }
     
     /// The names of all defined `ObjectType`s
-    var allNames : [String] {
+    public var allNames : [String] {
         return definitions.keys.map({$0.description})
     }
     
