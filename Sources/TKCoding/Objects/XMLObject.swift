@@ -24,9 +24,10 @@ public struct XMLObject : Codable{
     
     public let properties : XMLProperties
     public let type : ObjectType
+    public let tiledType : String?
 
     enum CodingKeys : String, CodingKey {
-        case id, name, x, y, visible, width, height, point, ellipse, polygon, polyline, text, tile = "gid", properties, rotation
+        case id, name, x, y, visible, width, height, point, ellipse, polygon, polyline, text, tile = "gid", properties, rotation, tiledType = "type"
     }
     
     public enum ObjectType {
@@ -38,6 +39,7 @@ public struct XMLObject : Codable{
         
         id = try container.decode(Int.self, forKey: .id)
         name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
+        tiledType = try container.decodeIfPresent(String.self, forKey: .tiledType)
         x = try container.decode(Double.self, forKey: .x)
         y = try container.decode(Double.self, forKey: .y)
         visible = try container.decodeIfPresent(Bool.self, forKey: .visible) ?? true
