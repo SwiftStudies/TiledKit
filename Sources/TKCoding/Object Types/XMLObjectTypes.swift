@@ -19,7 +19,7 @@ public struct XMLObjectTypes : Encodable {
     public let types : [XMLObjectType]
     
     public enum CodingKeys : String, CodingKey {
-        case types = "objectype"
+        case types = "objecttype"
     }
     
     public init(from url:URL) throws {
