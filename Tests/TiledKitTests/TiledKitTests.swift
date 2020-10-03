@@ -488,7 +488,19 @@ final class TiledKitTests: XCTestCase {
         }
     }
     
+    func testObjectSearch(){
+        guard let map = try? moduleBundleProject.retrieve(map: "Maps/Test Map 2") else {
+            return XCTFail("Could not load map")
+        }
+        
+        XCTAssertNotNil(map.object(1))
+        XCTAssertNotNil(map.object(1, deep:false))
+        XCTAssertNotNil(map.object(2))
+        XCTAssertNil(map.object(2,deep: false))
+    }
+    
     static var allTests = [
+        ("testObjectSearch", testObjectSearch),
         ("testWritingObjectTypeDefinition",testWritingObjectTypeDefinition),
         ("testObjectTypeDefinitions", testObjectTypeDefinitions),
         ("testTileObjectScaling",testTileObjectScaling),

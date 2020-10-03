@@ -37,7 +37,7 @@
     },
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/Project.swift",
-      "line": 198,
+      "line": 260,
       "symbol": "Project.retrieve(asType:from:in:of:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

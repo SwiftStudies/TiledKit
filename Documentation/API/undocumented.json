@@ -36,8 +36,15 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/ObjectTypes.swift",
+      "line": 61,
+      "symbol": "ObjectTypes.write(to:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Project/Project.swift",
-      "line": 260,
+      "line": 272,
       "symbol": "Project.retrieve(asType:from:in:of:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
