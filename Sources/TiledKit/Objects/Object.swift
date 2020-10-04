@@ -46,6 +46,9 @@ public struct Object : MutablePropertied {
     /// The name of the `Object`, or an empty `String`
     public let name    : String
     
+    /// The type of the object
+    public let type    : String?
+    
     /// `true` if the `Object` should be rendered
     public let visible : Bool
     

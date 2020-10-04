@@ -106,6 +106,9 @@
                 <a href="../Protocols/MutablePropertied.html">MutablePropertied</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/ObjectFilter.html">ObjectFilter</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/Propertied.html">Propertied</a>
               </li>
               <li class="nav-group-task">
@@ -567,6 +570,136 @@ of the layer can be used to extract <code><a href="../Structs/Layer/Kind.html">L
                       <div>
                         <h4>Return Value</h4>
                         <p>The matching <code><a href="../Structs/ImageLayer.html">ImageLayer</a></code></p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit14LayerContainerPAAE6object_4deepAA6ObjectVSgSi_SbtF"></a>
+                    <a name="//apple_ref/swift/Method/object(_:deep:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit14LayerContainerPAAE6object_4deepAA6ObjectVSgSi_SbtF">object(_:<wbr>deep:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retreives an object with the specified <code>id</code>. By default the search is recursive (searching within groups).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">object</span><span class="p">(</span><span class="n">_</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">deep</span> <span class="nv">recursiveSearch</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Object.html">Object</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired id</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>recursiveSearch</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code> then the search will search within groups until it finds object layer containing the object with the id.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An <code><a href="../Structs/Object.html">Object</a></code> or <code>nil</code> if no object with that id exists</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit14LayerContainerPAAE7objects4deep8matchingSayAA6ObjectVGSb_AA0H6Filter_pdtF"></a>
+                    <a name="//apple_ref/swift/Method/objects(deep:matching:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit14LayerContainerPAAE7objects4deep8matchingSayAA6ObjectVGSb_AA0H6Filter_pdtF">objects(deep:<wbr>matching:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retreives all of the objects contained by the layers of the container that match the supplied filters</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">objects</span><span class="p">(</span><span class="n">deep</span> <span class="nv">recursiveSearch</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="n">matching</span> <span class="nv">filters</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectFilter.html">ObjectFilter</a></span><span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Structs/Object.html">Object</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>recursiveSearch</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code> any groups will be recursively searched for the objects</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>filters</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Protocols/LayerFilter.html">LayerFilter</a></code>s objects must match</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>All matching <code><a href="../Structs/Object.html">Object</a></code>s</p>
                       </div>
                     </section>
                   </div>

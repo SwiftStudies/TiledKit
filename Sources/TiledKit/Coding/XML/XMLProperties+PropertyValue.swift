@@ -15,7 +15,7 @@
 import TKCoding
 import Foundation
 
-extension XMLProperty {
+internal extension XMLProperty {
     fileprivate func propertyValue(baseUrl:URL?, and project:Project)->PropertyValue? {
         guard let type = type else {
             return .string(value)
@@ -40,6 +40,51 @@ extension XMLProperty {
             return .object(id: objectId)
         }
 
+    }
+}
+
+internal extension PropertyValue{
+    var xmlType : XMLRawPropertyType {
+        switch self {
+        case .string:
+            return .string
+        case .bool:
+            return .bool
+        case .int:
+            return .int
+        case .double:
+            return .float
+        case .file:
+            return .file
+        case .color:
+            return .color
+        case .object:
+            return .object
+        case .error:
+            return .string
+        }
+    }
+    
+    var xmlValue : String {
+        switch self {
+        case .bool(let value):
+            return value ? "1" : "0"
+        case .string(let value):
+            return value
+        case .int(let value):
+            return value.description
+        case .double(let value):
+            return value.description
+        case .file(let value):
+            #warning("This converts relative paths at load time into absolute paths... not desireable")
+            return value.relativePath
+        case .color(let value):
+            return value.tiledFormatDescription
+        case .object(let value):
+            return value.description
+        case .error(_, let value):
+            return value
+        }
     }
 }
 

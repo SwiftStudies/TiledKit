@@ -28,30 +28,30 @@ extension XMLObject {
     }
 
     func tkGeometricObject(relativeTo baseUrl:URL?, in project:Project) -> Object? {
-        switch type {
+        switch kind {
         case .point:
-            return Object(id: id, name: name, visible: visible, position: location, properties: properties.interpret(baseUrl: baseUrl, in: project), kind: .point)
+            return Object(id: id, name: name, type: type, visible: visible, position: location, properties: properties.interpret(baseUrl: baseUrl, in: project), kind: .point)
         case .rectangle(let size, let rotation):
-            return Object(id: id, name: name, visible: visible, position: location, properties: properties.interpret(baseUrl: baseUrl, in: project), kind: .rectangle(Size(width: size.width, height: size.height), angle: rotation))
+            return Object(id: id, name: name, type: type, visible: visible, position: location, properties: properties.interpret(baseUrl: baseUrl, in: project), kind: .rectangle(Size(width: size.width, height: size.height), angle: rotation))
         case .elipse(let size, let rotation):
-            return Object(id: id, name: name, visible: visible, position: location, properties: properties.interpret(baseUrl: baseUrl, in: project), kind: .ellipse(Size(width: size.width, height: size.height), angle: rotation))
+            return Object(id: id, name: name, type: type, visible: visible, position: location, properties: properties.interpret(baseUrl: baseUrl, in: project), kind: .ellipse(Size(width: size.width, height: size.height), angle: rotation))
         case .polyline(let path, let rotation):
-            return Object(id: id, name: name, visible: visible, position: location, properties: properties.interpret(baseUrl: baseUrl, in: project), kind: .polyline(path.points.path, angle: rotation))
+            return Object(id: id, name: name, type: type, visible: visible, position: location, properties: properties.interpret(baseUrl: baseUrl, in: project), kind: .polyline(path.points.path, angle: rotation))
         case .polygon(let path, let rotation):
-            return Object(id: id, name: name, visible: visible, position: location, properties: properties.interpret(baseUrl: baseUrl, in: project), kind: .polygon(path.points.path, angle: rotation))
+            return Object(id: id, name: name, type: type, visible: visible, position: location, properties: properties.interpret(baseUrl: baseUrl, in: project), kind: .polygon(path.points.path, angle: rotation))
         default:
             return nil
         }
     }
     
     func tkObject(for map:Map, in project:Project)->Object {
-        switch type {
+        switch kind {
         case .point, .rectangle, .elipse, .polyline, .polygon:
             return tkGeometricObject(relativeTo: map.url, in: project)!
         case .tile(let rawTileGid,let size, let rotation):
-            return Object(id: id, name: name, visible: visible, position: location, properties: properties.interpret(baseUrl: map.url, in: project), kind: .tile(TileGID(integerLiteral: rawTileGid), size:Size(width: size.width, height: size.height),  angle: rotation))
+            return Object(id: id, name: name, type: type, visible: visible, position: location, properties: properties.interpret(baseUrl: map.url, in: project), kind: .tile(TileGID(integerLiteral: rawTileGid), size:Size(width: size.width, height: size.height),  angle: rotation))
         case .text(let style, let size, let rotation):
-            return Object(id: id, name: name, visible: visible, position: location, properties: properties.interpret(baseUrl: map.url, in: project), kind: .text( style.string, size:Size(width: size.width, height: size.height), angle: rotation, style: style.textStyle))
+            return Object(id: id, name: name, type: type, visible: visible, position: location, properties: properties.interpret(baseUrl: map.url, in: project), kind: .text( style.string, size:Size(width: size.width, height: size.height), angle: rotation, style: style.textStyle))
         }
     }
 }

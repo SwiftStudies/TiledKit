@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>TileSetReference Structure Reference</title>
+    <title>ObjectFilter Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/TileSetReference" class="dashAnchor"></a>
-    <a title="TileSetReference Structure Reference"></a>
+    <a name="//apple_ref/swift/Protocol/ObjectFilter" class="dashAnchor"></a>
+    <a title="ObjectFilter Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">TiledKit</a> (97% documented)</p>
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">TiledKit Reference</a>
         <img id="carat" src="../img/carat.png" />
-        TileSetReference Structure Reference
+        ObjectFilter Protocol Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -230,16 +230,16 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>TileSetReference</h1>
+            <h1>ObjectFilter</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TileSetReference</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ObjectFilter</span></code></pre>
 
                 </div>
               </div>
-            <p><code><a href="../Classes/TileSet.html">TileSet</a></code>s are referenced by <code><a href="../Structs/Map.html">Map</a></code>s, and all tile <code><a href="../Structs/Layer.html">Layer</a></code>s reference a specific <code><a href="../Classes/Tile.html">Tile</a></code> and <code><a href="../Classes/TileSet.html">TileSet</a></code> by using a <code><a href="../Structs/TileGID.html">TileGID</a></code>.  The <code>TileSetReference</code> type
-captures both the first <code><a href="../Structs/TileGID.html">TileGID</a></code> of a <code><a href="../Classes/TileSet.html">TileSet</a></code> referenced by a <code><a href="../Structs/Map.html">Map</a></code>, as well as the <code><a href="../Classes/TileSet.html">TileSet</a></code> itself.</p>
+            <p>An <code>ObjectFilter</code> is used when querying <code><a href="../Protocols/LayerContainer.html">LayerContainer</a></code>s to select one or more matching <code>Objects</code>s and
+are responsible for determining if any given <code><a href="../Structs/Object.html">Object</a></code> meets a set of criteria</p>
 
           </section>
           <section class="section task-group-section">
@@ -248,9 +248,9 @@ captures both the first <code><a href="../Structs/TileGID.html">TileGID</a></cod
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit16TileSetReferenceV8firstGids6UInt32Vvp"></a>
-                    <a name="//apple_ref/swift/Property/firstGid" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit16TileSetReferenceV8firstGids6UInt32Vvp">firstGid</a>
+                    <a name="/s:8TiledKit12ObjectFilterP7matchesySbAA0C0VF"></a>
+                    <a name="//apple_ref/swift/Method/matches(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit12ObjectFilterP7matchesySbAA0C0VF">matches(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -258,43 +258,35 @@ captures both the first <code><a href="../Structs/TileGID.html">TileGID</a></cod
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Determines If the supplied <code><a href="../Structs/Object.html">Object</a></code> meets the criteria of the <code>ObjectFilter</code></p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">firstGid</span><span class="p">:</span> <span class="kt">UInt32</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">matches</span><span class="p">(</span><span class="n">_</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Structs/Object.html">Object</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8TiledKit16TileSetReferenceV04tileD0AA0cD0Cvp"></a>
-                    <a name="//apple_ref/swift/Property/tileSet" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit16TileSetReferenceV04tileD0AA0cD0Cvp">tileSet</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">tileSet</span><span class="p">:</span> <span class="kt"><a href="../Classes/TileSet.html">TileSet</a></span></code></pre>
-
-                        </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Structs/Object.html">Object</a></code> to evaluate</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>

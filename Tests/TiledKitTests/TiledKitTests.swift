@@ -448,7 +448,78 @@ final class TiledKitTests: XCTestCase {
         XCTAssertNotEqual(objectTypes["Object Type"]?["File Unset"], .file(url: URL(fileURLWithPath: "")))
     }
     
+    func testWritingObjectTypeDefinition(){
+        do {
+            var objectTypes = ObjectTypes()
+            
+            objectTypes["Test"] = ObjectType(color: Color(r: 255, g: 0, b: 0))
+            objectTypes["Test"]?["String Property"] = "Hello"
+            objectTypes["Test"]?["Int Property"] = 42
+
+            objectTypes["Test 2"] = ObjectType(color: Color(r: 0, g: 0, b: 255))
+            objectTypes["Test 2"]?["Float Property"] = 42.42
+            objectTypes["Test 2"]?["Bool Property"] = true
+
+            let url = FileManager.default.temporaryDirectory.appendingPathComponent("test write.xml")
+            try objectTypes.write(to: url)
+            
+            let readObjectTypes = try Project.default.retrieve(asType: ObjectTypes.self, from: url)
+            
+            XCTAssertEqual(readObjectTypes.count, objectTypes.count)
+            XCTAssertEqual(readObjectTypes.allNames.sorted(), objectTypes.allNames.sorted())
+            for objectTypeName in readObjectTypes.allNames {
+                guard let originalObjectType = objectTypes[objectTypeName] else {
+                    return XCTFail("Could not get original object type")
+                }
+                guard let writtenAndReadObjectType = readObjectTypes[objectTypeName] else {
+                    return XCTFail("Could not get re-read object type")
+                }
+                
+                XCTAssertEqual(originalObjectType.color, writtenAndReadObjectType.color)
+                XCTAssertEqual(originalObjectType.allPropertyNames.sorted(), writtenAndReadObjectType.allPropertyNames.sorted())
+                for property in writtenAndReadObjectType.allPropertyNames {
+                    let originalProperty = originalObjectType[property]
+                    let writtenAndReadProperty = writtenAndReadObjectType[property]
+                    XCTAssertEqual(originalProperty, writtenAndReadProperty)
+                }
+            }
+        } catch {
+            return XCTFail("Could not write object types")
+        }
+    }
+    
+    func testObjectSearch(){
+        guard let map = try? moduleBundleProject.retrieve(map: "Maps/Test Map 2") else {
+            return XCTFail("Could not load map")
+        }
+        
+        XCTAssertNotNil(map.object(1))
+        XCTAssertNotNil(map.object(1, deep:false))
+        XCTAssertNotNil(map.object(2))
+        XCTAssertNil(map.object(2,deep: false))
+        
+        XCTAssertEqual(map.objects(matching: Object.isPoint).count, 5)
+        XCTAssertEqual(map.objects(matching: Object.isEither(Object.isRectangle, or: Object.isPoint)).count, 5)
+        XCTAssertEqual(map.objects(matching: Object.isEither(Object.isPoint, or: Object.isRectangle)).count, 5)
+        XCTAssertEqual(map.objects(matching: Object.isOf(type: "Object Type")).count, 2)
+
+        guard let map2 = try? moduleBundleProject.retrieve(map: "Maps/Test Map 1") else {
+            return XCTFail("Could not load map")
+        }
+        
+        XCTAssertEqual(map2.objects(matching: Object.isPoint).count, 2)
+        XCTAssertEqual(map2.objects(matching: Object.isText).count, 2)
+        XCTAssertEqual(map2.objects(matching: Object.isPolygon).count, 2)
+        XCTAssertEqual(map2.objects(matching: Object.isPolyline).count, 1)
+        XCTAssertEqual(map2.objects(matching: Object.isTile).count, 2)
+        XCTAssertEqual(map2.objects(matching: Object.isTile, Object.isNamed("Stretched Tile")).count, 1)
+        XCTAssertEqual(map2.objects(matching: Object.isRectangle).count, 1)
+        XCTAssertEqual(map2.objects(matching: Object.isEllipse).count, 1)
+    }
+    
     static var allTests = [
+        ("testObjectSearch", testObjectSearch),
+        ("testWritingObjectTypeDefinition",testWritingObjectTypeDefinition),
         ("testObjectTypeDefinitions", testObjectTypeDefinitions),
         ("testTileObjectScaling",testTileObjectScaling),
         ("testTileGrid", testTileGrid),

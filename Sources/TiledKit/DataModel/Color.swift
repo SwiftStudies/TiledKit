@@ -85,12 +85,53 @@ public struct Color : Equatable{
         alpha = a
     }
     
+    internal var tiledFormatDescription : String {
+        let format = "%02hhx"
+        return "#\(String(format: format , red))\(String(format: format , green))\(String(format: format , blue))"
+    }
+    
     /// Predefined white color
     public static let white = Color(r: 255, g: 255, b: 255)
     
     /// Predefined black color
     public static let black = Color(r: 0, g: 0, b: 0)
+
+    /// Predefined red color
+    public static let red = Color(r: 0, g: 0, b: 0)
+
+    /// Predefined green color
+    public static let green = Color(r: 0, g: 0, b: 0)
+
+    /// Predefined blue color
+    public static let blue = Color(r: 0, g: 0, b: 0)
     
+    /// Predefined magenta color
+    public static let magenta = Color(r: 255, g: 0, b: 255)
+
+    /// Predefined cyan color
+    public static let cyan = Color(r: 0, g: 255, b: 255)
+
+    /// Predefined yellow color
+    public static let yellow = Color(r: 255, g: 255, b: 0)
+
+    /// Predefined grey color
+    public static let grey = Color(r: 128, g: 128, b: 128)
+
+    /// Predefined light grey color
+    public static let lightGrey = Color(r: 191, g: 191, b: 191)
+
+    /// Predefined dark grey color
+    public static let darkGrey = Color(r: 98, g: 98, b: 98)
+
+    /// Predefined brown color
+    public static let brown = Color(r: 155, g: 99, b: 0)
+
+    /// Predefined orange color
+    public static let orange = Color(r: 255, g: 155, b: 0)
+
+    /// Predefined pink color
+    public static let pink = Color(r: 255, g: 155, b: 255)
+
     /// Predefined clear color (transparent black)
     public static let clear = Color(r: 0, g: 0, b: 0, a: 0)
 }

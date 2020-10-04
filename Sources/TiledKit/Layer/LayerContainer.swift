@@ -158,4 +158,30 @@ public extension LayerContainer {
             throw LayerMatchingError.matchedLayerNonMatchingKind(matchedLayer)
         }
     }
+    
+    
+    /// Retreives an object with the specified `id`. By default the search is recursive (searching within groups).
+    /// - Parameters:
+    ///   - id: The desired id
+    ///   - recursiveSearch: If `true` then the search will search within groups until it finds object layer containing the object with the id.
+    /// - Returns: An `Object` or `nil` if no object with that id exists
+    func object(_ id:Int, deep recursiveSearch:Bool = true) -> Object? {
+        for layer in layers {
+            switch layer.kind {
+            case .objects(let objects):
+                for object in objects {
+                    if object.id == id {
+                        return object
+                    }
+                }
+            case .group(let group) where recursiveSearch:
+                if let containedObject = group.object(id) {
+                    return containedObject
+                }
+            default: break
+            }
+        }
+        
+        return nil
+    }
 }
