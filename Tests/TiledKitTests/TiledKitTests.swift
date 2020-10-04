@@ -497,6 +497,24 @@ final class TiledKitTests: XCTestCase {
         XCTAssertNotNil(map.object(1, deep:false))
         XCTAssertNotNil(map.object(2))
         XCTAssertNil(map.object(2,deep: false))
+        
+        XCTAssertEqual(map.objects(matching: Object.isPoint).count, 5)
+        XCTAssertEqual(map.objects(matching: Object.isEither(Object.isRectangle, or: Object.isPoint)).count, 5)
+        XCTAssertEqual(map.objects(matching: Object.isEither(Object.isPoint, or: Object.isRectangle)).count, 5)
+        XCTAssertEqual(map.objects(matching: Object.isOf(type: "Object Type")).count, 2)
+
+        guard let map2 = try? moduleBundleProject.retrieve(map: "Maps/Test Map 1") else {
+            return XCTFail("Could not load map")
+        }
+        
+        XCTAssertEqual(map2.objects(matching: Object.isPoint).count, 2)
+        XCTAssertEqual(map2.objects(matching: Object.isText).count, 2)
+        XCTAssertEqual(map2.objects(matching: Object.isPolygon).count, 2)
+        XCTAssertEqual(map2.objects(matching: Object.isPolyline).count, 1)
+        XCTAssertEqual(map2.objects(matching: Object.isTile).count, 2)
+        XCTAssertEqual(map2.objects(matching: Object.isTile, Object.isNamed("Stretched Tile")).count, 1)
+        XCTAssertEqual(map2.objects(matching: Object.isRectangle).count, 1)
+        XCTAssertEqual(map2.objects(matching: Object.isEllipse).count, 1)
     }
     
     static var allTests = [

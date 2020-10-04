@@ -15,6 +15,9 @@
 /// A `LayerFilter` is used when querying `LayerContainer`s to select one or more matching `Layer`s and
 /// are responsible for determining if any given `Layer` meets a set of criteria
 public protocol LayerFilter {
+    /// Determines If the supplied `Layer` meets the criteria of the `LayerFilter`
+    /// - Parameter layer: The `Layer` to evaluate
+    /// - returns `true` if it matches, `false` if not
     func matches(_ layer:Layer) -> Bool
 }
 
