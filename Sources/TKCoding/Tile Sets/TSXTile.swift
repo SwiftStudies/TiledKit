@@ -22,9 +22,11 @@ public struct TSXTile : Codable {
     public let collisionObject : XMLObjectLayer?
     public let animationFrames : [TSXTileFrame]
     public let image : XMLImageElement?
+    public let type : String?
+    public let properties : XMLProperties
     
     enum CodingKeys : String, CodingKey {
-        case id, collisionObject = "objectgroup", animationFrames = "animation", image
+        case id, collisionObject = "objectgroup", animationFrames = "animation", image, type, properties
     }
     
     public init(from decoder: Decoder) throws {
@@ -33,6 +35,9 @@ public struct TSXTile : Codable {
         id = try container.decode(UInt32.self, forKey: .id)
         collisionObject = try container.decodeIfPresent(XMLObjectLayer.self, forKey: .collisionObject)
         image = try container.decodeIfPresent(XMLImageElement.self, forKey: .image)
+        type = try container.decodeIfPresent(String.self, forKey: .type)
+        
+        properties = try XMLProperties.decode(from: decoder)
         
         // needs to be nested unkeyed and iterated?
         var animationFrames = [TSXTileFrame]()

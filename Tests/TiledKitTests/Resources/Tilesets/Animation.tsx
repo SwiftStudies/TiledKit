@@ -21,4 +21,9 @@ Probably carriage returns causing that shift. </property>
    <frame tileid="3" duration="1000"/>
   </animation>
  </tile>
+ <tile id="3" type="D">
+  <properties>
+   <property name="Value" value="D"/>
+  </properties>
+ </tile>
 </tileset>

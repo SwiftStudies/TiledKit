@@ -30,6 +30,12 @@ public class Tile {
     /// The URL of the image used
     public let imageSource : URL
     
+    /// The user specified type of the tile (if specified)
+    public var type : String? = nil
+    
+    /// Any user defined properties associated with the tile
+    public var properties = Properties()
+    
     /// The color used in the image that should be treated as transparent (if any). This should not impact the interpretation of any
     /// alpha values also used for a color (i.e. it is addative)
     public let transparentColor : Color?

@@ -73,12 +73,14 @@ extension TSXTileSet {
             }
         }
         
-        // Now we have all tiles add any animation frames and collision bodies
+        // Now we have all tiles add any type, properties, animation frames and collision bodies
         for xmlTile in tileSetXML.tileSpecs {
             let collisionBodies = xmlTile.collisionObject?.objects.compactMap({ (xmlObject)->Object? in
                 return xmlObject.tkGeometricObject(relativeTo: url, in: project)
             })
             
+            tileSet[xmlTile.id]?.type = xmlTile.type
+            tileSet[xmlTile.id]?.properties = xmlTile.properties.interpret(baseUrl: url, in: project)
             
             let frames = try xmlTile.animationFrames.map({ (xmlFrame) -> Frame in
                 guard let frameTile = tileSet[xmlFrame.tileid] else {
