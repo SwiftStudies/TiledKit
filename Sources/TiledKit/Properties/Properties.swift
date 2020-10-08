@@ -23,6 +23,23 @@ public protocol Propertied {
     var  properties : Properties { get }
 }
 
+/// Provides the ability to merge two sets of properties
+public extension Properties {
+    
+    
+    /// Creates a new `Properties` object by merging this set with the passed `Properties`, if there is a collision the passed `Properties` value will be used
+    /// - Parameter properties: The properties to merge. If there is a collision these will take priority
+    /// - Returns: The resultant merged `Properties`
+    func overridingWith(_ properties:Properties)->Properties {
+        var combinedProperties = self
+        
+        for propertyTuple in properties {
+            combinedProperties[propertyTuple.key] = propertyTuple.value
+        }
+        
+        return combinedProperties
+    }
+}
 
 /// Any TiledKit object that can have user defined properties, that supports writing of properties
 public protocol MutablePropertied : Propertied{

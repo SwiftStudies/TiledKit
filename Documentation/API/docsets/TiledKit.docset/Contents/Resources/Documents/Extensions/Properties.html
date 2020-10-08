@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>LayerFilter Protocol Reference</title>
+    <title>Properties Extension Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Protocol/LayerFilter" class="dashAnchor"></a>
-    <a title="LayerFilter Protocol Reference"></a>
+    <a name="//apple_ref/swift/Extension/Properties" class="dashAnchor"></a>
+    <a title="Properties Extension Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">TiledKit</a> (97% documented)</p>
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">TiledKit Reference</a>
         <img id="carat" src="../img/carat.png" />
-        LayerFilter Protocol Reference
+        Properties Extension Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -233,16 +233,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>LayerFilter</h1>
+            <h1>Properties</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">LayerFilter</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt"><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></span></code></pre>
 
                 </div>
               </div>
-            <p>A <code>LayerFilter</code> is used when querying <code><a href="../Protocols/LayerContainer.html">LayerContainer</a></code>s to select one or more matching <code><a href="../Structs/Layer.html">Layer</a></code>s and
-are responsible for determining if any given <code><a href="../Structs/Layer.html">Layer</a></code> meets a set of criteria</p>
+            <p>Provides the ability to merge two sets of properties</p>
 
           </section>
           <section class="section task-group-section">
@@ -251,9 +250,9 @@ are responsible for determining if any given <code><a href="../Structs/Layer.htm
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit11LayerFilterP7matchesySbAA0C0VF"></a>
-                    <a name="//apple_ref/swift/Method/matches(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit11LayerFilterP7matchesySbAA0C0VF">matches(_:<wbr>)</a>
+                    <a name="/s:SD8TiledKitSSRszAA13PropertyValueORs_rlE14overridingWithySDySSACGAEF"></a>
+                    <a name="//apple_ref/swift/Method/overridingWith(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:SD8TiledKitSSRszAA13PropertyValueORs_rlE14overridingWithySDySSACGAEF">overridingWith(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -261,14 +260,14 @@ are responsible for determining if any given <code><a href="../Structs/Layer.htm
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Determines If the supplied <code><a href="../Structs/Layer.html">Layer</a></code> meets the criteria of the <code>LayerFilter</code></p>
+                        <p>Creates a new <code><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></code> object by merging this set with the passed <code><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></code>, if there is a collision the passed <code><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></code> value will be used</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">matches</span><span class="p">(</span><span class="n">_</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Structs/Layer.html">Layer</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">overridingWith</span><span class="p">(</span><span class="n">_</span> <span class="nv">properties</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></span></code></pre>
 
                         </div>
                       </div>
@@ -279,17 +278,21 @@ are responsible for determining if any given <code><a href="../Structs/Layer.htm
                             <tr>
                               <td>
                                 <code>
-                                <em>layer</em>
+                                <em>properties</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The <code><a href="../Structs/Layer.html">Layer</a></code> to evaluate</p>
+                                  <p>The properties to merge. If there is a collision these will take priority</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The resultant merged <code><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></code></p>
                       </div>
                     </section>
                   </div>
