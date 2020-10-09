@@ -19,6 +19,9 @@ public protocol Engine {
     
     /// The type that captures `Color`s in the engine
     associatedtype ColorType : ExpressibleAsTiledColor
+    
+    /// The type that represents a `Map` in the engine
+    associatedtype MapType   : EngineMap
 }
 
 /// Provides common diagnostic capabilites to any engine specialization
@@ -26,11 +29,4 @@ public extension Engine {
     static func warn(_ message:String){
         print("Warning: \(message)")
     }
-}
-
-/// Captures an object that is important for a given game engine (and will be involved in automated maping etc). In general only
-/// game engine types that map directly to Tiled entities will need to support this
-public protocol EngineObject {
-    /// The specific game engine the object supports
-    associatedtype EngineType : Engine
 }
