@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TiledEngineBridgableProperty Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/TiledEngineBridgableProperty" class="dashAnchor"></a>
+    <a title="TiledEngineBridgableProperty Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">TiledKit</a> (97% documented)</p>
+        <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">TiledKit Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        TiledEngineBridgableProperty Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Project.html">Project</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Tile.html">Tile</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TileSet.html">TileSet</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/FileType.html">FileType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/HorizontalTextAlignment.html">HorizontalTextAlignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LayerMatchingError.html">LayerMatchingError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Orientation.html">Orientation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PropertyValue.html">PropertyValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RenderingOrder.html">RenderingOrder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/VerticalTextAlignment.html">VerticalTextAlignment</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Properties.html">Properties</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URL.html">URL</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Engine.html">Engine</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineObject.html">EngineObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ExpressibleAsTiledColor.html">ExpressibleAsTiledColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ExpressibleAsTiledFloat.html">ExpressibleAsTiledFloat</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LayerContainer.html">LayerContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LayerFilter.html">LayerFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LayerProtocol.html">LayerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Loadable.html">Loadable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MutablePropertied.html">MutablePropertied</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ObjectFilter.html">ObjectFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Propertied.html">Propertied</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ResourceLoader.html">ResourceLoader</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TiledEngineBridgableProperty.html">TiledEngineBridgableProperty</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/BridgedProperty.html">BridgedProperty</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Color.html">Color</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Dimension.html">Dimension</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Frame.html">Frame</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Group.html">Group</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GroupLayer.html">GroupLayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ImageLayer.html">ImageLayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ImageReference.html">ImageReference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Layer.html">Layer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Layer/Kind.html">– Kind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Map.html">Map</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Object.html">Object</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Object/Kind.html">– Kind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ObjectLayer.html">ObjectLayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ObjectType.html">ObjectType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ObjectTypes.html">ObjectTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Point.html">Point</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Rectangle.html">Rectangle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TextStyle.html">TextStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TileFlip.html">TileFlip</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TileGID.html">TileGID</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TileGrid.html">TileGrid</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TileLayer.html">TileLayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TileSetReference.html">TileSetReference</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit4Bytea">Byte</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit4Patha">Path</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit11PixelBoundsa">PixelBounds</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit10PixelPointa">PixelPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit9PixelSizea">PixelSize</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit8Positiona">Position</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit4Sizea">Size</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit16TileGridPositiona">TileGridPosition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit12TileGridSizea">TileGridSize</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>TiledEngineBridgableProperty</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TiledEngineBridgableProperty</span></code></pre>
+
+                </div>
+              </div>
+            <p>Enables the implementer to provide the information required to automatically translate a tiled property
+and apply it to the game specific engine.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A23EngineBridgablePropertyP0C10ObjectTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/EngineObjectType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A23EngineBridgablePropertyP0C10ObjectTypeQa">EngineObjectType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Captures which game engine object is the target for this property</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">EngineObjectType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineObject.html">EngineObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A23EngineBridgablePropertyP9FloatTypea"></a>
+                    <a name="//apple_ref/swift/Alias/FloatType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A23EngineBridgablePropertyP9FloatTypea">FloatType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Convience propagation of the type used for most floats in the target game engine</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">typealias</span> <span class="kt">FloatType</span> <span class="o">=</span> <span class="kt"><a href="../Protocols/TiledEngineBridgableProperty.html#/s:8TiledKit0A23EngineBridgablePropertyP0C10ObjectTypeQa">EngineObjectType</a></span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt">FloatType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A23EngineBridgablePropertyP9ColorTypea"></a>
+                    <a name="//apple_ref/swift/Alias/ColorType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A23EngineBridgablePropertyP9ColorTypea">ColorType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Convience propagation of the type used to represent colors in the target game engine</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">typealias</span> <span class="kt">ColorType</span> <span class="o">=</span> <span class="kt"><a href="../Protocols/TiledEngineBridgableProperty.html#/s:8TiledKit0A23EngineBridgablePropertyP0C10ObjectTypeQa">EngineObjectType</a></span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt">ColorType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A23EngineBridgablePropertyP9tiledNameSSvp"></a>
+                    <a name="//apple_ref/swift/Property/tiledName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A23EngineBridgablePropertyP9tiledNameSSvp">tiledName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The name of the property in Tiled</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">tiledName</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A23EngineBridgablePropertyP12tiledDefaultAA0E5ValueOvp"></a>
+                    <a name="//apple_ref/swift/Property/tiledDefault" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A23EngineBridgablePropertyP12tiledDefaultAA0E5ValueOvp">tiledDefault</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default value of the property in Tiled</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">tiledDefault</span><span class="p">:</span> <span class="kt"><a href="../Enums/PropertyValue.html">PropertyValue</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A23EngineBridgablePropertyP012engineObjectE0s14PartialKeyPathCy0cG4TypeQzGvp"></a>
+                    <a name="//apple_ref/swift/Property/engineObjectProperty" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A23EngineBridgablePropertyP012engineObjectE0s14PartialKeyPathCy0cG4TypeQzGvp">engineObjectProperty</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The key path to be used to write the property on <code><a href="../Protocols/TiledEngineBridgableProperty.html#/s:8TiledKit0A23EngineBridgablePropertyP0C10ObjectTypeQa">EngineObjectType</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">engineObjectProperty</span><span class="p">:</span> <span class="kt">PartialKeyPath</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/TiledEngineBridgableProperty.html#/s:8TiledKit0A23EngineBridgablePropertyP0C10ObjectTypeQa">EngineObjectType</a></span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A23EngineBridgablePropertyPAAE5apply2to_y0C10ObjectTypeQz_AA0E5ValueOtF"></a>
+                    <a name="//apple_ref/swift/Method/apply(to:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A23EngineBridgablePropertyPAAE5apply2to_y0C10ObjectTypeQz_AA0E5ValueOtF">apply(to:<wbr>_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the appropriate property on the <code><a href="../Protocols/TiledEngineBridgableProperty.html#/s:8TiledKit0A23EngineBridgablePropertyP0C10ObjectTypeQa">EngineObjectType</a></code> instance supplied</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">apply</span><span class="p">(</span><span class="n">to</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TiledEngineBridgableProperty.html#/s:8TiledKit0A23EngineBridgablePropertyP0C10ObjectTypeQa">EngineObjectType</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Enums/PropertyValue.html">PropertyValue</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The object in the specialized engine that should be updated</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The value to apply to its property</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>(c) 2020 SwiftStudies. All rights reserved</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -1,6 +1,62 @@
 {
   "warnings": [
     {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Engine.swift",
+      "line": 15,
+      "symbol": "Engine",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Engine.swift",
+      "line": 16,
+      "symbol": "Engine.FloatType",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Engine.swift",
+      "line": 17,
+      "symbol": "Engine.ColorType",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Engine.swift",
+      "line": 23,
+      "symbol": "Engine",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Engine.swift",
+      "line": 24,
+      "symbol": "Engine.warn(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Engine.swift",
+      "line": 29,
+      "symbol": "EngineObject",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Engine.swift",
+      "line": 30,
+      "symbol": "EngineObject.EngineType",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/MappedProperty.swift",
+      "line": 21,
+      "symbol": "MappedProperty.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Immutable Typed Layers/GroupLayer.swift",
       "line": 15,
       "symbol": "GroupLayer",
