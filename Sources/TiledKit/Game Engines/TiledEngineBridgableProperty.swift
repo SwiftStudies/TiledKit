@@ -18,14 +18,14 @@ import Foundation
 public protocol ExpressibleAsTiledFloat {
     /// Creates an instance of the implementating type from the default type for Tiled floats (`Double`)
     /// - Parameter from: The value of the Tiled property
-    init(_ from:Double)
+    static func instance(bridging value:Double)->Self
 }
 
 /// Ensures a Tiled "color" can be converted into an Engine specific property value
 public protocol ExpressibleAsTiledColor {
     /// Creates an instance of the implementating type from supplied `Color`
     /// - Parameter from: The value of the tiled property
-    init(_ from:Color)
+    static func instance(bridging color:Color)->Self
 }
 
 /// Enables the implementer to provide the information required to automatically translate a tiled property
@@ -79,7 +79,7 @@ public extension TiledEngineBridgableProperty {
             }
         case .double(let value):
             if let keyPath = engineObjectProperty as? ReferenceWritableKeyPath<EngineObjectType,FloatType> {
-                object[keyPath: keyPath] = FloatType(value)
+                object[keyPath: keyPath] = FloatType.instance(bridging: value)
                 return
             }
         case .file(let url):
@@ -89,7 +89,7 @@ public extension TiledEngineBridgableProperty {
             }
         case .color(let color):
             if let keyPath = engineObjectProperty as? ReferenceWritableKeyPath<EngineObjectType,ColorType> {
-                object[keyPath: keyPath] = ColorType(color)
+                object[keyPath: keyPath] = ColorType.instance(bridging: color)
                 return
             }
         case .object(let id):
