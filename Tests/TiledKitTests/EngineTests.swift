@@ -56,11 +56,14 @@ enum TestProperties : String, TiledEngineBridgableProperty, CaseIterable {
 }
 
 extension Float : ExpressibleAsTiledFloat {
+    public static func instance(bridging value: Double) -> Float {
+        return Float(value)
+    }
 }
 
 extension UInt32 : ExpressibleAsTiledColor {
-    public init(_ from: Color) {
-        self = UInt32(from.alpha) << 24 | UInt32(from.blue) << 16 | UInt32(from.green) << 8 | UInt32(from.red)
+    public static func instance(bridging color: Color) -> UInt32 {
+       return UInt32(color.alpha) << 24 | UInt32(color.blue) << 16 | UInt32(color.green) << 8 | UInt32(color.red)
     }
 }
 
@@ -76,7 +79,7 @@ final class EngineTests: XCTestCase {
         XCTAssertEqual(sprite.weight, 10)
 
         TestProperties.shade.apply(to: sprite, TestProperties.shade.tiledDefault)
-        XCTAssertEqual(sprite.color, UInt32(Color.red))
+        XCTAssertEqual(sprite.color, UInt32.instance(bridging: Color.red))
     }
     
     static var allTests = [
