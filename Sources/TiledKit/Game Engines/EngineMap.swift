@@ -12,8 +12,18 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-/// The different errors that can be thrown
-enum EngineError : Error {
-    case unsupportedTypeWhenLoadingMap(desiredType:String, supportedType:String)
-    case notImplemented
+/// A concrete object that the implementor of will be able to be directly bridged to a TiledKit `map`
+/// with a high level of automation
+public protocol EngineMap : EngineObject,Loadable {
+    
+}
+
+/// A default implementation that that returns the automatic loader
+public extension EngineMap {
+    /// Always returns the automated loader
+    /// - Parameter project: The project that is loading the resource
+    /// - Returns: An instance of `EngineMapLoader`
+    static func loader(for project: Project) -> ResourceLoader {
+        return EngineMapLoader<EngineType>(project)
+    }
 }

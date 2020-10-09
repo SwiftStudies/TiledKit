@@ -15,60 +15,20 @@
 import XCTest
 @testable import TiledKit
 
-class TestEngine : Engine {
-    typealias FloatType = Float
-    typealias ColorType = UInt32
-}
-
-class TestSprite : EngineObject {
-    typealias EngineType = TestEngine
-    
-    var color : UInt32 = 0
-    var weight : Float = 100.0
-}
-
-enum TestProperties : String, TiledEngineBridgableProperty, CaseIterable {
-    typealias EngineObjectType = TestSprite
-    
-    case shade, mass
-    
-    var tiledName: String {
-        return rawValue
-    }
-    
-    var tiledDefault: PropertyValue {
-        switch  self {
-        case .shade:
-            return .color(.red)
-        case .mass:
-            return 10.0
-        }
-    }
-    
-    var engineObjectProperty: PartialKeyPath<TestSprite> {
-        switch self {
-        case .shade:
-            return \TestSprite.color
-        case .mass:
-            return \TestSprite.weight
-        }
-    }
-}
-
-extension Float : ExpressibleAsTiledFloat {
-    public static func instance(bridging value: Double) -> Float {
-        return Float(value)
-    }
-}
-
-extension UInt32 : ExpressibleAsTiledColor {
-    public static func instance(bridging color: Color) -> UInt32 {
-       return UInt32(color.alpha) << 24 | UInt32(color.blue) << 16 | UInt32(color.green) << 8 | UInt32(color.red)
-    }
-}
-
 final class EngineTests: XCTestCase {
-        
+    lazy var moduleBundleProject : Project = {
+        Project(using: Bundle.module)
+    }()
+    
+    func testMapLoading(){
+        let testMap : TestMap
+        do {
+            testMap = try moduleBundleProject.retrieve(specializedMap: "Test Map 1", in: "Maps")
+        } catch {
+            return XCTFail("\(error)")
+        }
+    }
+    
     func testBridgeAblePropertyApplication(){
         let sprite = TestSprite()
         
@@ -83,6 +43,7 @@ final class EngineTests: XCTestCase {
     }
     
     static var allTests = [
+        ("testMapLoading", testMapLoading),
         ("testBridgeAblePropertyApplication", testBridgeAblePropertyApplication),
         ]
 }
