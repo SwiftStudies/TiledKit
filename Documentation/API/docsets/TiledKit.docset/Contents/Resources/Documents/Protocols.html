@@ -94,6 +94,18 @@
             <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Protocols/Engine.html">Engine</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/EngineObject.html">EngineObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ExpressibleAsTiledColor.html">ExpressibleAsTiledColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ExpressibleAsTiledFloat.html">ExpressibleAsTiledFloat</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/LayerContainer.html">LayerContainer</a>
               </li>
               <li class="nav-group-task">
@@ -117,11 +129,17 @@
               <li class="nav-group-task">
                 <a href="Protocols/ResourceLoader.html">ResourceLoader</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Protocols/TiledEngineBridgableProperty.html">TiledEngineBridgableProperty</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/BridgedProperty.html">BridgedProperty</a>
+              </li>
               <li class="nav-group-task">
                 <a href="Structs/Color.html">Color</a>
               </li>
@@ -240,6 +258,148 @@
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP"></a>
+                    <a name="//apple_ref/swift/Protocol/Engine" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP">Engine</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The entry point for any game engine specialization. See <a href="../../Game%20Engine%20Specialization.md">Game Engine Specialization</a></p>
+
+                        <a href="Protocols/Engine.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Engine</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit12EngineObjectP"></a>
+                    <a name="//apple_ref/swift/Protocol/EngineObject" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit12EngineObjectP">EngineObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Captures an object that is important for a given game engine (and will be involved in automated maping etc). In general only
+game engine types that map directly to Tiled entities will need to support this</p>
+
+                        <a href="Protocols/EngineObject.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">EngineObject</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit013ExpressibleAsA5FloatP"></a>
+                    <a name="//apple_ref/swift/Protocol/ExpressibleAsTiledFloat" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit013ExpressibleAsA5FloatP">ExpressibleAsTiledFloat</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Ensures a Tiled &ldquo;float&rdquo; can be converted into an Engine specific property value</p>
+
+                        <a href="Protocols/ExpressibleAsTiledFloat.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ExpressibleAsTiledFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit013ExpressibleAsA5ColorP"></a>
+                    <a name="//apple_ref/swift/Protocol/ExpressibleAsTiledColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit013ExpressibleAsA5ColorP">ExpressibleAsTiledColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Ensures a Tiled &ldquo;color&rdquo; can be converted into an Engine specific property value</p>
+
+                        <a href="Protocols/ExpressibleAsTiledColor.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ExpressibleAsTiledColor</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A23EngineBridgablePropertyP"></a>
+                    <a name="//apple_ref/swift/Protocol/TiledEngineBridgableProperty" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A23EngineBridgablePropertyP">TiledEngineBridgableProperty</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Enables the implementer to provide the information required to automatically translate a tiled property
+and apply it to the game specific engine.</p>
+
+                        <a href="Protocols/TiledEngineBridgableProperty.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TiledEngineBridgableProperty</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
