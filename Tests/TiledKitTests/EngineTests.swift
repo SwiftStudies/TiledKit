@@ -37,13 +37,13 @@ final class EngineTests: XCTestCase {
         XCTAssertEqual(TestEngine.engineMapFactories().count, 1)
         
         guard let customMap : TestMap = try? moduleBundleProject.retrieve(specializedMap:"Test Map 1", in:"Maps") else {
-            TestEngine.removeAllFactories()
+            TestEngine.removeAllFactoriesAndPostProcessors()
             return XCTFail("Could not load custom map")
         }
         
         XCTAssertEqual(customMap.size, PixelSize(width: 1, height: 1))
         
-        TestEngine.removeAllFactories()
+        TestEngine.removeAllFactoriesAndPostProcessors()
         XCTAssertEqual(TestEngine.engineMapFactories().count, 0)
     }
     
