@@ -22,11 +22,29 @@ final class EngineTests: XCTestCase {
     
     func testMapLoading(){
         let testMap : TestMap
+        let originalMap : Map
         do {
             testMap = try moduleBundleProject.retrieve(specializedMap: "Test Map 1", in: "Maps")
+            originalMap = try moduleBundleProject.retrieve(map: "Test Map 1", in: "Maps")
         } catch {
             return XCTFail("\(error)")
         }
+        
+        XCTAssertEqual(testMap.size, originalMap.pixelSize)
+        
+        XCTAssertEqual(TestEngine.engineMapFactories().count, 0)
+        TestEngine.register(factory: TestMapFactory())
+        XCTAssertEqual(TestEngine.engineMapFactories().count, 1)
+        
+        guard let customMap : TestMap = try? moduleBundleProject.retrieve(specializedMap:"Test Map 1", in:"Maps") else {
+            TestEngine.removeAllFactories()
+            return XCTFail("Could not load custom map")
+        }
+        
+        XCTAssertEqual(customMap.size, PixelSize(width: 1, height: 1))
+        
+        TestEngine.removeAllFactories()
+        XCTAssertEqual(TestEngine.engineMapFactories().count, 0)
     }
     
     func testBridgeAblePropertyApplication(){

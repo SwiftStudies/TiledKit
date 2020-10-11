@@ -15,7 +15,6 @@
 import Foundation
 
 class EngineMapLoader<E:Engine> : ResourceLoader {
-    
     let project : Project
     
     init(_ project:Project){
@@ -29,13 +28,13 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
     }
     
     func build(specializedImplementationFor map:Map) throws -> E.MapType {
-        //        for mapProcessor in mapFactories {
-        //            if let created = try mapProcessor.make(sceneFor: map, from: project) {
-        //                specializedMap = created
-        //                break
-        //            }
-        //        }
-        throw EngineError.notImplemented
+        for factory in E.engineMapFactories(){
+            if let specializedMap : E.MapType = try factory.make(from: map, in: project) {
+                return specializedMap
+            }
+        }
+        
+        return try E.make(engineMapForTiled: map)
     }
     
     func process(specializedMap:E.MapType, for map:Map) throws -> E.MapType {
@@ -53,10 +52,12 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
         var specializedMap = try build(specializedImplementationFor: tiledMap)
         
         /// Walk the map
-        walk(tiledMap, bridgingTo: specializedMap)
+        #warning("Turn back on")
+//        walk(tiledMap, bridgingTo: specializedMap)
         
         /// Apply map post processors
-        specializedMap = try process(specializedMap: specializedMap, for: tiledMap)
+        #warning("Turn back on")
+//        specializedMap = try process(specializedMap: specializedMap, for: tiledMap)
         
         guard let typedSpecializedMap = specializedMap as? R else {
             throw EngineError.unsupportedTypeWhenLoadingMap(desiredType: "\(R.self)", supportedType: "\(E.MapType.self)")

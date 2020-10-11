@@ -22,10 +22,57 @@ public protocol Engine {
     
     /// The type that represents a `Map` in the engine
     associatedtype MapType   : EngineMap
+    
+    
+    /// Provide a default specialized map creator for the Engine
+    /// - Parameter map: The `Map` to create it for
+    static func make(engineMapForTiled map:Map) throws -> MapType
+}
+
+internal struct AnyEngineMapFactory<EngineType:Engine> : EngineMapFactory {
+    
+    let wrappedFactory : (_ map:Map, _ project:Project) throws -> EngineType.MapType?
+    
+    init<F:EngineMapFactory>(wrap factory:F) where F.EngineType == EngineType {
+        wrappedFactory = factory.make
+    }
+    
+    func make<EngineMapType>(from map: Map, in project: Project) throws -> EngineMapType? where EngineMapType : EngineMap {
+        return try wrappedFactory(map,project) as? EngineMapType
+    }
+}
+
+fileprivate struct Factories {
+    static var factories = [Any]()
+    
+    static func get<T>()->[T] {
+        return factories.compactMap({
+            $0 as? T
+        })
+    }
 }
 
 /// Provides common diagnostic capabilites to any engine specialization
 public extension Engine {
+
+    /// Add a new factory to the factories for the `Engine`, new factories are tried first
+    /// - Parameter factory: The new factory
+    static func register<F:EngineMapFactory>(factory:F) where F.EngineType == Self {
+            Factories.factories.insert(AnyEngineMapFactory<Self>(wrap:factory), at: 0)
+    }
+    
+    static func removeAllFactories() {
+        Factories.factories.removeAll()
+    }
+    
+    /// Returns all engine map factories registered
+    /// - Returns: The available map factories for this engine
+    internal static func engineMapFactories() -> [AnyEngineMapFactory<Self>] {
+        return  Factories.get()
+        
+        
+    }
+        
     static func warn(_ message:String){
         print("Warning: \(message)")
     }

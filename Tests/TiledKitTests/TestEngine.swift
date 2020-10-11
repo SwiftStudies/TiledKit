@@ -16,9 +16,16 @@ import Foundation
 import TiledKit
 
 class TestEngine : Engine {
+    typealias EngineType = TestEngine
+    
     typealias FloatType = Float
     typealias ColorType = UInt32
     typealias MapType = TestMap
+    
+    
+    static func make(engineMapForTiled map: Map) throws -> TestMap {
+        return TestMap(size:map.pixelSize)
+    }
 }
 
 class TestNode : EngineObject {
@@ -27,6 +34,12 @@ class TestNode : EngineObject {
 }
 
 class TestMap : TestNode, EngineMap {
+    let size : PixelSize
+    
+    init(size:PixelSize){
+        self.size = size
+    }
+    
     var cache: Bool {
         return false
     }
@@ -36,8 +49,16 @@ class TestMap : TestNode, EngineMap {
     }
 }
 
-class TestSprite : TestNode {
+struct TestMapFactory : EngineMapFactory {
     
+    typealias EngineType = TestEngine
+
+    func make(from map: Map, in project: Project) throws -> TestMap? {
+        return TestMap(size: PixelSize(width: 1, height: 1))
+    }
+}
+
+class TestSprite : TestNode {
     var color : UInt32 = 0
     var weight : Float = 100.0
 }
