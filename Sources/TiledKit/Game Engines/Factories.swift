@@ -21,5 +21,13 @@ public protocol Factory {
 
 /// A Factory responsible for creating an Engine Map
 public protocol EngineMapFactory : Factory {
+    
+    /// A map factory is responsible for determining (for example looking at properites)
+    /// if a special kind of map should be created. If the map type this factory makes
+    /// is not applicable for the supplied `Map` then the factory can return nil, causing the
+    /// next factory to be tried
+    /// - Parameters:
+    ///   - map: The `Map` being loaded
+    ///   - project: The `Project` the map is being loaded from
     func make(from map:Map, in project:Project) throws -> EngineType.MapType?
 }
