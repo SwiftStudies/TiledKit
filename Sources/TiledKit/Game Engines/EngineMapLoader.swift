@@ -38,16 +38,21 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
     }
     
     func process(specializedMap:E.MapType, for map:Map) throws -> E.MapType {
-        //        for mapProcessor in mapPostProcessors {
-        //            specializedMap = try mapProcessor.process(specializedMap, for: map, from: project)
-        //        }
-
-        throw EngineError.notImplemented
+        var specializedMap = specializedMap
+        
+        for mapProcessor in E.engineMapPostProcessors(){
+            specializedMap = try mapProcessor.process(specializedMap, for: map, from: project)
+        }
+        
+        return specializedMap
     }
     
     func retrieve<R>(asType: R.Type, from url: URL) throws -> R where R : Loadable {
         let tiledMap = try project.retrieve(asType: Map.self, from: url)
 
+        /// Load tile sets
+        #warning("Implement tile set loading")
+        
         /// Use factories to build a map
         var specializedMap = try build(specializedImplementationFor: tiledMap)
         
@@ -56,8 +61,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
 //        walk(tiledMap, bridgingTo: specializedMap)
         
         /// Apply map post processors
-        #warning("Turn back on")
-//        specializedMap = try process(specializedMap: specializedMap, for: tiledMap)
+        specializedMap = try process(specializedMap: specializedMap, for: tiledMap)
         
         guard let typedSpecializedMap = specializedMap as? R else {
             throw EngineError.unsupportedTypeWhenLoadingMap(desiredType: "\(R.self)", supportedType: "\(E.MapType.self)")

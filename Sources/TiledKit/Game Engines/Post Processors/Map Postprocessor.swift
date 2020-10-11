@@ -25,3 +25,34 @@ public protocol MapPostProcessor : PostProcessor {
     ///   - project: The project the map was loaded from
     func process(_ specializedMap:EngineType.MapType, for map:Map, from project:Project) throws ->EngineType.MapType
 }
+
+/// Adds support for `MapPostProcessor`s  to `Engine`
+public extension Engine {
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter postProcessor: The new post processor
+    static func register<P:MapPostProcessor>(postProcessor:P) where P.EngineType == Self {
+        EngineRegistry.insert(
+            for: Self.self,
+            object: AnyEngineMapPostProcessor<Self>(wrap:postProcessor)
+        )
+    }
+    
+    /// Returns all engine map factories registered
+    /// - Returns: The available map factories for this engine
+    internal static func engineMapPostProcessors() -> [AnyEngineMapPostProcessor<Self>] {
+        return  EngineRegistry.get(for: Self.self)
+    }
+}
+
+internal struct AnyEngineMapPostProcessor<EngineType:Engine> : MapPostProcessor {
+    let wrapped : (_ specializedMap: EngineType.MapType, _ map:Map, _ project:Project) throws -> EngineType.MapType
+
+    init<F:MapPostProcessor>(wrap factory:F) where F.EngineType == EngineType {
+        wrapped = factory.process
+    }
+
+    func process(_ specializedMap: EngineType.MapType, for map: Map, from project: Project) throws -> EngineType.MapType {
+        return try wrapped(specializedMap, map, project)
+    }
+}

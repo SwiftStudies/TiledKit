@@ -107,3 +107,18 @@ public extension TiledEngineBridgableProperty {
     }
 }
 
+
+/// Provides convience methods for applying multiple bridgable properties
+public extension Array where Element : TiledEngineBridgableProperty {
+    /// For an array of bridgeable properties applies all of those that exist to the supplied object
+    /// - Parameters:
+    ///   - properties: The tiled properties and values
+    ///   - object: The object in the specialized engine that should be updated
+    func apply(_ properties:Properties, to object:Element.EngineObjectType){
+        for tiledBridgedProperty in self {
+            if let tiledValue = properties[tiledBridgedProperty.tiledName] {
+                tiledBridgedProperty.apply(to: object, tiledValue)
+            }
+        }
+    }
+}

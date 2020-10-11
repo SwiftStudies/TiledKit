@@ -36,6 +36,9 @@ class TestNode : EngineObject {
 class TestMap : TestNode, EngineMap {
     let size : PixelSize
     
+    var falseByDefault = false
+    var lifeTheUniverseAndEverything = 0
+    
     init(size:PixelSize){
         self.size = size
     }
@@ -55,6 +58,42 @@ struct TestMapFactory : EngineMapFactory {
 
     func make(from map: Map, in project: Project) throws -> TestMap? {
         return TestMap(size: PixelSize(width: 1, height: 1))
+    }
+}
+
+struct TestMapPostProcessor : MapPostProcessor {
+    typealias EngineType = TestEngine
+
+    enum BridgedProperties : String, TiledEngineBridgableProperty, CaseIterable {
+        typealias EngineObjectType = TestMap
+        
+        case booleanProperty = "Boolean Property", intProperty = "Int Property"
+
+        var tiledName: String {
+            return rawValue
+        }
+        
+        var tiledDefault: PropertyValue {
+            switch self {
+            case .booleanProperty: return false
+            case .intProperty: return 42
+            }
+        }
+        
+        var engineObjectProperty: PartialKeyPath<TestMap> {
+            switch self {
+            case .booleanProperty:
+                return \EngineObjectType.falseByDefault
+            case .intProperty:
+                return \EngineObjectType.lifeTheUniverseAndEverything
+            }
+        }
+        
+    }
+    
+    func process(_ specializedMap: EngineType.MapType, for map: Map, from project: Project) throws -> EngineType.MapType {
+        BridgedProperties.allCases.apply(map.properties, to: specializedMap)
+        return specializedMap
     }
 }
 

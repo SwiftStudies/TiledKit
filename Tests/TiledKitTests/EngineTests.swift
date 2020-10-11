@@ -31,18 +31,25 @@ final class EngineTests: XCTestCase {
         }
         
         XCTAssertEqual(testMap.size, originalMap.pixelSize)
-        
+        XCTAssertEqual(testMap.falseByDefault, false)
+        XCTAssertEqual(testMap.lifeTheUniverseAndEverything, 0)
+
         XCTAssertEqual(TestEngine.engineMapFactories().count, 0)
+        XCTAssertEqual(TestEngine.engineMapPostProcessors().count, 0)
         TestEngine.register(factory: TestMapFactory())
+        TestEngine.register(postProcessor: TestMapPostProcessor())
         XCTAssertEqual(TestEngine.engineMapFactories().count, 1)
-        
+        XCTAssertEqual(TestEngine.engineMapPostProcessors().count, 1)
+
         guard let customMap : TestMap = try? moduleBundleProject.retrieve(specializedMap:"Test Map 1", in:"Maps") else {
             TestEngine.removeAllFactoriesAndPostProcessors()
             return XCTFail("Could not load custom map")
         }
         
         XCTAssertEqual(customMap.size, PixelSize(width: 1, height: 1))
-        
+        XCTAssertEqual(customMap.falseByDefault, true)
+        XCTAssertEqual(customMap.lifeTheUniverseAndEverything, 42)
+
         TestEngine.removeAllFactoriesAndPostProcessors()
         XCTAssertEqual(TestEngine.engineMapFactories().count, 0)
     }
