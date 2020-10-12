@@ -25,19 +25,6 @@ public protocol TileFactory : Factory {
 
 }
 
-internal struct AnyTileFactory<EngineType:Engine> : TileFactory {
-    let wrappedFactory : (_ tile:Tile, _ tileset:TileSet, _ texture: EngineType.TextureType, _ project : Project) throws -> EngineType.SpriteType?
-    
-    init<F:TileFactory>(wrap factory:F) where F.EngineType == EngineType {
-        wrappedFactory = factory.make
-    }
-    
-    func make(spriteFor tile: Tile, in tileset: TileSet, with texture: EngineType.TextureType, from project: Project) throws -> EngineType.SpriteType? {
-        return try wrappedFactory(tile, tileset, texture, project)
-    }
-    
-}
-
 /// Adds support for `EngineMapFactories` to `Engine`
 public extension Engine {
 
@@ -55,4 +42,18 @@ public extension Engine {
     internal static func tileFactories() -> [AnyTileFactory<Self>] {
         return  EngineRegistry.get(for: Self.self)
     }
+}
+
+
+internal struct AnyTileFactory<EngineType:Engine> : TileFactory {
+    let wrappedFactory : (_ tile:Tile, _ tileset:TileSet, _ texture: EngineType.TextureType, _ project : Project) throws -> EngineType.SpriteType?
+    
+    init<F:TileFactory>(wrap factory:F) where F.EngineType == EngineType {
+        wrappedFactory = factory.make
+    }
+    
+    func make(spriteFor tile: Tile, in tileset: TileSet, with texture: EngineType.TextureType, from project: Project) throws -> EngineType.SpriteType? {
+        return try wrappedFactory(tile, tileset, texture, project)
+    }
+    
 }
