@@ -48,7 +48,9 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
     }
     
     func loadTilesets(from map:Map, for specializedMap:E.MapType) throws {
-        for tileSet in map.tileSets {
+        
+        for tileSetReference in map.tileSetReferences {
+            let tileSet = tileSetReference.tileSet
             for tileId : UInt32  in 0..<UInt32(tileSet.count){
                 guard let tile = tileSet[tileId] else {
                     throw EngineError.couldNotFindTileInTileSet(tileId, tileSet: tileSet)
@@ -61,7 +63,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     }
                 }
                 if specializedTile == nil {
-                    specializedTile = try E.make(tile: tile, from: tileSet, from: project)
+                    specializedTile = try E.make(spriteFor: tile, in: tileSet, with: E.load(textureFrom: tile.imageSource, in: project), from: project)
                 }
                 
                 #warning("Or should this store it with the map?")
