@@ -16,16 +16,61 @@ import Foundation
 import TiledKit
 
 class TestEngine : Engine {
+
+    
     typealias EngineType = TestEngine
     
     typealias FloatType = Float
     typealias ColorType = UInt32
     typealias MapType = TestMap
-    
+    typealias SpriteType = TestSprite
+    typealias TextureType = TestTexture
+
+    static func load(textureFrom url: URL, in project:Project) throws -> TestTexture {
+        return TestTexture(from: url)
+    }
     
     static func make(engineMapForTiled map: Map) throws -> TestMap {
         return TestMap(size:map.pixelSize)
     }
+    
+    static func make(tile: Tile, from tileSet: TileSet, from project: Project) throws -> TestSprite {
+        return TestSprite()
+    }
+}
+
+public enum TestError : Error {
+    case couldNotCreateTexture(URL)
+}
+
+class TestTexture : EngineTexture {
+    typealias EngineType = TestEngine
+    
+    var originatingUrl : URL
+    
+    init(from url:URL){
+        originatingUrl = url
+    }
+    
+    func newInstance() -> Self {
+        return self
+    }
+
+}
+
+class TestSprite : TestNode, DeepCopyable {
+    var color : UInt32 = 0
+    var weight : Float = 100.0
+    
+    func deepCopy() -> Self {
+        let newCopy = TestSprite()
+        
+        newCopy.color = color
+        newCopy.weight = weight
+        
+        return newCopy as! Self
+    }
+    
 }
 
 class TestNode : EngineObject {
@@ -92,15 +137,12 @@ struct TestMapPostProcessor : MapPostProcessor {
     }
     
     func process(_ specializedMap: EngineType.MapType, for map: Map, from project: Project) throws -> EngineType.MapType {
-        BridgedProperties.allCases.apply(map.properties, to: specializedMap)
+        BridgedProperties.apply(map.properties, to: specializedMap)
         return specializedMap
     }
 }
 
-class TestSprite : TestNode {
-    var color : UInt32 = 0
-    var weight : Float = 100.0
-}
+
 
 enum TestProperties : String, TiledEngineBridgableProperty, CaseIterable {
     typealias EngineObjectType = TestSprite

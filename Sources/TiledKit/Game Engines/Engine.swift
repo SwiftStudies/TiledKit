@@ -12,6 +12,8 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+import Foundation
+
 /// The entry point for any game engine specialization. See [Game Engine Specialization](../../Game%20Engine%20Specialization.md)
 public protocol Engine {
     /// The most common lossless way of expressing a float in the engine
@@ -23,13 +25,55 @@ public protocol Engine {
     /// The type that represents a `Map` in the engine
     associatedtype MapType   : EngineMap
     
+    /// The type that represents a texture or bitmap that will be rendered as a Sprite
+    associatedtype TextureType : EngineTexture
+    
+    /// The type that represents the object that can draw itself on-screen
+    associatedtype SpriteType  : EngineObject, DeepCopyable
+    
+    /// Provide a method for loading textures
+    static func load(textureFrom url:URL, in project:Project) throws -> TextureType
     
     /// Provide a default specialized map creator for the Engine
     /// - Parameter map: The `Map` to create it for
     static func make(engineMapForTiled map:Map) throws -> MapType
+
+    /// Provide a default specialized tile creator for the Engine
+    /// - Parameter map: The `Map` to create it for
+    static func make(tile:Tile, from tileSet:TileSet, from project:Project) throws -> SpriteType
+
+
 }
 
+/// By implementing this protocol (required for `Engine.TextureType`
+/// loading behaviour except the actual loading of the texture data will be
+/// provided
+public protocol EngineTexture : EngineObject,Loadable {
 
+}
+
+/// Provides default implementations ensuring textures are cached, and
+/// a simplified loader is used
+public extension EngineTexture {
+    var cache: Bool {
+        return true
+    }
+    
+    /// Returns the default loader for the `Engine` simplifying what has to be
+    /// implemented
+    /// - Parameter project: The project the texture is refered to from
+    /// - Returns: The `ResourceLoader` that knows how  to load the texture
+    static func loader(for project: Project) -> ResourceLoader {
+        return EngineTextureLoader<EngineType>(project)
+    }
+}
+
+/// An object that can create new instances that are deep copies of itself
+public protocol DeepCopyable {
+    /// Create a deep copy of the object, returning a new instance
+    /// Unlike new instance, a new copy should always be returned
+    func deepCopy()->Self
+}
 
 /// Provides common diagnostic capabilites to any engine specialization
 public extension Engine {

@@ -14,15 +14,17 @@
 
 import Foundation
 
-/// The different errors that can be thrown
-enum EngineError : Error {
+class EngineTextureLoader<E:Engine> : ResourceLoader {
+    let project : Project
     
-    /// Thrown when the type of the map can't be created
-    case unsupportedTypeWhenLoadingMap(desiredType:String, supportedType:String)
-    /// Thrown when they type of the texture can't be created, or the texture can't be loaded
-    case couldNotCreateTextureFrom(URL)
-    /// `Tile` with the given id cannot be found in the containing `TileSet`
-    case couldNotFindTileInTileSet(UInt32, tileSet:TileSet)
-    /// Thrown if a function is not yet implemented
-    case notImplemented
+    init(_ project:Project){
+        self.project = project
+    }
+    
+    func retrieve<R>(asType: R.Type, from url: URL) throws -> R where R : Loadable {
+        guard let loadedTexture =  try E.load(textureFrom: url, in: project) as? R else {
+            throw EngineError.couldNotCreateTextureFrom(url)
+        }
+        return loadedTexture
+    }
 }

@@ -47,20 +47,43 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
         return specializedMap
     }
     
+    func loadTilesets(from map:Map, for specializedMap:E.MapType) throws {
+        for tileSet in map.tileSets {
+            for tileId : UInt32  in 0..<UInt32(tileSet.count){
+                guard let tile = tileSet[tileId] else {
+                    throw EngineError.couldNotFindTileInTileSet(tileId, tileSet: tileSet)
+                }
+                var specializedTile : E.SpriteType!
+                for factory in E.tileFactories() {
+                    if let madeTile = try factory.make(spriteFor: tile, in: tileSet, with:  E.load(textureFrom: tile.imageSource, in: project), from: project){
+                        specializedTile = madeTile
+                        break
+                    }
+                }
+                if specializedTile == nil {
+                    specializedTile = try E.make(tile: tile, from: tileSet, from: project)
+                }
+                
+                #warning("Or should this store it with the map?")
+//                project.store(specializedTile, as: tile.cachableUrl)
+            }
+        }
+    }
+    
     func retrieve<R>(asType: R.Type, from url: URL) throws -> R where R : Loadable {
         let tiledMap = try project.retrieve(asType: Map.self, from: url)
-
-        /// Load tile sets
-        #warning("Implement tile set loading")
         
-        /// Use factories to build a map
+        // Use factories to build a map
         var specializedMap = try build(specializedImplementationFor: tiledMap)
+        
+        // Load the tiles
+        try loadTilesets(from: tiledMap, for: specializedMap)
         
         /// Walk the map
         #warning("Turn back on")
 //        walk(tiledMap, bridgingTo: specializedMap)
         
-        /// Apply map post processors
+        // Apply map post processors
         specializedMap = try process(specializedMap: specializedMap, for: tiledMap)
         
         guard let typedSpecializedMap = specializedMap as? R else {
