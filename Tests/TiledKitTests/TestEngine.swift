@@ -16,6 +16,7 @@ import Foundation
 import TiledKit
 
 class TestEngine : Engine {
+    
 
     
     typealias EngineType = TestEngine
@@ -34,9 +35,9 @@ class TestEngine : Engine {
         return TestMap(size:map.pixelSize)
     }
     
-    static func make(tile: Tile, from tileSet: TileSet, from project: Project) throws -> TestSprite {
+    static func make(spriteFor tile: Tile, in tileset: TileSet, with texture: TestTexture, from project: Project) throws -> TestSprite {
         return TestSprite()
-    }
+    }    
 }
 
 public enum TestError : Error {
@@ -95,6 +96,7 @@ class TestMap : TestNode, EngineMap {
     func newInstance() -> Self {
         return self
     }
+    
 }
 
 struct TestMapFactory : EngineMapFactory {

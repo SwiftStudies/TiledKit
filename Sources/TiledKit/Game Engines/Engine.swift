@@ -40,9 +40,11 @@ public protocol Engine {
 
     /// Provide a default specialized tile creator for the Engine
     /// - Parameter map: The `Map` to create it for
-    static func make(tile:Tile, from tileSet:TileSet, from project:Project) throws -> SpriteType
-
-
+    /// - Parameter tile: The `Tile` to create a sprite for
+    /// - Parameter tileset: The `TileSet` the tile is from
+    /// - Parameter texture: The texture (not cropped) to use for the tile
+    /// - Parameter project: The `Project` data is being cloaded from
+    static func make(spriteFor tile:Tile, in tileset:TileSet, with texture:TextureType, from project:Project) throws ->SpriteType
 }
 
 /// By implementing this protocol (required for `Engine.TextureType`
