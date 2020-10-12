@@ -36,10 +36,16 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
         self.project = project
     }
     
-    func walk(_ map:Map, bridgingTo specializedMap:E.MapType){
-        //
-        //        try apply(map: map, to: specializedMap)
-        //
+    func walk(layers:[Layer], in map:Map, containedIn container:E.LayerContainer) throws {
+        
+        for layer in layers {
+            for factory in E.layerFactories() {
+                switch layer.kind {
+                    
+                }
+            }
+        }
+        
     }
     
     func build(specializedImplementationFor map:Map) throws -> E.MapType {
@@ -118,8 +124,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
         try loadTilesets(from: tiledMap, for: specializedMap)
         
         /// Walk the map
-        #warning("Turn back on")
-//        walk(tiledMap, bridgingTo: specializedMap)
+        try walk(tiledMap, bridgingTo: specializedMap)
         
         // Apply map post processors
         specializedMap = try process(specializedMap: specializedMap, for: tiledMap)

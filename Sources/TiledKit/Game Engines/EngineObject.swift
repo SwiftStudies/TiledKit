@@ -18,3 +18,23 @@ public protocol EngineObject {
     /// The specific game engine the object supports
     associatedtype EngineType : Engine
 }
+
+/// Layer containers can contain other elements or layers.
+public protocol EngineLayerContainer : EngineObject {
+    
+    /// Adds a tile layer to the container
+    /// - Parameter layer: The layer to add
+    func add(child layer:EngineType.TileLayerType)
+
+    /// Adds a group layer to the container
+    /// - Parameter layer: The layer to add
+    func add(child layer:EngineType.GroupLayerType)
+    
+    /// Adds a sprite to the container
+    /// - Parameter layer: The sprite to add
+    func add(child sprite:EngineType.SpriteType)
+    
+    /// Adds an object layer to the container
+    /// - Parameter layer: The layer to add
+    func add(child layer:EngineType.ObjectLayerType)
+}

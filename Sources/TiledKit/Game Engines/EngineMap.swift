@@ -14,7 +14,7 @@
 
 /// A concrete object that the implementor of will be able to be directly bridged to a TiledKit `map`
 /// with a high level of automation
-public protocol EngineMap : EngineObject,Loadable {
+public protocol EngineMap : EngineLayerContainer,Loadable {
     
 }
 
