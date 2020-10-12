@@ -39,7 +39,7 @@ public extension Engine {
     }
     
     /// Returns all engine map factories registered
-    /// - Returns: The available map factories for this engine
+    /// - Returns: The available map post processsors for this engine
     internal static func engineMapPostProcessors() -> [AnyEngineMapPostProcessor<Self>] {
         return  EngineRegistry.get(for: Self.self)
     }

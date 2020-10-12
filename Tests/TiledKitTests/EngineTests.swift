@@ -38,9 +38,15 @@ final class EngineTests: XCTestCase {
         XCTAssertEqual(TestEngine.engineMapPostProcessors().count, 0)
         TestEngine.register(factory: TestMapFactory())
         TestEngine.register(postProcessor: TestMapPostProcessor())
+        TestEngine.register(postProcessor: TestTilePostProcessor())
         XCTAssertEqual(TestEngine.engineMapFactories().count, 1)
         XCTAssertEqual(TestEngine.engineMapPostProcessors().count, 1)
 
+        XCTAssertEqual(TestEngine.createdSprites.count, 5)
+        XCTAssertEqual(TestEngine.createdSprites.filter(\.postProcessed).count, TestEngine.createdSprites.count)
+        
+        // Reset sprite count
+        TestEngine.createdSprites.removeAll()
         guard let customMap : TestMap = try? moduleBundleProject.retrieve(specializedMap:"Test Map 1", in:"Maps") else {
             TestEngine.removeAllFactoriesAndPostProcessors()
             return XCTFail("Could not load custom map")
@@ -49,9 +55,13 @@ final class EngineTests: XCTestCase {
         XCTAssertEqual(customMap.size, PixelSize(width: 1, height: 1))
         XCTAssertEqual(customMap.falseByDefault, true)
         XCTAssertEqual(customMap.lifeTheUniverseAndEverything, 42)
+        XCTAssertEqual(TestEngine.createdSprites.count, 5)
+        XCTAssertEqual(TestEngine.createdSprites.filter(\.postProcessed).count, 0)
 
+        
         TestEngine.removeAllFactoriesAndPostProcessors()
         XCTAssertEqual(TestEngine.engineMapFactories().count, 0)
+        
     }
     
     func testBridgeAblePropertyApplication(){

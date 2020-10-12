@@ -16,11 +16,6 @@ import Foundation
 import TiledKit
 
 class TestEngine : Engine {
-    
-
-    
-    typealias EngineType = TestEngine
-    
     typealias FloatType = Float
     typealias ColorType = UInt32
     typealias MapType = TestMap
@@ -35,9 +30,23 @@ class TestEngine : Engine {
         return TestMap(size:map.pixelSize)
     }
     
+    //
+    // Tile Processing
+    //
+    
+    static var createdSprites = [SpriteType]()
+    
     static func make(spriteFor tile: Tile, in tileset: TileSet, with texture: TestTexture, from project: Project) throws -> TestSprite {
-        return TestSprite()
-    }    
+        let sprite = TestSprite()
+        
+        createdSprites.append(sprite)
+        return sprite
+    }
+    
+    static func postProcess(_ sprite: TestSprite, from tile: Tile, in tileSet: TileSet, with setSprites: [UInt32 : TestSprite], for map: Map, from project: Project) throws -> TestSprite {
+        sprite.postProcessed = true
+      return sprite
+    }
 }
 
 public enum TestError : Error {
@@ -63,11 +72,14 @@ class TestSprite : TestNode, DeepCopyable {
     var color : UInt32 = 0
     var weight : Float = 100.0
     
+    var postProcessed = false
+    
     func deepCopy() -> Self {
         let newCopy = TestSprite()
         
         newCopy.color = color
         newCopy.weight = weight
+        newCopy.postProcessed = postProcessed
         
         return newCopy as! Self
     }
@@ -106,6 +118,17 @@ struct TestMapFactory : EngineMapFactory {
     func make(from map: Map, in project: Project) throws -> TestMap? {
         return TestMap(size: PixelSize(width: 1, height: 1))
     }
+}
+
+struct TestTilePostProcessor : TilePostProcessor {
+    typealias EngineType = TestEngine
+    
+    
+    func process(_ sprite: EngineType.SpriteType, from tile: Tile, in tileSet: TileSet, with setSprites: [UInt32 : EngineType.SpriteType], for map: Map, from project: Project) throws -> EngineType.SpriteType {
+        sprite.postProcessed = false
+        return sprite
+    }
+    
 }
 
 struct TestMapPostProcessor : MapPostProcessor {

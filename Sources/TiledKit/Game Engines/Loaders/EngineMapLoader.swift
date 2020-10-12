@@ -14,8 +14,23 @@
 
 import Foundation
 
+/// Stores the tiles for a map so that they can be retreived as layers and objects are created
+public class MapTiles<EngineType:Engine> {
+    var     tiles = [UInt32:EngineType.SpriteType]()
+    
+    /// Access the the `Engine` specific tile that was created during the map loading
+    /// process
+    /// - Parameter tileGid: The GID of the tile required
+    /// - returns The `Engine` specifc sprite
+    public subscript(_ tileGid:TileGID)->EngineType.SpriteType?{
+        return tiles[tileGid.globalTileOffset]?.deepCopy()
+    }
+}
+
 class EngineMapLoader<E:Engine> : ResourceLoader {
     let project : Project
+    
+    let mapTiles = MapTiles<E>()
     
     init(_ project:Project){
         self.project = project
@@ -51,6 +66,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
         
         for tileSetReference in map.tileSetReferences {
             let tileSet = tileSetReference.tileSet
+            var setSprites = [UInt32:E.SpriteType]()
             for tileId : UInt32  in 0..<UInt32(tileSet.count){
                 guard let tile = tileSet[tileId] else {
                     throw EngineError.couldNotFindTileInTileSet(tileId, tileSet: tileSet)
@@ -66,8 +82,28 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     specializedTile = try E.make(spriteFor: tile, in: tileSet, with: E.load(textureFrom: tile.imageSource, in: project), from: project)
                 }
                 
-                #warning("Or should this store it with the map?")
-//                project.store(specializedTile, as: tile.cachableUrl)
+                setSprites[tileId] = specializedTile
+            }
+            
+            // Post process
+            for tileId : UInt32  in 0..<UInt32(tileSet.count){
+                guard let tile = tileSet[tileId] else {
+                    throw EngineError.couldNotFindTileInTileSet(tileId, tileSet: tileSet)
+                }
+                guard var sprite = setSprites[tileId] else {
+                    throw EngineError.couldNotFindSpriteInTileSet(tileId, tileSet: tileSet)
+                }
+                
+                setSprites[tileId] = try E.postProcess(sprite, from: tile, in: tileSet, with: setSprites, for: map, from: project)
+
+                // Process stuff
+                for processor in E.engineTilePostProcessors() {
+                    sprite = try processor.process(sprite, from: tile, in: tileSet, with: setSprites, for: map, from: project)
+                    setSprites[tileId] = sprite
+                }
+                
+                // Store it for later use outside of the context of the single tileset
+                mapTiles.tiles[tileSetReference.firstGid+tileId] = sprite
             }
         }
     }

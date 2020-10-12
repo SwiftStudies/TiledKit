@@ -45,6 +45,17 @@ public protocol Engine {
     /// - Parameter texture: The texture (not cropped) to use for the tile
     /// - Parameter project: The `Project` data is being cloaded from
     static func make(spriteFor tile:Tile, in tileset:TileSet, with texture:TextureType, from project:Project) throws ->SpriteType
+    
+    /// Enables post processing of tiles which is performed after all tiles for a tileset have been created. It will be called _before_ any other registered
+    ///  `TilePostProcessor`
+    /// - Parameters:
+    ///   - sprite: The previously created `SpriteType`
+    ///   - tile: The `Tile` it was created from
+    ///   - tileSet: The `TileSet` the tile belongs to
+    ///   - setSprites: All other sprites created for the `TileSet`
+    ///   - map: The map the `TileSet`s were loaded from
+    ///   - project: The project the `Map`& `TileSet` was loaded from
+    static func postProcess(_ sprite:SpriteType, from tile:Tile, in tileSet:TileSet, with setSprites:[UInt32:SpriteType], for map:Map, from project:Project) throws ->SpriteType
 }
 
 /// By implementing this protocol (required for `Engine.TextureType`

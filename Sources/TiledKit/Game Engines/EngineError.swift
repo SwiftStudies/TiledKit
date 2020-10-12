@@ -19,10 +19,17 @@ enum EngineError : Error {
     
     /// Thrown when the type of the map can't be created
     case unsupportedTypeWhenLoadingMap(desiredType:String, supportedType:String)
+
     /// Thrown when they type of the texture can't be created, or the texture can't be loaded
     case couldNotCreateTextureFrom(URL)
+
     /// `Tile` with the given id cannot be found in the containing `TileSet`
     case couldNotFindTileInTileSet(UInt32, tileSet:TileSet)
+
+    /// The `Engine` specific sprite with the given id cannot be found for the `TileSet`
+    case couldNotFindSpriteInTileSet(UInt32, tileSet:TileSet)
+
+    
     /// Thrown if a function is not yet implemented
     case notImplemented
 }
