@@ -53,7 +53,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
     }
     
     func process(specializedMap:E.MapType, for map:Map) throws -> E.MapType {
-        var specializedMap = specializedMap
+        var specializedMap = try E.postProcess(specializedMap, for: map, from: project)
         
         for mapProcessor in E.engineMapPostProcessors(){
             specializedMap = try mapProcessor.process(specializedMap, for: map, from: project)

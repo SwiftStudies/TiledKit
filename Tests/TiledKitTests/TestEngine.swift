@@ -43,6 +43,10 @@ class TestEngine : Engine {
         return sprite
     }
     
+    static func postProcess(_ specializedMap: TestMap, for map: Map, from project: Project) throws -> TestMap {
+        return specializedMap
+    }
+    
     static func postProcess(_ sprite: TestSprite, from tile: Tile, in tileSet: TileSet, with setSprites: [UInt32 : TestSprite], for map: Map, from project: Project) throws -> TestSprite {
         sprite.postProcessed = true
       return sprite

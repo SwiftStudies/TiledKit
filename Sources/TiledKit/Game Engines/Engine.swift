@@ -38,6 +38,16 @@ public protocol Engine {
     /// - Parameter map: The `Map` to create it for
     static func make(engineMapForTiled map:Map) throws -> MapType
 
+    /// Enables you to post process a map, even creating a different instance of the specialized
+    /// map for the engine. As it is called after all other contents have been specialized you can
+    /// apply changes to everything within your specialized map. Note that if you have registered
+    /// separate post processors they will be called _after_ this processor (as it is assumed they are more specialized)
+    /// - Parameters:
+    ///   - specializedMap: The output of the factory, or previous post processor
+    ///   - map: The original Tiled map
+    ///   - project: The project the map was loaded from
+    static func postProcess(_ specializedMap:MapType, for map:Map, from project:Project) throws ->MapType
+    
     /// Provide a default specialized tile creator for the Engine
     /// - Parameter map: The `Map` to create it for
     /// - Parameter tile: The `Tile` to create a sprite for
