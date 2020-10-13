@@ -36,14 +36,125 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
         self.project = project
     }
     
-    func walk(layers:[Layer], in map:Map, containedIn container:E.LayerContainer) throws {
+    func walk<Container:EngineObjectContainer>(objects:[Object], in map:Map, containedIn container:Container) throws where Container.EngineType == E {
+        
+        for object in objects {
+            switch object.kind {
+            case .point:
+                break
+
+            case .rectangle(_, angle: let angle):
+                break
+
+            case .ellipse(_, angle: let angle):
+                break
+
+            case .tile(_, size: let size, angle: let angle):
+                break
+
+            case .text(_, size: let size, angle: let angle, style: let style):
+                break
+
+            case .polygon(_, angle: let angle):
+                break
+
+            case .polyline(_, angle: let angle):
+                break
+            }
+        }
+        
+    }
+    
+    func walk<Container:EngineLayerContainer>(layers:[Layer], in map:Map, containedIn container:Container) throws where Container.EngineType == E {
         
         for layer in layers {
-            for factory in E.layerFactories() {
-                switch layer.kind {
-                    
+            switch layer.kind {
+            case .group(let group):
+                var madeLayer : E.GroupLayerType!
+                for factory in E.layerFactories() {
+                    if let factoryMadeLayer = try factory.makeGroupFor(layer, in: map, from: project){
+                        madeLayer = factoryMadeLayer
+                        break
+                    }
                 }
+                
+                if madeLayer == nil {
+                    madeLayer = try E.makeGroupLayer(layer, in: map, from: project)
+                }
+                
+                try walk(layers: group.layers, in: map, containedIn: madeLayer)
+                
+                madeLayer = try E.postProcess(madeLayer, from: layer, for: map, in: project)
+                for postProcessor in E.engineLayerPostProcessors() {
+                    madeLayer = try postProcessor.process(madeLayer, from: layer, for: map, in: project)
+                }
+                
+                container.add(child: madeLayer)
+            case .image(let imageReference):
+                var madeLayer : E.SpriteType!
+                for factory in E.layerFactories() {
+                    if let factoryMadeLayer = try factory.makeSprite(from: imageReference, for: layer, in: map, from: project){
+                        madeLayer = factoryMadeLayer
+                        break
+                    }
+                }
+                
+                if madeLayer == nil {
+                    let texture = try project.retrieve(asType: E.TextureType.self, from: imageReference.source)
+                    madeLayer = try E.makeSpriteFrom(texture, for: layer, in: map, from: project)
+                }
+                
+                madeLayer = try E.postProcess(madeLayer, from: layer, for: map, in: project)
+                madeLayer = try E.postProcess(madeLayer, from: layer, for: map, in: project)
+                for postProcessor in E.engineLayerPostProcessors() {
+                    madeLayer = try postProcessor.process(madeLayer, from: layer, for: map, in: project)
+                }
+                
+                container.add(child: madeLayer)
+            case .objects(let objects):
+                var madeLayer : E.ObjectLayerType! = nil
+                for factory in E.layerFactories() {
+                    if let factoryMadeLayer = try factory.makeObjectContainer(layer, in: map, from: project){
+                        madeLayer = factoryMadeLayer
+                        break
+                    }
+                }
+                
+                if madeLayer == nil {
+                    madeLayer = try E.makeObjectContainer(layer, in: map, from: project)
+                }
+                
+                try walk(objects: objects, in: map, containedIn: madeLayer)
+                
+                madeLayer = try E.postProcess(madeLayer, from: layer, for: map, in: project)
+                madeLayer = try E.postProcess(madeLayer, from: layer, for: map, in: project)
+                for postProcessor in E.engineLayerPostProcessors() {
+                    madeLayer = try postProcessor.process(madeLayer, from: layer, for: map, in: project)
+                }
+                
+                container.add(child: madeLayer)
+            case .tile(let tileGrid):
+                var madeLayer : E.TileLayerType! = nil
+                for factory in E.layerFactories() {
+                    if let factoryMadeLayer = try factory.makeTileLayer(from: tileGrid, for: layer, with: mapTiles, in: map, from: project){
+                        madeLayer = factoryMadeLayer
+                        break
+                    }
+                }
+                
+                if madeLayer == nil {
+                    madeLayer = try E.makeTileLayerFrom(tileGrid, for: layer, with: mapTiles, in: map, from: project)
+                }
+                
+                madeLayer = try E.postProcess(madeLayer, from: layer, for: map, in: project)
+                madeLayer = try E.postProcess(madeLayer, from: layer, for: map, in: project)
+                for postProcessor in E.engineLayerPostProcessors() {
+                    madeLayer = try postProcessor.process(madeLayer, from: layer, for: map, in: project)
+                }
+                
+                container.add(child: madeLayer)
             }
+            
         }
         
     }
@@ -124,7 +235,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
         try loadTilesets(from: tiledMap, for: specializedMap)
         
         /// Walk the map
-        try walk(tiledMap, bridgingTo: specializedMap)
+        try walk(layers: tiledMap.layers, in: tiledMap, containedIn: specializedMap)
         
         // Apply map post processors
         specializedMap = try process(specializedMap: specializedMap, for: tiledMap)

@@ -19,6 +19,11 @@ public protocol EngineObject {
     associatedtype EngineType : Engine
 }
 
+/// Container that can contain objects
+public protocol EngineObjectContainer : EngineObject {
+    
+}
+
 /// Layer containers can contain other elements or layers.
 public protocol EngineLayerContainer : EngineObject {
     

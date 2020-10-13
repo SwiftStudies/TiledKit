@@ -42,7 +42,7 @@ public protocol LayerFactory : Factory {
     ///   - sprites: The sprites (indexed by gid) that can be used
     ///   - map: The map the layer is in
     ///   - project: The project the layer is loaded from
-    func makeTileLayer(from tileGrid:TileGrid, for layer:LayerProtocol, with sprites:[UInt32:EngineType.SpriteType], in map:Map, from project:Project) throws -> EngineType.TileLayerType?
+    func makeTileLayer(from tileGrid:TileGrid, for layer:LayerProtocol, with sprites:MapTiles<EngineType>, in map:Map, from project:Project) throws -> EngineType.TileLayerType?
 }
 
 /// Adds support for `LayerFactories` to `Engine`
@@ -69,7 +69,7 @@ internal struct AnyLayerFactory<EngineType:Engine> : LayerFactory {
     let imageLayerFactory : (_ imageReference:ImageReference, _ layer:LayerProtocol, _ map:Map, _ project:Project) throws -> EngineType.SpriteType?
     let objectLayerFactory : (_ layer:LayerProtocol, _ map:Map, _ project:Project) throws -> EngineType.ObjectLayerType?
     let groupLayerFactory : (_ layer:LayerProtocol, _ map:Map, _ project:Project) throws -> EngineType.GroupLayerType?
-    let tileLayerFactory : (_ tileGrid:TileGrid, _ layer:LayerProtocol, _ sprites:[UInt32 : EngineType.SpriteType], _ map:Map, _ project:Project) throws -> EngineType.TileLayerType?
+    let tileLayerFactory : (_ tileGrid:TileGrid, _ layer:LayerProtocol, _ sprites:MapTiles<EngineType>, _ map:Map, _ project:Project) throws -> EngineType.TileLayerType?
     
     init<F:LayerFactory>(wrap factory:F) where F.EngineType == EngineType {
         imageLayerFactory = factory.makeSprite
@@ -90,7 +90,7 @@ internal struct AnyLayerFactory<EngineType:Engine> : LayerFactory {
         return try groupLayerFactory(layer, map, project)
     }
     
-    func makeTileLayer(from tileGrid: TileGrid, for layer: LayerProtocol, with sprites: [UInt32 : EngineType.SpriteType], in map: Map, from project: Project) throws -> EngineType.TileLayerType? {
+    func makeTileLayer(from tileGrid: TileGrid, for layer: LayerProtocol, with sprites: MapTiles<EngineType>, in map: Map, from project: Project) throws -> EngineType.TileLayerType? {
         return try tileLayerFactory(tileGrid, layer, sprites, map, project)
     }
 }

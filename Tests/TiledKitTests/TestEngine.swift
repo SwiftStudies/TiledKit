@@ -15,12 +15,15 @@
 import Foundation
 import TiledKit
 
-class TestEngine : Engine {
+final class TestEngine : Engine {
     typealias FloatType = Float
     typealias ColorType = UInt32
     typealias MapType = TestMap
     typealias SpriteType = TestSprite
     typealias TextureType = TestTexture
+    typealias TileLayerType = TestNode
+    typealias GroupLayerType = TestNode
+    typealias ObjectLayerType = TestNode
 
     static func load(textureFrom url: URL, in project:Project) throws -> TestTexture {
         return TestTexture(from: url)
@@ -51,6 +54,32 @@ class TestEngine : Engine {
         sprite.postProcessed = true
       return sprite
     }
+    
+    static func makeSpriteFrom(_ texture: TestTexture, for layer: LayerProtocol, in map: Map, from project: Project) throws -> TestSprite? {
+        return TestSprite()
+    }
+    
+    static func makeObjectContainer(_ layer: LayerProtocol, in map: Map, from project: Project) throws -> TestNode? {
+        return TestNode()
+    }
+    
+    static func makeGroupLayer(_ layer: LayerProtocol, in map: Map, from project: Project) throws -> TestNode? {
+        return TestNode()
+    }
+    
+    static func makeTileLayerFrom(_ tileGrid: TileGrid, for layer: LayerProtocol, with sprites: MapTiles<TestEngine>, in map: Map, from project: Project) throws -> TestNode? {
+        return TestNode()
+    }
+    
+    static func postProcess(_ objectLayer: TestNode, from layer: LayerProtocol, for map: Map, in project: Project) throws -> TestNode {
+        return objectLayer
+    }
+    
+    
+    static func postProcess(_ imageLayer: TestSprite, from layer: LayerProtocol, for map: Map, in project: Project) throws -> TestSprite {
+        return imageLayer
+    }
+    
 }
 
 public enum TestError : Error {
@@ -90,9 +119,18 @@ class TestSprite : TestNode, DeepCopyable {
     
 }
 
-class TestNode : EngineObject {
+class TestNode : EngineLayerContainer, EngineObjectContainer {
     typealias EngineType = TestEngine
 
+    var children = [Any]()
+    
+    func add(child layer: TestNode) {
+        children.append(layer)
+    }
+    
+    func add(child sprite: TestSprite) {
+        children.append(sprite)
+    }
 }
 
 class TestMap : TestNode, EngineMap {

@@ -23,22 +23,22 @@ public protocol Engine {
     associatedtype ColorType : ExpressibleAsTiledColor
     
     /// The type that represents a `Map` in the engine
-    associatedtype MapType   : EngineMap
+    associatedtype MapType   : EngineMap where MapType.EngineType == Self
     
     /// The type that represents a texture or bitmap that will be rendered as a Sprite
-    associatedtype TextureType : EngineTexture
+    associatedtype TextureType : EngineTexture where TextureType.EngineType == Self
     
     /// The type that represents the object that can draw itself on-screen
-    associatedtype SpriteType  : EngineObject, DeepCopyable
+    associatedtype SpriteType  : EngineObject, DeepCopyable where SpriteType.EngineType == Self
 
     /// The type that represents a layer of tiles
-    associatedtype TileLayerType  : EngineObject
+    associatedtype TileLayerType  : EngineObject where TileLayerType.EngineType == Self
 
     /// The type that represents a group of other layers
-    associatedtype GroupLayerType  : EngineLayerContainer
+    associatedtype GroupLayerType  : EngineLayerContainer where GroupLayerType.EngineType == Self
 
     /// The type that represents a layer populated by objects
-    associatedtype ObjectLayerType  : EngineObject
+    associatedtype ObjectLayerType  : EngineObjectContainer where ObjectLayerType.EngineType == Self
 
     /// Provide a method for loading textures
     static func load(textureFrom url:URL, in project:Project) throws -> TextureType
@@ -82,21 +82,21 @@ public protocol Engine {
     ///   - layer: The additional data from the layer
     ///   - map: The map the layer is part of
     ///   - project: The project the map is being loaded from
-    func makeSpriteFrom(_ texture:TextureType, for layer:LayerProtocol, in map:Map, from project:Project) throws -> SpriteType?
+    static func makeSpriteFrom(_ texture:TextureType, for layer:LayerProtocol, in map:Map, from project:Project) throws -> SpriteType?
     
     /// Creates a layer to contain objects
     /// - Parameters:
     ///   - layer: The additional data from the layer
     ///   - map: The map the layer is part of
     ///   - project: The project the map is being loaded from
-    func makeObjectContainer(_ layer:LayerProtocol,in map:Map, from project:Project) throws -> ObjectLayerType?
+    static func makeObjectContainer(_ layer:LayerProtocol,in map:Map, from project:Project) throws -> ObjectLayerType?
     
     /// Creates a layer containing other layers
     /// - Parameters:
     ///   - layer: The details of the grouping layer
     ///   - map: The `Map` the layer belongs to
     ///   - project: The project the map is being loaded from
-    func makeGroupLayer(_ layer:LayerProtocol,in map:Map, from project:Project) throws -> GroupLayerType?
+    static func makeGroupLayer(_ layer:LayerProtocol,in map:Map, from project:Project) throws -> GroupLayerType?
     
     /// Creates a tile layer with the supplied tiles in using the sprites loaded during map building
     /// - Parameters:
@@ -105,7 +105,39 @@ public protocol Engine {
     ///   - sprites: The sprites (indexed by gid) that can be used
     ///   - map: The map the layer is in
     ///   - project: The project the layer is loaded from
-    func makeTileLayerFrom(_ tileGrid:TileGrid, for layer:LayerProtocol, with sprites:[UInt32:SpriteType], in map:Map, from project:Project) throws -> TileLayerType?
+    static func makeTileLayerFrom(_ tileGrid:TileGrid, for layer:LayerProtocol, with sprites:MapTiles<Self>, in map:Map, from project:Project) throws -> TileLayerType?
+    
+    /// Performs post processing on an object layer after creation
+    /// - Parameters:
+    ///   - objectLayer: The object layer
+    ///   - layer: The original tiled layer meta data
+    ///   - map: The map the layer is in
+    ///   - project: The project the map was loaded from
+    static func postProcess(_ objectLayer:ObjectLayerType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> ObjectLayerType
+
+    /// Perfforms post processing on an tile layer after creation
+    /// - Parameters:
+    ///   - tileLayer: The tile layer
+    ///   - layer: The original tiled layer meta data
+    ///   - map: The map the layer is in
+    ///   - project: The project the map was loaded from
+    static func postProcess(_ tileLayer:TileLayerType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> TileLayerType
+
+    /// Perfforms post processing on an image layer after creation
+    /// - Parameters:
+    ///   - imageLayer: The sprite that was created
+    ///   - layer: The original tiled layer meta data
+    ///   - map: The map the layer is in
+    ///   - project: The project the map was loaded from
+    static func postProcess(_ imageLayer:SpriteType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> SpriteType
+
+    /// Perfforms post processing on an group layer after creation
+    /// - Parameters:
+    ///   - groupLayer: The group layer
+    ///   - layer: The original tiled layer meta data
+    ///   - map: The map the layer is in
+    ///   - project: The project the map was loaded from
+    static func postProcess(_ groupLayer:GroupLayerType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> GroupLayerType
 }
 
 /// By implementing this protocol (required for `Engine.TextureType`
