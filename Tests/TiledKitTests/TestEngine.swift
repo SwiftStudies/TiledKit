@@ -24,6 +24,12 @@ final class TestEngine : Engine {
     typealias TileLayerType = TestNode
     typealias GroupLayerType = TestNode
     typealias ObjectLayerType = TestNode
+    typealias PointObjectType = TestPoint
+    typealias RectangleObjectType = TestRectangle
+    typealias EllipseObjectType = TestEllipse
+    typealias TextObjectType = TestText
+    typealias PolylineObjectType = TestPologonal
+    typealias PolygonObjectType = TestPologonal
 
     static func load(textureFrom url: URL, in project:Project) throws -> TestTexture {
         return TestTexture(from: url)
@@ -80,6 +86,57 @@ final class TestEngine : Engine {
         return imageLayer
     }
     
+    static func make(pointFor object: ObjectProtocol, in map: Map, from project: Project) throws -> TestPoint {
+        return TestPoint()
+    }
+    
+    static func make(rectangleOf size: Size, at angle: Double, for object: ObjectProtocol, in map: Map, from project: Project) throws -> TestRectangle {
+        return TestRectangle()
+    }
+    
+    static func make(ellipseOf size: Size, at angle: Double, for object: ObjectProtocol, in map: Map, from project: Project) throws -> TestEllipse {
+        return TestEllipse()
+    }
+    
+    static func make(spriteWith tile: TestSprite, of size: Size, at angle: Double, for object: ObjectProtocol, in map: Map, from project: Project) throws -> TestSprite {
+        return TestSprite()
+    }
+    
+    static func make(textWith string: String, of size: Size, at angle: Double, with style: TextStyle, for object: ObjectProtocol, in map: Map, from project: Project) throws -> TestText {
+        return TestText()
+    }
+    
+    static func make(polylineWith path: Path, at angle: Double, for object: ObjectProtocol, in map: Map, from project: Project) throws -> TestPologonal {
+        return TestPologonal()
+    }
+    
+    static func make(polygonWith path: Path, at angle: Double, for object: ObjectProtocol, in map: Map, from project: Project) throws -> TestPologonal {
+        return TestPologonal()
+    }
+}
+
+struct TestPoint : EngineObject {
+    typealias EngineType = TestEngine
+}
+
+struct TestRectangle : EngineObject {
+     typealias EngineType = TestEngine
+
+}
+
+struct TestEllipse : EngineObject {
+    typealias EngineType = TestEngine
+
+}
+
+struct TestText : EngineObject {
+    typealias EngineType = TestEngine
+
+}
+
+struct TestPologonal : EngineObject {
+    typealias EngineType = TestEngine
+
 }
 
 public enum TestError : Error {
@@ -123,6 +180,27 @@ class TestNode : EngineLayerContainer, EngineObjectContainer {
     typealias EngineType = TestEngine
 
     var children = [Any]()
+    
+    func add(child point: TestPoint) {
+        children.append(point)
+    }
+    
+    func add(child rectangle: TestRectangle) {
+        children.append(rectangle)
+    }
+    
+    func add(child ellipse: TestEllipse) {
+        children.append(ellipse)
+    }
+    
+    func add(child text: TestText) {
+        children.append(text)
+    }
+    
+    func add(child polyline: TestPologonal) {
+        children.append(polyline)
+    }
+
     
     func add(child layer: TestNode) {
         children.append(layer)

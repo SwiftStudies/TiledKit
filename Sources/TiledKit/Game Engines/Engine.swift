@@ -40,22 +40,30 @@ public protocol Engine {
     /// The type that represents a layer populated by objects
     associatedtype ObjectLayerType  : EngineObjectContainer where ObjectLayerType.EngineType == Self
 
+    /// The type that represents a point in the engine scene
+    associatedtype PointObjectType : EngineObject where PointObjectType.EngineType == Self
+    
+    /// The type that represents a rectangle in the engine scene
+    associatedtype RectangleObjectType : EngineObject where RectangleObjectType.EngineType == Self
+    
+    /// The type that represents an ellipse in the engine scene
+    associatedtype EllipseObjectType : EngineObject where EllipseObjectType.EngineType == Self
+        
+    /// The type that represents a text object in the engine scene
+    associatedtype TextObjectType : EngineObject where TextObjectType.EngineType == Self
+    
+    /// The type that represents a polyline object in the engine scene
+    associatedtype PolylineObjectType : EngineObject where PolylineObjectType.EngineType == Self
+    
+    /// The type that represents a polygon object in the engine scene
+    associatedtype PolygonObjectType : EngineObject where PolygonObjectType.EngineType == Self
+
     /// Provide a method for loading textures
     static func load(textureFrom url:URL, in project:Project) throws -> TextureType
     
     /// Provide a default specialized map creator for the Engine
     /// - Parameter map: The `Map` to create it for
     static func make(engineMapForTiled map:Map) throws -> MapType
-
-    /// Enables you to post process a map, even creating a different instance of the specialized
-    /// map for the engine. As it is called after all other contents have been specialized you can
-    /// apply changes to everything within your specialized map. Note that if you have registered
-    /// separate post processors they will be called _after_ this processor (as it is assumed they are more specialized)
-    /// - Parameters:
-    ///   - specializedMap: The output of the factory, or previous post processor
-    ///   - map: The original Tiled map
-    ///   - project: The project the map was loaded from
-    static func postProcess(_ specializedMap:MapType, for map:Map, from project:Project) throws ->MapType
     
     /// Provide a default specialized tile creator for the Engine
     /// - Parameter map: The `Map` to create it for
@@ -107,37 +115,69 @@ public protocol Engine {
     ///   - project: The project the layer is loaded from
     static func makeTileLayerFrom(_ tileGrid:TileGrid, for layer:LayerProtocol, with sprites:MapTiles<Self>, in map:Map, from project:Project) throws -> TileLayerType?
     
-    /// Performs post processing on an object layer after creation
+    /// Creates a point object
     /// - Parameters:
-    ///   - objectLayer: The object layer
-    ///   - layer: The original tiled layer meta data
-    ///   - map: The map the layer is in
+    ///   - object: The meta-data for the object
+    ///   - map: The map the object is in
     ///   - project: The project the map was loaded from
-    static func postProcess(_ objectLayer:ObjectLayerType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> ObjectLayerType
+    static func make(pointFor object:ObjectProtocol, in map:Map, from project:Project) throws -> PointObjectType
+    
+    /// Creates a rectangle object of the specified size
+    /// - Parameters:
+    ///   - size: The `Size` of the rectangle
+    ///   - angle: The angle the rectangle should be displayed in (in degrees)
+    ///   - object: The meta-data about the object
+    ///   - map: The map the object is in
+    ///   - project: The project content is being loaded from
+    static func make(rectangleOf size:Size, at angle:Double, for object:ObjectProtocol, in map:Map, from project:Project) throws -> RectangleObjectType
 
-    /// Perfforms post processing on an tile layer after creation
+    /// Creates a ellipse object of the specified size
     /// - Parameters:
-    ///   - tileLayer: The tile layer
-    ///   - layer: The original tiled layer meta data
-    ///   - map: The map the layer is in
+    ///   - size: The `Size` of the ellipse
+    ///   - angle: The angle the ellipse should be displayed in (in degrees)
+    ///   - object: The meta-data about the object
+    ///   - map: The map the object is in
+    ///   - project: The project content is being loaded from
+    static func make(ellipseOf size:Size, at angle:Double, for object:ObjectProtocol, in map:Map, from project:Project) throws -> EllipseObjectType
+    
+    /// Creates a sprite for the specified tile
+    /// - Parameters:
+    ///   - tile: The tile node to place/change
+    ///   - size: The size of the sprite
+    ///   - angle: The angle the sprite should be displayed at
+    ///   - object: The meta-data about the object
+    ///   - map: The map the object is in
     ///   - project: The project the map was loaded from
-    static func postProcess(_ tileLayer:TileLayerType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> TileLayerType
+    static func make(spriteWith tile:SpriteType,of size:Size, at angle:Double, for object:ObjectProtocol, in map:Map, from project:Project) throws -> SpriteType
+    
+    /// Creates a text object
+    /// - Parameters:
+    ///   - string: The string to display
+    ///   - size: The size of the clipping rectangle of the text
+    ///   - angle: The angle the text should be displayed at
+    ///   - style: The style the text should be rendered in
+    ///   - object: The meta-data about the object
+    ///   - map: The map the object is in
+    ///   - project: The project the map was loaded from
+    static func make(textWith string:String, of size:Size, at angle:Double, with style:TextStyle, for object:ObjectProtocol, in map:Map, from project:Project) throws -> TextObjectType
+    
+    /// Creates a polyline (non-closed path) object
+    /// - Parameters:
+    ///   - path: The points of the path
+    ///   - angle: The angle the object should be shown at
+    ///   - object: Meta-data about the object
+    ///   - map: The map the object is in
+    ///   - project: The project the map was loaded from
+    static func make(polylineWith path:Path, at angle:Double, for object:ObjectProtocol, in map:Map, from project:Project) throws -> PolylineObjectType
 
-    /// Perfforms post processing on an image layer after creation
+    /// Creates a polygon (closed path) object
     /// - Parameters:
-    ///   - imageLayer: The sprite that was created
-    ///   - layer: The original tiled layer meta data
-    ///   - map: The map the layer is in
+    ///   - path: The points of the path
+    ///   - angle: The angle the object should be shown at
+    ///   - object: Meta-data about the object
+    ///   - map: The map the object is in
     ///   - project: The project the map was loaded from
-    static func postProcess(_ imageLayer:SpriteType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> SpriteType
-
-    /// Perfforms post processing on an group layer after creation
-    /// - Parameters:
-    ///   - groupLayer: The group layer
-    ///   - layer: The original tiled layer meta data
-    ///   - map: The map the layer is in
-    ///   - project: The project the map was loaded from
-    static func postProcess(_ groupLayer:GroupLayerType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> GroupLayerType
+    static func make(polygonWith path:Path, at angle:Double, for object:ObjectProtocol, in map:Map, from project:Project) throws -> PolygonObjectType
 }
 
 /// By implementing this protocol (required for `Engine.TextureType`

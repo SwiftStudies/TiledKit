@@ -22,6 +22,33 @@ public protocol EngineObject {
 /// Container that can contain objects
 public protocol EngineObjectContainer : EngineObject {
     
+    /// Adds a point to the container
+    /// - Parameter point: The point to add
+    func add(child point:EngineType.PointObjectType)
+    
+    /// Adds a rectangle to the container
+    /// - Parameter rectangle: The rectangle to add
+    func add(child rectangle:EngineType.RectangleObjectType)
+    
+    /// Adds an ellipse to the container
+    /// - Parameter ellipse: The ellipse to add
+    func add(child ellipse:EngineType.EllipseObjectType)
+    
+    /// Adds a sprite to the container
+    /// - Parameter sprite: The sprite to add
+    func add(child sprite:EngineType.SpriteType)
+    
+    /// Adds text to the container
+    /// - Parameter text: The text to add
+    func add(child text:EngineType.TextObjectType)
+    
+    /// Adds a polyline to the container
+    /// - Parameter polyline: The polyline to add
+    func add(child polyline:EngineType.PolylineObjectType)
+    
+    /// Adds a polygon to the container
+    /// - Parameter polygon: The polygon to add
+    func add(child polygon:EngineType.PolygonObjectType)
 }
 
 /// Layer containers can contain other elements or layers.

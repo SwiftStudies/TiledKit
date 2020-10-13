@@ -41,25 +41,99 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
         for object in objects {
             switch object.kind {
             case .point:
-                break
-
-            case .rectangle(_, angle: let angle):
-                break
-
-            case .ellipse(_, angle: let angle):
-                break
-
-            case .tile(_, size: let size, angle: let angle):
-                break
-
-            case .text(_, size: let size, angle: let angle, style: let style):
-                break
-
-            case .polygon(_, angle: let angle):
-                break
-
-            case .polyline(_, angle: let angle):
-                break
+                var madeObject : E.PointObjectType! = nil
+                for factory in E.objectFactories() {
+                    madeObject = try factory.make(pointFor: object, in: map, from: project)
+                    if madeObject != nil {
+                        break
+                    }
+                }
+                if madeObject == nil {
+                    madeObject = try E.make(pointFor: object, in: map, from: project)
+                }
+                
+                container.add(child: madeObject)
+            case .rectangle(let size, angle: let angle):
+                var madeObject : E.RectangleObjectType! = nil
+                for factory in E.objectFactories() {
+                    madeObject = try factory.make(rectangleOf: size, at: angle, for: object, in: map, from: project)
+                    if madeObject != nil {
+                        break
+                    }
+                }
+                if madeObject == nil {
+                    madeObject = try E.make(rectangleOf: size, at: angle, for: object, in: map, from: project)
+                }
+                
+                container.add(child: madeObject)
+            case .ellipse(let size, angle: let angle):
+                var madeObject : E.EllipseObjectType! = nil
+                for factory in E.objectFactories() {
+                    madeObject = try factory.make(ellipseOf: size, at: angle, for: object, in: map, from: project)
+                    if madeObject != nil {
+                        break
+                    }
+                }
+                if madeObject == nil {
+                    madeObject = try E.make(ellipseOf: size, at: angle, for: object, in: map, from: project)
+                }
+                
+                container.add(child: madeObject)
+            case .tile(let tileGID, let size, let angle):
+                var madeObject : E.SpriteType! = nil
+                for factory in E.objectFactories() {
+                    madeObject = try factory.make(spriteWith: tileGID, of: size, at: angle, with: mapTiles, for: object, in: map, from: project)
+                    if madeObject != nil {
+                        break
+                    }
+                }
+                if madeObject == nil {
+                    guard let spriteCopy = mapTiles[tileGID]?.deepCopy() else {
+                        throw EngineError.couldNotFindTileInMap(tileGID)
+                    }
+                    madeObject = try E.make(spriteWith: spriteCopy, of: size, at: angle, for: object, in: map, from: project)
+                }
+                
+                container.add(child: madeObject)
+            case .text(let string, let size, let angle, let style):
+                var madeObject : E.TextObjectType! = nil
+                for factory in E.objectFactories() {
+                    madeObject = try factory.make(textWith: string, of: size, at: angle, with: style, for: object, in: map, from: project)
+                    if madeObject != nil {
+                        break
+                    }
+                }
+                if madeObject == nil {
+                    madeObject = try E.make(textWith: string, of: size, at: angle, with: style, for: object, in: map, from: project)
+                }
+                
+                container.add(child: madeObject)
+            case .polygon(let points, let angle):
+                var madeObject : E.PolygonObjectType! = nil
+                for factory in E.objectFactories() {
+                    madeObject = try factory.make(polygonWith: points, at: angle, for: object, in: map, from: project)
+                    if madeObject != nil {
+                        break
+                    }
+                }
+                if madeObject == nil {
+                    madeObject = try E.make(polygonWith: points, at: angle, for: object, in: map, from: project)
+                }
+                
+                container.add(child: madeObject)
+            case .polyline(let points, let angle):
+                var madeObject : E.PolylineObjectType! = nil
+                for factory in E.objectFactories() {
+                    madeObject = try factory.make(polylineWith: points, at: angle, for: object, in: map, from: project)
+                    if madeObject != nil {
+                        break
+                    }
+                }
+                if madeObject == nil {
+                    madeObject = try E.make(polylineWith: points, at: angle, for: object, in: map, from: project)
+                }
+                
+                container.add(child: madeObject)
             }
         }
         
@@ -84,7 +158,6 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 
                 try walk(layers: group.layers, in: map, containedIn: madeLayer)
                 
-                madeLayer = try E.postProcess(madeLayer, from: layer, for: map, in: project)
                 for postProcessor in E.engineLayerPostProcessors() {
                     madeLayer = try postProcessor.process(madeLayer, from: layer, for: map, in: project)
                 }
@@ -104,8 +177,6 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     madeLayer = try E.makeSpriteFrom(texture, for: layer, in: map, from: project)
                 }
                 
-                madeLayer = try E.postProcess(madeLayer, from: layer, for: map, in: project)
-                madeLayer = try E.postProcess(madeLayer, from: layer, for: map, in: project)
                 for postProcessor in E.engineLayerPostProcessors() {
                     madeLayer = try postProcessor.process(madeLayer, from: layer, for: map, in: project)
                 }
@@ -126,8 +197,6 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 
                 try walk(objects: objects, in: map, containedIn: madeLayer)
                 
-                madeLayer = try E.postProcess(madeLayer, from: layer, for: map, in: project)
-                madeLayer = try E.postProcess(madeLayer, from: layer, for: map, in: project)
                 for postProcessor in E.engineLayerPostProcessors() {
                     madeLayer = try postProcessor.process(madeLayer, from: layer, for: map, in: project)
                 }
@@ -146,8 +215,6 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     madeLayer = try E.makeTileLayerFrom(tileGrid, for: layer, with: mapTiles, in: map, from: project)
                 }
                 
-                madeLayer = try E.postProcess(madeLayer, from: layer, for: map, in: project)
-                madeLayer = try E.postProcess(madeLayer, from: layer, for: map, in: project)
                 for postProcessor in E.engineLayerPostProcessors() {
                     madeLayer = try postProcessor.process(madeLayer, from: layer, for: map, in: project)
                 }
@@ -170,7 +237,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
     }
     
     func process(specializedMap:E.MapType, for map:Map) throws -> E.MapType {
-        var specializedMap = try E.postProcess(specializedMap, for: map, from: project)
+        var specializedMap = specializedMap
         
         for mapProcessor in E.engineMapPostProcessors(){
             specializedMap = try mapProcessor.process(specializedMap, for: map, from: project)

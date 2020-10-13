@@ -29,6 +29,8 @@ enum EngineError : Error {
     /// The `Engine` specific sprite with the given id cannot be found for the `TileSet`
     case couldNotFindSpriteInTileSet(UInt32, tileSet:TileSet)
 
+    /// When a tileGid can't be found in the engineloader's index of tiles
+    case couldNotFindTileInMap(TileGID)
     
     /// Thrown if a function is not yet implemented
     case notImplemented
