@@ -15,60 +15,55 @@
 import XCTest
 @testable import TiledKit
 
-class TestEngine : Engine {
-    typealias FloatType = Float
-    typealias ColorType = UInt32
-}
-
-class TestSprite : EngineObject {
-    typealias EngineType = TestEngine
-    
-    var color : UInt32 = 0
-    var weight : Float = 100.0
-}
-
-enum TestProperties : String, TiledEngineBridgableProperty, CaseIterable {
-    typealias EngineObjectType = TestSprite
-    
-    case shade, mass
-    
-    var tiledName: String {
-        return rawValue
-    }
-    
-    var tiledDefault: PropertyValue {
-        switch  self {
-        case .shade:
-            return .color(.red)
-        case .mass:
-            return 10.0
-        }
-    }
-    
-    var engineObjectProperty: PartialKeyPath<TestSprite> {
-        switch self {
-        case .shade:
-            return \TestSprite.color
-        case .mass:
-            return \TestSprite.weight
-        }
-    }
-}
-
-extension Float : ExpressibleAsTiledFloat {
-    public static func instance(bridging value: Double) -> Float {
-        return Float(value)
-    }
-}
-
-extension UInt32 : ExpressibleAsTiledColor {
-    public static func instance(bridging color: Color) -> UInt32 {
-       return UInt32(color.alpha) << 24 | UInt32(color.blue) << 16 | UInt32(color.green) << 8 | UInt32(color.red)
-    }
-}
-
 final class EngineTests: XCTestCase {
+    lazy var moduleBundleProject : Project = {
+        Project(using: Bundle.module)
+    }()
+    
+    func testMapLoading(){
+        let testMap : TestMap
+        let originalMap : Map
+        do {
+            testMap = try moduleBundleProject.retrieve(specializedMap: "Test Map 1", in: "Maps")
+            originalMap = try moduleBundleProject.retrieve(map: "Test Map 1", in: "Maps")
+        } catch {
+            return XCTFail("\(error)")
+        }
         
+        XCTAssertEqual(testMap.size, originalMap.pixelSize)
+        XCTAssertEqual(testMap.falseByDefault, false)
+        XCTAssertEqual(testMap.lifeTheUniverseAndEverything, 0)
+
+        XCTAssertEqual(TestEngine.engineMapFactories().count, 0)
+        XCTAssertEqual(TestEngine.engineMapPostProcessors().count, 0)
+        TestEngine.register(factory: TestMapFactory())
+        TestEngine.register(postProcessor: TestMapPostProcessor())
+        TestEngine.register(postProcessor: TestTilePostProcessor())
+        XCTAssertEqual(TestEngine.engineMapFactories().count, 1)
+        XCTAssertEqual(TestEngine.engineMapPostProcessors().count, 1)
+
+        XCTAssertEqual(TestEngine.createdSprites.count, 5)
+        XCTAssertEqual(TestEngine.createdSprites.filter(\.postProcessed).count, TestEngine.createdSprites.count)
+        
+        // Reset sprite count
+        TestEngine.createdSprites.removeAll()
+        guard let customMap : TestMap = try? moduleBundleProject.retrieve(specializedMap:"Test Map 1", in:"Maps") else {
+            TestEngine.removeAllFactoriesAndPostProcessors()
+            return XCTFail("Could not load custom map")
+        }
+        
+        XCTAssertEqual(customMap.size, PixelSize(width: 1, height: 1))
+        XCTAssertEqual(customMap.falseByDefault, true)
+        XCTAssertEqual(customMap.lifeTheUniverseAndEverything, 42)
+        XCTAssertEqual(TestEngine.createdSprites.count, 5)
+        XCTAssertEqual(TestEngine.createdSprites.filter(\.postProcessed).count, 0)
+
+        
+        TestEngine.removeAllFactoriesAndPostProcessors()
+        XCTAssertEqual(TestEngine.engineMapFactories().count, 0)
+        
+    }
+    
     func testBridgeAblePropertyApplication(){
         let sprite = TestSprite()
         
@@ -83,6 +78,7 @@ final class EngineTests: XCTestCase {
     }
     
     static var allTests = [
+        ("testMapLoading", testMapLoading),
         ("testBridgeAblePropertyApplication", testBridgeAblePropertyApplication),
         ]
 }

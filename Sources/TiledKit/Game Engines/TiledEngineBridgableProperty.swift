@@ -50,6 +50,17 @@ public protocol TiledEngineBridgableProperty  {
     var     engineObjectProperty   : PartialKeyPath<EngineObjectType>   {get}
 }
 
+/// Useful for enums that capture `TiledEngineBridgableProperty` to enable them to be
+/// quickly and easily applied
+public extension CaseIterable where Self : TiledEngineBridgableProperty {
+    /// Bridges all cases  with the supplied Tiled properties to the supplied `EngineObject`
+    /// - Parameters:
+    ///   - properties: The tiled properties and values
+    ///   - object: The object in the specialized engine that should be updated
+    static func apply(_ properties:Properties, to object:EngineObjectType){
+        allCases.apply(properties, to: object)
+    }
+}
 
 /// Standard capabilities added to make mapping from Tiled data to the objects in a game engine as simple as possible
 public extension TiledEngineBridgableProperty {
@@ -107,3 +118,18 @@ public extension TiledEngineBridgableProperty {
     }
 }
 
+
+/// Provides convience methods for applying multiple bridgable properties
+public extension Collection where Element : TiledEngineBridgableProperty {
+    /// For an array of bridgeable properties applies all of those that exist to the supplied object
+    /// - Parameters:
+    ///   - properties: The tiled properties and values
+    ///   - object: The object in the specialized engine that should be updated
+    func apply(_ properties:Properties, to object:Element.EngineObjectType){
+        for tiledBridgedProperty in self {
+            if let tiledValue = properties[tiledBridgedProperty.tiledName] {
+                tiledBridgedProperty.apply(to: object, tiledValue)
+            }
+        }
+    }
+}

@@ -40,6 +40,9 @@
             <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Classes/MapTiles.html">MapTiles</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/Project.html">Project</a>
               </li>
               <li class="nav-group-task">
@@ -83,6 +86,12 @@
                 <a href="../Extensions/Array.html">Array</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Extensions/CaseIterable.html">CaseIterable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/Properties.html">Properties</a>
               </li>
               <li class="nav-group-task">
@@ -94,10 +103,28 @@
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Protocols/DeepCopyable.html">DeepCopyable</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/Engine.html">Engine</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/EngineLayerContainer.html">EngineLayerContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineMap.html">EngineMap</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineMapFactory.html">EngineMapFactory</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/EngineObject.html">EngineObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineObjectContainer.html">EngineObjectContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineTexture.html">EngineTexture</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/ExpressibleAsTiledColor.html">ExpressibleAsTiledColor</a>
@@ -106,10 +133,19 @@
                 <a href="../Protocols/ExpressibleAsTiledFloat.html">ExpressibleAsTiledFloat</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/Factory.html">Factory</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/LayerContainer.html">LayerContainer</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/LayerFactory.html">LayerFactory</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/LayerFilter.html">LayerFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LayerPostProcessor.html">LayerPostProcessor</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/LayerProtocol.html">LayerProtocol</a>
@@ -118,16 +154,37 @@
                 <a href="../Protocols/Loadable.html">Loadable</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/MapPostProcessor.html">MapPostProcessor</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/MutablePropertied.html">MutablePropertied</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/ObjectFactory.html">ObjectFactory</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/ObjectFilter.html">ObjectFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ObjectPostProcessor.html">ObjectPostProcessor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/PostProcessor.html">PostProcessor</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Propertied.html">Propertied</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/ResourceLoader.html">ResourceLoader</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TileFactory.html">TileFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TilePostProcessor.html">TilePostProcessor</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/TiledEngineBridgableProperty.html">TiledEngineBridgableProperty</a>
@@ -322,6 +379,1620 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:8TiledKit6EngineP7MapTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/MapType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP7MapTypeQa">MapType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type that represents a <code><a href="../Structs/Map.html">Map</a></code> in the engine</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">MapType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineMap.html">EngineMap</a></span> <span class="k">where</span> <span class="k">Self</span><span class="o">.</span><span class="kt">MapType</span><span class="o">.</span><span class="kt">EngineType</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP15ObjectLayerTypeQa">ObjectLayerType</a></span><span class="o">.</span><span class="kt">EngineType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP11TextureTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/TextureType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP11TextureTypeQa">TextureType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type that represents a texture or bitmap that will be rendered as a Sprite</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">TextureType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineTexture.html">EngineTexture</a></span> <span class="k">where</span> <span class="k">Self</span><span class="o">.</span><span class="kt">TextureType</span><span class="o">.</span><span class="kt">EngineType</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP13TileLayerTypeQa">TileLayerType</a></span><span class="o">.</span><span class="kt">EngineType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP10SpriteTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/SpriteType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP10SpriteTypeQa">SpriteType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type that represents the object that can draw itself on-screen</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">SpriteType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/DeepCopyable.html">DeepCopyable</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/EngineObject.html">EngineObject</a></span> <span class="k">where</span> <span class="k">Self</span><span class="o">.</span><span class="kt">SpriteType</span><span class="o">.</span><span class="kt">EngineType</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP14TextObjectTypeQa">TextObjectType</a></span><span class="o">.</span><span class="kt">EngineType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP13TileLayerTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/TileLayerType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP13TileLayerTypeQa">TileLayerType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type that represents a layer of tiles</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">TileLayerType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineObject.html">EngineObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP14GroupLayerTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/GroupLayerType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP14GroupLayerTypeQa">GroupLayerType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type that represents a group of other layers</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">GroupLayerType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineLayerContainer.html">EngineLayerContainer</a></span> <span class="k">where</span> <span class="k">Self</span><span class="o">.</span><span class="kt">GroupLayerType</span><span class="o">.</span><span class="kt">EngineType</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP7MapTypeQa">MapType</a></span><span class="o">.</span><span class="kt">EngineType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP15ObjectLayerTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/ObjectLayerType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP15ObjectLayerTypeQa">ObjectLayerType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type that represents a layer populated by objects</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">ObjectLayerType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineObjectContainer.html">EngineObjectContainer</a></span> <span class="k">where</span> <span class="k">Self</span><span class="o">.</span><span class="kt">ObjectLayerType</span><span class="o">.</span><span class="kt">EngineType</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP15PointObjectTypeQa">PointObjectType</a></span><span class="o">.</span><span class="kt">EngineType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP15PointObjectTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/PointObjectType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP15PointObjectTypeQa">PointObjectType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type that represents a point in the engine scene</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">PointObjectType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineObject.html">EngineObject</a></span> <span class="k">where</span> <span class="k">Self</span><span class="o">.</span><span class="kt">PointObjectType</span><span class="o">.</span><span class="kt">EngineType</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17PolygonObjectTypeQa">PolygonObjectType</a></span><span class="o">.</span><span class="kt">EngineType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP19RectangleObjectTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/RectangleObjectType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP19RectangleObjectTypeQa">RectangleObjectType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type that represents a rectangle in the engine scene</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">RectangleObjectType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineObject.html">EngineObject</a></span> <span class="k">where</span> <span class="k">Self</span><span class="o">.</span><span class="kt">RectangleObjectType</span><span class="o">.</span><span class="kt">EngineType</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP10SpriteTypeQa">SpriteType</a></span><span class="o">.</span><span class="kt">EngineType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP17EllipseObjectTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/EllipseObjectType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type that represents an ellipse in the engine scene</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">EllipseObjectType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineObject.html">EngineObject</a></span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">EllipseObjectType</span><span class="o">.</span><span class="kt">EngineType</span><span class="p">,</span> <span class="k">Self</span><span class="o">.</span><span class="kt">EllipseObjectType</span><span class="o">.</span><span class="kt">EngineType</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP14GroupLayerTypeQa">GroupLayerType</a></span><span class="o">.</span><span class="kt">EngineType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP14TextObjectTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/TextObjectType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP14TextObjectTypeQa">TextObjectType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type that represents a text object in the engine scene</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">TextObjectType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineObject.html">EngineObject</a></span> <span class="k">where</span> <span class="k">Self</span><span class="o">.</span><span class="kt">TextObjectType</span><span class="o">.</span><span class="kt">EngineType</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP11TextureTypeQa">TextureType</a></span><span class="o">.</span><span class="kt">EngineType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP18PolylineObjectTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/PolylineObjectType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP18PolylineObjectTypeQa">PolylineObjectType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type that represents a polyline object in the engine scene</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">PolylineObjectType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineObject.html">EngineObject</a></span> <span class="k">where</span> <span class="k">Self</span><span class="o">.</span><span class="kt">PolylineObjectType</span><span class="o">.</span><span class="kt">EngineType</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP19RectangleObjectTypeQa">RectangleObjectType</a></span><span class="o">.</span><span class="kt">EngineType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP17PolygonObjectTypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/PolygonObjectType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP17PolygonObjectTypeQa">PolygonObjectType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type that represents a polygon object in the engine scene</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">PolygonObjectType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineObject.html">EngineObject</a></span> <span class="k">where</span> <span class="k">Self</span><span class="o">.</span><span class="kt">PolygonObjectType</span><span class="o">.</span><span class="kt">EngineType</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP18PolylineObjectTypeQa">PolylineObjectType</a></span><span class="o">.</span><span class="kt">EngineType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP4load11textureFrom2in11TextureTypeQz10Foundation3URLV_AA7ProjectCtKFZ"></a>
+                    <a name="//apple_ref/swift/Method/load(textureFrom:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP4load11textureFrom2in11TextureTypeQz10Foundation3URLV_AA7ProjectCtKFZ">load(textureFrom:<wbr>in:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provide a method for loading textures</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">load</span><span class="p">(</span><span class="n">textureFrom</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="k">in</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP11TextureTypeQa">TextureType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP4make012engineMapForA00F4TypeQzAA0F0V_tKFZ"></a>
+                    <a name="//apple_ref/swift/Method/make(engineMapForTiled:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP4make012engineMapForA00F4TypeQzAA0F0V_tKFZ">make(engineMapForTiled:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provide a default specialized map creator for the Engine</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">make</span><span class="p">(</span><span class="n">engineMapForTiled</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP7MapTypeQa">MapType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Structs/Map.html">Map</a></code> to create it for</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP4make9spriteFor2in4with4from10SpriteTypeQzAA4TileC_AA0L3SetC07TextureK0QzAA7ProjectCtKFZ"></a>
+                    <a name="//apple_ref/swift/Method/make(spriteFor:in:with:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP4make9spriteFor2in4with4from10SpriteTypeQzAA4TileC_AA0L3SetC07TextureK0QzAA7ProjectCtKFZ">make(spriteFor:<wbr>in:<wbr>with:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provide a default specialized tile creator for the Engine</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">make</span><span class="p">(</span><span class="n">spriteFor</span> <span class="nv">tile</span><span class="p">:</span> <span class="kt"><a href="../Classes/Tile.html">Tile</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">tileset</span><span class="p">:</span> <span class="kt"><a href="../Classes/TileSet.html">TileSet</a></span><span class="p">,</span> <span class="n">with</span> <span class="nv">texture</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP11TextureTypeQa">TextureType</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP10SpriteTypeQa">SpriteType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Structs/Map.html">Map</a></code> to create it for</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tile</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Classes/Tile.html">Tile</a></code> to create a sprite for</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tileset</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Classes/TileSet.html">TileSet</a></code> the tile is from</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>texture</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The texture (not cropped) to use for the tile</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Classes/Project.html">Project</a></code> data is being cloaded from</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP11postProcess_4from2in4with3forAE10SpriteTypeQzAJ_AA4TileCAA0L3SetCSDys6UInt32VAJGAA3MapVAA7ProjectCtKFZ"></a>
+                    <a name="//apple_ref/swift/Method/postProcess(_:from:in:with:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP11postProcess_4from2in4with3forAE10SpriteTypeQzAJ_AA4TileCAA0L3SetCSDys6UInt32VAJGAA3MapVAA7ProjectCtKFZ">postProcess(_:<wbr>from:<wbr>in:<wbr>with:<wbr>for:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Enables post processing of tiles which is performed after all tiles for a tileset have been created. It will be called <em>before</em> any other registered
+ <code><a href="../Protocols/TilePostProcessor.html">TilePostProcessor</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">postProcess</span><span class="p">(</span><span class="n">_</span> <span class="nv">sprite</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP10SpriteTypeQa">SpriteType</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">tile</span><span class="p">:</span> <span class="kt"><a href="../Classes/Tile.html">Tile</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">tileSet</span><span class="p">:</span> <span class="kt"><a href="../Classes/TileSet.html">TileSet</a></span><span class="p">,</span> <span class="n">with</span> <span class="nv">setSprites</span><span class="p">:</span> <span class="p">[</span><span class="kt">UInt32</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP10SpriteTypeQa">SpriteType</a></span><span class="p">],</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP10SpriteTypeQa">SpriteType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sprite</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The previously created <code><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP10SpriteTypeQa">SpriteType</a></code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tile</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Classes/Tile.html">Tile</a></code> it was created from</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tileSet</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Classes/TileSet.html">TileSet</a></code> the tile belongs to</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>setSprites</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>All other sprites created for the <code><a href="../Classes/TileSet.html">TileSet</a></code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map the <code><a href="../Classes/TileSet.html">TileSet</a></code>s were loaded from</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the <code><a href="../Structs/Map.html">Map</a></code>&amp; <code><a href="../Classes/TileSet.html">TileSet</a></code> was loaded from</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP14makeSpriteFrom_3for2in4from0E4TypeQzSg07TextureJ0Qz_AA13LayerProtocol_pAA3MapVAA7ProjectCtKFZ"></a>
+                    <a name="//apple_ref/swift/Method/makeSpriteFrom(_:for:in:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP14makeSpriteFrom_3for2in4from0E4TypeQzSg07TextureJ0Qz_AA13LayerProtocol_pAA3MapVAA7ProjectCtKFZ">makeSpriteFrom(_:<wbr>for:<wbr>in:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a sprite for the supplied image layer</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">makeSpriteFrom</span><span class="p">(</span><span class="n">_</span> <span class="nv">texture</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP11TextureTypeQa">TextureType</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP10SpriteTypeQa">SpriteType</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>texture</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The texture to use</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>layer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The additional data from the layer</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map the layer is part of</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the map is being loaded from</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP19makeObjectContainer_2in4from0E9LayerTypeQzSgAA0I8Protocol_p_AA3MapVAA7ProjectCtKFZ"></a>
+                    <a name="//apple_ref/swift/Method/makeObjectContainer(_:in:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP19makeObjectContainer_2in4from0E9LayerTypeQzSgAA0I8Protocol_p_AA3MapVAA7ProjectCtKFZ">makeObjectContainer(_:<wbr>in:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a layer to contain objects</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">makeObjectContainer</span><span class="p">(</span><span class="n">_</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP15ObjectLayerTypeQa">ObjectLayerType</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>layer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The additional data from the layer</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map the layer is part of</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the map is being loaded from</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP14makeGroupLayer_2in4from0eF4TypeQzSgAA0F8Protocol_p_AA3MapVAA7ProjectCtKFZ"></a>
+                    <a name="//apple_ref/swift/Method/makeGroupLayer(_:in:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP14makeGroupLayer_2in4from0eF4TypeQzSgAA0F8Protocol_p_AA3MapVAA7ProjectCtKFZ">makeGroupLayer(_:<wbr>in:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a layer containing other layers</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">makeGroupLayer</span><span class="p">(</span><span class="n">_</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP14GroupLayerTypeQa">GroupLayerType</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>layer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The details of the grouping layer</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Structs/Map.html">Map</a></code> the layer belongs to</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the map is being loaded from</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP17makeTileLayerFrom_3for4with2in4from0eF4TypeQzSgAA0E4GridV_AA0F8Protocol_pAA8MapTilesCyxGAA0O0VAA7ProjectCtKFZ"></a>
+                    <a name="//apple_ref/swift/Method/makeTileLayerFrom(_:for:with:in:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP17makeTileLayerFrom_3for4with2in4from0eF4TypeQzSgAA0E4GridV_AA0F8Protocol_pAA8MapTilesCyxGAA0O0VAA7ProjectCtKFZ">makeTileLayerFrom(_:<wbr>for:<wbr>with:<wbr>in:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a tile layer with the supplied tiles in using the sprites loaded during map building</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">makeTileLayerFrom</span><span class="p">(</span><span class="n">_</span> <span class="nv">tileGrid</span><span class="p">:</span> <span class="kt"><a href="../Structs/TileGrid.html">TileGrid</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="n">with</span> <span class="nv">sprites</span><span class="p">:</span> <span class="kt"><a href="../Classes/MapTiles.html">MapTiles</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP13TileLayerTypeQa">TileLayerType</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tileGrid</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The grid of tiles to present</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>layer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The meta data about the layer</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sprites</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The sprites (indexed by gid) that can be used</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map the layer is in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the layer is loaded from</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP4make8pointFor2in4from15PointObjectTypeQzAA0J8Protocol_p_AA3MapVAA7ProjectCtKFZ"></a>
+                    <a name="//apple_ref/swift/Method/make(pointFor:in:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP4make8pointFor2in4from15PointObjectTypeQzAA0J8Protocol_p_AA3MapVAA7ProjectCtKFZ">make(pointFor:<wbr>in:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a point object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">make</span><span class="p">(</span><span class="n">pointFor</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP15PointObjectTypeQa">PointObjectType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The meta-data for the object</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map the object is in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the map was loaded from</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP4make11rectangleOf2at3for2in4from19RectangleObjectTypeQzAA9DimensionVySdG_SdAA0L8Protocol_pAA3MapVAA7ProjectCtKFZ"></a>
+                    <a name="//apple_ref/swift/Method/make(rectangleOf:at:for:in:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP4make11rectangleOf2at3for2in4from19RectangleObjectTypeQzAA9DimensionVySdG_SdAA0L8Protocol_pAA3MapVAA7ProjectCtKFZ">make(rectangleOf:<wbr>at:<wbr>for:<wbr>in:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a rectangle object of the specified size</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">make</span><span class="p">(</span><span class="n">rectangleOf</span> <span class="nv">size</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8TiledKit4Sizea">Size</a></span><span class="p">,</span> <span class="n">at</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="k">for</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP19RectangleObjectTypeQa">RectangleObjectType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>size</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Typealiases.html#/s:8TiledKit4Sizea">Size</a></code> of the rectangle</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>angle</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The angle the rectangle should be displayed in (in degrees)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The meta-data about the object</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map the object is in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project content is being loaded from</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP4make9ellipseOf2at3for2in4from17EllipseObjectTypeQzAA9DimensionVySdG_SdAA0L8Protocol_pAA3MapVAA7ProjectCtKFZ"></a>
+                    <a name="//apple_ref/swift/Method/make(ellipseOf:at:for:in:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP4make9ellipseOf2at3for2in4from17EllipseObjectTypeQzAA9DimensionVySdG_SdAA0L8Protocol_pAA3MapVAA7ProjectCtKFZ">make(ellipseOf:<wbr>at:<wbr>for:<wbr>in:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a ellipse object of the specified size</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">make</span><span class="p">(</span><span class="n">ellipseOf</span> <span class="nv">size</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8TiledKit4Sizea">Size</a></span><span class="p">,</span> <span class="n">at</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="k">for</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>size</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Typealiases.html#/s:8TiledKit4Sizea">Size</a></code> of the ellipse</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>angle</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The angle the ellipse should be displayed in (in degrees)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The meta-data about the object</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map the object is in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project content is being loaded from</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP4make10spriteWith2of2at3for2in4from10SpriteTypeQzAL_AA9DimensionVySdGSdAA14ObjectProtocol_pAA3MapVAA7ProjectCtKFZ"></a>
+                    <a name="//apple_ref/swift/Method/make(spriteWith:of:at:for:in:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP4make10spriteWith2of2at3for2in4from10SpriteTypeQzAL_AA9DimensionVySdGSdAA14ObjectProtocol_pAA3MapVAA7ProjectCtKFZ">make(spriteWith:<wbr>of:<wbr>at:<wbr>for:<wbr>in:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a sprite for the specified tile</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">make</span><span class="p">(</span><span class="n">spriteWith</span> <span class="nv">tile</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP10SpriteTypeQa">SpriteType</a></span><span class="p">,</span> <span class="n">of</span> <span class="nv">size</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8TiledKit4Sizea">Size</a></span><span class="p">,</span> <span class="n">at</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="k">for</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP10SpriteTypeQa">SpriteType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tile</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The tile node to place/change</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>size</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The size of the sprite</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>angle</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The angle the sprite should be displayed at</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The meta-data about the object</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map the object is in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the map was loaded from</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP4make8textWith2of2at4with3for2in4from14TextObjectTypeQzSS_AA9DimensionVySdGSdAA0M5StyleVAA0N8Protocol_pAA3MapVAA7ProjectCtKFZ"></a>
+                    <a name="//apple_ref/swift/Method/make(textWith:of:at:with:for:in:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP4make8textWith2of2at4with3for2in4from14TextObjectTypeQzSS_AA9DimensionVySdGSdAA0M5StyleVAA0N8Protocol_pAA3MapVAA7ProjectCtKFZ">make(textWith:<wbr>of:<wbr>at:<wbr>with:<wbr>for:<wbr>in:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a text object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">make</span><span class="p">(</span><span class="n">textWith</span> <span class="nv">string</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">of</span> <span class="nv">size</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8TiledKit4Sizea">Size</a></span><span class="p">,</span> <span class="n">at</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">with</span> <span class="nv">style</span><span class="p">:</span> <span class="kt"><a href="../Structs/TextStyle.html">TextStyle</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP14TextObjectTypeQa">TextObjectType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>string</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The string to display</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>size</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The size of the clipping rectangle of the text</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>angle</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The angle the text should be displayed at</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>style</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The style the text should be rendered in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The meta-data about the object</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map the object is in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the map was loaded from</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP4make12polylineWith2at3for2in4from18PolylineObjectTypeQzSayAA5PointVySdGG_SdAA0L8Protocol_pAA3MapVAA7ProjectCtKFZ"></a>
+                    <a name="//apple_ref/swift/Method/make(polylineWith:at:for:in:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP4make12polylineWith2at3for2in4from18PolylineObjectTypeQzSayAA5PointVySdGG_SdAA0L8Protocol_pAA3MapVAA7ProjectCtKFZ">make(polylineWith:<wbr>at:<wbr>for:<wbr>in:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a polyline (non-closed path) object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">make</span><span class="p">(</span><span class="n">polylineWith</span> <span class="nv">path</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8TiledKit4Patha">Path</a></span><span class="p">,</span> <span class="n">at</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="k">for</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP18PolylineObjectTypeQa">PolylineObjectType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>path</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The points of the path</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>angle</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The angle the object should be shown at</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Meta-data about the object</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map the object is in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the map was loaded from</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EngineP4make11polygonWith2at3for2in4from17PolygonObjectTypeQzSayAA5PointVySdGG_SdAA0L8Protocol_pAA3MapVAA7ProjectCtKFZ"></a>
+                    <a name="//apple_ref/swift/Method/make(polygonWith:at:for:in:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EngineP4make11polygonWith2at3for2in4from17PolygonObjectTypeQzSayAA5PointVySdGG_SdAA0L8Protocol_pAA3MapVAA7ProjectCtKFZ">make(polygonWith:<wbr>at:<wbr>for:<wbr>in:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a polygon (closed path) object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">make</span><span class="p">(</span><span class="n">polygonWith</span> <span class="nv">path</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8TiledKit4Patha">Path</a></span><span class="p">,</span> <span class="n">at</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="k">for</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17PolygonObjectTypeQa">PolygonObjectType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>path</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The points of the path</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>angle</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The angle the object should be shown at</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Meta-data about the object</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map the object is in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the map was loaded from</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EnginePAAE35removeAllFactoriesAndPostProcessorsyyFZ"></a>
+                    <a name="//apple_ref/swift/Method/removeAllFactoriesAndPostProcessors()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EnginePAAE35removeAllFactoriesAndPostProcessorsyyFZ">removeAllFactoriesAndPostProcessors()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Removes all factories that have been registered for the engine</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">removeAllFactoriesAndPostProcessors</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:8TiledKit6EnginePAAE4warnyySSFZ"></a>
                     <a name="//apple_ref/swift/Method/warn(_:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:8TiledKit6EnginePAAE4warnyySSFZ">warn(_:<wbr>)</a>
@@ -335,7 +2006,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Displays a warning message to the console. You can override to display the messages
+more prominantly in the engine of your chosing.</p>
 
                       </div>
                       <div class="declaration">
@@ -345,6 +2017,398 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">warn</span><span class="p">(</span><span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EnginePAAE8register7factoryyqd___t0C4TypeQyd__RszAA12LayerFactoryRd__AF_013EllipseObjectF0AfIQYd__AIRtzlFZ"></a>
+                    <a name="//apple_ref/swift/Method/register(factory:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EnginePAAE8register7factoryyqd___t0C4TypeQyd__RszAA12LayerFactoryRd__AF_013EllipseObjectF0AfIQYd__AIRtzlFZ">register(factory:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add a new factory to the factories for the <code>Engine</code>, new factories are tried first</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">register</span><span class="o">&lt;</span><span class="kt">F</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">factory</span><span class="p">:</span> <span class="kt">F</span><span class="p">)</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt">F</span><span class="o">.</span><span class="kt">EngineType</span><span class="p">,</span> <span class="kt">F</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/LayerFactory.html">LayerFactory</a></span><span class="p">,</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span> <span class="o">==</span> <span class="kt">F</span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>factory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The new factory</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EnginePAAE8register7factoryyqd___t0C4TypeQyd__RszAA0C10MapFactoryRd__AF_013EllipseObjectF0AfIQYd__AIRtzlFZ"></a>
+                    <a name="//apple_ref/swift/Method/register(factory:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EnginePAAE8register7factoryyqd___t0C4TypeQyd__RszAA0C10MapFactoryRd__AF_013EllipseObjectF0AfIQYd__AIRtzlFZ">register(factory:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add a new factory to the factories for the <code>Engine</code>, new factories are tried first</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">register</span><span class="o">&lt;</span><span class="kt">F</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">factory</span><span class="p">:</span> <span class="kt">F</span><span class="p">)</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt">F</span><span class="o">.</span><span class="kt">EngineType</span><span class="p">,</span> <span class="kt">F</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineMapFactory.html">EngineMapFactory</a></span><span class="p">,</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span> <span class="o">==</span> <span class="kt">F</span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>factory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The new factory</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EnginePAAE8register7factoryyqd___t0C4TypeQyd__RszAA13ObjectFactoryRd__AF_07EllipsegF0AfIQYd__AIRtzlFZ"></a>
+                    <a name="//apple_ref/swift/Method/register(factory:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EnginePAAE8register7factoryyqd___t0C4TypeQyd__RszAA13ObjectFactoryRd__AF_07EllipsegF0AfIQYd__AIRtzlFZ">register(factory:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add a new factory to the factories for the <code>Engine</code>, new factories are tried first</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">register</span><span class="o">&lt;</span><span class="kt">F</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">factory</span><span class="p">:</span> <span class="kt">F</span><span class="p">)</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt">F</span><span class="o">.</span><span class="kt">EngineType</span><span class="p">,</span> <span class="kt">F</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectFactory.html">ObjectFactory</a></span><span class="p">,</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span> <span class="o">==</span> <span class="kt">F</span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>factory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The new factory</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EnginePAAE8register7factoryyqd___t0C4TypeQyd__RszAA11TileFactoryRd__AF_013EllipseObjectF0AfIQYd__AIRtzlFZ"></a>
+                    <a name="//apple_ref/swift/Method/register(factory:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EnginePAAE8register7factoryyqd___t0C4TypeQyd__RszAA11TileFactoryRd__AF_013EllipseObjectF0AfIQYd__AIRtzlFZ">register(factory:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add a new factory to the factories for the <code>Engine</code>, new factories are tried first</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">register</span><span class="o">&lt;</span><span class="kt">F</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">factory</span><span class="p">:</span> <span class="kt">F</span><span class="p">)</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt">F</span><span class="o">.</span><span class="kt">EngineType</span><span class="p">,</span> <span class="kt">F</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/TileFactory.html">TileFactory</a></span><span class="p">,</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span> <span class="o">==</span> <span class="kt">F</span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>factory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The new factory</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EnginePAAE8register13postProcessoryqd___t0C4TypeQyd__RszAA09LayerPostF0Rd__AF_013EllipseObjectG0AfIQYd__AIRtzlFZ"></a>
+                    <a name="//apple_ref/swift/Method/register(postProcessor:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EnginePAAE8register13postProcessoryqd___t0C4TypeQyd__RszAA09LayerPostF0Rd__AF_013EllipseObjectG0AfIQYd__AIRtzlFZ">register(postProcessor:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add a new post processor to the post processors for the <code>Engine</code>, new post processors  are tried first</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">register</span><span class="o">&lt;</span><span class="kt">P</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">postProcessor</span><span class="p">:</span> <span class="kt">P</span><span class="p">)</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt">P</span><span class="o">.</span><span class="kt">EngineType</span><span class="p">,</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/LayerPostProcessor.html">LayerPostProcessor</a></span><span class="p">,</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span> <span class="o">==</span> <span class="kt">P</span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>postProcessor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The new post processor</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EnginePAAE8register13postProcessoryqd___t0C4TypeQyd__RszAA07MapPostF0Rd__AF_013EllipseObjectG0AfIQYd__AIRtzlFZ"></a>
+                    <a name="//apple_ref/swift/Method/register(postProcessor:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EnginePAAE8register13postProcessoryqd___t0C4TypeQyd__RszAA07MapPostF0Rd__AF_013EllipseObjectG0AfIQYd__AIRtzlFZ">register(postProcessor:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add a new post processor to the post processors for the <code>Engine</code>, new post processors  are tried first</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">register</span><span class="o">&lt;</span><span class="kt">P</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">postProcessor</span><span class="p">:</span> <span class="kt">P</span><span class="p">)</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt">P</span><span class="o">.</span><span class="kt">EngineType</span><span class="p">,</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/MapPostProcessor.html">MapPostProcessor</a></span><span class="p">,</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span> <span class="o">==</span> <span class="kt">P</span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>postProcessor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The new post processor</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EnginePAAE8register13postProcessoryqd___t0C4TypeQyd__RszAA010ObjectPostF0Rd__AF_07EllipsehG0AfIQYd__AIRtzlFZ"></a>
+                    <a name="//apple_ref/swift/Method/register(postProcessor:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EnginePAAE8register13postProcessoryqd___t0C4TypeQyd__RszAA010ObjectPostF0Rd__AF_07EllipsehG0AfIQYd__AIRtzlFZ">register(postProcessor:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add a new post processor to the post processors for the <code>Engine</code>, new post processors  are tried first</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">register</span><span class="o">&lt;</span><span class="kt">P</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">postProcessor</span><span class="p">:</span> <span class="kt">P</span><span class="p">)</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt">P</span><span class="o">.</span><span class="kt">EngineType</span><span class="p">,</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectPostProcessor.html">ObjectPostProcessor</a></span><span class="p">,</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span> <span class="o">==</span> <span class="kt">P</span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>postProcessor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The new post processor</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit6EnginePAAE8register13postProcessoryqd___t0C4TypeQyd__RszAA08TilePostF0Rd__AF_013EllipseObjectG0AfIQYd__AIRtzlFZ"></a>
+                    <a name="//apple_ref/swift/Method/register(postProcessor:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit6EnginePAAE8register13postProcessoryqd___t0C4TypeQyd__RszAA08TilePostF0Rd__AF_013EllipseObjectG0AfIQYd__AIRtzlFZ">register(postProcessor:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add a new post processor to the post processors for the <code>Engine</code>, new post processors  are tried first</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">register</span><span class="o">&lt;</span><span class="kt">P</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">postProcessor</span><span class="p">:</span> <span class="kt">P</span><span class="p">)</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt">P</span><span class="o">.</span><span class="kt">EngineType</span><span class="p">,</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/TilePostProcessor.html">TilePostProcessor</a></span><span class="p">,</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span> <span class="o">==</span> <span class="kt">P</span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span><span class="o">.</span><span class="kt">EngineType</span><span class="o">.</span><span class="kt"><a href="../Protocols/Engine.html#/s:8TiledKit6EngineP17EllipseObjectTypeQa">EllipseObjectType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>postProcessor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The new post processor</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>

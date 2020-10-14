@@ -1,10 +1,17 @@
 {
   "warnings": [
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Engine.swift",
-      "line": 26,
-      "symbol": "Engine.warn(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Factories/Factories.swift",
+      "line": 19,
+      "symbol": "Factory.EngineType",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Factories/Layer Factory.swift",
+      "line": 15,
+      "symbol": "LayerFactory",
+      "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
@@ -33,6 +40,13 @@
       "line": 17,
       "symbol": "TileLayer.grid",
       "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/ObjectProtocol.swift",
+      "line": 15,
+      "symbol": "ObjectProtocol",
+      "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
