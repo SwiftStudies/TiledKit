@@ -121,7 +121,7 @@
                 <a href="Protocols/EngineObject.html">EngineObject</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols.html#/s:8TiledKit21EngineObjectContainerP">EngineObjectContainer</a>
+                <a href="Protocols/EngineObjectContainer.html">EngineObjectContainer</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/EngineTexture.html">EngineTexture</a>
@@ -160,7 +160,16 @@
                 <a href="Protocols/MutablePropertied.html">MutablePropertied</a>
               </li>
               <li class="nav-group-task">
+                <a href="Protocols/ObjectFactory.html">ObjectFactory</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/ObjectFilter.html">ObjectFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ObjectPostProcessor.html">ObjectPostProcessor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ObjectProtocol.html">ObjectProtocol</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/PostProcessor.html">PostProcessor</a>
@@ -465,6 +474,7 @@ game engine types that map directly to Tiled entities will need to support this<
                       <div class="abstract">
                         <p>Container that can contain objects</p>
 
+                        <a href="Protocols/EngineObjectContainer.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -593,6 +603,34 @@ simply a common base protocol</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:8TiledKit13ObjectFactoryP"></a>
+                    <a name="//apple_ref/swift/Protocol/ObjectFactory" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit13ObjectFactoryP">ObjectFactory</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tile factories create the sprites that will be rendered for tiles</p>
+
+                        <a href="Protocols/ObjectFactory.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ObjectFactory</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Factory.html">Factory</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:8TiledKit11TileFactoryP"></a>
                     <a name="//apple_ref/swift/Protocol/TileFactory" class="dashAnchor"></a>
                     <a class="token" href="#/s:8TiledKit11TileFactoryP">TileFactory</a>
@@ -670,6 +708,35 @@ and <code>Objects</code> have been made and processed</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">MapPostProcessor</span> <span class="p">:</span> <span class="kt"><a href="Protocols/PostProcessor.html">PostProcessor</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP"></a>
+                    <a name="//apple_ref/swift/Protocol/ObjectPostProcessor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP">ObjectPostProcessor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A specialized form of a <code><a href="Protocols/PostProcessor.html">PostProcessor</a></code> that applies to <code><a href="Classes/Tile.html">Tile</a></code>s. It is called after the first factory
+has created the specialized sprite for the tile</p>
+
+                        <a href="Protocols/ObjectPostProcessor.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ObjectPostProcessor</span> <span class="p">:</span> <span class="kt"><a href="Protocols/PostProcessor.html">PostProcessor</a></span></code></pre>
 
                         </div>
                       </div>
@@ -928,6 +995,34 @@ are responsible for determining if any given <code><a href="Structs/Object.html"
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ObjectFilter</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit14ObjectProtocolP"></a>
+                    <a name="//apple_ref/swift/Protocol/ObjectProtocol" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit14ObjectProtocolP">ObjectProtocol</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Protocols/ObjectProtocol.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ObjectProtocol</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Propertied.html">Propertied</a></span></code></pre>
 
                         </div>
                       </div>

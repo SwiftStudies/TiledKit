@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Properties Extension Reference</title>
+    <title>EngineObjectContainer Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Extension/Properties" class="dashAnchor"></a>
-    <a title="Properties Extension Reference"></a>
+    <a name="//apple_ref/swift/Protocol/EngineObjectContainer" class="dashAnchor"></a>
+    <a title="EngineObjectContainer Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">TiledKit</a> (97% documented)</p>
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">TiledKit Reference</a>
         <img id="carat" src="../img/carat.png" />
-        Properties Extension Reference
+        EngineObjectContainer Protocol Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -308,15 +308,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Properties</h1>
+            <h1>EngineObjectContainer</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt"><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">EngineObjectContainer</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineObject.html">EngineObject</a></span></code></pre>
 
                 </div>
               </div>
-            <p>Provides the ability to merge two sets of properties</p>
+            <p>Container that can contain objects</p>
 
           </section>
           <section class="section task-group-section">
@@ -325,9 +325,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:SD8TiledKitSSRszAA13PropertyValueORs_rlE14overridingWithySDySSACGAEF"></a>
-                    <a name="//apple_ref/swift/Method/overridingWith(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:SD8TiledKitSSRszAA13PropertyValueORs_rlE14overridingWithySDySSACGAEF">overridingWith(_:<wbr>)</a>
+                    <a name="/s:8TiledKit21EngineObjectContainerP3add5childy0C4Type_05PointdH0QZ_tF"></a>
+                    <a name="//apple_ref/swift/Method/add(child:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit21EngineObjectContainerP3add5childy0C4Type_05PointdH0QZ_tF">add(child:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -335,14 +335,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Creates a new <code><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></code> object by merging this set with the passed <code><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></code>, if there is a collision the passed <code><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></code> value will be used</p>
+                        <p>Adds a point to the container</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">overridingWith</span><span class="p">(</span><span class="n">_</span> <span class="nv">properties</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="n">child</span> <span class="nv">point</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PointObjectType</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -353,21 +353,293 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>properties</em>
+                                <em>point</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The properties to merge. If there is a collision these will take priority</p>
+                                  <p>The point to add</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit21EngineObjectContainerP3add5childy0C4Type_09RectangledH0QZ_tF"></a>
+                    <a name="//apple_ref/swift/Method/add(child:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit21EngineObjectContainerP3add5childy0C4Type_09RectangledH0QZ_tF">add(child:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a rectangle to the container</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="n">child</span> <span class="nv">rectangle</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">RectangleObjectType</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
                       <div>
-                        <h4>Return Value</h4>
-                        <p>The resultant merged <code><a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></code></p>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rectangle</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The rectangle to add</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit21EngineObjectContainerP3add5childy0C4Type_07EllipsedH0QZ_tF"></a>
+                    <a name="//apple_ref/swift/Method/add(child:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit21EngineObjectContainerP3add5childy0C4Type_07EllipsedH0QZ_tF">add(child:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds an ellipse to the container</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="n">child</span> <span class="nv">ellipse</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">EllipseObjectType</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ellipse</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ellipse to add</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit21EngineObjectContainerP3add5childy0C4Type_06SpriteH0QZ_tF"></a>
+                    <a name="//apple_ref/swift/Method/add(child:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit21EngineObjectContainerP3add5childy0C4Type_06SpriteH0QZ_tF">add(child:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a sprite to the container</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="n">child</span> <span class="nv">sprite</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">SpriteType</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sprite</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The sprite to add</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit21EngineObjectContainerP3add5childy0C4Type_04TextdH0QZ_tF"></a>
+                    <a name="//apple_ref/swift/Method/add(child:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit21EngineObjectContainerP3add5childy0C4Type_04TextdH0QZ_tF">add(child:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds text to the container</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="n">child</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">TextObjectType</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>text</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The text to add</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit21EngineObjectContainerP3add5childy0C4Type_08PolylinedH0QZ_tF"></a>
+                    <a name="//apple_ref/swift/Method/add(child:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit21EngineObjectContainerP3add5childy0C4Type_08PolylinedH0QZ_tF">add(child:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a polyline to the container</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="n">child</span> <span class="nv">polyline</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PolylineObjectType</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>polyline</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The polyline to add</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit21EngineObjectContainerP3add5childy0C4Type_07PolygondH0QZ_tF"></a>
+                    <a name="//apple_ref/swift/Method/add(child:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit21EngineObjectContainerP3add5childy0C4Type_07PolygondH0QZ_tF">add(child:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a polygon to the container</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="n">child</span> <span class="nv">polygon</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PolygonObjectType</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>polygon</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The polygon to add</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>

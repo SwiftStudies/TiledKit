@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>LayerContainer Protocol Reference</title>
+    <title>ObjectPostProcessor Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Protocol/LayerContainer" class="dashAnchor"></a>
-    <a title="LayerContainer Protocol Reference"></a>
+    <a name="//apple_ref/swift/Protocol/ObjectPostProcessor" class="dashAnchor"></a>
+    <a title="ObjectPostProcessor Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">TiledKit</a> (97% documented)</p>
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">TiledKit Reference</a>
         <img id="carat" src="../img/carat.png" />
-        LayerContainer Protocol Reference
+        ObjectPostProcessor Protocol Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -308,15 +308,16 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>LayerContainer</h1>
+            <h1>ObjectPostProcessor</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">LayerContainer</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ObjectPostProcessor</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PostProcessor.html">PostProcessor</a></span></code></pre>
 
                 </div>
               </div>
-            <p>Implemented by any object that can contain <code><a href="../Structs/Layer.html">Layer</a></code>s (such as a <code><a href="../Structs/Map.html">Map</a></code>)</p>
+            <p>A specialized form of a <code><a href="../Protocols/PostProcessor.html">PostProcessor</a></code> that applies to <code><a href="../Classes/Tile.html">Tile</a></code>s. It is called after the first factory
+has created the specialized sprite for the tile</p>
 
           </section>
           <section class="section task-group-section">
@@ -325,9 +326,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit14LayerContainerP6layersSayAA0C0VGvp"></a>
-                    <a name="//apple_ref/swift/Property/layers" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit14LayerContainerP6layersSayAA0C0VGvp">layers</a>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_05PointcJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(_:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_05PointcJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(_:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -335,50 +336,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The <code><a href="../Structs/Layer.html">Layer</a></code>s inside the container</p>
+                        <p>Perform post processing on a point object</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">layers</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Layer.html">Layer</a></span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8TiledKit14LayerContainerPAAE6layersySayAA0C0VGAA0C6Filter_pd_tKF"></a>
-                    <a name="//apple_ref/swift/Method/layers(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit14LayerContainerPAAE6layersySayAA0C0VGAA0C6Filter_pd_tKF">layers(_:<wbr>)</a>
-                    </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Filters the <code><a href="../Structs/Layer.html">Layer</a></code>s contained by the supplied filters. It does no further type restriction although of course the <code><a href="../Structs/Layer/Kind.html">Layer.Kind</a></code>
-of the layer can be used to extract <code><a href="../Structs/Layer/Kind.html">Layer.Kind</a></code> specifc information</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    An exception will be thrown if there are no filters or no layers match
-
-</div>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">layers</span><span class="p">(</span><span class="n">_</span> <span class="nv">matching</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerFilter.html">LayerFilter</a></span><span class="o">...</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Structs/Layer.html">Layer</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">point</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PointObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PointObjectType</span></code></pre>
 
                         </div>
                       </div>
@@ -389,21 +354,53 @@ of the layer can be used to extract <code><a href="../Structs/Layer/Kind.html">L
                             <tr>
                               <td>
                                 <code>
-                                <em>matching</em>
+                                <em>point</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>Zero or more filters to use to reduce the set of matching layers</p>
+                                  <p>The point to be processed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The object it was created from</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map it is in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the map was loaded from</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>A new <code>LayerContainer</code> containing the filtered <code><a href="../Structs/Layer.html">Layer</a></code>s</p>
                       </div>
                     </section>
                   </div>
@@ -411,32 +408,24 @@ of the layer can be used to extract <code><a href="../Structs/Layer/Kind.html">L
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit14LayerContainerPAAE05groupC0_2atAA05GroupC0VAA0C6Filter_pd_SiSgtKF"></a>
-                    <a name="//apple_ref/swift/Method/groupLayer(_:at:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit14LayerContainerPAAE05groupC0_2atAA05GroupC0VAA0C6Filter_pd_SiSgtKF">groupLayer(_:<wbr>at:<wbr>)</a>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_09RectanglecJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(_:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_09RectanglecJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(_:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
                     </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns a single <code><a href="../Structs/GroupLayer.html">GroupLayer</a></code> that matches the supplied filters</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    Any exception will be thrown if there are no filters, no layers match, or more than one layer matches the supplied filters
-
-</div>
+                        <p>Perform post processing on a rectangle object</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">groupLayer</span><span class="p">(</span><span class="n">_</span> <span class="nv">matching</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerFilter.html">LayerFilter</a></span><span class="o">...</span><span class="p">,</span> <span class="n">at</span> <span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/GroupLayer.html">GroupLayer</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">rectangle</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">RectangleObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">RectangleObjectType</span></code></pre>
 
                         </div>
                       </div>
@@ -447,33 +436,53 @@ of the layer can be used to extract <code><a href="../Structs/Layer/Kind.html">L
                             <tr>
                               <td>
                                 <code>
-                                <em>matching</em>
+                                <em>rectangle</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The filters that should result in a single <code><a href="../Structs/Layer.html">Layer</a></code> being identified</p>
+                                  <p>The rectangle to be processed</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>index</em>
+                                <em>object</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>If you know that the filters which match multiple and want a specific result specify it here</p>
+                                  <p>The object it was created from</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map it is in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the map was loaded from</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The matching <code><a href="../Structs/GroupLayer.html">GroupLayer</a></code></p>
                       </div>
                     </section>
                   </div>
@@ -481,32 +490,24 @@ of the layer can be used to extract <code><a href="../Structs/Layer/Kind.html">L
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit14LayerContainerPAAE06objectC0_2atAA06ObjectC0VAA0C6Filter_pd_SiSgtKF"></a>
-                    <a name="//apple_ref/swift/Method/objectLayer(_:at:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit14LayerContainerPAAE06objectC0_2atAA06ObjectC0VAA0C6Filter_pd_SiSgtKF">objectLayer(_:<wbr>at:<wbr>)</a>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_07EllipsecJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(_:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_07EllipsecJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(_:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
                     </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns a single <code><a href="../Structs/ObjectLayer.html">ObjectLayer</a></code> that matches the supplied filters</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    Any exception will be thrown if there are no filters, no layers match, or more than one layer matches the supplied filters
-
-</div>
+                        <p>Perform post processing on a ellipse object</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">objectLayer</span><span class="p">(</span><span class="n">_</span> <span class="nv">matching</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerFilter.html">LayerFilter</a></span><span class="o">...</span><span class="p">,</span> <span class="n">at</span> <span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ObjectLayer.html">ObjectLayer</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">ellipse</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">EllipseObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">EllipseObjectType</span></code></pre>
 
                         </div>
                       </div>
@@ -517,21 +518,53 @@ of the layer can be used to extract <code><a href="../Structs/Layer/Kind.html">L
                             <tr>
                               <td>
                                 <code>
-                                <em>matching</em>
+                                <em>ellipse</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The filters that should result in a single <code><a href="../Structs/Layer.html">Layer</a></code> being identified</p>
+                                  <p>The ellipse to be processed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The object it was created from</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map it is in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the map was loaded from</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The matching <code><a href="../Structs/ObjectLayer.html">ObjectLayer</a></code></p>
                       </div>
                     </section>
                   </div>
@@ -539,32 +572,24 @@ of the layer can be used to extract <code><a href="../Structs/Layer/Kind.html">L
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit14LayerContainerPAAE04tileC0_2atAA04TileC0VAA0C6Filter_pd_SiSgtKF"></a>
-                    <a name="//apple_ref/swift/Method/tileLayer(_:at:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit14LayerContainerPAAE04tileC0_2atAA04TileC0VAA0C6Filter_pd_SiSgtKF">tileLayer(_:<wbr>at:<wbr>)</a>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_06SpriteJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(_:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_06SpriteJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(_:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
                     </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns a single <code><a href="../Structs/TileLayer.html">TileLayer</a></code> that matches the supplied filters</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    Any exception will be thrown if there are no filters, no layers match, or more than one layer matches the supplied filters
-
-</div>
+                        <p>Perform post processing on a sprite  object created for a tile</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">tileLayer</span><span class="p">(</span><span class="n">_</span> <span class="nv">matching</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerFilter.html">LayerFilter</a></span><span class="o">...</span><span class="p">,</span> <span class="n">at</span> <span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/TileLayer.html">TileLayer</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">sprite</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">SpriteType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">SpriteType</span></code></pre>
 
                         </div>
                       </div>
@@ -575,21 +600,53 @@ of the layer can be used to extract <code><a href="../Structs/Layer/Kind.html">L
                             <tr>
                               <td>
                                 <code>
-                                <em>matching</em>
+                                <em>sprite</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The filters that should result in a single <code><a href="../Structs/Layer.html">Layer</a></code> being identified</p>
+                                  <p>The sprite to be processed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The object it was created from</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map it is in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the map was loaded from</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The matching <code><a href="../Structs/TileLayer.html">TileLayer</a></code></p>
                       </div>
                     </section>
                   </div>
@@ -597,32 +654,24 @@ of the layer can be used to extract <code><a href="../Structs/Layer/Kind.html">L
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit14LayerContainerPAAE05imageC0_2atAA05ImageC0VAA0C6Filter_pd_SiSgtKF"></a>
-                    <a name="//apple_ref/swift/Method/imageLayer(_:at:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit14LayerContainerPAAE05imageC0_2atAA05ImageC0VAA0C6Filter_pd_SiSgtKF">imageLayer(_:<wbr>at:<wbr>)</a>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_04TextcJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(_:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_04TextcJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(_:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
                     </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns a single <code><a href="../Structs/ImageLayer.html">ImageLayer</a></code> that matches the supplied filters</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    Any exception will be thrown if there are no filters, no layers match, or more than one layer matches the supplied filters
-
-</div>
+                        <p>Perform post processing on a text object</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">imageLayer</span><span class="p">(</span><span class="n">_</span> <span class="nv">matching</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerFilter.html">LayerFilter</a></span><span class="o">...</span><span class="p">,</span> <span class="n">at</span> <span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ImageLayer.html">ImageLayer</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">TextObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">TextObjectType</span></code></pre>
 
                         </div>
                       </div>
@@ -633,21 +682,53 @@ of the layer can be used to extract <code><a href="../Structs/Layer/Kind.html">L
                             <tr>
                               <td>
                                 <code>
-                                <em>matching</em>
+                                <em>text</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The filters that should result in a single <code><a href="../Structs/Layer.html">Layer</a></code> being identified</p>
+                                  <p>The text to be processed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The object it was created from</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map it is in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the map was loaded from</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The matching <code><a href="../Structs/ImageLayer.html">ImageLayer</a></code></p>
                       </div>
                     </section>
                   </div>
@@ -655,27 +736,24 @@ of the layer can be used to extract <code><a href="../Structs/Layer/Kind.html">L
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit14LayerContainerPAAE6object_4deepAA6ObjectVSgSi_SbtF"></a>
-                    <a name="//apple_ref/swift/Method/object(_:deep:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit14LayerContainerPAAE6object_4deepAA6ObjectVSgSi_SbtF">object(_:<wbr>deep:<wbr>)</a>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_08PolylinecJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(_:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_08PolylinecJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(_:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
                     </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Retreives an object with the specified <code>id</code>. By default the search is recursive (searching within groups).</p>
+                        <p>Perform post processing on a polyline object</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">object</span><span class="p">(</span><span class="n">_</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">deep</span> <span class="nv">recursiveSearch</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Object.html">Object</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">polyline</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PolylineObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PolylineObjectType</span></code></pre>
 
                         </div>
                       </div>
@@ -686,33 +764,53 @@ of the layer can be used to extract <code><a href="../Structs/Layer/Kind.html">L
                             <tr>
                               <td>
                                 <code>
-                                <em>id</em>
+                                <em>polyline</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The desired id</p>
+                                  <p>The polyline to be processed</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>recursiveSearch</em>
+                                <em>object</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>If <code>true</code> then the search will search within groups until it finds object layer containing the object with the id.</p>
+                                  <p>The object it was created from</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map it is in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the map was loaded from</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An <code><a href="../Structs/Object.html">Object</a></code> or <code>nil</code> if no object with that id exists</p>
                       </div>
                     </section>
                   </div>
@@ -720,27 +818,24 @@ of the layer can be used to extract <code><a href="../Structs/Layer/Kind.html">L
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit14LayerContainerPAAE7objects4deep8matchingSayAA6ObjectVGSb_AA0H6Filter_pdtF"></a>
-                    <a name="//apple_ref/swift/Method/objects(deep:matching:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit14LayerContainerPAAE7objects4deep8matchingSayAA6ObjectVGSb_AA0H6Filter_pdtF">objects(deep:<wbr>matching:<wbr>)</a>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_07PolygoncJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(_:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_07PolygoncJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(_:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
                     </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Retreives all of the objects contained by the layers of the container that match the supplied filters</p>
+                        <p>Perform post processing on a polygon object</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">objects</span><span class="p">(</span><span class="n">deep</span> <span class="nv">recursiveSearch</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="n">matching</span> <span class="nv">filters</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectFilter.html">ObjectFilter</a></span><span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Structs/Object.html">Object</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">polygon</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PolygonObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PolygonObjectType</span></code></pre>
 
                         </div>
                       </div>
@@ -751,33 +846,53 @@ of the layer can be used to extract <code><a href="../Structs/Layer/Kind.html">L
                             <tr>
                               <td>
                                 <code>
-                                <em>recursiveSearch</em>
+                                <em>polygon</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>If <code>true</code> any groups will be recursively searched for the objects</p>
+                                  <p>The polygon to be processed</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>filters</em>
+                                <em>object</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The <code><a href="../Protocols/LayerFilter.html">LayerFilter</a></code>s objects must match</p>
+                                  <p>The object it was created from</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map it is in</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project the map was loaded from</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>All matching <code><a href="../Structs/Object.html">Object</a></code>s</p>
                       </div>
                     </section>
                   </div>

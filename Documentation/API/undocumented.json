@@ -43,6 +43,13 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/ObjectProtocol.swift",
+      "line": 15,
+      "symbol": "ObjectProtocol",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Objects/ObjectTypes.swift",
       "line": 61,
       "symbol": "ObjectTypes.write(to:)",
