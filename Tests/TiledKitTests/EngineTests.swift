@@ -24,7 +24,7 @@ final class EngineTests: XCTestCase {
         let testMap : TestMap
         let originalMap : Map
         do {
-            testMap = try moduleBundleProject.retrieve(specializedMap: "Test Map 1", in: "Maps")
+            testMap = try moduleBundleProject.retrieve(TestEngine.self, mapNamed: "Test Map 1", in: "Maps")
             originalMap = try moduleBundleProject.retrieve(map: "Test Map 1", in: "Maps")
         } catch {
             return XCTFail("\(error)")
@@ -47,7 +47,7 @@ final class EngineTests: XCTestCase {
         
         // Reset sprite count
         TestEngine.createdSprites.removeAll()
-        guard let customMap : TestMap = try? moduleBundleProject.retrieve(specializedMap:"Test Map 1", in:"Maps") else {
+        guard let customMap : TestMap = try? moduleBundleProject.retrieve(TestEngine.self, mapNamed:"Test Map 1", in:"Maps") else {
             TestEngine.removeAllFactoriesAndPostProcessors()
             return XCTFail("Could not load custom map")
         }

@@ -330,7 +330,7 @@ public extension Project {
     ///   - subdirectory: The subdirectory the map is stored in relative to the `Project` root
     /// - Throws: Errors from loading
     /// - Returns: An instance of the specialized map
-    func retrieve<E:EngineMap>(specializedMap name: String, in subdirectory:String? = nil) throws -> E {
-        return try retrieve(asType: E.self, from: name, in: subdirectory, of: .tmx)
+    func retrieve<EngineType:Engine>(_ engine:EngineType.Type, mapNamed name: String, in subdirectory:String? = nil) throws -> EngineType.MapType {
+        return try retrieve(asType: EngineType.MapType.self, from: name, in: subdirectory, of: .tmx)
     }
 }

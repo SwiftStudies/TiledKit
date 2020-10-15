@@ -60,6 +60,10 @@ public protocol Engine {
 
     /// Provide a method for loading textures
     static func load(textureFrom url:URL, in project:Project) throws -> TextureType
+
+    /// Make an instance of a given texture given the supplied clipping bounds and properites for this instance
+    static func make(texture:TextureType, with bounds:PixelBounds?, and properties:Properties, in project:Project) throws -> TextureType
+
     
     /// Provide a default specialized map creator for the Engine
     /// - Parameter map: The `Map` to create it for
@@ -212,6 +216,12 @@ public protocol DeepCopyable {
 
 /// Provides common diagnostic capabilites to any engine specialization
 public extension Engine {
+    
+    /// Make an instance of a given texture given the supplied clipping bounds and properites for this instance
+    static func make(textureFrom url:URL, with bounds:PixelBounds?, and properties:Properties, in project:Project) throws -> TextureType {
+        return try make(texture: load(textureFrom: url, in: project), with: bounds, and: properties, in: project)
+    }
+
     
     /// Removes all factories that have been registered for the engine
     static func removeAllFactoriesAndPostProcessors() {
