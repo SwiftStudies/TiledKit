@@ -39,6 +39,12 @@ final class TestEngine : Engine {
         return TestMap(size:map.pixelSize)
     }
     
+    static func registerFactoriesAndPostProcessors() {
+        return
+    }
+    
+
+    
     //
     // Tile Processing
     //
