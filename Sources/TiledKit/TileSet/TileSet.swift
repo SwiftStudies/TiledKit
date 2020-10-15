@@ -42,6 +42,18 @@ public class TileSet : Loadable, MutablePropertied {
         self.properties = properties
     }
     
+    /// Returns the local id of the tile (outside of the context of a map) of a given tile
+    /// - Parameter tile: The tile
+    /// - Returns: `nil` if the `Tile` is 
+    public func localId(of tile:Tile)->UInt32? {
+        for (index,setTile) in tiles {
+            if tile == setTile {
+                return index
+            }
+        }
+        return nil
+    }
+    
     /// Retreives the `Tile` specified by the index from the `TileSet`
     /// - Parameters:
     ///   - tileId: The index of the `Tile` starting at 0

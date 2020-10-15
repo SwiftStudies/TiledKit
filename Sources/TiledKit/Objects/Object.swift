@@ -13,9 +13,9 @@
 //    limitations under the License.
 
 /// Represents a Tiled object (which are contained inside Object `Layer`s). All objects share some common attributes (e.g. their position inside their containing `Layer`).
-public struct Object : ObjectProtocol, MutablePropertied {
+public struct Object : Equatable, ObjectProtocol, MutablePropertied {
     /// The kind of object, together with attached data specific to that kind of object
-    public enum Kind {
+    public enum Kind : Equatable {
         /// The object is a single point (use the `position` property for its coordinate
         case point
         

@@ -16,7 +16,7 @@ import Foundation
 
 /// Frames are attached to `Tile`s and reference another `Tile` within the same Tile Set as well as the duration it that `Tile` should be displayed
 /// when shown as part of an animation
-public struct Frame {
+public struct Frame : Equatable {
     /// The tile to display
     public let tile : Tile
     
@@ -26,7 +26,7 @@ public struct Frame {
 
 /// A `Tile` represents a 2D image that should be rendered when referenced on by an `Object` or `Layer`.
 /// It contains a reference to the image, and the portion of that image that should be used to generate the image.
-public class Tile {
+public class Tile : Equatable {
     /// The URL of the image used
     public let imageSource : URL
     
@@ -65,5 +65,42 @@ public class Tile {
         self.imageSource = imageSource
         self.transparentColor = transparentColor
         self.bounds = bounds
+    }
+    
+    /// Compares two tiles to determine if they are equivalent
+    /// - Parameters:
+    ///   - lhs: The first `Tile`
+    ///   - rhs: The second `Tile`
+    /// - Returns: `true` if they are the same `false` otherwise
+    public static func ==(lhs:Tile, rhs:Tile) -> Bool{
+        if lhs.imageSource != rhs.imageSource {
+            return false
+        }
+        
+        if lhs.type != rhs.type {
+            return false
+        }
+        
+        if lhs.properties != rhs.properties {
+            return false
+        }
+        
+        if lhs.transparentColor != rhs.transparentColor {
+            return false
+        }
+        
+        if lhs.bounds != rhs.bounds {
+            return false
+        }
+        
+        if lhs.frames != rhs.frames {
+            return false
+        }
+        
+        if lhs.collisionBodies != rhs.collisionBodies {
+            return false
+        }
+        
+        return true
     }
 }

@@ -40,7 +40,7 @@ public enum VerticalTextAlignment : String, Codable {
 }
 
 /// Represents the formating and style of text `Object`s.
-public struct TextStyle {
+public struct TextStyle : Equatable {
     /// Text should be wrapped inside the bounding rectangle
     public let wrap : Bool
     /// The desired font (if any) of the text
