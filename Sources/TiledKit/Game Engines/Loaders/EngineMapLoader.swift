@@ -293,6 +293,11 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
     }
     
     func retrieve<R>(asType: R.Type, from url: URL) throws -> R where R : Loadable {
+        /// Register defaults if present
+        if !E.hasFactoriesOrPostProcessors {
+            E.registerFactoriesAndPostProcessors()
+        }
+        
         let tiledMap = try project.retrieve(asType: Map.self, from: url)
         
         // Use factories to build a map

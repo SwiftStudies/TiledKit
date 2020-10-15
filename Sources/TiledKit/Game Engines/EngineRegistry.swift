@@ -19,6 +19,10 @@ internal struct EngineRegistry {
         return "\(type(of: E.self))"
     }
     
+    static func isEmpty<E:Engine>(`for` engine:E.Type)->Bool{
+        return registry.isEmpty
+    }
+    
     static func insert<T,E:Engine>(`for` engine:E.Type, object:T){
         let key = makeKey(for: engine.self)
         
