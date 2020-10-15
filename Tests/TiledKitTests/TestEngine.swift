@@ -113,6 +113,10 @@ final class TestEngine : Engine {
     static func make(polygonWith path: Path, at angle: Double, for object: ObjectProtocol, in map: Map, from project: Project) throws -> TestPologonal {
         return TestPologonal()
     }
+    
+    static func make(texture: TestTexture, with bounds: PixelBounds?, and properties: Properties, in project: Project) throws -> TestTexture {
+        return TestTexture()
+    }
 }
 
 struct TestPoint : EngineObject {
@@ -146,10 +150,14 @@ public enum TestError : Error {
 class TestTexture : EngineTexture {
     typealias EngineType = TestEngine
     
-    var originatingUrl : URL
+    var originatingUrl : URL?
     
     init(from url:URL){
         originatingUrl = url
+    }
+    
+    init(){
+        originatingUrl = nil
     }
     
     func newInstance() -> Self {
