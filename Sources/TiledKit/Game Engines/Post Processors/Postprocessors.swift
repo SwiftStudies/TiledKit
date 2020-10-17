@@ -14,8 +14,19 @@
 
 /// Processors are applied after creation and can even completely recreate the
 /// specialized target. However, in most cases they will process and apply properties
-public protocol PostProcessor {
-    /// The `Engine` the `PostProcessor` applies to
-    associatedtype EngineType : Engine
+public protocol PostProcessor : EngineObject {
+    
 }
 
+
+/// Adds support for adding `PostProcessor`s that support multiple types
+public extension Engine {
+    #warning("API: Rename anypostprocessor to postProcessor and delete all other methods")
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter postProcessor: The new post processor
+    static func register<P:PostProcessor>(anyPostProcessor postProcessor:P) where P.EngineType == Self {
+  
+        
+        
+    }
+}

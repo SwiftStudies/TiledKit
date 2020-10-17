@@ -23,7 +23,7 @@ internal struct EngineRegistry {
         return registry.isEmpty
     }
     
-    static func insert<T,E:Engine>(`for` engine:E.Type, object:T){
+    static func insert<T:EngineObject,EngineType>(`for` engine:EngineType.Type, object:T) where T.EngineType == EngineType{
         let key = makeKey(for: engine.self)
         
         if registry[key] == nil {
@@ -32,7 +32,7 @@ internal struct EngineRegistry {
         registry[key]!.insert(object, at: 0)
     }
     
-    static func get<T,E:Engine>(`for` engine:E.Type)->[T] {
+    static func get<T:EngineObject,EngineType>(`for` engine:EngineType.Type)->[T] where T.EngineType == EngineType{
         return registry[makeKey(for: engine.self)]?.compactMap({
             $0 as? T
         }) ?? []
