@@ -70,7 +70,7 @@ public protocol Engine {
     
     /// Provide a default specialized map creator for the Engine
     /// - Parameter map: The `Map` to create it for
-    static func make(engineMapForTiled map:Map) throws -> MapType
+    static func make(mapFor tiledMap:Map) throws -> MapType
     
     /// Provide a default specialized tile creator for the Engine
     /// - Parameter map: The `Map` to create it for
@@ -89,7 +89,7 @@ public protocol Engine {
     ///   - setSprites: All other sprites created for the `TileSet`
     ///   - map: The map the `TileSet`s were loaded from
     ///   - project: The project the `Map`& `TileSet` was loaded from
-    static func postProcess(_ sprite:SpriteType, from tile:Tile, in tileSet:TileSet, with setSprites:[UInt32:SpriteType], for map:Map, from project:Project) throws ->SpriteType
+    static func process(_ sprite:SpriteType, from tile:Tile, in tileSet:TileSet, with setSprites:[UInt32:SpriteType], for map:Map, from project:Project) throws ->SpriteType
     
     /// Creates a sprite for the supplied image layer
     /// - Parameters:
@@ -97,21 +97,21 @@ public protocol Engine {
     ///   - layer: The additional data from the layer
     ///   - map: The map the layer is part of
     ///   - project: The project the map is being loaded from
-    static func makeSpriteFrom(_ texture:TextureType, for layer:LayerProtocol, in map:Map, from project:Project) throws -> SpriteType?
+    static func make(spriteFrom texture:TextureType, for layer:LayerProtocol, in map:Map, from project:Project) throws -> SpriteType?
     
     /// Creates a layer to contain objects
     /// - Parameters:
     ///   - layer: The additional data from the layer
     ///   - map: The map the layer is part of
     ///   - project: The project the map is being loaded from
-    static func makeObjectContainer(_ layer:LayerProtocol,in map:Map, from project:Project) throws -> ObjectLayerType?
+    static func make(objectContainerFrom layer:LayerProtocol,in map:Map, from project:Project) throws -> ObjectLayerType?
     
     /// Creates a layer containing other layers
     /// - Parameters:
     ///   - layer: The details of the grouping layer
     ///   - map: The `Map` the layer belongs to
     ///   - project: The project the map is being loaded from
-    static func makeGroupLayer(_ layer:LayerProtocol,in map:Map, from project:Project) throws -> GroupLayerType?
+    static func make(groupFrom layer:LayerProtocol,in map:Map, from project:Project) throws -> GroupLayerType?
     
     /// Creates a tile layer with the supplied tiles in using the sprites loaded during map building
     /// - Parameters:
@@ -120,7 +120,7 @@ public protocol Engine {
     ///   - sprites: The sprites (indexed by gid) that can be used
     ///   - map: The map the layer is in
     ///   - project: The project the layer is loaded from
-    static func makeTileLayerFrom(_ tileGrid:TileGrid, for layer:LayerProtocol, with sprites:MapTiles<Self>, in map:Map, from project:Project) throws -> TileLayerType?
+    static func make(tileLayer tileGrid:TileGrid, for layer:LayerProtocol, with sprites:MapTiles<Self>, in map:Map, from project:Project) throws -> TileLayerType?
     
     /// Creates a point object
     /// - Parameters:

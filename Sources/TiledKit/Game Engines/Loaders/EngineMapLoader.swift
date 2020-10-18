@@ -153,7 +153,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 }
                 
                 if madeLayer == nil {
-                    madeLayer = try E.makeGroupLayer(layer, in: map, from: project)
+                    madeLayer = try E.make(groupFrom: layer, in: map, from: project)
                 }
                 
                 try walk(layers: group.layers, in: map, containedIn: madeLayer)
@@ -174,7 +174,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 
                 if madeLayer == nil {
                     let texture = try project.retrieve(asType: E.TextureType.self, from: imageReference.source)
-                    madeLayer = try E.makeSpriteFrom(texture, for: layer, in: map, from: project)
+                    madeLayer = try E.make(spriteFrom: texture, for: layer, in: map, from: project)
                 }
                 
                 for postProcessor in E.engineLayerPostProcessors() {
@@ -192,7 +192,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 }
                 
                 if madeLayer == nil {
-                    madeLayer = try E.makeObjectContainer(layer, in: map, from: project)
+                    madeLayer = try E.make(objectContainerFrom: layer, in: map, from: project)
                 }
                 
                 try walk(objects: objects, in: map, containedIn: madeLayer)
@@ -212,7 +212,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 }
                 
                 if madeLayer == nil {
-                    madeLayer = try E.makeTileLayerFrom(tileGrid, for: layer, with: mapTiles, in: map, from: project)
+                    madeLayer = try E.make(tileLayer: tileGrid, for: layer, with: mapTiles, in: map, from: project)
                 }
                 
                 for postProcessor in E.engineLayerPostProcessors() {
@@ -233,7 +233,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
             }
         }
         
-        return try E.make(engineMapForTiled: map)
+        return try E.make(mapFor: map)
     }
     
     func process(specializedMap:E.MapType, for map:Map) throws -> E.MapType {
@@ -278,7 +278,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     throw EngineError.couldNotFindSpriteInTileSet(tileId, tileSet: tileSet)
                 }
                 
-                setSprites[tileId] = try E.postProcess(sprite, from: tile, in: tileSet, with: setSprites, for: map, from: project)
+                setSprites[tileId] = try E.process(sprite, from: tile, in: tileSet, with: setSprites, for: map, from: project)
 
                 // Process stuff
                 for processor in E.engineTilePostProcessors() {

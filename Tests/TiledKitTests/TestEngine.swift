@@ -35,7 +35,7 @@ final class TestEngine : Engine {
         return TestTexture(from: url)
     }
     
-    static func make(engineMapForTiled map: Map) throws -> TestMap {
+    static func make(mapFor map: Map) throws -> TestMap {
         return TestMap(size:map.pixelSize)
     }
     
@@ -60,34 +60,25 @@ final class TestEngine : Engine {
         return specializedMap
     }
     
-    static func postProcess(_ sprite: TestSprite, from tile: Tile, in tileSet: TileSet, with setSprites: [UInt32 : TestSprite], for map: Map, from project: Project) throws -> TestSprite {
+    static func process(_ sprite: TestSprite, from tile: Tile, in tileSet: TileSet, with setSprites: [UInt32 : TestSprite], for map: Map, from project: Project) throws -> TestSprite {
         sprite.postProcessed = true
       return sprite
     }
     
-    static func makeSpriteFrom(_ texture: TestTexture, for layer: LayerProtocol, in map: Map, from project: Project) throws -> TestSprite? {
+    static func make(spriteFrom texture: TestTexture, for layer: LayerProtocol, in map: Map, from project: Project) throws -> TestSprite? {
         return TestSprite()
     }
     
-    static func makeObjectContainer(_ layer: LayerProtocol, in map: Map, from project: Project) throws -> TestNode? {
+    static func make(groupFrom layer: LayerProtocol, in map: Map, from project: Project) throws -> TestNode? {
         return TestNode()
     }
     
-    static func makeGroupLayer(_ layer: LayerProtocol, in map: Map, from project: Project) throws -> TestNode? {
+    static func make(objectContainerFrom layer: LayerProtocol, in map: Map, from project: Project) throws -> TestNode? {
         return TestNode()
     }
-    
-    static func makeTileLayerFrom(_ tileGrid: TileGrid, for layer: LayerProtocol, with sprites: MapTiles<TestEngine>, in map: Map, from project: Project) throws -> TestNode? {
+        
+    static func make(tileLayer tileGrid: TileGrid, for layer: LayerProtocol, with sprites: MapTiles<TestEngine>, in map: Map, from project: Project) throws -> TestNode? {
         return TestNode()
-    }
-    
-    static func postProcess(_ objectLayer: TestNode, from layer: LayerProtocol, for map: Map, in project: Project) throws -> TestNode {
-        return objectLayer
-    }
-    
-    
-    static func postProcess(_ imageLayer: TestSprite, from layer: LayerProtocol, for map: Map, in project: Project) throws -> TestSprite {
-        return imageLayer
     }
     
     static func make(pointFor object: ObjectProtocol, in map: Map, from project: Project) throws -> TestPoint {
