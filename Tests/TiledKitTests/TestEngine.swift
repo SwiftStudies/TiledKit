@@ -43,8 +43,6 @@ final class TestEngine : Engine {
         return
     }
     
-
-    
     //
     // Tile Processing
     //
@@ -194,6 +192,8 @@ class TestNode : EngineLayerContainer, EngineObjectContainer {
     typealias EngineType = TestEngine
 
     var children = [Any]()
+    var userData = [String:Any]()
+
     
     func add(child point: TestPoint) {
         children.append(point)
@@ -301,7 +301,28 @@ struct TestMapPostProcessor : MapPostProcessor {
     }
 }
 
+struct TestMultiProcessor : MapPostProcessor, LayerPostProcessor {
+    typealias EngineType = TestEngine
 
+    func process(_ imageLayer: TestSprite, from layer: LayerProtocol, for map: Map, in project: Project) throws -> TestSprite {
+        imageLayer.userData["multiProcessed"] = true
+        
+        return imageLayer
+    }
+
+    
+    func process(_ specializedMap: TestMap, for map: Map, from project: Project) throws -> EngineType.MapType {
+        specializedMap.userData["multiProcessed"] = true
+        
+        return specializedMap
+    }
+    
+    func process(_ node: TestNode, from layer: LayerProtocol, for map: Map, in project: Project) throws -> EngineType.ObjectLayerType {
+        node.userData["multiProcessed"] = true
+        
+        return node
+    }
+}
 
 enum TestProperties : String, TiledEngineBridgableProperty, CaseIterable {
     typealias EngineObjectType = TestSprite
