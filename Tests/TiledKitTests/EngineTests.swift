@@ -55,9 +55,9 @@ final class EngineTests: XCTestCase {
 
         XCTAssertEqual(TestEngine.engineMapFactories().count, 0)
         XCTAssertEqual(TestEngine.engineMapPostProcessors().count, 0)
-        TestEngine.register(factory: TestMapFactory())
-        TestEngine.register(postProcessor: TestMapPostProcessor())
-        TestEngine.register(postProcessor: TestTilePostProcessor())
+        TestEngine.register(producer: TestMapFactory())
+        TestEngine.register(producer: TestMapPostProcessor())
+        TestEngine.register(producer: TestTilePostProcessor())
         TestEngine.register(producer: TestMultiProcessor())
         XCTAssertEqual(TestEngine.engineLayerPostProcessors().count, 1)
         XCTAssertEqual(TestEngine.engineMapFactories().count, 1)

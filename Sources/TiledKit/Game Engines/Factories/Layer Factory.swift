@@ -47,16 +47,6 @@ public protocol LayerFactory : Factory {
 
 /// Adds support for `LayerFactories` to `Engine`
 public extension Engine {
-
-    /// Add a new factory to the factories for the `Engine`, new factories are tried first
-    /// - Parameter factory: The new factory
-    static func register<F:LayerFactory>(factory:F) where F.EngineType == Self {
-        EngineRegistry.insert(
-            for: Self.self,
-            object: AnyLayerFactory<Self>(wrap:factory)
-        )
-    }
-    
     /// Returns all engine tile factories registered
     /// - Returns: The available tile factories for this engine
     internal static func layerFactories() -> [AnyLayerFactory<Self>] {

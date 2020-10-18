@@ -40,16 +40,6 @@ internal struct AnyEngineMapFactory<EngineType:Engine> : EngineMapFactory {
 
 /// Adds support for `EngineMapFactories` to `Engine`
 public extension Engine {
-
-    /// Add a new factory to the factories for the `Engine`, new factories are tried first
-    /// - Parameter factory: The new factory
-    static func register<F:EngineMapFactory>(factory:F) where F.EngineType == Self {
-        EngineRegistry.insert(
-            for: Self.self,
-            object: AnyEngineMapFactory<Self>(wrap:factory)
-        )
-    }
-    
     /// Returns all engine map factories registered
     /// - Returns: The available map factories for this engine
     internal static func engineMapFactories() -> [AnyEngineMapFactory<Self>] {

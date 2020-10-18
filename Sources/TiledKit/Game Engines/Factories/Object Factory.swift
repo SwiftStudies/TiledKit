@@ -84,16 +84,6 @@ public protocol ObjectFactory : Factory {
 
 /// Adds support for `EngineObjectFactories` to `Engine`
 public extension Engine {
-
-    /// Add a new factory to the factories for the `Engine`, new factories are tried first
-    /// - Parameter factory: The new factory
-    static func register<F:ObjectFactory>(factory:F) where F.EngineType == Self {
-        EngineRegistry.insert(
-            for: Self.self,
-            object: AnyObjectFactory<Self>(wrap:factory)
-        )
-    }
-    
     /// Returns all object factories registered
     /// - Returns: The available object factories for this engine
     internal static func objectFactories() -> [AnyObjectFactory<Self>] {

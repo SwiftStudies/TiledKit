@@ -29,15 +29,6 @@ public protocol MapPostProcessor : PostProcessor {
 /// Adds support for `MapPostProcessor`s  to `Engine`
 public extension Engine {
 
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter postProcessor: The new post processor
-    static func register<P:MapPostProcessor>(postProcessor:P) where P.EngineType == Self {
-        EngineRegistry.insert(
-            for: Self.self,
-            object: AnyEngineMapPostProcessor<Self>(wrap:postProcessor)
-        )
-    }
-    
     /// Returns all engine map factories registered
     /// - Returns: The available map post processsors for this engine
     internal static func engineMapPostProcessors() -> [AnyEngineMapPostProcessor<Self>] {

@@ -51,15 +51,6 @@ public protocol LayerPostProcessor : PostProcessor {
 
 /// Adds support for `TilePostProcessor`s  to `Engine`
 public extension Engine {
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter postProcessor: The new post processor
-    static func register<P:LayerPostProcessor>(postProcessor:P) where P.EngineType == Self {
-        EngineRegistry.insert(
-            for: Self.self,
-            object: AnyLayerPostProcessor<Self>(wrap:postProcessor)
-        )
-    }
     
     /// Returns all engine map factories registered
     /// - Returns: The available tile post processors for this engine
