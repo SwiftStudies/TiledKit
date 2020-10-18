@@ -15,6 +15,6 @@
 
 /// Factories are responsible for creating the specialized game engine objects. `Factory` itself is
 /// simply a common base protocol
-public protocol Factory {
-    associatedtype  EngineType : Engine
+public protocol Factory : EngineObject  {
+    
 }

@@ -20,6 +20,25 @@ final class EngineTests: XCTestCase {
         Project(using: Bundle.module)
     }()
     
+    func testProductionRegistration(){
+        struct SomeMapFactory : MapPostProcessor, EngineMapFactory {
+            typealias EngineType = TestEngine
+            
+            func process(_ specializedMap: EngineType.MapType, for map: Map, from project: Project) throws -> EngineType.MapType {
+                return specializedMap
+            }
+            func make(from map: Map, in project: Project) throws -> EngineType.MapType? {
+                return nil
+            }
+        }
+
+        TestEngine.register(producer: SomeMapFactory())
+
+        XCTAssertEqual(TestEngine.engineMapFactories().count, 1)
+        XCTAssertEqual(TestEngine.engineMapPostProcessors().count, 1)
+
+    }
+    
     func testMapLoading(){
         let testMap : TestMap
         let originalMap : Map
@@ -39,8 +58,10 @@ final class EngineTests: XCTestCase {
         TestEngine.register(factory: TestMapFactory())
         TestEngine.register(postProcessor: TestMapPostProcessor())
         TestEngine.register(postProcessor: TestTilePostProcessor())
+        TestEngine.register(producer: TestMultiProcessor())
+        XCTAssertEqual(TestEngine.engineLayerPostProcessors().count, 1)
         XCTAssertEqual(TestEngine.engineMapFactories().count, 1)
-        XCTAssertEqual(TestEngine.engineMapPostProcessors().count, 1)
+        XCTAssertEqual(TestEngine.engineMapPostProcessors().count, 2)
 
         XCTAssertEqual(TestEngine.createdSprites.count, 5)
         XCTAssertEqual(TestEngine.createdSprites.filter(\.postProcessed).count, TestEngine.createdSprites.count)
@@ -55,6 +76,7 @@ final class EngineTests: XCTestCase {
         XCTAssertEqual(customMap.size, PixelSize(width: 1, height: 1))
         XCTAssertEqual(customMap.falseByDefault, true)
         XCTAssertEqual(customMap.lifeTheUniverseAndEverything, 42)
+        XCTAssertEqual(customMap.userData["multiProcessed"] as? Bool, true)
         XCTAssertEqual(TestEngine.createdSprites.count, 5)
         XCTAssertEqual(TestEngine.createdSprites.filter(\.postProcessed).count, 0)
 

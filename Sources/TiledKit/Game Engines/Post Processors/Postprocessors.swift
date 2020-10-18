@@ -14,8 +14,6 @@
 
 /// Processors are applied after creation and can even completely recreate the
 /// specialized target. However, in most cases they will process and apply properties
-public protocol PostProcessor {
-    /// The `Engine` the `PostProcessor` applies to
-    associatedtype EngineType : Engine
+public protocol PostProcessor : EngineObject {
+    
 }
-
