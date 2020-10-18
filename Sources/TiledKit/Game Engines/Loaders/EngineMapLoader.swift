@@ -146,7 +146,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
             case .group(let group):
                 var madeLayer : E.GroupLayerType!
                 for factory in E.layerFactories() {
-                    if let factoryMadeLayer = try factory.makeGroupFor(layer, in: map, from: project){
+                    if let factoryMadeLayer = try factory.make(groupFor: layer, in: map, from: project){
                         madeLayer = factoryMadeLayer
                         break
                     }
@@ -166,7 +166,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
             case .image(let imageReference):
                 var madeLayer : E.SpriteType!
                 for factory in E.layerFactories() {
-                    if let factoryMadeLayer = try factory.makeSprite(from: imageReference, for: layer, in: map, from: project){
+                    if let factoryMadeLayer = try factory.make(spriteFor: imageReference, for: layer, in: map, from: project){
                         madeLayer = factoryMadeLayer
                         break
                     }
@@ -185,7 +185,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
             case .objects(let objects):
                 var madeLayer : E.ObjectLayerType! = nil
                 for factory in E.layerFactories() {
-                    if let factoryMadeLayer = try factory.makeObjectContainer(layer, in: map, from: project){
+                    if let factoryMadeLayer = try factory.make(objectContainerFor: layer, in: map, from: project){
                         madeLayer = factoryMadeLayer
                         break
                     }
@@ -205,7 +205,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
             case .tile(let tileGrid):
                 var madeLayer : E.TileLayerType! = nil
                 for factory in E.layerFactories() {
-                    if let factoryMadeLayer = try factory.makeTileLayer(from: tileGrid, for: layer, with: mapTiles, in: map, from: project){
+                    if let factoryMadeLayer = try factory.make(tileLayerFor: tileGrid, for: layer, with: mapTiles, in: map, from: project){
                         madeLayer = factoryMadeLayer
                         break
                     }
@@ -228,7 +228,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
     
     func build(specializedImplementationFor map:Map) throws -> E.MapType {
         for factory in E.engineMapFactories(){
-            if let specializedMap : E.MapType = try factory.make(from: map, in: project) {
+            if let specializedMap : E.MapType = try factory.make(mapFor: map, in: project) {
                 return specializedMap
             }
         }
@@ -294,8 +294,8 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
     
     func retrieve<R>(asType: R.Type, from url: URL) throws -> R where R : Loadable {
         /// Register defaults if present
-        if !E.hasFactoriesOrPostProcessors {
-            E.registerFactoriesAndPostProcessors()
+        if !E.hasProducers {
+            E.registerProducers()
         }
         
         let tiledMap = try project.retrieve(asType: Map.self, from: url)

@@ -13,7 +13,7 @@
 //    limitations under the License.
 
 /// Tile factories create the sprites that will be rendered for tiles
-public protocol ObjectFactory : Factory {
+public protocol ObjectFactory : Producer {
     
     /// Creates a point object
     /// - Parameters:

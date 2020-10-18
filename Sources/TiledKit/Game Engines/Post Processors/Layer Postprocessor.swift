@@ -14,7 +14,7 @@
 
 /// A specialized form of a `PostProcessor` that applies to `Tile`s. It is called after the first factory
 /// has created the specialized sprite for the tile
-public protocol LayerPostProcessor : PostProcessor {
+public protocol LayerPostProcessor : Producer {
     
     /// Perfforms post processing on an object layer after creation
     /// - Parameters:

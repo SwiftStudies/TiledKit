@@ -39,7 +39,7 @@ final class TestEngine : Engine {
         return TestMap(size:map.pixelSize)
     }
     
-    static func registerFactoriesAndPostProcessors() {
+    static func registerProducers() {
         return
     }
     
@@ -245,11 +245,11 @@ class TestMap : TestNode, EngineMap {
     
 }
 
-struct TestMapFactory : EngineMapFactory {
+struct TestMapFactory : MapFactory {
     
     typealias EngineType = TestEngine
 
-    func make(from map: Map, in project: Project) throws -> TestMap? {
+    func make(mapFor map: Map, in project: Project) throws -> TestMap? {
         return TestMap(size: PixelSize(width: 1, height: 1))
     }
 }

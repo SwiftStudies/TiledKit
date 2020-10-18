@@ -13,7 +13,7 @@
 //    limitations under the License.
 
 /// Tile factories create the sprites that will be rendered for tiles
-public protocol TileFactory : Factory {
+public protocol TileFactory : Producer {
     
     /// Make a new sprite to represent the tile
     /// - Parameters:

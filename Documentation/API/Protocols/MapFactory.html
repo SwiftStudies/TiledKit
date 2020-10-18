@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Factory Protocol Reference</title>
+    <title>MapFactory Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,11 +13,11 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Protocol/Factory" class="dashAnchor"></a>
-    <a title="Factory Protocol Reference"></a>
+    <a name="//apple_ref/swift/Protocol/MapFactory" class="dashAnchor"></a>
+    <a title="MapFactory Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TiledKit</a> (97% documented)</p>
+        <p><a href="../index.html">TiledKit</a> (98% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">TiledKit Reference</a>
         <img id="carat" src="../img/carat.png" />
-        Factory Protocol Reference
+        MapFactory Protocol Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -115,9 +115,6 @@
                 <a href="../Protocols/EngineMap.html">EngineMap</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/EngineMapFactory.html">EngineMapFactory</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Protocols/EngineObject.html">EngineObject</a>
               </li>
               <li class="nav-group-task">
@@ -133,7 +130,7 @@
                 <a href="../Protocols/ExpressibleAsTiledFloat.html">ExpressibleAsTiledFloat</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/Factory.html">Factory</a>
+                <a href="../Protocols.html#/s:8TiledKit7FactoryP">Factory</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/LayerContainer.html">LayerContainer</a>
@@ -154,6 +151,9 @@
                 <a href="../Protocols/Loadable.html">Loadable</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/MapFactory.html">MapFactory</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/MapPostProcessor.html">MapPostProcessor</a>
               </li>
               <li class="nav-group-task">
@@ -172,7 +172,7 @@
                 <a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/PostProcessor.html">PostProcessor</a>
+                <a href="../Protocols.html#/s:8TiledKit13PostProcessorP">PostProcessor</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Propertied.html">Propertied</a>
@@ -308,16 +308,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Factory</h1>
+            <h1>MapFactory</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Factory</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">MapFactory</span> <span class="p">:</span> <span class="kt"><a href="../Protocols.html#/s:8TiledKit7FactoryP">Factory</a></span></code></pre>
 
                 </div>
               </div>
-            <p>Factories are responsible for creating the specialized game engine objects. <code>Factory</code> itself is
-simply a common base protocol</p>
+            <p>A Factory responsible for creating an Engine Map</p>
 
           </section>
           <section class="section task-group-section">
@@ -326,9 +325,9 @@ simply a common base protocol</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit7FactoryP10EngineTypeQa"></a>
-                    <a name="//apple_ref/swift/Alias/EngineType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit7FactoryP10EngineTypeQa">EngineType</a>
+                    <a name="/s:8TiledKit10MapFactoryP4make6mapFor2in10EngineType_0cJ0QZSgAA0C0V_AA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/make(mapFor:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit10MapFactoryP4make6mapFor2in10EngineType_0cJ0QZSgAA0C0V_AA7ProjectCtKF">make(mapFor:<wbr>in:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -336,16 +335,50 @@ simply a common base protocol</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A map factory is responsible for determining (for example looking at properites)
+if a special kind of map should be created. If the map type this factory makes
+is not applicable for the supplied <code><a href="../Structs/Map.html">Map</a></code> then the factory can return nil, causing the
+next factory to be tried</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">EngineType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Engine.html">Engine</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">make</span><span class="p">(</span><span class="n">mapFor</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">MapType</span><span class="p">?</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Structs/Map.html">Map</a></code> being loaded</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>project</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Classes/Project.html">Project</a></code> the map is being loaded from</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>

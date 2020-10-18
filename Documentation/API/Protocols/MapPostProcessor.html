@@ -17,7 +17,7 @@
     <a title="MapPostProcessor Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TiledKit</a> (97% documented)</p>
+        <p><a href="../index.html">TiledKit</a> (98% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -115,9 +115,6 @@
                 <a href="../Protocols/EngineMap.html">EngineMap</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/EngineMapFactory.html">EngineMapFactory</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Protocols/EngineObject.html">EngineObject</a>
               </li>
               <li class="nav-group-task">
@@ -133,7 +130,7 @@
                 <a href="../Protocols/ExpressibleAsTiledFloat.html">ExpressibleAsTiledFloat</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/Factory.html">Factory</a>
+                <a href="../Protocols.html#/s:8TiledKit7FactoryP">Factory</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/LayerContainer.html">LayerContainer</a>
@@ -154,6 +151,9 @@
                 <a href="../Protocols/Loadable.html">Loadable</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/MapFactory.html">MapFactory</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/MapPostProcessor.html">MapPostProcessor</a>
               </li>
               <li class="nav-group-task">
@@ -172,7 +172,7 @@
                 <a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/PostProcessor.html">PostProcessor</a>
+                <a href="../Protocols.html#/s:8TiledKit13PostProcessorP">PostProcessor</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Propertied.html">Propertied</a>
@@ -312,11 +312,11 @@
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">MapPostProcessor</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PostProcessor.html">PostProcessor</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">MapPostProcessor</span> <span class="p">:</span> <span class="kt"><a href="../Protocols.html#/s:8TiledKit13PostProcessorP">PostProcessor</a></span></code></pre>
 
                 </div>
               </div>
-            <p>A specialized form of a <code><a href="../Protocols/PostProcessor.html">PostProcessor</a></code> that applies to <code>Maps</code>. It is called after all <code>Layers</code>
+            <p>A specialized form of a <code><a href="../Protocols.html#/s:8TiledKit13PostProcessorP">PostProcessor</a></code> that applies to <code>Maps</code>. It is called after all <code>Layers</code>
 and <code>Objects</code> have been made and processed</p>
 
           </section>
@@ -345,7 +345,7 @@ apply changes to everything within your specialized map</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">specializedMap</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">MapType</span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">MapType</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">engineMap</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">MapType</span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">MapType</span></code></pre>
 
                         </div>
                       </div>

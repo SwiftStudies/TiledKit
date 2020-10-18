@@ -21,13 +21,13 @@ final class EngineTests: XCTestCase {
     }()
     
     func testProductionRegistration(){
-        struct SomeMapFactory : MapPostProcessor, EngineMapFactory {
+        struct SomeMapFactory : MapPostProcessor, MapFactory {
             typealias EngineType = TestEngine
             
             func process(_ specializedMap: EngineType.MapType, for map: Map, from project: Project) throws -> EngineType.MapType {
                 return specializedMap
             }
-            func make(from map: Map, in project: Project) throws -> EngineType.MapType? {
+            func make(mapFor map: Map, in project: Project) throws -> EngineType.MapType? {
                 return nil
             }
         }
@@ -69,7 +69,7 @@ final class EngineTests: XCTestCase {
         // Reset sprite count
         TestEngine.createdSprites.removeAll()
         guard let customMap : TestMap = try? moduleBundleProject.retrieve(TestEngine.self, mapNamed:"Test Map 1", in:"Maps") else {
-            TestEngine.removeAllFactoriesAndPostProcessors()
+            TestEngine.removeProducers()
             return XCTFail("Could not load custom map")
         }
         
@@ -81,7 +81,7 @@ final class EngineTests: XCTestCase {
         XCTAssertEqual(TestEngine.createdSprites.filter(\.postProcessed).count, 0)
 
         
-        TestEngine.removeAllFactoriesAndPostProcessors()
+        TestEngine.removeProducers()
         XCTAssertEqual(TestEngine.engineMapFactories().count, 0)
         
     }

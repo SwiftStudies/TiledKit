@@ -15,7 +15,7 @@
 
 /// A specialized form of a `PostProcessor` that applies to `Tile`s. It is called after the first factory
 /// has created the specialized sprite for the tile
-public protocol TilePostProcessor : PostProcessor {
+public protocol TilePostProcessor : Producer  {
     
     
     /// Enables post processing of tiles which is performed after all tiles for a tileset have been created by factories and enables

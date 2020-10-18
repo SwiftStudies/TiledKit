@@ -17,7 +17,7 @@
     <a title="Project Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TiledKit</a> (97% documented)</p>
+        <p><a href="../index.html">TiledKit</a> (98% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -115,9 +115,6 @@
                 <a href="../Protocols/EngineMap.html">EngineMap</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/EngineMapFactory.html">EngineMapFactory</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Protocols/EngineObject.html">EngineObject</a>
               </li>
               <li class="nav-group-task">
@@ -133,7 +130,7 @@
                 <a href="../Protocols/ExpressibleAsTiledFloat.html">ExpressibleAsTiledFloat</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/Factory.html">Factory</a>
+                <a href="../Protocols.html#/s:8TiledKit7FactoryP">Factory</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/LayerContainer.html">LayerContainer</a>
@@ -154,6 +151,9 @@
                 <a href="../Protocols/Loadable.html">Loadable</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/MapFactory.html">MapFactory</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/MapPostProcessor.html">MapPostProcessor</a>
               </li>
               <li class="nav-group-task">
@@ -172,7 +172,7 @@
                 <a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/PostProcessor.html">PostProcessor</a>
+                <a href="../Protocols.html#/s:8TiledKit13PostProcessorP">PostProcessor</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Propertied.html">Propertied</a>
@@ -1095,9 +1095,9 @@ to create common cached assets</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit7ProjectC8retrieve14specializedMap2inxSS_SSSgtKAA06EngineF0RzlF"></a>
-                    <a name="//apple_ref/swift/Method/retrieve(specializedMap:in:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit7ProjectC8retrieve14specializedMap2inxSS_SSSgtKAA06EngineF0RzlF">retrieve(specializedMap:<wbr>in:<wbr>)</a>
+                    <a name="/s:8TiledKit7ProjectC8retrieve_8mapNamed2in7MapTypeQzxm_S2SSgtKAA6EngineRzlF"></a>
+                    <a name="//apple_ref/swift/Method/retrieve(_:mapNamed:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit7ProjectC8retrieve_8mapNamed2in7MapTypeQzxm_S2SSgtKAA6EngineRzlF">retrieve(_:<wbr>mapNamed:<wbr>in:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1122,7 +1122,7 @@ receiving variable, so you must ensure the type is explicit. For example:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">retrieve</span><span class="o">&lt;</span><span class="kt">E</span><span class="o">&gt;</span><span class="p">(</span><span class="n">specializedMap</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="k">in</span> <span class="nv">subdirectory</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">E</span> <span class="k">where</span> <span class="kt">E</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineMap.html">EngineMap</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">retrieve</span><span class="o">&lt;</span><span class="kt">EngineType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">engine</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span> <span class="n">mapNamed</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="k">in</span> <span class="nv">subdirectory</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">MapType</span> <span class="k">where</span> <span class="kt">EngineType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Engine.html">Engine</a></span></code></pre>
 
                         </div>
                       </div>

@@ -17,7 +17,7 @@
     <a title="LayerFactory Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TiledKit</a> (97% documented)</p>
+        <p><a href="../index.html">TiledKit</a> (98% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -115,9 +115,6 @@
                 <a href="../Protocols/EngineMap.html">EngineMap</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/EngineMapFactory.html">EngineMapFactory</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Protocols/EngineObject.html">EngineObject</a>
               </li>
               <li class="nav-group-task">
@@ -133,7 +130,7 @@
                 <a href="../Protocols/ExpressibleAsTiledFloat.html">ExpressibleAsTiledFloat</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/Factory.html">Factory</a>
+                <a href="../Protocols.html#/s:8TiledKit7FactoryP">Factory</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/LayerContainer.html">LayerContainer</a>
@@ -154,6 +151,9 @@
                 <a href="../Protocols/Loadable.html">Loadable</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/MapFactory.html">MapFactory</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/MapPostProcessor.html">MapPostProcessor</a>
               </li>
               <li class="nav-group-task">
@@ -172,7 +172,7 @@
                 <a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/PostProcessor.html">PostProcessor</a>
+                <a href="../Protocols.html#/s:8TiledKit13PostProcessorP">PostProcessor</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Propertied.html">Propertied</a>
@@ -312,7 +312,7 @@
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">LayerFactory</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Factory.html">Factory</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">LayerFactory</span> <span class="p">:</span> <span class="kt"><a href="../Protocols.html#/s:8TiledKit7FactoryP">Factory</a></span></code></pre>
 
                 </div>
               </div>
@@ -325,9 +325,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit12LayerFactoryP10makeSprite4from3for2inAE10EngineType_0fK0QZSgAA14ImageReferenceV_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
-                    <a name="//apple_ref/swift/Method/makeSprite(from:for:in:from:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit12LayerFactoryP10makeSprite4from3for2inAE10EngineType_0fK0QZSgAA14ImageReferenceV_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">makeSprite(from:<wbr>for:<wbr>in:<wbr>from:<wbr>)</a>
+                    <a name="/s:8TiledKit12LayerFactoryP4make9spriteFor3for2in4from10EngineType_06SpriteL0QZSgAA14ImageReferenceV_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/make(spriteFor:for:in:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit12LayerFactoryP4make9spriteFor3for2in4from10EngineType_06SpriteL0QZSgAA14ImageReferenceV_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">make(spriteFor:<wbr>for:<wbr>in:<wbr>from:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -342,7 +342,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">makeSprite</span><span class="p">(</span><span class="n">from</span> <span class="nv">imageReference</span><span class="p">:</span> <span class="kt"><a href="../Structs/ImageReference.html">ImageReference</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">SpriteType</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">make</span><span class="p">(</span><span class="n">spriteFor</span> <span class="nv">imageReference</span><span class="p">:</span> <span class="kt"><a href="../Structs/ImageReference.html">ImageReference</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">SpriteType</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -407,9 +407,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit12LayerFactoryP19makeObjectContainer_2in4from10EngineType_0fcK0QZSgAA0C8Protocol_p_AA3MapVAA7ProjectCtKF"></a>
-                    <a name="//apple_ref/swift/Method/makeObjectContainer(_:in:from:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit12LayerFactoryP19makeObjectContainer_2in4from10EngineType_0fcK0QZSgAA0C8Protocol_p_AA3MapVAA7ProjectCtKF">makeObjectContainer(_:<wbr>in:<wbr>from:<wbr>)</a>
+                    <a name="/s:8TiledKit12LayerFactoryP4make18objectContainerFor2in4from10EngineType_06ObjectcL0QZSgAA0C8Protocol_p_AA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/make(objectContainerFor:in:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit12LayerFactoryP4make18objectContainerFor2in4from10EngineType_06ObjectcL0QZSgAA0C8Protocol_p_AA3MapVAA7ProjectCtKF">make(objectContainerFor:<wbr>in:<wbr>from:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -424,7 +424,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">makeObjectContainer</span><span class="p">(</span><span class="n">_</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">ObjectLayerType</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">make</span><span class="p">(</span><span class="n">objectContainerFor</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">ObjectLayerType</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -477,9 +477,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit12LayerFactoryP12makeGroupFor_2in4from10EngineType_0fcK0QZSgAA0C8Protocol_p_AA3MapVAA7ProjectCtKF"></a>
-                    <a name="//apple_ref/swift/Method/makeGroupFor(_:in:from:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit12LayerFactoryP12makeGroupFor_2in4from10EngineType_0fcK0QZSgAA0C8Protocol_p_AA3MapVAA7ProjectCtKF">makeGroupFor(_:<wbr>in:<wbr>from:<wbr>)</a>
+                    <a name="/s:8TiledKit12LayerFactoryP4make8groupFor2in4from10EngineType_05GroupcK0QZSgAA0C8Protocol_p_AA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/make(groupFor:in:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit12LayerFactoryP4make8groupFor2in4from10EngineType_05GroupcK0QZSgAA0C8Protocol_p_AA3MapVAA7ProjectCtKF">make(groupFor:<wbr>in:<wbr>from:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -494,7 +494,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">makeGroupFor</span><span class="p">(</span><span class="n">_</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">GroupLayerType</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">make</span><span class="p">(</span><span class="n">groupFor</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">GroupLayerType</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -547,9 +547,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit12LayerFactoryP08makeTileC04from3for4with2inAE10EngineType_0fcL0QZSgAA0F4GridV_AA0C8Protocol_pAA8MapTilesCyAIQzGAA0O0VAA7ProjectCtKF"></a>
-                    <a name="//apple_ref/swift/Method/makeTileLayer(from:for:with:in:from:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit12LayerFactoryP08makeTileC04from3for4with2inAE10EngineType_0fcL0QZSgAA0F4GridV_AA0C8Protocol_pAA8MapTilesCyAIQzGAA0O0VAA7ProjectCtKF">makeTileLayer(from:<wbr>for:<wbr>with:<wbr>in:<wbr>from:<wbr>)</a>
+                    <a name="/s:8TiledKit12LayerFactoryP4make04tileC3For3for4with2in4from10EngineType_04TilecM0QZSgAA0N4GridV_AA0C8Protocol_pAA8MapTilesCyAJQzGAA0Q0VAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/make(tileLayerFor:for:with:in:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit12LayerFactoryP4make04tileC3For3for4with2in4from10EngineType_04TilecM0QZSgAA0N4GridV_AA0C8Protocol_pAA8MapTilesCyAJQzGAA0Q0VAA7ProjectCtKF">make(tileLayerFor:<wbr>for:<wbr>with:<wbr>in:<wbr>from:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -564,7 +564,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">makeTileLayer</span><span class="p">(</span><span class="n">from</span> <span class="nv">tileGrid</span><span class="p">:</span> <span class="kt"><a href="../Structs/TileGrid.html">TileGrid</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="n">with</span> <span class="nv">sprites</span><span class="p">:</span> <span class="kt"><a href="../Classes/MapTiles.html">MapTiles</a></span><span class="o">&lt;</span><span class="kt">EngineType</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">TileLayerType</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">make</span><span class="p">(</span><span class="n">tileLayerFor</span> <span class="nv">tileGrid</span><span class="p">:</span> <span class="kt"><a href="../Structs/TileGrid.html">TileGrid</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="n">with</span> <span class="nv">sprites</span><span class="p">:</span> <span class="kt"><a href="../Classes/MapTiles.html">MapTiles</a></span><span class="o">&lt;</span><span class="kt">EngineType</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">in</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">TileLayerType</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>

@@ -59,7 +59,7 @@ public protocol Engine {
     associatedtype PolygonObjectType : EngineObject where PolygonObjectType.EngineType == Self
 
     /// Register any default factories or post-processors
-    static func registerFactoriesAndPostProcessors()
+    static func registerProducers()
     
     /// Provide a method for loading textures
     static func load(textureFrom url:URL, in project:Project) throws -> TextureType
@@ -226,12 +226,12 @@ public extension Engine {
     }
 
     /// `true` if there are any factories or post processors registered
-    static var hasFactoriesOrPostProcessors : Bool {
+    static var hasProducers : Bool {
         return EngineRegistry.isEmpty(for: Self.self)
     }
     
     /// Removes all factories that have been registered for the engine
-    static func removeAllFactoriesAndPostProcessors() {
+    static func removeProducers() {
         EngineRegistry.removeAll(from: Self.self)
     }
         

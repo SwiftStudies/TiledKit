@@ -14,6 +14,13 @@
 
 import Foundation
 
+/// Producers are responsible for creating and post-processing `Engine` specific objects representing Tiled objects. `Engine` implementors
+/// must provide basic similar funcitonality but those can be the most generic realizations of Tiled objects, with specific producers created to
+/// perform more specialized work, stopping `Engine`s from becoming overly complex in a single type. 
+public protocol Producer : EngineObject {
+    
+}
+
 /// Adds support for adding `PostProcessor`s and `Factories` that support multiple types
 public extension Engine {
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
@@ -69,19 +76,19 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: TilePostProcessor, Producer: ObjectFactory, Producer: LayerFactory, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: EngineMapFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: TilePostProcessor, Producer: ObjectFactory, Producer: LayerFactory, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: MapFactory {
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: TileFactory, Producer: TilePostProcessor, Producer: ObjectFactory, Producer: LayerFactory, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: EngineMapFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: TileFactory, Producer: TilePostProcessor, Producer: ObjectFactory, Producer: LayerFactory, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: MapFactory {
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
@@ -89,7 +96,7 @@ public extension Engine {
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
@@ -117,11 +124,11 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: TileFactory, Producer: ObjectFactory, Producer: EngineMapFactory, Producer: TilePostProcessor, Producer: LayerPostProcessor, Producer: MapPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: TileFactory, Producer: ObjectFactory, Producer: MapFactory, Producer: TilePostProcessor, Producer: LayerPostProcessor, Producer: MapPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
@@ -129,9 +136,9 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: EngineMapFactory, Producer: LayerPostProcessor, Producer: ObjectFactory, Producer: TileFactory, Producer: TilePostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: MapFactory, Producer: LayerPostProcessor, Producer: ObjectFactory, Producer: TileFactory, Producer: TilePostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
@@ -150,8 +157,8 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: MapPostProcessor, Producer: LayerPostProcessor, Producer: ObjectFactory, Producer: TileFactory, Producer: TilePostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: MapPostProcessor, Producer: LayerPostProcessor, Producer: ObjectFactory, Producer: TileFactory, Producer: TilePostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
@@ -161,8 +168,8 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: TilePostProcessor, Producer: TileFactory, Producer: MapPostProcessor, Producer: ObjectFactory, Producer: LayerFactory, Producer: LayerPostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: TilePostProcessor, Producer: TileFactory, Producer: MapPostProcessor, Producer: ObjectFactory, Producer: LayerFactory, Producer: LayerPostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
@@ -194,8 +201,8 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: LayerPostProcessor, Producer: ObjectFactory, Producer: LayerFactory, Producer: TileFactory, Producer: TilePostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: LayerPostProcessor, Producer: ObjectFactory, Producer: LayerFactory, Producer: TileFactory, Producer: TilePostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
@@ -205,8 +212,8 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: LayerPostProcessor, Producer: ObjectFactory, Producer: TileFactory, Producer: TilePostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: LayerPostProcessor, Producer: ObjectFactory, Producer: TileFactory, Producer: TilePostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
@@ -234,9 +241,9 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: EngineMapFactory, Producer: MapPostProcessor, Producer: ObjectFactory, Producer: LayerFactory, Producer: TilePostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: MapFactory, Producer: MapPostProcessor, Producer: ObjectFactory, Producer: LayerFactory, Producer: TilePostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
@@ -245,14 +252,14 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: ObjectFactory, Producer: MapPostProcessor, Producer: TileFactory, Producer: LayerFactory, Producer: TilePostProcessor, Producer: EngineMapFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: ObjectFactory, Producer: MapPostProcessor, Producer: TileFactory, Producer: LayerFactory, Producer: TilePostProcessor, Producer: MapFactory {
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
@@ -268,22 +275,22 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: MapPostProcessor, Producer: ObjectFactory, Producer: EngineMapFactory, Producer: TilePostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: MapPostProcessor, Producer: ObjectFactory, Producer: MapFactory, Producer: TilePostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: ObjectPostProcessor, Producer: MapPostProcessor, Producer: ObjectFactory, Producer: EngineMapFactory, Producer: TilePostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: ObjectPostProcessor, Producer: MapPostProcessor, Producer: ObjectFactory, Producer: MapFactory, Producer: TilePostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
     }
 
@@ -308,22 +315,22 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: ObjectFactory, Producer: LayerFactory, Producer: EngineMapFactory, Producer: TileFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: ObjectFactory, Producer: LayerFactory, Producer: MapFactory, Producer: TileFactory {
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: ObjectFactory, Producer: LayerFactory, Producer: ObjectPostProcessor, Producer: EngineMapFactory, Producer: TileFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: ObjectFactory, Producer: LayerFactory, Producer: ObjectPostProcessor, Producer: MapFactory, Producer: TileFactory {
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
     }
 
@@ -339,18 +346,18 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: EngineMapFactory, Producer: ObjectFactory, Producer: TileFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: MapFactory, Producer: ObjectFactory, Producer: TileFactory {
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: EngineMapFactory, Producer: ObjectFactory, Producer: TileFactory, Producer: ObjectPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: MapFactory, Producer: ObjectFactory, Producer: TileFactory, Producer: ObjectPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
@@ -394,10 +401,10 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: MapPostProcessor, Producer: EngineMapFactory, Producer: LayerFactory, Producer: TileFactory, Producer: LayerPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: MapPostProcessor, Producer: MapFactory, Producer: LayerFactory, Producer: TileFactory, Producer: LayerPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
@@ -405,9 +412,9 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: EngineMapFactory, Producer: TileFactory, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: ObjectFactory, Producer: LayerFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: MapFactory, Producer: TileFactory, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: ObjectFactory, Producer: LayerFactory {
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
@@ -428,20 +435,20 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: MapPostProcessor, Producer: EngineMapFactory, Producer: LayerFactory, Producer: TileFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: MapPostProcessor, Producer: MapFactory, Producer: LayerFactory, Producer: TileFactory {
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: MapPostProcessor, Producer: EngineMapFactory, Producer: LayerFactory, Producer: TileFactory, Producer: ObjectPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: MapPostProcessor, Producer: MapFactory, Producer: LayerFactory, Producer: TileFactory, Producer: ObjectPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
@@ -459,18 +466,18 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: EngineMapFactory, Producer: LayerFactory, Producer: ObjectFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: MapFactory, Producer: LayerFactory, Producer: ObjectFactory {
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: ObjectFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: ObjectFactory {
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
@@ -478,9 +485,9 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: LayerFactory, Producer: ObjectFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: LayerFactory, Producer: ObjectFactory {
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
@@ -489,9 +496,9 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: EngineMapFactory, Producer: LayerPostProcessor, Producer: LayerFactory, Producer: ObjectFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: MapFactory, Producer: LayerPostProcessor, Producer: LayerFactory, Producer: ObjectFactory {
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
@@ -554,23 +561,23 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: ObjectFactory, Producer: TileFactory, Producer: LayerPostProcessor, Producer: EngineMapFactory, Producer: ObjectPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: ObjectFactory, Producer: TileFactory, Producer: LayerPostProcessor, Producer: MapFactory, Producer: ObjectPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: ObjectFactory, Producer: TileFactory, Producer: LayerPostProcessor, Producer: EngineMapFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: ObjectFactory, Producer: TileFactory, Producer: LayerPostProcessor, Producer: MapFactory {
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
@@ -584,21 +591,21 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: ObjectFactory, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: EngineMapFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: ObjectFactory, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: MapFactory {
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: ObjectFactory, Producer: TileFactory, Producer: EngineMapFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: ObjectFactory, Producer: TileFactory, Producer: MapFactory {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
@@ -620,8 +627,8 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectFactory, Producer: MapPostProcessor, Producer: TileFactory, Producer: ObjectPostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectFactory, Producer: MapPostProcessor, Producer: TileFactory, Producer: ObjectPostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
@@ -630,25 +637,25 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: ObjectFactory, Producer: EngineMapFactory, Producer: MapPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: ObjectFactory, Producer: MapFactory, Producer: MapPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: TileFactory, Producer: EngineMapFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: TileFactory, Producer: MapFactory {
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: ObjectFactory, Producer: TileFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: ObjectFactory, Producer: TileFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
@@ -709,22 +716,22 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: MapPostProcessor, Producer: TilePostProcessor, Producer: LayerFactory, Producer: EngineMapFactory, Producer: LayerPostProcessor, Producer: ObjectFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: MapPostProcessor, Producer: TilePostProcessor, Producer: LayerFactory, Producer: MapFactory, Producer: LayerPostProcessor, Producer: ObjectFactory {
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: TilePostProcessor, Producer: EngineMapFactory, Producer: LayerFactory, Producer: ObjectFactory, Producer: LayerPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: TilePostProcessor, Producer: MapFactory, Producer: LayerFactory, Producer: ObjectFactory, Producer: LayerPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
@@ -732,9 +739,9 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: EngineMapFactory, Producer: LayerFactory, Producer: ObjectFactory, Producer: LayerPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: MapFactory, Producer: LayerFactory, Producer: ObjectFactory, Producer: LayerPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
@@ -742,10 +749,10 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: TilePostProcessor, Producer: EngineMapFactory, Producer: LayerFactory, Producer: ObjectFactory, Producer: LayerPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: TilePostProcessor, Producer: MapFactory, Producer: LayerFactory, Producer: ObjectFactory, Producer: LayerPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
@@ -763,18 +770,18 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: EngineMapFactory, Producer: LayerFactory, Producer: ObjectFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: MapFactory, Producer: LayerFactory, Producer: ObjectFactory {
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: ObjectFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: ObjectFactory {
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
@@ -782,10 +789,10 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: TilePostProcessor, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: ObjectFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: TilePostProcessor, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: ObjectFactory {
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
@@ -793,10 +800,10 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: TilePostProcessor, Producer: EngineMapFactory, Producer: LayerFactory, Producer: ObjectFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: TilePostProcessor, Producer: MapFactory, Producer: LayerFactory, Producer: ObjectFactory {
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
     }
@@ -858,42 +865,42 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: TilePostProcessor, Producer: MapPostProcessor, Producer: ObjectPostProcessor, Producer: EngineMapFactory, Producer: LayerPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: TilePostProcessor, Producer: MapPostProcessor, Producer: ObjectPostProcessor, Producer: MapFactory, Producer: LayerPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: TilePostProcessor, Producer: MapPostProcessor, Producer: EngineMapFactory, Producer: LayerPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: TilePostProcessor, Producer: MapPostProcessor, Producer: MapFactory, Producer: LayerPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: TilePostProcessor, Producer: MapPostProcessor, Producer: EngineMapFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: TilePostProcessor, Producer: MapPostProcessor, Producer: MapFactory {
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: TilePostProcessor, Producer: MapPostProcessor, Producer: ObjectPostProcessor, Producer: EngineMapFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: TilePostProcessor, Producer: MapPostProcessor, Producer: ObjectPostProcessor, Producer: MapFactory {
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
@@ -915,20 +922,20 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: LayerPostProcessor, Producer: EngineMapFactory, Producer: TilePostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: LayerPostProcessor, Producer: MapFactory, Producer: TilePostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: EngineMapFactory, Producer: TilePostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: MapFactory, Producer: TilePostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
     }
 
@@ -943,18 +950,18 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: TilePostProcessor, Producer: EngineMapFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: TilePostProcessor, Producer: MapFactory {
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: ObjectFactory, Producer: EngineMapFactory, Producer: TilePostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: ObjectFactory, Producer: MapFactory, Producer: TilePostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
     }
 
@@ -975,16 +982,16 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: EngineMapFactory, Producer: ObjectFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapFactory, Producer: ObjectFactory {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: ObjectFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: ObjectFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
@@ -992,8 +999,8 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: MapPostProcessor, Producer: LayerPostProcessor, Producer: ObjectFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: MapPostProcessor, Producer: LayerPostProcessor, Producer: ObjectFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
@@ -1002,9 +1009,9 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerFactory, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: MapPostProcessor, Producer: LayerPostProcessor, Producer: ObjectFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerFactory, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: MapPostProcessor, Producer: LayerPostProcessor, Producer: ObjectFactory {
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
@@ -1013,9 +1020,9 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerFactory, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: ObjectFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerFactory, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: ObjectFactory {
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
@@ -1023,18 +1030,18 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: EngineMapFactory, Producer: ObjectFactory, Producer: MapPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapFactory, Producer: ObjectFactory, Producer: MapPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: EngineMapFactory, Producer: ObjectFactory, Producer: MapPostProcessor, Producer: LayerFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapFactory, Producer: ObjectFactory, Producer: MapPostProcessor, Producer: LayerFactory {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
@@ -1042,9 +1049,9 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: EngineMapFactory, Producer: LayerFactory, Producer: LayerPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: MapFactory, Producer: LayerFactory, Producer: LayerPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
     }
@@ -1127,19 +1134,19 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: MapPostProcessor, Producer: EngineMapFactory, Producer: ObjectFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: MapPostProcessor, Producer: MapFactory, Producer: ObjectFactory {
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: MapPostProcessor, Producer: EngineMapFactory, Producer: LayerFactory, Producer: ObjectFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: MapPostProcessor, Producer: MapFactory, Producer: LayerFactory, Producer: ObjectFactory {
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
     }
@@ -1155,16 +1162,16 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: EngineMapFactory, Producer: MapPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectFactory, Producer: MapFactory, Producer: MapPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: MapPostProcessor, Producer: LayerFactory, Producer: ObjectFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: MapPostProcessor, Producer: LayerFactory, Producer: ObjectFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
@@ -1180,23 +1187,23 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectFactory, Producer: LayerFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectFactory, Producer: LayerFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: LayerFactory, Producer: ObjectPostProcessor, Producer: ObjectFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: LayerFactory, Producer: ObjectPostProcessor, Producer: ObjectFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
@@ -1204,8 +1211,8 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectFactory, Producer: ObjectPostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectFactory, Producer: ObjectPostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
     }
@@ -1234,50 +1241,50 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: EngineMapFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapFactory {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: EngineMapFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: EngineMapFactory, Producer: TilePostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: MapFactory {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: MapFactory, Producer: TilePostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: EngineMapFactory, Producer: TilePostProcessor, Producer: TileFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: MapFactory, Producer: TilePostProcessor, Producer: TileFactory {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: EngineMapFactory, Producer: TilePostProcessor, Producer: TileFactory, Producer: LayerFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: MapFactory, Producer: TilePostProcessor, Producer: TileFactory, Producer: LayerFactory {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
@@ -1285,9 +1292,9 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: EngineMapFactory, Producer: LayerFactory, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: TilePostProcessor, Producer: TileFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: MapFactory, Producer: LayerFactory, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: TilePostProcessor, Producer: TileFactory {
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
@@ -1297,10 +1304,10 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: EngineMapFactory, Producer: TilePostProcessor, Producer: TileFactory, Producer: ObjectPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: MapFactory, Producer: TilePostProcessor, Producer: TileFactory, Producer: ObjectPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
@@ -1308,20 +1315,20 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: EngineMapFactory, Producer: TilePostProcessor, Producer: ObjectPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: MapFactory, Producer: TilePostProcessor, Producer: ObjectPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: EngineMapFactory, Producer: TilePostProcessor, Producer: LayerFactory, Producer: ObjectPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: MapFactory, Producer: TilePostProcessor, Producer: LayerFactory, Producer: ObjectPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
@@ -1329,28 +1336,28 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: EngineMapFactory, Producer: TilePostProcessor, Producer: LayerFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapPostProcessor, Producer: MapFactory, Producer: TilePostProcessor, Producer: LayerFactory {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: EngineMapFactory, Producer: TileFactory, Producer: MapPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapFactory, Producer: TileFactory, Producer: MapPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: EngineMapFactory, Producer: TileFactory, Producer: ObjectPostProcessor, Producer: MapPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapFactory, Producer: TileFactory, Producer: ObjectPostProcessor, Producer: MapPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
@@ -1358,9 +1365,9 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: EngineMapFactory, Producer: TileFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: MapPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapFactory, Producer: TileFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: MapPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
@@ -1369,9 +1376,9 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: EngineMapFactory, Producer: TileFactory, Producer: LayerFactory, Producer: MapPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapFactory, Producer: TileFactory, Producer: LayerFactory, Producer: MapPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
@@ -1379,219 +1386,209 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: LayerPostProcessor, Producer: EngineMapFactory, Producer: ObjectPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: LayerPostProcessor, Producer: MapFactory, Producer: ObjectPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: LayerFactory, Producer: LayerPostProcessor, Producer: EngineMapFactory, Producer: ObjectPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapPostProcessor, Producer: LayerFactory, Producer: LayerPostProcessor, Producer: MapFactory, Producer: ObjectPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: EngineMapFactory, Producer: LayerFactory, Producer: MapPostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: MapFactory, Producer: LayerFactory, Producer: MapPostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: LayerFactory, Producer: EngineMapFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: EngineMapFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: TilePostProcessor, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: EngineMapFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: TilePostProcessor, Producer: TileFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: EngineMapFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: TileFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: EngineMapFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: LayerFactory, Producer: EngineMapFactory, Producer: TileFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: LayerFactory, Producer: EngineMapFactory, Producer: TileFactory, Producer: TilePostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: LayerFactory, Producer: LayerPostProcessor, Producer: TilePostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: EngineMapFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: ObjectPostProcessor, Producer: EngineMapFactory, Producer: TilePostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: ObjectPostProcessor, Producer: EngineMapFactory, Producer: TileFactory, Producer: TilePostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: EngineMapFactory, Producer: TileFactory, Producer: LayerPostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: LayerPostProcessor, Producer: EngineMapFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: TilePostProcessor, Producer: EngineMapFactory, Producer: TileFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: TilePostProcessor, Producer: EngineMapFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: TilePostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: MapPostProcessor, Producer: TilePostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: TilePostProcessor, Producer: MapPostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: TilePostProcessor, Producer: MapPostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: LayerFactory, Producer: MapFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: MapFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: TilePostProcessor, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: MapFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: TilePostProcessor, Producer: TileFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: MapFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: TileFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: MapFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: LayerFactory, Producer: MapFactory, Producer: TileFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: LayerFactory, Producer: MapFactory, Producer: TileFactory, Producer: TilePostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: LayerFactory, Producer: LayerPostProcessor, Producer: TilePostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: LayerPostProcessor, Producer: MapFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: ObjectPostProcessor, Producer: MapFactory, Producer: TilePostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: ObjectPostProcessor, Producer: MapFactory, Producer: TileFactory, Producer: TilePostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: MapFactory, Producer: TileFactory, Producer: LayerPostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: LayerPostProcessor, Producer: MapFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: TilePostProcessor, Producer: MapFactory, Producer: TileFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: LayerPostProcessor, Producer: TilePostProcessor, Producer: MapFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyLayerPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: TilePostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: MapPostProcessor, Producer: TilePostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: TilePostProcessor, Producer: MapPostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: TileFactory, Producer: TilePostProcessor, Producer: MapPostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: TilePostProcessor, Producer: MapPostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: TileFactory, Producer: TilePostProcessor, Producer: MapPostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: LayerFactory, Producer: TileFactory, Producer: TilePostProcessor, Producer: MapPostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
@@ -1599,44 +1596,54 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: MapPostProcessor, Producer: EngineMapFactory, Producer: LayerFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: TileFactory, Producer: TilePostProcessor, Producer: MapPostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: MapPostProcessor, Producer: MapFactory, Producer: LayerFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: MapPostProcessor, Producer: TileFactory, Producer: EngineMapFactory, Producer: LayerFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: MapPostProcessor, Producer: TileFactory, Producer: MapFactory, Producer: LayerFactory {
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: MapPostProcessor, Producer: EngineMapFactory, Producer: TileFactory {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TilePostProcessor, Producer: MapPostProcessor, Producer: MapFactory, Producer: TileFactory {
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: EngineMapFactory, Producer: TilePostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: MapFactory, Producer: TilePostProcessor {
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: TilePostProcessor, Producer: LayerFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: TilePostProcessor, Producer: LayerFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
@@ -1644,35 +1651,9 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: TilePostProcessor, Producer: LayerFactory, Producer: TileFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: TilePostProcessor, Producer: LayerFactory, Producer: TileFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: TilePostProcessor, Producer: TileFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: LayerFactory, Producer: TilePostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: TilePostProcessor, Producer: LayerFactory, Producer: TileFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
@@ -1680,131 +1661,157 @@ public extension Engine {
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: EngineMapFactory, Producer: TilePostProcessor {
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: TilePostProcessor, Producer: TileFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: LayerFactory, Producer: TilePostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: MapPostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: LayerFactory, Producer: MapPostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: TilePostProcessor, Producer: LayerFactory, Producer: TileFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: EngineMapFactory, Producer: MapPostProcessor, Producer: LayerFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: ObjectPostProcessor, Producer: EngineMapFactory, Producer: MapPostProcessor, Producer: LayerFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: EngineMapFactory, Producer: LayerFactory, Producer: MapPostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: EngineMapFactory, Producer: MapPostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: MapPostProcessor, Producer: TileFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: MapPostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: MapFactory, Producer: TilePostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTilePostProcessor(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: MapPostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: LayerFactory, Producer: MapPostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: MapFactory, Producer: MapPostProcessor, Producer: LayerFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: ObjectPostProcessor, Producer: MapFactory, Producer: MapPostProcessor, Producer: LayerFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: MapFactory, Producer: LayerFactory, Producer: MapPostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: TileFactory, Producer: MapFactory, Producer: MapPostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: MapPostProcessor, Producer: TileFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: MapPostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyEngineMapPostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectPostProcessor {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectPostProcessor {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: LayerFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: LayerFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: TileFactory, Producer: EngineMapFactory, Producer: LayerFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
-        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: ObjectPostProcessor, Producer: TileFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: ObjectPostProcessor, Producer: TileFactory, Producer: MapFactory, Producer: LayerFactory {
         EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
-    }
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: LayerFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: TileFactory, Producer: LayerFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: ObjectPostProcessor, Producer: TileFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyObjectPostProcessor(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: LayerFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
+        EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
+    }
+
+    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
+    /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: TileFactory, Producer: LayerFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyLayerFactory(wrap: producer))
     }
 
     /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
     /// - Parameter producer: The `EngineProducer` to be registered. All of the appropriate capabilities will be registered (e.g. MapFactory & MapPostProcessor)
-    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: EngineMapFactory, Producer: TileFactory {
-        EngineRegistry.insert(for: Self.self, object: AnyEngineMapFactory(wrap: producer))
+    static func register<Producer>(producer:Producer) where Producer.EngineType == Self, Producer: MapFactory, Producer: TileFactory {
+        EngineRegistry.insert(for: Self.self, object: AnyMapFactory(wrap: producer))
         EngineRegistry.insert(for: Self.self, object: AnyTileFactory(wrap: producer))
     }
 

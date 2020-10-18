@@ -1,13 +1,6 @@
 {
   "warnings": [
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Factories/Factories.swift",
-      "line": 19,
-      "symbol": "Factory.EngineType",
-      "symbol_kind": "source.lang.swift.decl.associatedtype",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Factories/Layer Factory.swift",
       "line": 15,
       "symbol": "LayerFactory",
@@ -65,14 +58,14 @@
     },
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
-      "line": 80,
+      "line": 92,
       "symbol": "TileSetReference.firstGid",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/TileSet/TileSet.swift",
-      "line": 81,
+      "line": 93,
       "symbol": "TileSetReference.tileSet",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
