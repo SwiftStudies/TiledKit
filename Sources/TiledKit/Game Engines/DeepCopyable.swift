@@ -12,8 +12,9 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-/// Processors are applied after creation and can even completely recreate the
-/// specialized target. However, in most cases they will process and apply properties
-public protocol PostProcessor : EngineObject {
-    
+/// An object that can create new instances that are deep copies of itself
+public protocol DeepCopyable {
+    /// Create a deep copy of the object, returning a new instance
+    /// Unlike new instance, a new copy should always be returned
+    func deepCopy()->Self
 }

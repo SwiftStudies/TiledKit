@@ -15,7 +15,7 @@
 
 /// A specialized form of a `PostProcessor` that applies to `Tile`s. It is called after the first factory
 /// has created the specialized sprite for the tile
-public protocol TilePostProcessor : PostProcessor {
+public protocol TilePostProcessor : Producer  {
     
     
     /// Enables post processing of tiles which is performed after all tiles for a tileset have been created by factories and enables
@@ -32,15 +32,6 @@ public protocol TilePostProcessor : PostProcessor {
 
 /// Adds support for `TilePostProcessor`s  to `Engine`
 public extension Engine {
-
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter postProcessor: The new post processor
-    static func register<P:TilePostProcessor>(postProcessor:P) where P.EngineType == Self {
-        EngineRegistry.insert(
-            for: Self.self,
-            object: AnyTilePostProcessor<Self>(wrap:postProcessor)
-        )
-    }
     
     /// Returns all engine map factories registered
     /// - Returns: The available tile post processors for this engine

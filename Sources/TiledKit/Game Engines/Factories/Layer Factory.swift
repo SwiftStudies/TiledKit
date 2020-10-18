@@ -12,28 +12,28 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-public protocol LayerFactory : Factory {
+public protocol LayerFactory : Producer {
     /// Creates a sprite for the supplied image layer
     /// - Parameters:
     ///   - imageReference: The file reference to the image
     ///   - layer: The additional data from the layer
     ///   - map: The map the layer is part of
     ///   - project: The project the map is being loaded from
-    func makeSprite(from imageReference:ImageReference, for layer:LayerProtocol, in map:Map, from project:Project) throws -> EngineType.SpriteType?
+    func make(spriteFor imageReference:ImageReference, for layer:LayerProtocol, in map:Map, from project:Project) throws -> EngineType.SpriteType?
     
     /// Creates a layer to contain objects
     /// - Parameters:
     ///   - layer: The additional data from the layer
     ///   - map: The map the layer is part of
     ///   - project: The project the map is being loaded from
-    func makeObjectContainer(_ layer:LayerProtocol,in map:Map, from project:Project) throws -> EngineType.ObjectLayerType?
+    func make(objectContainerFor layer:LayerProtocol,in map:Map, from project:Project) throws -> EngineType.ObjectLayerType?
     
     /// Creates a layer containing other layers
     /// - Parameters:
     ///   - layer: The details of the grouping layer
     ///   - map: The `Map` the layer belongs to
     ///   - project: The project the map is being loaded from
-    func makeGroupFor(_ layer:LayerProtocol,in map:Map, from project:Project) throws -> EngineType.GroupLayerType?
+    func make(groupFor layer:LayerProtocol,in map:Map, from project:Project) throws -> EngineType.GroupLayerType?
     
     /// Creates a tile layer with the supplied tiles in using the sprites loaded during map building
     /// - Parameters:
@@ -42,21 +42,11 @@ public protocol LayerFactory : Factory {
     ///   - sprites: The sprites (indexed by gid) that can be used
     ///   - map: The map the layer is in
     ///   - project: The project the layer is loaded from
-    func makeTileLayer(from tileGrid:TileGrid, for layer:LayerProtocol, with sprites:MapTiles<EngineType>, in map:Map, from project:Project) throws -> EngineType.TileLayerType?
+    func make(tileLayerFor tileGrid:TileGrid, for layer:LayerProtocol, with sprites:MapTiles<EngineType>, in map:Map, from project:Project) throws -> EngineType.TileLayerType?
 }
 
 /// Adds support for `LayerFactories` to `Engine`
 public extension Engine {
-
-    /// Add a new factory to the factories for the `Engine`, new factories are tried first
-    /// - Parameter factory: The new factory
-    static func register<F:LayerFactory>(factory:F) where F.EngineType == Self {
-        EngineRegistry.insert(
-            for: Self.self,
-            object: AnyLayerFactory<Self>(wrap:factory)
-        )
-    }
-    
     /// Returns all engine tile factories registered
     /// - Returns: The available tile factories for this engine
     internal static func layerFactories() -> [AnyLayerFactory<Self>] {
@@ -72,25 +62,25 @@ internal struct AnyLayerFactory<EngineType:Engine> : LayerFactory {
     let tileLayerFactory : (_ tileGrid:TileGrid, _ layer:LayerProtocol, _ sprites:MapTiles<EngineType>, _ map:Map, _ project:Project) throws -> EngineType.TileLayerType?
     
     init<F:LayerFactory>(wrap factory:F) where F.EngineType == EngineType {
-        imageLayerFactory = factory.makeSprite
-        objectLayerFactory = factory.makeObjectContainer
-        groupLayerFactory = factory.makeGroupFor
-        tileLayerFactory = factory.makeTileLayer
+        imageLayerFactory = factory.make
+        objectLayerFactory = factory.make
+        groupLayerFactory = factory.make
+        tileLayerFactory = factory.make
     }
 
-    func makeSprite(from imageReference: ImageReference, for layer: LayerProtocol, in map: Map, from project: Project) throws -> EngineType.SpriteType? {
+    func make(spriteFor imageReference: ImageReference, for layer: LayerProtocol, in map: Map, from project: Project) throws -> EngineType.SpriteType? {
         return try imageLayerFactory(imageReference, layer, map, project)
     }
     
-    func makeObjectContainer(_ layer: LayerProtocol, in map: Map, from project: Project) throws -> EngineType.ObjectLayerType? {
+    func make(objectContainerFor layer: LayerProtocol, in map: Map, from project: Project) throws -> EngineType.ObjectLayerType? {
         return try objectLayerFactory(layer, map, project)
     }
     
-    func makeGroupFor(_ layer: LayerProtocol, in map: Map, from project: Project) throws -> EngineType.GroupLayerType? {
+    func make(groupFor layer: LayerProtocol, in map: Map, from project: Project) throws -> EngineType.GroupLayerType? {
         return try groupLayerFactory(layer, map, project)
     }
     
-    func makeTileLayer(from tileGrid: TileGrid, for layer: LayerProtocol, with sprites: MapTiles<EngineType>, in map: Map, from project: Project) throws -> EngineType.TileLayerType? {
+    func make(tileLayerFor tileGrid: TileGrid, for layer: LayerProtocol, with sprites: MapTiles<EngineType>, in map: Map, from project: Project) throws -> EngineType.TileLayerType? {
         return try tileLayerFactory(tileGrid, layer, sprites, map, project)
     }
 }

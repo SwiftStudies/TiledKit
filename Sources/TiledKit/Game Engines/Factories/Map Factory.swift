@@ -13,7 +13,7 @@
 //    limitations under the License.
 
 /// A Factory responsible for creating an Engine Map
-public protocol EngineMapFactory : Factory {
+public protocol MapFactory : Producer {
     
     /// A map factory is responsible for determining (for example looking at properites)
     /// if a special kind of map should be created. If the map type this factory makes
@@ -22,37 +22,27 @@ public protocol EngineMapFactory : Factory {
     /// - Parameters:
     ///   - map: The `Map` being loaded
     ///   - project: The `Project` the map is being loaded from
-    func make(from map:Map, in project:Project) throws -> EngineType.MapType?
+    func make(mapFor map:Map, in project:Project) throws -> EngineType.MapType?
 }
 
-internal struct AnyEngineMapFactory<EngineType:Engine> : EngineMapFactory {
+internal struct AnyMapFactory<EngineType:Engine> : MapFactory {
     
     let wrappedFactory : (_ map:Map, _ project:Project) throws -> EngineType.MapType?
     
-    init<F:EngineMapFactory>(wrap factory:F) where F.EngineType == EngineType {
+    init<F:MapFactory>(wrap factory:F) where F.EngineType == EngineType {
         wrappedFactory = factory.make
     }
     
-    func make<EngineMapType>(from map: Map, in project: Project) throws -> EngineMapType? where EngineMapType : EngineMap {
+    func make<EngineMapType>(mapFor map: Map, in project: Project) throws -> EngineMapType? where EngineMapType : EngineMap {
         return try wrappedFactory(map,project) as? EngineMapType
     }
 }
 
 /// Adds support for `EngineMapFactories` to `Engine`
 public extension Engine {
-
-    /// Add a new factory to the factories for the `Engine`, new factories are tried first
-    /// - Parameter factory: The new factory
-    static func register<F:EngineMapFactory>(factory:F) where F.EngineType == Self {
-        EngineRegistry.insert(
-            for: Self.self,
-            object: AnyEngineMapFactory<Self>(wrap:factory)
-        )
-    }
-    
     /// Returns all engine map factories registered
     /// - Returns: The available map factories for this engine
-    internal static func engineMapFactories() -> [AnyEngineMapFactory<Self>] {
+    internal static func engineMapFactories() -> [AnyMapFactory<Self>] {
         return  EngineRegistry.get(for: Self.self)
     }
 }

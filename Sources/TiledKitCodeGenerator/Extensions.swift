@@ -12,9 +12,16 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+import Foundation
 
-/// Factories are responsible for creating the specialized game engine objects. `Factory` itself is
-/// simply a common base protocol
-public protocol Factory : EngineObject  {
-    
+extension Set where Element : Equatable {
+    func removing(_ element:Element)->Self {
+        return filter({$0 != element})
+    }
+}
+
+extension String {
+    mutating func print(_ text:String){
+        self += text+"\n"
+    }
 }

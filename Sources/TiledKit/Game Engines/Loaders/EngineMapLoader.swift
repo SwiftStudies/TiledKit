@@ -146,14 +146,14 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
             case .group(let group):
                 var madeLayer : E.GroupLayerType!
                 for factory in E.layerFactories() {
-                    if let factoryMadeLayer = try factory.makeGroupFor(layer, in: map, from: project){
+                    if let factoryMadeLayer = try factory.make(groupFor: layer, in: map, from: project){
                         madeLayer = factoryMadeLayer
                         break
                     }
                 }
                 
                 if madeLayer == nil {
-                    madeLayer = try E.makeGroupLayer(layer, in: map, from: project)
+                    madeLayer = try E.make(groupFrom: layer, in: map, from: project)
                 }
                 
                 try walk(layers: group.layers, in: map, containedIn: madeLayer)
@@ -166,7 +166,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
             case .image(let imageReference):
                 var madeLayer : E.SpriteType!
                 for factory in E.layerFactories() {
-                    if let factoryMadeLayer = try factory.makeSprite(from: imageReference, for: layer, in: map, from: project){
+                    if let factoryMadeLayer = try factory.make(spriteFor: imageReference, for: layer, in: map, from: project){
                         madeLayer = factoryMadeLayer
                         break
                     }
@@ -174,7 +174,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 
                 if madeLayer == nil {
                     let texture = try project.retrieve(asType: E.TextureType.self, from: imageReference.source)
-                    madeLayer = try E.makeSpriteFrom(texture, for: layer, in: map, from: project)
+                    madeLayer = try E.make(spriteFrom: texture, for: layer, in: map, from: project)
                 }
                 
                 for postProcessor in E.engineLayerPostProcessors() {
@@ -185,14 +185,14 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
             case .objects(let objects):
                 var madeLayer : E.ObjectLayerType! = nil
                 for factory in E.layerFactories() {
-                    if let factoryMadeLayer = try factory.makeObjectContainer(layer, in: map, from: project){
+                    if let factoryMadeLayer = try factory.make(objectContainerFor: layer, in: map, from: project){
                         madeLayer = factoryMadeLayer
                         break
                     }
                 }
                 
                 if madeLayer == nil {
-                    madeLayer = try E.makeObjectContainer(layer, in: map, from: project)
+                    madeLayer = try E.make(objectContainerFrom: layer, in: map, from: project)
                 }
                 
                 try walk(objects: objects, in: map, containedIn: madeLayer)
@@ -205,14 +205,14 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
             case .tile(let tileGrid):
                 var madeLayer : E.TileLayerType! = nil
                 for factory in E.layerFactories() {
-                    if let factoryMadeLayer = try factory.makeTileLayer(from: tileGrid, for: layer, with: mapTiles, in: map, from: project){
+                    if let factoryMadeLayer = try factory.make(tileLayerFor: tileGrid, for: layer, with: mapTiles, in: map, from: project){
                         madeLayer = factoryMadeLayer
                         break
                     }
                 }
                 
                 if madeLayer == nil {
-                    madeLayer = try E.makeTileLayerFrom(tileGrid, for: layer, with: mapTiles, in: map, from: project)
+                    madeLayer = try E.make(tileLayer: tileGrid, for: layer, with: mapTiles, in: map, from: project)
                 }
                 
                 for postProcessor in E.engineLayerPostProcessors() {
@@ -228,12 +228,12 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
     
     func build(specializedImplementationFor map:Map) throws -> E.MapType {
         for factory in E.engineMapFactories(){
-            if let specializedMap : E.MapType = try factory.make(from: map, in: project) {
+            if let specializedMap : E.MapType = try factory.make(mapFor: map, in: project) {
                 return specializedMap
             }
         }
         
-        return try E.make(engineMapForTiled: map)
+        return try E.make(mapFor: map)
     }
     
     func process(specializedMap:E.MapType, for map:Map) throws -> E.MapType {
@@ -278,7 +278,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     throw EngineError.couldNotFindSpriteInTileSet(tileId, tileSet: tileSet)
                 }
                 
-                setSprites[tileId] = try E.postProcess(sprite, from: tile, in: tileSet, with: setSprites, for: map, from: project)
+                setSprites[tileId] = try E.process(sprite, from: tile, in: tileSet, with: setSprites, for: map, from: project)
 
                 // Process stuff
                 for processor in E.engineTilePostProcessors() {
@@ -294,8 +294,8 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
     
     func retrieve<R>(asType: R.Type, from url: URL) throws -> R where R : Loadable {
         /// Register defaults if present
-        if !E.hasFactoriesOrPostProcessors {
-            E.registerFactoriesAndPostProcessors()
+        if !E.hasProducers {
+            E.registerProducers()
         }
         
         let tiledMap = try project.retrieve(asType: Map.self, from: url)

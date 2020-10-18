@@ -21,7 +21,8 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "TiledKit",
-            targets: ["TiledKit"])
+            targets: ["TiledKit"]),
+        .executable(name: "tkcodegen", targets: ["TiledKitCodeGenerator"])
     ],
     dependencies: [
         .package(url: "https://github.com/MaxDesiatov/XMLCoder.git", from: "0.11.1")
@@ -35,6 +36,10 @@ let package = Package(
             name: "TiledKit",
             dependencies: ["TKCoding"]
             ),
+        .target(
+            name: "TiledKitCodeGenerator",
+            dependencies: []
+        ),
         .testTarget(
             name: "TiledKitTests",
             dependencies: ["TiledKit"],

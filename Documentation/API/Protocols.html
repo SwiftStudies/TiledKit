@@ -17,7 +17,7 @@
     <a title="Protocols  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">TiledKit</a> (97% documented)</p>
+        <p><a href="index.html">TiledKit</a> (98% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="search.json">
@@ -115,9 +115,6 @@
                 <a href="Protocols/EngineMap.html">EngineMap</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/EngineMapFactory.html">EngineMapFactory</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Protocols/EngineObject.html">EngineObject</a>
               </li>
               <li class="nav-group-task">
@@ -133,7 +130,7 @@
                 <a href="Protocols/ExpressibleAsTiledFloat.html">ExpressibleAsTiledFloat</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/Factory.html">Factory</a>
+                <a href="Protocols.html#/s:8TiledKit7FactoryP">Factory</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/LayerContainer.html">LayerContainer</a>
@@ -154,6 +151,9 @@
                 <a href="Protocols/Loadable.html">Loadable</a>
               </li>
               <li class="nav-group-task">
+                <a href="Protocols/MapFactory.html">MapFactory</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/MapPostProcessor.html">MapPostProcessor</a>
               </li>
               <li class="nav-group-task">
@@ -172,7 +172,7 @@
                 <a href="Protocols/ObjectProtocol.html">ObjectProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/PostProcessor.html">PostProcessor</a>
+                <a href="Protocols.html#/s:8TiledKit13PostProcessorP">PostProcessor</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/Propertied.html">Propertied</a>
@@ -531,13 +531,12 @@ game engine types that map directly to Tiled entities will need to support this<
                         <p>Factories are responsible for creating the specialized game engine objects. <code>Factory</code> itself is
 simply a common base protocol</p>
 
-                        <a href="Protocols/Factory.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Factory</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Factory</span> <span class="p">:</span> <span class="kt"><a href="Protocols/EngineObject.html">EngineObject</a></span></code></pre>
 
                         </div>
                       </div>
@@ -565,7 +564,7 @@ simply a common base protocol</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">LayerFactory</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Factory.html">Factory</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">LayerFactory</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:8TiledKit7FactoryP">Factory</a></span></code></pre>
 
                         </div>
                       </div>
@@ -575,9 +574,9 @@ simply a common base protocol</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit16EngineMapFactoryP"></a>
-                    <a name="//apple_ref/swift/Protocol/EngineMapFactory" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit16EngineMapFactoryP">EngineMapFactory</a>
+                    <a name="/s:8TiledKit10MapFactoryP"></a>
+                    <a name="//apple_ref/swift/Protocol/MapFactory" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit10MapFactoryP">MapFactory</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -587,13 +586,13 @@ simply a common base protocol</p>
                       <div class="abstract">
                         <p>A Factory responsible for creating an Engine Map</p>
 
-                        <a href="Protocols/EngineMapFactory.html" class="slightly-smaller">See more</a>
+                        <a href="Protocols/MapFactory.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">EngineMapFactory</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Factory.html">Factory</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">MapFactory</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:8TiledKit7FactoryP">Factory</a></span></code></pre>
 
                         </div>
                       </div>
@@ -621,7 +620,7 @@ simply a common base protocol</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ObjectFactory</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Factory.html">Factory</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ObjectFactory</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:8TiledKit7FactoryP">Factory</a></span></code></pre>
 
                         </div>
                       </div>
@@ -649,7 +648,7 @@ simply a common base protocol</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TileFactory</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Factory.html">Factory</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TileFactory</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:8TiledKit7FactoryP">Factory</a></span></code></pre>
 
                         </div>
                       </div>
@@ -669,7 +668,7 @@ simply a common base protocol</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A specialized form of a <code><a href="Protocols/PostProcessor.html">PostProcessor</a></code> that applies to <code><a href="Classes/Tile.html">Tile</a></code>s. It is called after the first factory
+                        <p>A specialized form of a <code><a href="Protocols.html#/s:8TiledKit13PostProcessorP">PostProcessor</a></code> that applies to <code><a href="Classes/Tile.html">Tile</a></code>s. It is called after the first factory
 has created the specialized sprite for the tile</p>
 
                         <a href="Protocols/LayerPostProcessor.html" class="slightly-smaller">See more</a>
@@ -678,7 +677,7 @@ has created the specialized sprite for the tile</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">LayerPostProcessor</span> <span class="p">:</span> <span class="kt"><a href="Protocols/PostProcessor.html">PostProcessor</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">LayerPostProcessor</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:8TiledKit13PostProcessorP">PostProcessor</a></span></code></pre>
 
                         </div>
                       </div>
@@ -698,7 +697,7 @@ has created the specialized sprite for the tile</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A specialized form of a <code><a href="Protocols/PostProcessor.html">PostProcessor</a></code> that applies to <code>Maps</code>. It is called after all <code>Layers</code>
+                        <p>A specialized form of a <code><a href="Protocols.html#/s:8TiledKit13PostProcessorP">PostProcessor</a></code> that applies to <code>Maps</code>. It is called after all <code>Layers</code>
 and <code>Objects</code> have been made and processed</p>
 
                         <a href="Protocols/MapPostProcessor.html" class="slightly-smaller">See more</a>
@@ -707,7 +706,7 @@ and <code>Objects</code> have been made and processed</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">MapPostProcessor</span> <span class="p">:</span> <span class="kt"><a href="Protocols/PostProcessor.html">PostProcessor</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">MapPostProcessor</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:8TiledKit13PostProcessorP">PostProcessor</a></span></code></pre>
 
                         </div>
                       </div>
@@ -727,7 +726,7 @@ and <code>Objects</code> have been made and processed</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A specialized form of a <code><a href="Protocols/PostProcessor.html">PostProcessor</a></code> that applies to <code><a href="Classes/Tile.html">Tile</a></code>s. It is called after the first factory
+                        <p>A specialized form of a <code><a href="Protocols.html#/s:8TiledKit13PostProcessorP">PostProcessor</a></code> that applies to <code><a href="Classes/Tile.html">Tile</a></code>s. It is called after the first factory
 has created the specialized sprite for the tile</p>
 
                         <a href="Protocols/ObjectPostProcessor.html" class="slightly-smaller">See more</a>
@@ -736,7 +735,7 @@ has created the specialized sprite for the tile</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ObjectPostProcessor</span> <span class="p">:</span> <span class="kt"><a href="Protocols/PostProcessor.html">PostProcessor</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ObjectPostProcessor</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:8TiledKit13PostProcessorP">PostProcessor</a></span></code></pre>
 
                         </div>
                       </div>
@@ -759,13 +758,12 @@ has created the specialized sprite for the tile</p>
                         <p>Processors are applied after creation and can even completely recreate the
 specialized target. However, in most cases they will process and apply properties</p>
 
-                        <a href="Protocols/PostProcessor.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">PostProcessor</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">PostProcessor</span> <span class="p">:</span> <span class="kt"><a href="Protocols/EngineObject.html">EngineObject</a></span></code></pre>
 
                         </div>
                       </div>
@@ -785,7 +783,7 @@ specialized target. However, in most cases they will process and apply propertie
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A specialized form of a <code><a href="Protocols/PostProcessor.html">PostProcessor</a></code> that applies to <code><a href="Classes/Tile.html">Tile</a></code>s. It is called after the first factory
+                        <p>A specialized form of a <code><a href="Protocols.html#/s:8TiledKit13PostProcessorP">PostProcessor</a></code> that applies to <code><a href="Classes/Tile.html">Tile</a></code>s. It is called after the first factory
 has created the specialized sprite for the tile</p>
 
                         <a href="Protocols/TilePostProcessor.html" class="slightly-smaller">See more</a>
@@ -794,7 +792,7 @@ has created the specialized sprite for the tile</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TilePostProcessor</span> <span class="p">:</span> <span class="kt"><a href="Protocols/PostProcessor.html">PostProcessor</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TilePostProcessor</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:8TiledKit13PostProcessorP">PostProcessor</a></span></code></pre>
 
                         </div>
                       </div>

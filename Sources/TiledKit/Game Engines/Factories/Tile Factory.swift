@@ -13,7 +13,7 @@
 //    limitations under the License.
 
 /// Tile factories create the sprites that will be rendered for tiles
-public protocol TileFactory : Factory {
+public protocol TileFactory : Producer {
     
     /// Make a new sprite to represent the tile
     /// - Parameters:
@@ -27,15 +27,6 @@ public protocol TileFactory : Factory {
 
 /// Adds support for `EngineMapFactories` to `Engine`
 public extension Engine {
-
-    /// Add a new factory to the factories for the `Engine`, new factories are tried first
-    /// - Parameter factory: The new factory
-    static func register<F:TileFactory>(factory:F) where F.EngineType == Self {
-        EngineRegistry.insert(
-            for: Self.self,
-            object: AnyTileFactory<Self>(wrap:factory)
-        )
-    }
     
     /// Returns all engine tile factories registered
     /// - Returns: The available tile factories for this engine

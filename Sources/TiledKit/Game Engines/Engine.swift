@@ -59,7 +59,7 @@ public protocol Engine {
     associatedtype PolygonObjectType : EngineObject where PolygonObjectType.EngineType == Self
 
     /// Register any default factories or post-processors
-    static func registerFactoriesAndPostProcessors()
+    static func registerProducers()
     
     /// Provide a method for loading textures
     static func load(textureFrom url:URL, in project:Project) throws -> TextureType
@@ -70,7 +70,7 @@ public protocol Engine {
     
     /// Provide a default specialized map creator for the Engine
     /// - Parameter map: The `Map` to create it for
-    static func make(engineMapForTiled map:Map) throws -> MapType
+    static func make(mapFor tiledMap:Map) throws -> MapType
     
     /// Provide a default specialized tile creator for the Engine
     /// - Parameter map: The `Map` to create it for
@@ -89,7 +89,7 @@ public protocol Engine {
     ///   - setSprites: All other sprites created for the `TileSet`
     ///   - map: The map the `TileSet`s were loaded from
     ///   - project: The project the `Map`& `TileSet` was loaded from
-    static func postProcess(_ sprite:SpriteType, from tile:Tile, in tileSet:TileSet, with setSprites:[UInt32:SpriteType], for map:Map, from project:Project) throws ->SpriteType
+    static func process(_ sprite:SpriteType, from tile:Tile, in tileSet:TileSet, with setSprites:[UInt32:SpriteType], for map:Map, from project:Project) throws ->SpriteType
     
     /// Creates a sprite for the supplied image layer
     /// - Parameters:
@@ -97,21 +97,21 @@ public protocol Engine {
     ///   - layer: The additional data from the layer
     ///   - map: The map the layer is part of
     ///   - project: The project the map is being loaded from
-    static func makeSpriteFrom(_ texture:TextureType, for layer:LayerProtocol, in map:Map, from project:Project) throws -> SpriteType?
+    static func make(spriteFrom texture:TextureType, for layer:LayerProtocol, in map:Map, from project:Project) throws -> SpriteType?
     
     /// Creates a layer to contain objects
     /// - Parameters:
     ///   - layer: The additional data from the layer
     ///   - map: The map the layer is part of
     ///   - project: The project the map is being loaded from
-    static func makeObjectContainer(_ layer:LayerProtocol,in map:Map, from project:Project) throws -> ObjectLayerType?
+    static func make(objectContainerFrom layer:LayerProtocol,in map:Map, from project:Project) throws -> ObjectLayerType?
     
     /// Creates a layer containing other layers
     /// - Parameters:
     ///   - layer: The details of the grouping layer
     ///   - map: The `Map` the layer belongs to
     ///   - project: The project the map is being loaded from
-    static func makeGroupLayer(_ layer:LayerProtocol,in map:Map, from project:Project) throws -> GroupLayerType?
+    static func make(groupFrom layer:LayerProtocol,in map:Map, from project:Project) throws -> GroupLayerType?
     
     /// Creates a tile layer with the supplied tiles in using the sprites loaded during map building
     /// - Parameters:
@@ -120,7 +120,7 @@ public protocol Engine {
     ///   - sprites: The sprites (indexed by gid) that can be used
     ///   - map: The map the layer is in
     ///   - project: The project the layer is loaded from
-    static func makeTileLayerFrom(_ tileGrid:TileGrid, for layer:LayerProtocol, with sprites:MapTiles<Self>, in map:Map, from project:Project) throws -> TileLayerType?
+    static func make(tileLayer tileGrid:TileGrid, for layer:LayerProtocol, with sprites:MapTiles<Self>, in map:Map, from project:Project) throws -> TileLayerType?
     
     /// Creates a point object
     /// - Parameters:
@@ -187,54 +187,9 @@ public protocol Engine {
     static func make(polygonWith path:Path, at angle:Double, for object:ObjectProtocol, in map:Map, from project:Project) throws -> PolygonObjectType
 }
 
-/// By implementing this protocol (required for `Engine.TextureType`
-/// loading behaviour except the actual loading of the texture data will be
-/// provided
-public protocol EngineTexture : EngineObject,Loadable {
-
-}
-
-/// Provides default implementations ensuring textures are cached, and
-/// a simplified loader is used
-public extension EngineTexture {
-    var cache: Bool {
-        return true
-    }
-    
-    /// Returns the default loader for the `Engine` simplifying what has to be
-    /// implemented
-    /// - Parameter project: The project the texture is refered to from
-    /// - Returns: The `ResourceLoader` that knows how  to load the texture
-    static func loader(for project: Project) -> ResourceLoader {
-        return EngineTextureLoader<EngineType>(project)
-    }
-}
-
-/// An object that can create new instances that are deep copies of itself
-public protocol DeepCopyable {
-    /// Create a deep copy of the object, returning a new instance
-    /// Unlike new instance, a new copy should always be returned
-    func deepCopy()->Self
-}
 
 /// Provides common diagnostic capabilites to any engine specialization
 public extension Engine {
-    
-    /// Make an instance of a given texture given the supplied clipping bounds and properites for this instance
-    static func make(textureFrom url:URL, with bounds:PixelBounds?, and properties:Properties, in project:Project) throws -> TextureType {
-        return try make(texture: load(textureFrom: url, in: project), with: bounds, and: properties, in: project)
-    }
-
-    /// `true` if there are any factories or post processors registered
-    static var hasFactoriesOrPostProcessors : Bool {
-        return EngineRegistry.isEmpty(for: Self.self)
-    }
-    
-    /// Removes all factories that have been registered for the engine
-    static func removeAllFactoriesAndPostProcessors() {
-        EngineRegistry.removeAll(from: Self.self)
-    }
-        
     /// Displays a warning message to the console. You can override to display the messages
     /// more prominantly in the engine of your chosing. 
     static func warn(_ message:String){

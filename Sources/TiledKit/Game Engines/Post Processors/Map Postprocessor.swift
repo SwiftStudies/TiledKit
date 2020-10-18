@@ -14,7 +14,7 @@
 
 /// A specialized form of a `PostProcessor` that applies to `Maps`. It is called after all `Layers`
 /// and `Objects` have been made and processed
-public protocol MapPostProcessor : PostProcessor {
+public protocol MapPostProcessor : Producer {
     
     /// Enables you to post process a map, even creating a different instance of the specialized
     /// map for the engine. As it is called after all other contents have been specialized you can
@@ -23,21 +23,12 @@ public protocol MapPostProcessor : PostProcessor {
     ///   - specializedMap: The output of the factory, or previous post processor
     ///   - map: The original Tiled map
     ///   - project: The project the map was loaded from
-    func process(_ specializedMap:EngineType.MapType, for map:Map, from project:Project) throws ->EngineType.MapType
+    func process(_ engineMap:EngineType.MapType, for map:Map, from project:Project) throws ->EngineType.MapType
 }
 
 /// Adds support for `MapPostProcessor`s  to `Engine`
 public extension Engine {
 
-    /// Add a new post processor to the post processors for the `Engine`, new post processors  are tried first
-    /// - Parameter postProcessor: The new post processor
-    static func register<P:MapPostProcessor>(postProcessor:P) where P.EngineType == Self {
-        EngineRegistry.insert(
-            for: Self.self,
-            object: AnyEngineMapPostProcessor<Self>(wrap:postProcessor)
-        )
-    }
-    
     /// Returns all engine map factories registered
     /// - Returns: The available map post processsors for this engine
     internal static func engineMapPostProcessors() -> [AnyEngineMapPostProcessor<Self>] {
