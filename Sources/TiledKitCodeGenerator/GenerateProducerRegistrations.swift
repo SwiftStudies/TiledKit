@@ -29,11 +29,11 @@ fileprivate func registrationFunction(forProducerConformingTo conformances:Set<P
         """)
     
     var declaration = "\tstatic func register<Producer>(producer:Producer) where Producer.EngineType == Self"
-    for conformance in conformances {
+    for conformance in conformances.sorted() {
         declaration += ", Producer: \(conformance.name)"
     }
     output.print(declaration+" {")
-    for conformance in conformances {
+    for conformance in conformances.sorted() {
         output.print("\t\tEngineRegistry.insert(for: Self.self, object: \(conformance.wrapperType)(wrap: producer))")
     }
     output.print("\t}\n")
@@ -42,7 +42,7 @@ fileprivate func registrationFunction(forProducerConformingTo conformances:Set<P
 fileprivate func elaborate(conformingTo producers:Set<ProducerType>, with otherProducers:Set<ProducerType>, into output:inout String){
     registrationFunction(forProducerConformingTo:producers, into: &output)
     
-    for otherProducer in otherProducers {
+    for otherProducer in otherProducers.sorted() {
         var additionalConformances = producers
         additionalConformances.insert(otherProducer)
         elaborate(conformingTo: additionalConformances, with: otherProducers.removing(otherProducer), into: &output)
@@ -67,6 +67,19 @@ func generateProducerRegistrationFunctions(for allProducers:Set<ProducerType>)->
         
         import Foundation
         
+        /// Adds some functions to manage `Producer`s
+        public extension Engine {
+            /// `true` if there are any factories or post processors registered
+            static var hasProducers : Bool {
+                return EngineRegistry.isEmpty(for: Self.self)
+            }
+            
+            /// Removes all factories that have been registered for the engine
+            static func removeProducers() {
+                EngineRegistry.removeAll(from: Self.self)
+            }
+        }
+
         /// Producers are responsible for creating and post-processing `Engine` specific objects representing Tiled objects. `Engine` implementors
         /// must provide basic similar funcitonality but those can be the most generic realizations of Tiled objects, with specific producers created to
         /// perform more specialized work, stopping `Engine`s from becoming overly complex in a single type.

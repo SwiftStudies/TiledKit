@@ -187,54 +187,9 @@ public protocol Engine {
     static func make(polygonWith path:Path, at angle:Double, for object:ObjectProtocol, in map:Map, from project:Project) throws -> PolygonObjectType
 }
 
-/// By implementing this protocol (required for `Engine.TextureType`
-/// loading behaviour except the actual loading of the texture data will be
-/// provided
-public protocol EngineTexture : EngineObject,Loadable {
-
-}
-
-/// Provides default implementations ensuring textures are cached, and
-/// a simplified loader is used
-public extension EngineTexture {
-    var cache: Bool {
-        return true
-    }
-    
-    /// Returns the default loader for the `Engine` simplifying what has to be
-    /// implemented
-    /// - Parameter project: The project the texture is refered to from
-    /// - Returns: The `ResourceLoader` that knows how  to load the texture
-    static func loader(for project: Project) -> ResourceLoader {
-        return EngineTextureLoader<EngineType>(project)
-    }
-}
-
-/// An object that can create new instances that are deep copies of itself
-public protocol DeepCopyable {
-    /// Create a deep copy of the object, returning a new instance
-    /// Unlike new instance, a new copy should always be returned
-    func deepCopy()->Self
-}
 
 /// Provides common diagnostic capabilites to any engine specialization
 public extension Engine {
-    
-    /// Make an instance of a given texture given the supplied clipping bounds and properites for this instance
-    static func make(textureFrom url:URL, with bounds:PixelBounds?, and properties:Properties, in project:Project) throws -> TextureType {
-        return try make(texture: load(textureFrom: url, in: project), with: bounds, and: properties, in: project)
-    }
-
-    /// `true` if there are any factories or post processors registered
-    static var hasProducers : Bool {
-        return EngineRegistry.isEmpty(for: Self.self)
-    }
-    
-    /// Removes all factories that have been registered for the engine
-    static func removeProducers() {
-        EngineRegistry.removeAll(from: Self.self)
-    }
-        
     /// Displays a warning message to the console. You can override to display the messages
     /// more prominantly in the engine of your chosing. 
     static func warn(_ message:String){

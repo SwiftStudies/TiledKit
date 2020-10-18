@@ -12,13 +12,9 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-import Foundation
-
-struct ProducerType : Equatable, Hashable, Comparable {
-    static func < (lhs: ProducerType, rhs: ProducerType) -> Bool {
-        return lhs.name < rhs.name
-    }
-    
-    let name : String
-    let wrapperType : String    
+/// An object that can create new instances that are deep copies of itself
+public protocol DeepCopyable {
+    /// Create a deep copy of the object, returning a new instance
+    /// Unlike new instance, a new copy should always be returned
+    func deepCopy()->Self
 }
