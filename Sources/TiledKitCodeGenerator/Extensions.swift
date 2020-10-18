@@ -22,6 +22,6 @@ extension Set where Element : Equatable {
 
 extension String {
     mutating func print(_ text:String){
-        self += text
+        self += text+"\n"
     }
 }

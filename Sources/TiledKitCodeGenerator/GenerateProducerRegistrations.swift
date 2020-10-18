@@ -67,6 +67,13 @@ func generateProducerRegistrationFunctions(for allProducers:Set<ProducerType>)->
         
         import Foundation
         
+        /// Producers are responsible for creating and post-processing `Engine` specific objects representing Tiled objects. `Engine` implementors
+        /// must provide basic similar funcitonality but those can be the most generic realizations of Tiled objects, with specific producers created to
+        /// perform more specialized work, stopping `Engine`s from becoming overly complex in a single type.
+        public protocol Producer : EngineObject {
+        }
+        
+        
         """
     output.print("/// Adds support for adding `PostProcessor`s and `Factories` that support multiple types")
     output.print("public extension Engine {")
