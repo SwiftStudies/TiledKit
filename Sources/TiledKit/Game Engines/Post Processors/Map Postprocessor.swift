@@ -23,7 +23,7 @@ public protocol MapPostProcessor : Producer {
     ///   - specializedMap: The output of the factory, or previous post processor
     ///   - map: The original Tiled map
     ///   - project: The project the map was loaded from
-    func process(_ engineMap:EngineType.MapType, for map:Map, from project:Project) throws ->EngineType.MapType
+    func process(engineMap:EngineType.MapType, for map:Map, from project:Project) throws ->EngineType.MapType
 }
 
 /// Adds support for `MapPostProcessor`s  to `Engine`
@@ -43,7 +43,7 @@ internal struct AnyEngineMapPostProcessor<EngineType:Engine> : MapPostProcessor 
         wrapped = factory.process
     }
 
-    func process(_ specializedMap: EngineType.MapType, for map: Map, from project: Project) throws -> EngineType.MapType {
-        return try wrapped(specializedMap, map, project)
+    func process(engineMap: EngineType.MapType, for map: Map, from project: Project) throws -> EngineType.MapType {
+        return try wrapped(engineMap, map, project)
     }
 }

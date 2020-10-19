@@ -22,7 +22,7 @@ public protocol LayerPostProcessor : Producer {
     ///   - layer: The original tiled layer meta data
     ///   - map: The map the layer is in
     ///   - project: The project the map was loaded from
-    func process(_ objectLayer:EngineType.ObjectLayerType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> EngineType.ObjectLayerType
+    func process(objectLayer:EngineType.ObjectLayerType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> EngineType.ObjectLayerType
 
     /// Perfforms post processing on an tile layer after creation
     /// - Parameters:
@@ -30,7 +30,7 @@ public protocol LayerPostProcessor : Producer {
     ///   - layer: The original tiled layer meta data
     ///   - map: The map the layer is in
     ///   - project: The project the map was loaded from
-    func process(_ tileLayer:EngineType.TileLayerType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> EngineType.TileLayerType
+    func process(tileLayer:EngineType.TileLayerType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> EngineType.TileLayerType
 
     /// Perfforms post processing on an image layer after creation
     /// - Parameters:
@@ -38,7 +38,7 @@ public protocol LayerPostProcessor : Producer {
     ///   - layer: The original tiled layer meta data
     ///   - map: The map the layer is in
     ///   - project: The project the map was loaded from
-    func process(_ imageLayer:EngineType.SpriteType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> EngineType.SpriteType
+    func process(imageLayer:EngineType.SpriteType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> EngineType.SpriteType
 
     /// Perfforms post processing on an group layer after creation
     /// - Parameters:
@@ -46,7 +46,7 @@ public protocol LayerPostProcessor : Producer {
     ///   - layer: The original tiled layer meta data
     ///   - map: The map the layer is in
     ///   - project: The project the map was loaded from
-    func process(_ groupLayer:EngineType.GroupLayerType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> EngineType.GroupLayerType
+    func process(groupLayer:EngineType.GroupLayerType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> EngineType.GroupLayerType
 }
 
 /// Adds support for `TilePostProcessor`s  to `Engine`
@@ -77,19 +77,19 @@ internal struct AnyLayerPostProcessor<EngineType:Engine> : LayerPostProcessor {
         groupLayerProcessor = factory.process
     }
     
-    func process(_ objectLayer: EngineType.ObjectLayerType, from layer: LayerProtocol, for map: Map, in project: Project) throws -> EngineType.ObjectLayerType {
+    func process(objectLayer: EngineType.ObjectLayerType, from layer: LayerProtocol, for map: Map, in project: Project) throws -> EngineType.ObjectLayerType {
         return try objectLayerProcessor(objectLayer, layer, map, project)
     }
     
-    func process(_ tileLayer: EngineType.TileLayerType, from layer: LayerProtocol, for map: Map, in project: Project) throws -> EngineType.TileLayerType {
+    func process(tileLayer: EngineType.TileLayerType, from layer: LayerProtocol, for map: Map, in project: Project) throws -> EngineType.TileLayerType {
         return try tileLayerProcessor(tileLayer, layer, map, project)
     }
     
-    func process(_ imageLayer: EngineType.SpriteType, from layer: LayerProtocol, for map: Map, in project: Project) throws -> EngineType.SpriteType {
+    func process(imageLayer: EngineType.SpriteType, from layer: LayerProtocol, for map: Map, in project: Project) throws -> EngineType.SpriteType {
         return try imageLayerProcessor(imageLayer, layer, map, project)
     }
     
-    func process(_ groupLayer: EngineType.GroupLayerType, from layer: LayerProtocol, for map: Map, in project: Project) throws -> EngineType.GroupLayerType {
+    func process(groupLayer: EngineType.GroupLayerType, from layer: LayerProtocol, for map: Map, in project: Project) throws -> EngineType.GroupLayerType {
         return try groupLayerProcessor(groupLayer, layer, map, project)
     }
 }
