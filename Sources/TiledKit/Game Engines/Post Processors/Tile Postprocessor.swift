@@ -27,7 +27,7 @@ public protocol TilePostProcessor : Producer  {
     ///   - setSprites: All other sprites created for the `TileSet`
     ///   - map: The map the `TileSet`s were loaded from
     ///   - project: The project the `Map`& `TileSet` was loaded from
-    func process(_ sprite:EngineType.SpriteType, from tile:Tile, in tileSet:TileSet, with setSprites:[UInt32:EngineType.SpriteType], for map:Map, from project:Project) throws ->EngineType.SpriteType
+    func process(sprite:EngineType.SpriteType, from tile:Tile, in tileSet:TileSet, with setSprites:[UInt32:EngineType.SpriteType], for map:Map, from project:Project) throws ->EngineType.SpriteType
 }
 
 /// Adds support for `TilePostProcessor`s  to `Engine`
@@ -47,7 +47,7 @@ internal struct AnyTilePostProcessor<EngineType:Engine> : TilePostProcessor {
         wrapped = factory.process
     }
     
-    func process(_ sprite: EngineType.SpriteType, from tile: Tile, in tileSet: TileSet, with setSprites: [UInt32 : EngineType.SpriteType], for map: Map, from project: Project) throws -> EngineType.SpriteType {
+    func process(sprite: EngineType.SpriteType, from tile: Tile, in tileSet: TileSet, with setSprites: [UInt32 : EngineType.SpriteType], for map: Map, from project: Project) throws -> EngineType.SpriteType {
         return try wrapped(sprite, tile, tileSet, setSprites, map, project)
     }
 }

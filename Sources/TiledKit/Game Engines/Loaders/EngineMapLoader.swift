@@ -159,7 +159,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 try walk(layers: group.layers, in: map, containedIn: madeLayer)
                 
                 for postProcessor in E.engineLayerPostProcessors() {
-                    madeLayer = try postProcessor.process(madeLayer, from: layer, for: map, in: project)
+                    madeLayer = try postProcessor.process(groupLayer: madeLayer, from: layer, for: map, in: project)
                 }
                 
                 container.add(child: madeLayer)
@@ -178,7 +178,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 }
                 
                 for postProcessor in E.engineLayerPostProcessors() {
-                    madeLayer = try postProcessor.process(madeLayer, from: layer, for: map, in: project)
+                    madeLayer = try postProcessor.process(imageLayer: madeLayer, from: layer, for: map, in: project)
                 }
                 
                 container.add(child: madeLayer)
@@ -198,7 +198,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 try walk(objects: objects, in: map, containedIn: madeLayer)
                 
                 for postProcessor in E.engineLayerPostProcessors() {
-                    madeLayer = try postProcessor.process(madeLayer, from: layer, for: map, in: project)
+                    madeLayer = try postProcessor.process(objectLayer: madeLayer, from: layer, for: map, in: project)
                 }
                 
                 container.add(child: madeLayer)
@@ -216,7 +216,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 }
                 
                 for postProcessor in E.engineLayerPostProcessors() {
-                    madeLayer = try postProcessor.process(madeLayer, from: layer, for: map, in: project)
+                    madeLayer = try postProcessor.process(tileLayer: madeLayer, from: layer, for: map, in: project)
                 }
                 
                 container.add(child: madeLayer)
@@ -240,7 +240,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
         var specializedMap = specializedMap
         
         for mapProcessor in E.engineMapPostProcessors(){
-            specializedMap = try mapProcessor.process(specializedMap, for: map, from: project)
+            specializedMap = try mapProcessor.process(engineMap: specializedMap, for: map, from: project)
         }
         
         return specializedMap
@@ -282,7 +282,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
 
                 // Process stuff
                 for processor in E.engineTilePostProcessors() {
-                    sprite = try processor.process(sprite, from: tile, in: tileSet, with: setSprites, for: map, from: project)
+                    sprite = try processor.process(sprite: sprite, from: tile, in: tileSet, with: setSprites, for: map, from: project)
                     setSprites[tileId] = sprite
                 }
                 

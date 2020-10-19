@@ -24,7 +24,7 @@ final class EngineTests: XCTestCase {
         struct SomeMapFactory : MapPostProcessor, MapFactory {
             typealias EngineType = TestEngine
             
-            func process(_ specializedMap: EngineType.MapType, for map: Map, from project: Project) throws -> EngineType.MapType {
+            func process(engineMap specializedMap: EngineType.MapType, for map: Map, from project: Project) throws -> EngineType.MapType {
                 return specializedMap
             }
             func make(mapFor map: Map, in project: Project) throws -> EngineType.MapType? {
@@ -37,6 +37,10 @@ final class EngineTests: XCTestCase {
         XCTAssertEqual(TestEngine.engineMapFactories().count, 1)
         XCTAssertEqual(TestEngine.engineMapPostProcessors().count, 1)
 
+        TestEngine.register(producer: TestObjectMapProcessor("ObjectMapProcessor", value: true))
+        
+        XCTAssertEqual(TestEngine.engineMapPostProcessors().count, 2)
+        XCTAssertEqual(TestEngine.engineObjectPostProcessors().count, 1)
     }
     
     func testMapLoading(){

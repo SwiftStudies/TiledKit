@@ -22,7 +22,7 @@ public protocol ObjectPostProcessor : Producer {
     ///   - object: The object it was created from
     ///   - map: The map it is in
     ///   - project: The project the map was loaded from
-    func process(_ point:EngineType.PointObjectType, from object:ObjectProtocol,  for map:Map, from project:Project) throws -> EngineType.PointObjectType
+    func process(point:EngineType.PointObjectType, from object:ObjectProtocol,  for map:Map, from project:Project) throws -> EngineType.PointObjectType
     
     /// Perform post processing on a rectangle object
     /// - Parameters:
@@ -30,7 +30,7 @@ public protocol ObjectPostProcessor : Producer {
     ///   - object: The object it was created from
     ///   - map: The map it is in
     ///   - project: The project the map was loaded from
-    func process(_ rectangle:EngineType.RectangleObjectType, from object:ObjectProtocol, for map:Map, from project:Project) throws -> EngineType.RectangleObjectType
+    func process(rectangle:EngineType.RectangleObjectType, from object:ObjectProtocol, for map:Map, from project:Project) throws -> EngineType.RectangleObjectType
 
     /// Perform post processing on a ellipse object
     /// - Parameters:
@@ -38,7 +38,7 @@ public protocol ObjectPostProcessor : Producer {
     ///   - object: The object it was created from
     ///   - map: The map it is in
     ///   - project: The project the map was loaded from
-    func process(_ ellipse:EngineType.EllipseObjectType, from object:ObjectProtocol, for map:Map, from project:Project) throws -> EngineType.EllipseObjectType
+    func process(ellipse:EngineType.EllipseObjectType, from object:ObjectProtocol, for map:Map, from project:Project) throws -> EngineType.EllipseObjectType
 
     /// Perform post processing on a sprite  object created for a tile
     /// - Parameters:
@@ -46,7 +46,7 @@ public protocol ObjectPostProcessor : Producer {
     ///   - object: The object it was created from
     ///   - map: The map it is in
     ///   - project: The project the map was loaded from
-    func process(_ sprite:EngineType.SpriteType, from object:ObjectProtocol, for map:Map, from project:Project) throws -> EngineType.SpriteType
+    func process(sprite:EngineType.SpriteType, from object:ObjectProtocol, for map:Map, from project:Project) throws -> EngineType.SpriteType
 
     /// Perform post processing on a text object
     /// - Parameters:
@@ -54,7 +54,7 @@ public protocol ObjectPostProcessor : Producer {
     ///   - object: The object it was created from
     ///   - map: The map it is in
     ///   - project: The project the map was loaded from
-    func process(_ text:EngineType.TextObjectType, from object:ObjectProtocol, for map:Map, from project:Project) throws -> EngineType.TextObjectType
+    func process(text:EngineType.TextObjectType, from object:ObjectProtocol, for map:Map, from project:Project) throws -> EngineType.TextObjectType
 
     /// Perform post processing on a polyline object
     /// - Parameters:
@@ -62,7 +62,7 @@ public protocol ObjectPostProcessor : Producer {
     ///   - object: The object it was created from
     ///   - map: The map it is in
     ///   - project: The project the map was loaded from
-    func process(_ polyline:EngineType.PolylineObjectType, from object:ObjectProtocol, for map:Map, from project:Project) throws -> EngineType.PolylineObjectType
+    func process(polyline:EngineType.PolylineObjectType, from object:ObjectProtocol, for map:Map, from project:Project) throws -> EngineType.PolylineObjectType
 
     /// Perform post processing on a polygon object
     /// - Parameters:
@@ -70,7 +70,7 @@ public protocol ObjectPostProcessor : Producer {
     ///   - object: The object it was created from
     ///   - map: The map it is in
     ///   - project: The project the map was loaded from
-    func process(_ polygon:EngineType.PolygonObjectType, from object:ObjectProtocol, for map:Map, from project:Project) throws -> EngineType.PolygonObjectType
+    func process(polygon:EngineType.PolygonObjectType, from object:ObjectProtocol, for map:Map, from project:Project) throws -> EngineType.PolygonObjectType
     
 }
 
@@ -104,31 +104,31 @@ internal struct AnyObjectPostProcessor<EngineType:Engine> : ObjectPostProcessor 
         polygonProcessor = factory.process
     }
     
-    func process(_ point: EngineType.PointObjectType, from object: ObjectProtocol, for map: Map, from project: Project) throws -> EngineType.PointObjectType {
+    func process(point: EngineType.PointObjectType, from object: ObjectProtocol, for map: Map, from project: Project) throws -> EngineType.PointObjectType {
         return try pointProcessor(point, object, map, project)
     }
     
-    func process(_ rectangle: EngineType.RectangleObjectType, from object: ObjectProtocol, for map: Map, from project: Project) throws -> EngineType.RectangleObjectType {
+    func process(rectangle: EngineType.RectangleObjectType, from object: ObjectProtocol, for map: Map, from project: Project) throws -> EngineType.RectangleObjectType {
         return try rectangleProcessor(rectangle, object, map, project)
     }
     
-    func process(_ ellipse: EngineType.EllipseObjectType, from object: ObjectProtocol, for map: Map, from project: Project) throws -> EngineType.EllipseObjectType {
+    func process(ellipse: EngineType.EllipseObjectType, from object: ObjectProtocol, for map: Map, from project: Project) throws -> EngineType.EllipseObjectType {
         return try ellipseProcessor(ellipse, object, map, project)
     }
     
-    func process(_ sprite: EngineType.SpriteType, from object: ObjectProtocol, for map: Map, from project: Project) throws -> EngineType.SpriteType {
+    func process(sprite: EngineType.SpriteType, from object: ObjectProtocol, for map: Map, from project: Project) throws -> EngineType.SpriteType {
         return try spriteProcessor(sprite, object, map, project)
     }
     
-    func process(_ text: EngineType.TextObjectType, from object: ObjectProtocol, for map: Map, from project: Project) throws -> EngineType.TextObjectType {
+    func process(text: EngineType.TextObjectType, from object: ObjectProtocol, for map: Map, from project: Project) throws -> EngineType.TextObjectType {
         return try textProcessor(text, object, map, project)
     }
     
-    func process(_ polyline: EngineType.PolylineObjectType, from object: ObjectProtocol, for map: Map, from project: Project) throws -> EngineType.PolylineObjectType {
+    func process(polyline: EngineType.PolylineObjectType, from object: ObjectProtocol, for map: Map, from project: Project) throws -> EngineType.PolylineObjectType {
         return try polylineProcessor(polyline, object, map, project)
     }
     
-    func process(_ polygon: EngineType.PolygonObjectType, from object: ObjectProtocol, for map: Map, from project: Project) throws -> EngineType.PolygonObjectType {
+    func process(polygon: EngineType.PolygonObjectType, from object: ObjectProtocol, for map: Map, from project: Project) throws -> EngineType.PolygonObjectType {
         return try polygonProcessor(polygon, object, map, project)
     }
 }
