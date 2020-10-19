@@ -97,13 +97,13 @@ public struct Color : Equatable{
     public static let black = Color(r: 0, g: 0, b: 0)
 
     /// Predefined red color
-    public static let red = Color(r: 0, g: 0, b: 0)
+    public static let red = Color(r: 255, g: 0, b: 0)
 
     /// Predefined green color
-    public static let green = Color(r: 0, g: 0, b: 0)
+    public static let green = Color(r: 0, g: 255, b: 0)
 
     /// Predefined blue color
-    public static let blue = Color(r: 0, g: 0, b: 0)
+    public static let blue = Color(r: 0, g: 0, b: 255)
     
     /// Predefined magenta color
     public static let magenta = Color(r: 255, g: 0, b: 255)
