@@ -33,9 +33,13 @@ final class EngineTests: XCTestCase {
         }
         
         TestEngine.removeProducers()
+        
+        XCTAssertFalse(TestEngine.hasProducers)
 
         TestEngine.register(producer: SomeMapFactory())
 
+        XCTAssertTrue(TestEngine.hasProducers)
+        
         XCTAssertEqual(TestEngine.engineMapFactories().count, 1)
         XCTAssertEqual(TestEngine.engineMapPostProcessors().count, 1)
 
