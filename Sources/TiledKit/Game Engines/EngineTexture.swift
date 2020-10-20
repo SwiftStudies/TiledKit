@@ -19,7 +19,9 @@ public extension Engine {
     
     /// Make an instance of a given texture given the supplied clipping bounds and properites for this instance
     static func make(textureFrom url:URL, with bounds:PixelBounds?, and properties:Properties, in project:Project) throws -> TextureType {
-        return try make(texture: load(textureFrom: url, in: project), with: bounds, and: properties, in: project)
+        let texture = try project.retrieve(asType: TextureType.self, from: url)
+        
+        return try make(texture: texture, with: bounds, and: properties, in: project)
     }
 }
 
