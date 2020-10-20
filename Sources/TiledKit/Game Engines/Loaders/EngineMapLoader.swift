@@ -52,6 +52,10 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     madeObject = try E.make(pointFor: object, in: map, from: project)
                 }
                 
+                for processor in E.engineObjectPostProcessors() {
+                    madeObject = try processor.process(point: madeObject, from: object, for: map, from: project)
+                }
+                
                 container.add(child: madeObject)
             case .rectangle(let size, angle: let angle):
                 var madeObject : E.RectangleObjectType! = nil
@@ -63,6 +67,10 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 }
                 if madeObject == nil {
                     madeObject = try E.make(rectangleOf: size, at: angle, for: object, in: map, from: project)
+                }
+                
+                for processor in E.engineObjectPostProcessors() {
+                    madeObject = try processor.process(rectangle: madeObject, from: object, for: map, from: project)
                 }
                 
                 container.add(child: madeObject)
@@ -78,6 +86,10 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     madeObject = try E.make(ellipseOf: size, at: angle, for: object, in: map, from: project)
                 }
                 
+                for processor in E.engineObjectPostProcessors() {
+                    madeObject = try processor.process(ellipse: madeObject, from: object, for: map, from: project)
+                }
+
                 container.add(child: madeObject)
             case .tile(let tileGID, let size, let angle):
                 var madeObject : E.SpriteType! = nil
@@ -93,7 +105,11 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     }
                     madeObject = try E.make(spriteWith: spriteCopy, of: size, at: angle, for: object, in: map, from: project)
                 }
-                
+                                
+                for processor in E.engineObjectPostProcessors() {
+                    madeObject = try processor.process(sprite: madeObject, from: object, for: map, from: project)
+                }
+
                 container.add(child: madeObject)
             case .text(let string, let size, let angle, let style):
                 var madeObject : E.TextObjectType! = nil
@@ -105,6 +121,10 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 }
                 if madeObject == nil {
                     madeObject = try E.make(textWith: string, of: size, at: angle, with: style, for: object, in: map, from: project)
+                }
+                
+                for processor in E.engineObjectPostProcessors() {
+                    madeObject = try processor.process(text: madeObject, from: object, for: map, from: project)
                 }
                 
                 container.add(child: madeObject)
@@ -120,6 +140,10 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     madeObject = try E.make(polygonWith: points, at: angle, for: object, in: map, from: project)
                 }
                 
+                for processor in E.engineObjectPostProcessors() {
+                    madeObject = try processor.process(polygon: madeObject, from: object, for: map, from: project)
+                }
+
                 container.add(child: madeObject)
             case .polyline(let points, let angle):
                 var madeObject : E.PolylineObjectType! = nil
@@ -133,6 +157,10 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     madeObject = try E.make(polylineWith: points, at: angle, for: object, in: map, from: project)
                 }
                 
+                for processor in E.engineObjectPostProcessors() {
+                    madeObject = try processor.process(polyline: madeObject, from: object, for: map, from: project)
+                }
+
                 container.add(child: madeObject)
             }
         }
