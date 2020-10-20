@@ -20,7 +20,7 @@ internal struct EngineRegistry {
     }
     
     static func isEmpty<E:Engine>(`for` engine:E.Type)->Bool{
-        return registry[makeKey(for: engine.self)]?.isEmpty ?? true
+        return !(registry[makeKey(for: engine.self)]?.isEmpty ?? true)
     }
     
     static func insert<T:EngineObject,EngineType>(`for` engine:EngineType.Type, object:T) where T.EngineType == EngineType{
