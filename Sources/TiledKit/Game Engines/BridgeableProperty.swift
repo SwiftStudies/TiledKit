@@ -30,7 +30,7 @@ public protocol ExpressibleAsTiledColor {
 
 /// Enables the implementer to provide the information required to automatically translate a tiled property
 /// and apply it to the game specific engine.
-public protocol TiledEngineBridgableProperty  {
+public protocol BridgableProperty  {
     /// Captures which game engine object is the target for this property
     associatedtype EngineObjectType : EngineObject
     
@@ -50,9 +50,18 @@ public protocol TiledEngineBridgableProperty  {
     var     engineObjectProperty   : PartialKeyPath<EngineObjectType>   {get}
 }
 
-/// Useful for enums that capture `TiledEngineBridgableProperty` to enable them to be
+/// If properties are captured in an `String` enum generically returning the name of the tiled property based on the raw value of the
+/// case
+public extension BridgableProperty where Self : RawRepresentable, Self.RawValue == String {
+    /// The name of the property in Tiled
+    var tiledName : String {
+       return rawValue
+    }
+}
+
+/// Useful for enums that capture `BridgableProperty` to enable them to be
 /// quickly and easily applied
-public extension CaseIterable where Self : TiledEngineBridgableProperty {
+public extension CaseIterable where Self : BridgableProperty {
     /// Bridges all cases  with the supplied Tiled properties to the supplied `EngineObject`
     /// - Parameters:
     ///   - properties: The tiled properties and values
@@ -63,7 +72,7 @@ public extension CaseIterable where Self : TiledEngineBridgableProperty {
 }
 
 /// Standard capabilities added to make mapping from Tiled data to the objects in a game engine as simple as possible
-public extension TiledEngineBridgableProperty {
+public extension BridgableProperty {
     
     
     /// Sets the appropriate property on the `EngineObjectType` instance supplied
@@ -120,7 +129,7 @@ public extension TiledEngineBridgableProperty {
 
 
 /// Provides convience methods for applying multiple bridgable properties
-public extension Collection where Element : TiledEngineBridgableProperty {
+public extension Collection where Element : BridgableProperty {
     /// For an array of bridgeable properties applies all of those that exist to the supplied object
     /// - Parameters:
     ///   - properties: The tiled properties and values
@@ -131,5 +140,26 @@ public extension Collection where Element : TiledEngineBridgableProperty {
                 tiledBridgedProperty.apply(to: object, tiledValue)
             }
         }
+    }
+}
+
+/// For any property list, rapidly determine if the bridgable properties are included
+public extension Properties {
+    
+    /// Determines if the properties include at least one of the properties in the supplied array
+    /// - Parameter properties: The properties to check for
+    /// - Returns: `true` if at least one of the properties exists
+    func hasProperty<EngineProperty:BridgableProperty>(in properties:[EngineProperty])->Bool {
+        return filter({properties.map(\.tiledName).contains($0.key)}).count > 0
+    }
+}
+
+/// Convience method for all items that have properties
+public extension Propertied {
+    /// Determines if the properties of the object include at least one of the properties in the supplied array
+    /// - Parameter properties: The properties to check for
+    /// - Returns: `true` if at least one of the properties exists
+    func hasProperty<EngineProperty:BridgableProperty>(in properties:[EngineProperty])->Bool {
+        return self.properties.hasProperty(in: properties)
     }
 }

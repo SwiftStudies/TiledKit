@@ -285,7 +285,7 @@ struct TestTilePostProcessor : TilePostProcessor {
 struct TestMapPostProcessor : MapPostProcessor {
     typealias EngineType = TestEngine
 
-    enum BridgedProperties : String, TiledEngineBridgableProperty, CaseIterable {
+    enum BridgedProperties : String, BridgableProperty, CaseIterable {
         typealias EngineObjectType = TestMap
         
         case booleanProperty = "Boolean Property", intProperty = "Int Property"
@@ -410,7 +410,7 @@ struct TestObjectMapProcessor : ObjectPostProcessor, MapPostProcessor {
     
 }
 
-enum TestProperties : String, TiledEngineBridgableProperty, CaseIterable {
+enum TestProperties : String, BridgableProperty, CaseIterable {
     typealias EngineObjectType = TestSprite
     
     case shade, mass
