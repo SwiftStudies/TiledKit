@@ -88,7 +88,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     }
                 }
                 if madeObject == nil {
-                    guard let spriteCopy = mapTiles[tileGID]?.deepCopy() else {
+                    guard let spriteCopy = mapTiles[tileGID] else {
                         throw EngineError.couldNotFindTileInMap(tileGID)
                     }
                     madeObject = try E.make(spriteWith: spriteCopy, of: size, at: angle, for: object, in: map, from: project)
