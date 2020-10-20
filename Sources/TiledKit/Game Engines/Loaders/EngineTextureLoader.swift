@@ -14,7 +14,14 @@
 
 import Foundation
 
-class EngineTextureLoader<EngineType:Engine> : ResourceLoader {
+/// This type should not be implemented outside of TiledKit and is used solely pass
+/// information about the current project to the `Engine`s load texture implementation.
+/// Outside of TiledKit you should use the automatically provided `Engine.load(textureFrom url:URL, project: Project)` method
+public protocol EngineImageLoader {
+    var project: Project { get }
+}
+
+class EngineTextureLoader<EngineType:Engine> : ResourceLoader, EngineImageLoader {
     let project : Project
     
     init(_ project:Project){
@@ -22,7 +29,7 @@ class EngineTextureLoader<EngineType:Engine> : ResourceLoader {
     }
     
     func retrieve<R>(asType: R.Type, from url: URL) throws -> R where R : Loadable {
-        guard let loadedTexture =  try EngineType.load(textureFrom: url, in: project) as? R else {
+        guard let loadedTexture =  try EngineType.load(textureFrom: url, by: self) as? R else {
             throw EngineError.couldNotCreateTextureFrom(url)
         }
         return loadedTexture

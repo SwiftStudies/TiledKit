@@ -23,6 +23,16 @@ public extension Engine {
         
         return try make(texture: texture, with: bounds, and: properties, in: project)
     }
+    
+    /// Loads a texture (through the `Engine`'s specific implementation of image loading (ensuring caching is performed etc)
+    /// - Parameters:
+    ///   - url: The source of the texture
+    ///   - project: The project (providing context about the location of the image which may be needed)
+    /// - Throws: Any errors during loading
+    /// - Returns: The specific texture type for the image
+    static func load(textureFrom url:URL, in project:Project) throws -> TextureType {
+        return try project.retrieve(asType: TextureType.self, from: url)
+    }
 }
 
 /// By implementing this protocol (required for `Engine.TextureType`
