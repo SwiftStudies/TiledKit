@@ -47,6 +47,11 @@ final class TestEngine : Engine {
         return TestMap(size:map.pixelSize)
     }
     
+    static func process(engineMap specializedMap: TestMap, for tiledMap: Map, in project: Project) throws -> TestMap {
+        specializedMap.userData["processedBy"] = "TestEngine" 
+        return specializedMap
+    }
+    
     static func registerProducers() {
         return
     }

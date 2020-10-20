@@ -76,6 +76,13 @@ public protocol Engine {
     /// - Parameter map: The `Map` to create it for
     static func make(mapFor tiledMap:Map) throws -> MapType
     
+    /// Hook for specializations to provide post processing actvities
+    /// - Parameters:
+    ///   - specializedMap: The specialized map created by a factory or the engine
+    ///   - tiledMap: The tiled map it was created from
+    ///   - project: The project it is being loaded from
+    static func process(engineMap specializedMap:MapType, for tiledMap:Map, in project:Project) throws -> MapType 
+    
     /// Provide a default specialized tile creator for the Engine
     /// - Parameter map: The `Map` to create it for
     /// - Parameter tile: The `Tile` to create a sprite for
