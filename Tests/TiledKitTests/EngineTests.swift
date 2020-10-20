@@ -31,6 +31,8 @@ final class EngineTests: XCTestCase {
                 return nil
             }
         }
+        
+        TestEngine.removeProducers()
 
         TestEngine.register(producer: SomeMapFactory())
 
