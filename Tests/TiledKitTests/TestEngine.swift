@@ -15,6 +15,10 @@
 import Foundation
 import TiledKit
 
+enum TestEngineError : Error {
+    case incorrectLoaderUsed(loaderType:String)
+}
+
 final class TestEngine : Engine {
     typealias FloatType = Float
     typealias ColorType = UInt32
@@ -31,7 +35,11 @@ final class TestEngine : Engine {
     typealias PolylineObjectType = TestPologonal
     typealias PolygonObjectType = TestPologonal
 
-    static func load(textureFrom url: URL, in project:Project) throws -> TestTexture {
+    static func load<LoaderType>(textureFrom url: URL, by loader: LoaderType) throws -> TestTexture where LoaderType : EngineImageLoader {
+        let loaderName = "\(type(of: loader))"
+        guard loaderName.hasPrefix("EngineTextureLoader") else {
+            throw TestEngineError.incorrectLoaderUsed(loaderType: loaderName)
+        }
         return TestTexture(from: url)
     }
     

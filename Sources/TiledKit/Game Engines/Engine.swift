@@ -61,8 +61,12 @@ public protocol Engine {
     /// Register any default factories or post-processors
     static func registerProducers()
     
-    /// Provide a method for loading textures
-    static func load(textureFrom url:URL, in project:Project) throws -> TextureType
+    /// Provide a method for loading textures, should not be called directly as it is intended to provide a point for a specific `Engine`
+    /// specialization to provide concrete low-level loading behaviour.
+    /// - Parameters:
+    ///   - url: The location of the image
+    ///   - loader: The loader object, this will be supplied by the `Engine` (not a specific implementation of it).
+    static func load<LoaderType:EngineImageLoader>(textureFrom url:URL, by loader:LoaderType) throws -> TextureType
 
     /// Make an instance of a given texture given the supplied clipping bounds and properites for this instance
     static func make(texture:TextureType, with bounds:PixelBounds?, and properties:Properties, in project:Project) throws -> TextureType
