@@ -89,6 +89,35 @@ final class EngineTests: XCTestCase {
         XCTAssertEqual(TestEngine.engineMapFactories().count, 0)
         
     }
+
+    func loadTestMap(_ named:String)->TestMap{
+        let testMap : TestMap
+        do {
+            testMap = try moduleBundleProject.retrieve(TestEngine.self, mapNamed: named, in: "Maps")
+        } catch {
+            XCTFail("\(error)")
+            fatalError("Can't load the map, can't continue with testing")
+        }
+        return testMap
+    }
+    
+    func testMapProcessing(){
+        XCTAssertEqual(loadTestMap("Test Map 1").userData["processedBy"] as? String, "TestEngine")
+        
+        struct CustomMapProcessor : MapPostProcessor {
+            typealias EngineType = TestEngine
+
+            func process(engineMap: EngineType.MapType, for map: Map, from project: Project) throws -> EngineType.MapType {
+                engineMap.userData["processedBy"] = "CustomMapProcessor"
+                
+                return engineMap
+            }
+        }
+        
+        TestEngine.register(producer: CustomMapProcessor())
+        
+        XCTAssertEqual(loadTestMap("Test Map 1").userData["processedBy"] as? String, "CustomMapProcessor")
+    }
     
     func testBridgeAblePropertyApplication(){
         let sprite = TestSprite()
