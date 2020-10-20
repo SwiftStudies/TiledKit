@@ -14,7 +14,7 @@
 
 import Foundation
 
-class EngineTextureLoader<E:Engine> : ResourceLoader {
+class EngineTextureLoader<EngineType:Engine> : ResourceLoader {
     let project : Project
     
     init(_ project:Project){
@@ -22,7 +22,7 @@ class EngineTextureLoader<E:Engine> : ResourceLoader {
     }
     
     func retrieve<R>(asType: R.Type, from url: URL) throws -> R where R : Loadable {
-        guard let loadedTexture =  try E.load(textureFrom: url, in: project) as? R else {
+        guard let loadedTexture =  try EngineType.load(textureFrom: url, in: project) as? R else {
             throw EngineError.couldNotCreateTextureFrom(url)
         }
         return loadedTexture
