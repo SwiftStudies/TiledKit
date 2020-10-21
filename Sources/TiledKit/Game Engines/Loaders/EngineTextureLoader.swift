@@ -32,6 +32,13 @@ class EngineTextureLoader<EngineType:Engine> : ResourceLoader, EngineImageLoader
         guard let loadedTexture =  try EngineType.load(textureFrom: url, by: self) as? R else {
             throw EngineError.couldNotCreateTextureFrom(url)
         }
+        
+        if let engineTexture = loadedTexture as? EngineType.TextureType {
+            try engineTexture.verify()
+        } else {
+            EngineType.warn("Loaded texture (\(type(of: loadedTexture))) does not match (\(EngineType.self))'s Texture Type (\(EngineType.TextureType.self))")
+        }
+        
         return loadedTexture
     }
 }

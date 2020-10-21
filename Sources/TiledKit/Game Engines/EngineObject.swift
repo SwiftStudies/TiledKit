@@ -17,6 +17,22 @@
 public protocol EngineObject {
     /// The specific game engine the object supports
     associatedtype EngineType : Engine
+    
+    /// Called once all `Factory` and `Processor`s have been called
+    /// creating the object, providing an oppertunity to warn (`Engine.warn`)
+    /// or fail (by throwing an Error). A default implementation is provided that
+    /// does nothing.
+    func verify() throws
+}
+
+/// Provides a default implementation of `verify()`
+public extension EngineObject {
+    
+    /// Default implementation that does nothing
+    /// - Throws: No errors will be thrown by this default implementation
+    func verify() throws {
+        
+    }
 }
 
 /// Container that can contain objects

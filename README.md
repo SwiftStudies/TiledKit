@@ -21,6 +21,10 @@ To simply load a map and any associated tilesets it is as simple as
         let map = Project.default.retreive(map: "Test Map")
         print ("Hello, \(map.name)!")
 
+The primary use of TiledKit will be enable you to convert the maps you design in Tiled into playable games using a game engine, and there is significant support
+for doing that quickly and efficiently (as well as open source projects that already capture them such as [SpriteKit](https://github.com/SwiftStudies/SKTiledKit)). 
+You can find documentation aimed at guiding you through that process [Game Engine Specialization](/Documentation/Game%20Engine%20Specialization.md)
+
 TiledKit works on all Apple & Linux platforms supporting Swift 5.3 or later. 
 
 ## Installation
@@ -28,7 +32,6 @@ TiledKit works on all Apple & Linux platforms supporting Swift 5.3 or later.
 TiledKit is distributed as a Swift package to be built with SPM. You can include it in your project by adding the following dependency to your `Package.swift` file
 
     .package(url: "https://github.com/SwiftStudies/TiledKit", from: "0.5")
-
 
 ## Available Specializations
 
