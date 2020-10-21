@@ -58,6 +58,12 @@ public protocol Engine {
     /// The type that represents a polygon object in the engine scene
     associatedtype PolygonObjectType : EngineObject where PolygonObjectType.EngineType == Self
 
+    /// The prefix for the engine, used for engine object type generation
+    static var prefix : String { get }
+    
+    /// The specialized Tiled object types for the Engine
+    static var objectTypes : ObjectTypes { get }
+    
     /// Register any default factories or post-processors
     static func registerProducers()
     
@@ -96,11 +102,11 @@ public protocol Engine {
     /// - Parameters:
     ///   - sprite: The previously created `SpriteType`
     ///   - tile: The `Tile` it was created from
-    ///   - tileSet: The `TileSet` the tile belongs to
+    ///   - tileset: The `TileSet` the tile belongs to
     ///   - setSprites: All other sprites created for the `TileSet`
     ///   - map: The map the `TileSet`s were loaded from
     ///   - project: The project the `Map`& `TileSet` was loaded from
-    static func process(_ sprite:SpriteType, from tile:Tile, in tileSet:TileSet, with setSprites:[UInt32:SpriteType], for map:Map, from project:Project) throws ->SpriteType
+    static func process(_ sprite:SpriteType, from tile:Tile, in tileset:TileSet, with setSprites:[UInt32:SpriteType], for map:Map, from project:Project) throws ->SpriteType
     
     /// Creates a sprite for the supplied image layer
     /// - Parameters:
@@ -202,8 +208,15 @@ public protocol Engine {
 /// Provides common diagnostic capabilites to any engine specialization
 public extension Engine {
     /// Displays a warning message to the console. You can override to display the messages
-    /// more prominantly in the engine of your chosing. 
+    /// more prominantly in the engine of your chosing. This is a default implementation that just
+    /// prints the output to the console. Specific engines may want to display more prominently.
+    /// - Parameter message: The message to display.
     static func warn(_ message:String){
         print("Warning: \(message)")
+    }
+    
+    /// TK is provided as the default prefix.
+    static var prefix : String {
+        return "TK"
     }
 }

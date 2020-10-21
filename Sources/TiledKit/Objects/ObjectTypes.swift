@@ -41,7 +41,7 @@ public struct ObjectTypes : Loadable {
     }
     
     /// The defined `ObjectType`s
-    fileprivate var definitions : [String:ObjectType]
+    internal var definitions : [String:ObjectType]
     
     /// Get or set an object with the specified name
     public subscript(_ named:String) -> ObjectType?{
@@ -90,7 +90,7 @@ public struct ObjectTypes : Loadable {
         definitions = [:]
     }
     
-    private var url : URL?
+    internal var url : URL?
 }
 
 /// An `ObjectType` captures a set of properties and their default values that can be applied to any

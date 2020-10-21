@@ -56,6 +56,8 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     madeObject = try processor.process(point: madeObject, from: object, for: map, from: project)
                 }
                 
+                try madeObject.verify()
+                
                 container.add(child: madeObject)
             case .rectangle(let size, angle: let angle):
                 var madeObject : E.RectangleObjectType! = nil
@@ -72,6 +74,8 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 for processor in E.engineObjectPostProcessors() {
                     madeObject = try processor.process(rectangle: madeObject, from: object, for: map, from: project)
                 }
+
+                try madeObject.verify()
                 
                 container.add(child: madeObject)
             case .ellipse(let size, angle: let angle):
@@ -90,6 +94,8 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     madeObject = try processor.process(ellipse: madeObject, from: object, for: map, from: project)
                 }
 
+                try madeObject.verify()
+                
                 container.add(child: madeObject)
             case .tile(let tileGID, let size, let angle):
                 var madeObject : E.SpriteType! = nil
@@ -110,6 +116,8 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     madeObject = try processor.process(sprite: madeObject, from: object, for: map, from: project)
                 }
 
+                try madeObject.verify()
+                
                 container.add(child: madeObject)
             case .text(let string, let size, let angle, let style):
                 var madeObject : E.TextObjectType! = nil
@@ -126,6 +134,8 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 for processor in E.engineObjectPostProcessors() {
                     madeObject = try processor.process(text: madeObject, from: object, for: map, from: project)
                 }
+                
+                try madeObject.verify()
                 
                 container.add(child: madeObject)
             case .polygon(let points, let angle):
@@ -144,6 +154,8 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     madeObject = try processor.process(polygon: madeObject, from: object, for: map, from: project)
                 }
 
+                try madeObject.verify()
+                
                 container.add(child: madeObject)
             case .polyline(let points, let angle):
                 var madeObject : E.PolylineObjectType! = nil
@@ -161,6 +173,8 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     madeObject = try processor.process(polyline: madeObject, from: object, for: map, from: project)
                 }
 
+                try madeObject.verify()
+                
                 container.add(child: madeObject)
             }
         }
@@ -190,6 +204,8 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     madeLayer = try postProcessor.process(groupLayer: madeLayer, from: layer, for: map, in: project)
                 }
                 
+                try madeLayer.verify()
+                
                 container.add(child: madeLayer)
             case .image(let imageReference):
                 var madeLayer : E.SpriteType!
@@ -208,6 +224,8 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 for postProcessor in E.engineLayerPostProcessors() {
                     madeLayer = try postProcessor.process(imageLayer: madeLayer, from: layer, for: map, in: project)
                 }
+                
+                try madeLayer.verify()
                 
                 container.add(child: madeLayer)
             case .objects(let objects):
@@ -229,6 +247,8 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     madeLayer = try postProcessor.process(objectLayer: madeLayer, from: layer, for: map, in: project)
                 }
                 
+                try madeLayer.verify()
+                
                 container.add(child: madeLayer)
             case .tile(let tileGrid):
                 var madeLayer : E.TileLayerType! = nil
@@ -246,6 +266,8 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 for postProcessor in E.engineLayerPostProcessors() {
                     madeLayer = try postProcessor.process(tileLayer: madeLayer, from: layer, for: map, in: project)
                 }
+                
+                try madeLayer.verify()
                 
                 container.add(child: madeLayer)
             }
@@ -316,6 +338,9 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                     setSprites[tileId] = sprite
                 }
                 
+                // Verify
+                try sprite.verify()
+                
                 // Store it for later use outside of the context of the single tileset
                 mapTiles.tiles[tileSetReference.firstGid+tileId] = sprite
             }
@@ -341,6 +366,9 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
         
         // Apply map post processors
         specializedMap = try process(specializedMap: specializedMap, for: tiledMap)
+        
+        // Verify
+        try specializedMap.verify()
         
         guard let typedSpecializedMap = specializedMap as? R else {
             throw EngineError.unsupportedTypeWhenLoadingMap(desiredType: "\(R.self)", supportedType: "\(E.MapType.self)")

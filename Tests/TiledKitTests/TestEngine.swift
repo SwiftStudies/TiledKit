@@ -56,6 +56,10 @@ final class TestEngine : Engine {
         return
     }
     
+    static var objectTypes: ObjectTypes {
+        return ObjectTypes()
+    }
+    
     //
     // Tile Processing
     //

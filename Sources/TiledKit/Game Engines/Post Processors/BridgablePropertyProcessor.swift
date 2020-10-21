@@ -44,8 +44,6 @@ public struct BridgablePropertyProcessor<TargetType:EngineObject> : TiledKit.Map
 
     
     func process<O:EngineObject>(target engineObject:O, source:Propertied)->O{
-        // If it's of the right target type, the right tiled source type, and has at least one of the properties, then apply it
-        #warning("DEFECT: Not checking the type is right, probably need to include the type in the parameters")
         guard let target = engineObject as? TargetType else {
             return engineObject
         }
