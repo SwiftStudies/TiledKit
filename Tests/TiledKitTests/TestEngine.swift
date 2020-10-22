@@ -216,32 +216,35 @@ class TestNode : EngineLayerContainer, EngineObjectContainer, TestableObject {
     var properties = [String : PropertyValue]()
 
     
-    func add(child point: TestPoint) {
+    func add(point: TestPoint) {
         children.append(point)
     }
     
-    func add(child rectangle: TestRectangle) {
+    func add(rectangle: TestRectangle) {
         children.append(rectangle)
     }
     
-    func add(child ellipse: TestEllipse) {
+    func add(ellipse: TestEllipse) {
         children.append(ellipse)
     }
     
-    func add(child text: TestText) {
+    func add(text: TestText) {
         children.append(text)
     }
     
-    func add(child polyline: TestPologonal) {
+    func add(polygon: TestPologonal) {
+        children.append(polygon)
+    }
+    
+    func add(polyline: TestPologonal) {
         children.append(polyline)
     }
-
     
-    func add(child layer: TestNode) {
+    func add(layer: TestNode) {
         children.append(layer)
     }
     
-    func add(child sprite: TestSprite) {
+    func add(sprite: TestSprite) {
         children.append(sprite)
     }
 }
