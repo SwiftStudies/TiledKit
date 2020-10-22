@@ -40,31 +40,31 @@ public protocol EngineObjectContainer : EngineObject {
     
     /// Adds a point to the container
     /// - Parameter point: The point to add
-    func add(child point:EngineType.PointObjectType)
+    func add(point:EngineType.PointObjectType)
     
     /// Adds a rectangle to the container
     /// - Parameter rectangle: The rectangle to add
-    func add(child rectangle:EngineType.RectangleObjectType)
+    func add(rectangle:EngineType.RectangleObjectType)
     
     /// Adds an ellipse to the container
     /// - Parameter ellipse: The ellipse to add
-    func add(child ellipse:EngineType.EllipseObjectType)
+    func add(ellipse:EngineType.EllipseObjectType)
     
     /// Adds a sprite to the container
     /// - Parameter sprite: The sprite to add
-    func add(child sprite:EngineType.SpriteType)
+    func add(sprite:EngineType.SpriteType)
     
     /// Adds text to the container
     /// - Parameter text: The text to add
-    func add(child text:EngineType.TextObjectType)
+    func add(text:EngineType.TextObjectType)
     
     /// Adds a polyline to the container
     /// - Parameter polyline: The polyline to add
-    func add(child polyline:EngineType.PolylineObjectType)
+    func add(polyline:EngineType.PolylineObjectType)
     
     /// Adds a polygon to the container
     /// - Parameter polygon: The polygon to add
-    func add(child polygon:EngineType.PolygonObjectType)
+    func add(polygon:EngineType.PolygonObjectType)
 }
 
 /// Layer containers can contain other elements or layers.
@@ -72,17 +72,17 @@ public protocol EngineLayerContainer : EngineObject {
     
     /// Adds a tile layer to the container
     /// - Parameter layer: The layer to add
-    func add(child layer:EngineType.TileLayerType)
+    func add(layer:EngineType.TileLayerType)
 
     /// Adds a group layer to the container
     /// - Parameter layer: The layer to add
-    func add(child layer:EngineType.GroupLayerType)
+    func add(layer:EngineType.GroupLayerType)
     
     /// Adds a sprite to the container
     /// - Parameter layer: The sprite to add
-    func add(child sprite:EngineType.SpriteType)
+    func add(sprite:EngineType.SpriteType)
     
     /// Adds an object layer to the container
     /// - Parameter layer: The layer to add
-    func add(child layer:EngineType.ObjectLayerType)
+    func add(layer:EngineType.ObjectLayerType)
 }

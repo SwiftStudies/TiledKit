@@ -58,7 +58,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 
                 try madeObject.verify()
                 
-                container.add(child: madeObject)
+                container.add(point: madeObject)
             case .rectangle(let size, angle: let angle):
                 var madeObject : E.RectangleObjectType! = nil
                 for factory in E.objectFactories() {
@@ -77,7 +77,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
 
                 try madeObject.verify()
                 
-                container.add(child: madeObject)
+                container.add(rectangle: madeObject)
             case .ellipse(let size, angle: let angle):
                 var madeObject : E.EllipseObjectType! = nil
                 for factory in E.objectFactories() {
@@ -96,7 +96,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
 
                 try madeObject.verify()
                 
-                container.add(child: madeObject)
+                container.add(ellipse: madeObject)
             case .tile(let tileGID, let size, let angle):
                 var madeObject : E.SpriteType! = nil
                 for factory in E.objectFactories() {
@@ -118,7 +118,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
 
                 try madeObject.verify()
                 
-                container.add(child: madeObject)
+                container.add(sprite: madeObject)
             case .text(let string, let size, let angle, let style):
                 var madeObject : E.TextObjectType! = nil
                 for factory in E.objectFactories() {
@@ -137,7 +137,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 
                 try madeObject.verify()
                 
-                container.add(child: madeObject)
+                container.add(text: madeObject)
             case .polygon(let points, let angle):
                 var madeObject : E.PolygonObjectType! = nil
                 for factory in E.objectFactories() {
@@ -156,7 +156,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
 
                 try madeObject.verify()
                 
-                container.add(child: madeObject)
+                container.add(polygon: madeObject)
             case .polyline(let points, let angle):
                 var madeObject : E.PolylineObjectType! = nil
                 for factory in E.objectFactories() {
@@ -175,7 +175,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
 
                 try madeObject.verify()
                 
-                container.add(child: madeObject)
+                container.add(polyline: madeObject)
             }
         }
         
@@ -206,7 +206,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 
                 try madeLayer.verify()
                 
-                container.add(child: madeLayer)
+                container.add(layer: madeLayer)
             case .image(let imageReference):
                 var madeLayer : E.SpriteType!
                 for factory in E.layerFactories() {
@@ -227,7 +227,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 
                 try madeLayer.verify()
                 
-                container.add(child: madeLayer)
+                container.add(sprite: madeLayer)
             case .objects(let objects):
                 var madeLayer : E.ObjectLayerType! = nil
                 for factory in E.layerFactories() {
@@ -249,7 +249,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 
                 try madeLayer.verify()
                 
-                container.add(child: madeLayer)
+                container.add(layer: madeLayer)
             case .tile(let tileGrid):
                 var madeLayer : E.TileLayerType! = nil
                 for factory in E.layerFactories() {
@@ -269,7 +269,7 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
                 
                 try madeLayer.verify()
                 
-                container.add(child: madeLayer)
+                container.add(layer: madeLayer)
             }
             
         }
