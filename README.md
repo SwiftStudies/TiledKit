@@ -23,7 +23,9 @@ To simply load a map and any associated tilesets it is as simple as
 
 The primary use of TiledKit will be enable you to convert the maps you design in Tiled into playable games using a game engine, and there is significant support
 for doing that quickly and efficiently (as well as open source projects that already capture them such as [SpriteKit](https://github.com/SwiftStudies/SKTiledKit)). 
-You can find documentation aimed at guiding you through that process [Game Engine Specialization](/Documentation/Game%20Engine%20Specialization.md)
+You can find documentation aimed at guiding you through that process [Game Engine Specialization](/Documentation/Game%20Engine%20Specialization.md). Here's an example of a single Tiled level being rendered by two different specializations in TiledKit (bottom right, [TextEngine](https://github.com/SwiftStudies/TextEngine) in the console output, bottom left [SpriteKit using SKTiledKit](https://github.com/SwiftStudies/SKTiledKit)))
+
+![One Tiled Map, Two Engines Rendering It](https://swiftstudies.github.io/TiledKit/Documentation/Images/Multiple%20Game%20Engines.png =500x)
 
 TiledKit works on all Apple & Linux platforms supporting Swift 5.3 or later. 
 
