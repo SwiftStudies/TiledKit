@@ -4,9 +4,7 @@ Whilst it's academically interesting to build maps in Tiled and getting access t
  - __SpriteKit__ [SKTiled](https://github.com/SwiftStudies/SKTiledKit) A sprite kit implementation that even integrates with Tiled itself to let you quickly test your level in Tiled & SpriteKit without even going to Xcode!
  - __TextEngine__ [TextEngine (TKTextEngine package)](https://github.com/SwiftStudies/TextEngine) Actually this example walks through how you build this implementation. It's not a fully fledged game engine, but it is a good simple example. 
 
-If you don't see what you want, read on. When you've done it then please create a PR or raise an issue so I can add a link here
-
-__Note__ that this piece of the API is being built ready for 0.5 of TiledKit and is subject to breaking changes outside of the normal semantic versioning system. Now would be a great time to highlight complexities and issues in applying it! 
+If you don't see what you want, read on. When you've done it then please create a PR or raise an issue so I can add a link here to the engine you are supporting!
 
 ## Artisinal Integrations
 In the end you can skip this whole section, jump off to the Project or Map [API documentation](https://swiftstudies.github.io/TiledKit/Documentation/API/) and just load one up and parse the data structures yourself. Keeping that API easy and useful, particually for reading, is the primary goal of this module.
@@ -180,6 +178,18 @@ As you can see, essentially four functions for adding child layers of each of th
     
 And that's it, you have nothing else to consider. This pattern is almost always applicable (at least I've not used a modern game engine where it isnt').
 
+#### Conforming to `SpriteContainer` 
+
+`TileLayerType` must conform to `SpriteContainer`... think of it as a preview for  `ObjectContainer` below (in fact `ObjectContainer` inherits from it) and it contains just one requirement to provide a method that will allow the specialization engine to add tiles to it. Here's the implementation for `Node`
+
+    extension Node : SpriteContainer {
+        public func add(sprite: Sprite) {
+            add(child: sprite)
+        }
+    }
+
+As you can see, all we need to do is add the sprite to the Node. This pattern is going to be extended for `ObjectContainer`. 
+
 #### Conforming to `ObjectContainer`
 
 `ObjectLayerType`s must implement `ObjectContainer`. Essentially it's analogous to `LayerContainer`, but this time there is a protocol require a function to add one of each of the different object types that Tiled supports. 
@@ -301,29 +311,19 @@ For object layers you will typically want to just create a container layer, but 
 
 Group layers are really just containers, but they do give you an opppertunity to apply effects to everythign they contain for example. In the above example we just create a node at the correct position.  
 
-    public static func make(tileLayer tileGrid: TileGrid, for layer: LayerProtocol, with sprites: MapTiles<TKTextEngine>, in map: Map, from project: Project) throws -> Node? {
-
-        let layerNode = Node(at: layer.position.transform)
-        
-        for x in 0..<tileGrid.size.width{
-            for y in 0..<tileGrid.size.height {
-                if let sprite = sprites[tileGrid[x,y]] {
-                    sprite.position = (x*map.tileSize.width, y*map.tileSize.height)
-                    layerNode.add(child: sprite)
-                } else {
-                    TKTextEngine.warn("Not not get a sprite for the tile at \(x),\(y) in tile layer \(layer.name)")
-                }
-            }
-        }
-
-        return layerNode
+    public static func make(tileLayer layer: LayerProtocol, with sprites: MapTiles<TKTextEngine>, in map: Map, from project: Project) throws -> Node? {
+        return Node(at: layer.position.transform)
     }
 
-Tile layers are the most complex, you are passed the grid which you must interpret and add a new instance of each tile. At the moment as TiledKit only supports orthogonal tile layers this is not complex, but as support is extended you will need to ensure that you understand each different layout.  
+That's almost all you have to think about for tile layers, there is just one more thing though... engine specialization will automatically use the orientation and rendering order of the map to request that you configure each tile defined in the layer, but it will create the new instance and cacluate the position for you
 
-> __Note__ The API here will change in 0.6 of TiledKit. Instead of you being passed the grid of tiles, you will just be asked to create a tile
-> layer container, and the specialization engine will make multiple calls to the same `make(sprite...)` function for adding an object 
-> allowing the specializaiton engine to do the work of interpretting the grid for you. 
+    public static func make(tileWith tile: Sprite, at position: Position, for tileLayer: LayerProtocol, in map: Map, from project: Project) throws -> Sprite {
+        tile.position = position.transform
+        
+        return tile
+    }
+
+Note that the transform method is just a convience extension I made to the `Position` type to make it create a `Point` which is what TextEngine uses for specifying co-ordinates. 
 
 #### Adding Objects
 
