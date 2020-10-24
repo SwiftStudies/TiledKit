@@ -31,6 +31,10 @@ enum EngineError : Error {
 
     /// When a tileGid can't be found in the engineloader's index of tiles
     case couldNotFindTileInMap(TileGID)
+
+    /// When a tileGid can't be found in any tile sets associated with the map
+    case couldNotFindTileSetForTileInMap(TileGID)
+
     
     /// Thrown if a function is not yet implemented
     case notImplemented

@@ -253,15 +253,17 @@ class EngineMapLoader<E:Engine> : ResourceLoader {
             case .tile(let tileGrid):
                 var madeLayer : E.TileLayerType! = nil
                 for factory in E.layerFactories() {
-                    if let factoryMadeLayer = try factory.make(tileLayerFor: tileGrid, for: layer, with: mapTiles, in: map, from: project){
+                    if let factoryMadeLayer = try factory.make( tileLayerFor: layer, with: mapTiles, in: map, from: project){
                         madeLayer = factoryMadeLayer
                         break
                     }
                 }
                 
                 if madeLayer == nil {
-                    madeLayer = try E.make(tileLayer: tileGrid, for: layer, with: mapTiles, in: map, from: project)
+                    madeLayer = try E.make(tileLayer: layer, with: mapTiles, in: map, from: project)
                 }
+                
+                try map.orientation.produce(spriteContainer: madeLayer, tilesFor: tileGrid, with: mapTiles, from: layer, for: map, in: project)
                 
                 for postProcessor in E.engineLayerPostProcessors() {
                     madeLayer = try postProcessor.process(tileLayer: madeLayer, from: layer, for: map, in: project)

@@ -93,9 +93,13 @@ final class TestEngine : Engine {
     static func make(objectContainerFrom layer: LayerProtocol, in map: Map, from project: Project) throws -> TestNode? {
         return TestNode()
     }
-        
-    static func make(tileLayer tileGrid: TileGrid, for layer: LayerProtocol, with sprites: MapTiles<TestEngine>, in map: Map, from project: Project) throws -> TestNode? {
+            
+    static func make(tileLayer layer: LayerProtocol, with sprites: MapTiles<TestEngine>, in map: Map, from project: Project) throws -> TestNode? {
         return TestNode()
+    }
+
+    static func make(tileWith tile: TestSprite, at position: Position, for tileLayer: LayerProtocol, in map: Map, from project: Project) throws -> TestSprite {
+        return tile
     }
     
     static func make(pointFor object: ObjectProtocol, in map: Map, from project: Project) throws -> TestPoint {
@@ -349,6 +353,10 @@ struct TestMultiProcessor : MapPostProcessor, LayerPostProcessor {
     
     func process(tileLayer: TestNode, from layer: LayerProtocol, for map: Map, in project: Project) throws -> TestNode {
         return try process(objectLayer: tileLayer, from: layer, for: map, in: project)
+    }
+    
+    func process(tileInstance: TestSprite, from tile: Tile, and tileset: TileSet, in layer: LayerProtocol, for map: Map, from project: Project) throws -> TestSprite {
+        return tileInstance
     }
     
     func process(groupLayer: TestNode, from layer: LayerProtocol, for map: Map, in project: Project) throws -> TestNode {

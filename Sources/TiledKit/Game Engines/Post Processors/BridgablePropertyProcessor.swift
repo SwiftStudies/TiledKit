@@ -41,8 +41,6 @@ public struct BridgablePropertyProcessor<TargetType:EngineObject> : TiledKit.Map
         applicableTypeName = typeName
     }
     
-
-    
     func process<O:EngineObject>(target engineObject:O, source:Propertied)->O{
         guard let target = engineObject as? TargetType else {
             return engineObject
@@ -71,6 +69,10 @@ public struct BridgablePropertyProcessor<TargetType:EngineObject> : TiledKit.Map
     
     public func process(tileLayer: EngineType.TileLayerType, from layer: LayerProtocol, for map: Map, in project: Project) throws -> EngineType.TileLayerType {
         return process(target: tileLayer, source: layer)
+    }
+    
+    public func process(tileInstance: TargetType.EngineType.SpriteType, from tile: Tile, and tileset: TileSet, in layer: LayerProtocol, for map: Map, from project: Project) throws -> TargetType.EngineType.SpriteType {
+        return process(target: tileInstance, source: tile)
     }
     
     public func process(imageLayer: EngineType.SpriteType, from layer: LayerProtocol, for map: Map, in project: Project) throws -> EngineType.SpriteType {

@@ -32,7 +32,7 @@ public protocol Engine {
     associatedtype SpriteType  : EngineObject, DeepCopyable where SpriteType.EngineType == Self
 
     /// The type that represents a layer of tiles
-    associatedtype TileLayerType  : EngineObject where TileLayerType.EngineType == Self
+    associatedtype TileLayerType  : EngineSpriteContainer where TileLayerType.EngineType == Self
 
     /// The type that represents a group of other layers
     associatedtype GroupLayerType  : EngineLayerContainer where GroupLayerType.EngineType == Self
@@ -132,12 +132,20 @@ public protocol Engine {
     
     /// Creates a tile layer with the supplied tiles in using the sprites loaded during map building
     /// - Parameters:
-    ///   - tileGrid: The grid of tiles to present
     ///   - layer: The meta data about the layer
     ///   - sprites: The sprites (indexed by gid) that can be used
     ///   - map: The map the layer is in
     ///   - project: The project the layer is loaded from
-    static func make(tileLayer tileGrid:TileGrid, for layer:LayerProtocol, with sprites:MapTiles<Self>, in map:Map, from project:Project) throws -> TileLayerType?
+    static func make(tileLayer layer:LayerProtocol, with sprites:MapTiles<Self>, in map:Map, from project:Project) throws -> TileLayerType?
+
+    /// Called for each tile in a tile layer. The position in the layer is supplied in Tiled coordinates
+    /// - Parameters:
+    ///   - tile: A new instance of the tile representation in your specific game engine
+    ///   - position: The location, in tiled coordinates, to position the tile at
+    ///   - tileLayer: The tile layer containing the tile
+    ///   - map: The map containing the tile layer
+    ///   - project: The project containing the map
+    static func make(tileWith tile:SpriteType, at position:Position, for tileLayer:LayerProtocol, in map:Map, from project:Project) throws -> SpriteType
     
     /// Creates a point object
     /// - Parameters:

@@ -35,8 +35,15 @@ public extension EngineObject {
     }
 }
 
+/// Container that can contain sprites and tiles
+public protocol EngineSpriteContainer : EngineObject {
+    /// Adds a sprite to the container
+    /// - Parameter sprite: The sprite to add
+    func add(sprite:EngineType.SpriteType)
+}
+
 /// Container that can contain objects
-public protocol EngineObjectContainer : EngineObject {
+public protocol EngineObjectContainer : EngineSpriteContainer {
     
     /// Adds a point to the container
     /// - Parameter point: The point to add
@@ -49,11 +56,7 @@ public protocol EngineObjectContainer : EngineObject {
     /// Adds an ellipse to the container
     /// - Parameter ellipse: The ellipse to add
     func add(ellipse:EngineType.EllipseObjectType)
-    
-    /// Adds a sprite to the container
-    /// - Parameter sprite: The sprite to add
-    func add(sprite:EngineType.SpriteType)
-    
+        
     /// Adds text to the container
     /// - Parameter text: The text to add
     func add(text:EngineType.TextObjectType)
