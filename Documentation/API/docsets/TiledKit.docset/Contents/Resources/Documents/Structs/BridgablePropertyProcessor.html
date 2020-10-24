@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BridgablePropertyProcessor Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/BridgablePropertyProcessor" class="dashAnchor"></a>
+    <a title="BridgablePropertyProcessor Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">TiledKit</a> (98% documented)</p>
+        <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">TiledKit Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        BridgablePropertyProcessor Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/MapTiles.html">MapTiles</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Project.html">Project</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Tile.html">Tile</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TileSet.html">TileSet</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/FileType.html">FileType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/HorizontalTextAlignment.html">HorizontalTextAlignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LayerMatchingError.html">LayerMatchingError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Orientation.html">Orientation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PropertyValue.html">PropertyValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RenderingOrder.html">RenderingOrder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/VerticalTextAlignment.html">VerticalTextAlignment</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CaseIterable.html">CaseIterable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Properties.html">Properties</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Sequence.html">Sequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URL.html">URL</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/BridgableProperty.html">BridgableProperty</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DeepCopyable.html">DeepCopyable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Engine.html">Engine</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineImageLoader.html">EngineImageLoader</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineLayerContainer.html">EngineLayerContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineMap.html">EngineMap</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineObject.html">EngineObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineObjectContainer.html">EngineObjectContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineSpriteContainer.html">EngineSpriteContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineTexture.html">EngineTexture</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ExpressibleAsTiledColor.html">ExpressibleAsTiledColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ExpressibleAsTiledFloat.html">ExpressibleAsTiledFloat</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LayerContainer.html">LayerContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LayerFactory.html">LayerFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LayerFilter.html">LayerFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LayerPostProcessor.html">LayerPostProcessor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LayerProtocol.html">LayerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Loadable.html">Loadable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MapFactory.html">MapFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MapPostProcessor.html">MapPostProcessor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MutablePropertied.html">MutablePropertied</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ObjectFactory.html">ObjectFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ObjectFilter.html">ObjectFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ObjectPostProcessor.html">ObjectPostProcessor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:8TiledKit8ProducerP">Producer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Propertied.html">Propertied</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ResourceLoader.html">ResourceLoader</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TileFactory.html">TileFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TilePostProcessor.html">TilePostProcessor</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/BridgablePropertyProcessor.html">BridgablePropertyProcessor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Color.html">Color</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Dimension.html">Dimension</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Frame.html">Frame</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Group.html">Group</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GroupLayer.html">GroupLayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ImageLayer.html">ImageLayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ImageReference.html">ImageReference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Layer.html">Layer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Layer/Kind.html">– Kind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Map.html">Map</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Object.html">Object</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Object/Kind.html">– Kind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ObjectLayer.html">ObjectLayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ObjectType.html">ObjectType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ObjectTypes.html">ObjectTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Point.html">Point</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Rectangle.html">Rectangle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TextStyle.html">TextStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TileFlip.html">TileFlip</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TileGID.html">TileGID</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TileGrid.html">TileGrid</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TileLayer.html">TileLayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TileSetReference.html">TileSetReference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TiledType.html">TiledType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit4Bytea">Byte</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit4Patha">Path</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit11PixelBoundsa">PixelBounds</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit10PixelPointa">PixelPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit9PixelSizea">PixelSize</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit8Positiona">Position</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit4Sizea">Size</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit16TileGridPositiona">TileGridPosition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit12TileGridSizea">TileGridSize</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>BridgablePropertyProcessor</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">BridgablePropertyProcessor</span><span class="o">&lt;</span><span class="kt">TargetType</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">TiledKit</span><span class="o">.</span><span class="kt"><a href="../Protocols/MapPostProcessor.html">MapPostProcessor</a></span><span class="p">,</span> <span class="kt">TiledKit</span><span class="o">.</span><span class="kt"><a href="../Protocols/LayerPostProcessor.html">LayerPostProcessor</a></span><span class="p">,</span> <span class="kt">TiledKit</span><span class="o">.</span><span class="kt"><a href="../Protocols/ObjectPostProcessor.html">ObjectPostProcessor</a></span> <span class="k">where</span> <span class="kt">TargetType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/EngineObject.html">EngineObject</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>Undocumented</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit12EngineObjectP0C4TypeQa"></a>
+                    <a name="//apple_ref/swift/Alias/EngineType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">EngineType</span> <span class="o">=</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt">EngineType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit26BridgablePropertyProcessorV7applies2to4withACyxGqd_0__AA0A4TypeVSSSgtc012EngineObjectI0Qyd__RszAA0cD0Rd__7ElementQyd_0_Rsd__STRd_0_r0_lufc"></a>
+                    <a name="//apple_ref/swift/Method/init(applies:to:with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit26BridgablePropertyProcessorV7applies2to4withACyxGqd_0__AA0A4TypeVSSSgtc012EngineObjectI0Qyd__RszAA0cD0Rd__7ElementQyd_0_Rsd__STRd_0_r0_lufc">init(applies:<wbr>to:<wbr>with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">TBP</span><span class="p">,</span> <span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span><span class="n">applies</span> <span class="nv">properties</span><span class="p">:</span> <span class="kt">C</span><span class="p">,</span> <span class="n">to</span> <span class="nv">tiledTypes</span><span class="p">:</span> <span class="kt"><a href="../Structs/TiledType.html">TiledType</a></span><span class="p">,</span> <span class="n">with</span> <span class="nv">typeName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">where</span> <span class="kt">TargetType</span> <span class="o">==</span> <span class="kt">TBP</span><span class="o">.</span><span class="kt">EngineObjectType</span><span class="p">,</span> <span class="kt">TBP</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/BridgableProperty.html">BridgableProperty</a></span><span class="p">,</span> <span class="kt">TBP</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">C</span> <span class="p">:</span> <span class="kt">Sequence</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit16MapPostProcessorP7process06engineC03for4from10EngineType_0cK0QZAJ_AA0C0VAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(engineMap:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit16MapPostProcessorP7process06engineC03for4from10EngineType_0cK0QZAJ_AA0C0VAA7ProjectCtKF">process(engineMap:<wbr>for:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">engineMap</span><span class="p">:</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">MapType</span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">MapType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit18LayerPostProcessorP7process06objectC04from3for2in10EngineType_06ObjectcL0QZAK_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(objectLayer:from:for:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit18LayerPostProcessorP7process06objectC04from3for2in10EngineType_06ObjectcL0QZAK_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(objectLayer:<wbr>from:<wbr>for:<wbr>in:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">objectLayer</span><span class="p">:</span> <span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">ObjectLayerType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">ObjectLayerType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit18LayerPostProcessorP7process04tileC04from3for2in10EngineType_04TilecL0QZAK_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(tileLayer:from:for:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit18LayerPostProcessorP7process04tileC04from3for2in10EngineType_04TilecL0QZAK_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(tileLayer:<wbr>from:<wbr>for:<wbr>in:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">tileLayer</span><span class="p">:</span> <span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">TileLayerType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">TileLayerType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit18LayerPostProcessorP7process12tileInstance4from3and2in3forAF10EngineType_06SpriteN0QZAL_AA4TileCAA0P3SetCAA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(tileInstance:from:and:in:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit18LayerPostProcessorP7process12tileInstance4from3and2in3forAF10EngineType_06SpriteN0QZAL_AA4TileCAA0P3SetCAA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(tileInstance:<wbr>from:<wbr>and:<wbr>in:<wbr>for:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">tileInstance</span><span class="p">:</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">SpriteType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">tile</span><span class="p">:</span> <span class="kt"><a href="../Classes/Tile.html">Tile</a></span><span class="p">,</span> <span class="n">and</span> <span class="nv">tileset</span><span class="p">:</span> <span class="kt"><a href="../Classes/TileSet.html">TileSet</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">SpriteType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit18LayerPostProcessorP7process05imageC04from3for2in10EngineType_06SpriteL0QZAK_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(imageLayer:from:for:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit18LayerPostProcessorP7process05imageC04from3for2in10EngineType_06SpriteL0QZAK_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(imageLayer:<wbr>from:<wbr>for:<wbr>in:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">imageLayer</span><span class="p">:</span> <span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">SpriteType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">SpriteType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit18LayerPostProcessorP7process05groupC04from3for2in10EngineType_05GroupcL0QZAK_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(groupLayer:from:for:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit18LayerPostProcessorP7process05groupC04from3for2in10EngineType_05GroupcL0QZAK_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(groupLayer:<wbr>from:<wbr>for:<wbr>in:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">groupLayer</span><span class="p">:</span> <span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">GroupLayerType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/LayerProtocol.html">LayerProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">GroupLayerType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process5point4from3forAF10EngineType_05PointcK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(point:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process5point4from3forAF10EngineType_05PointcK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(point:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">point</span><span class="p">:</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">PointObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">PointObjectType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process9rectangle4from3forAF10EngineType_09RectanglecK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(rectangle:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process9rectangle4from3forAF10EngineType_09RectanglecK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(rectangle:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">rectangle</span><span class="p">:</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">RectangleObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">RectangleObjectType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process7ellipse4from3forAF10EngineType_07EllipsecK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(ellipse:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process7ellipse4from3forAF10EngineType_07EllipsecK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(ellipse:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">ellipse</span><span class="p">:</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">EllipseObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">EllipseObjectType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process6sprite4from3forAF10EngineType_06SpriteK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(sprite:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process6sprite4from3forAF10EngineType_06SpriteK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(sprite:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">sprite</span><span class="p">:</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">SpriteType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">SpriteType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process4text4from3forAF10EngineType_04TextcK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(text:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process4text4from3forAF10EngineType_04TextcK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(text:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">TextObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">TextObjectType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process8polyline4from3forAF10EngineType_08PolylinecK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(polyline:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process8polyline4from3forAF10EngineType_08PolylinecK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(polyline:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">polyline</span><span class="p">:</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">PolylineObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">PolylineObjectType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process7polygon4from3forAF10EngineType_07PolygoncK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(polygon:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process7polygon4from3forAF10EngineType_07PolygoncK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(polygon:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">polygon</span><span class="p">:</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">PolygonObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">TargetType</span><span class="o">.</span><span class="kt"><a href="../Structs/BridgablePropertyProcessor.html#/s:8TiledKit12EngineObjectP0C4TypeQa">EngineType</a></span><span class="o">.</span><span class="kt">PolygonObjectType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>(c) 2020 SwiftStudies. All rights reserved</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

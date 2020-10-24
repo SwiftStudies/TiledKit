@@ -8,6 +8,27 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Loaders/EngineTextureLoader.swift",
+      "line": 21,
+      "symbol": "EngineImageLoader.project",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Post Processors/BridgablePropertyProcessor.swift",
+      "line": 15,
+      "symbol": "BridgablePropertyProcessor",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Post Processors/BridgablePropertyProcessor.swift",
+      "line": 37,
+      "symbol": "BridgablePropertyProcessor.init(applies:to:with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Immutable Typed Layers/GroupLayer.swift",
       "line": 15,
       "symbol": "GroupLayer",

@@ -95,6 +95,9 @@
                 <a href="../Extensions/Properties.html">Properties</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Extensions/Sequence.html">Sequence</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/URL.html">URL</a>
               </li>
             </ul>
@@ -103,10 +106,16 @@
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Protocols/BridgableProperty.html">BridgableProperty</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/DeepCopyable.html">DeepCopyable</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Engine.html">Engine</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineImageLoader.html">EngineImageLoader</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/EngineLayerContainer.html">EngineLayerContainer</a>
@@ -119,6 +128,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/EngineObjectContainer.html">EngineObjectContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineSpriteContainer.html">EngineSpriteContainer</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/EngineTexture.html">EngineTexture</a>
@@ -183,16 +195,13 @@
               <li class="nav-group-task">
                 <a href="../Protocols/TilePostProcessor.html">TilePostProcessor</a>
               </li>
-              <li class="nav-group-task">
-                <a href="../Protocols/TiledEngineBridgableProperty.html">TiledEngineBridgableProperty</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/BridgedProperty.html">BridgedProperty</a>
+                <a href="../Structs/BridgablePropertyProcessor.html">BridgablePropertyProcessor</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Color.html">Color</a>
@@ -262,6 +271,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/TileSetReference.html">TileSetReference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TiledType.html">TiledType</a>
               </li>
             </ul>
           </li>
@@ -341,6 +353,49 @@ game engine types that map directly to Tiled entities will need to support this<
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">EngineType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Engine.html">Engine</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit12EngineObjectP6verifyyyKF"></a>
+                    <a name="//apple_ref/swift/Method/verify()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit12EngineObjectP6verifyyyKF">verify()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called once all <code>Factory</code> and <code>Processor</code>s have been called
+creating the object, providing an oppertunity to warn (<code>Engine.warn</code>)
+or fail (by throwing an Error). A default implementation is provided that
+does nothing.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Default implementation that does nothing</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    No errors will be thrown by this default implementation
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">verify</span><span class="p">()</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>

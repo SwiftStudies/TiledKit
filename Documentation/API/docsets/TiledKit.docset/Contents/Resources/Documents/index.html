@@ -94,6 +94,9 @@
                 <a href="Extensions/Properties.html">Properties</a>
               </li>
               <li class="nav-group-task">
+                <a href="Extensions/Sequence.html">Sequence</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/URL.html">URL</a>
               </li>
             </ul>
@@ -102,10 +105,16 @@
             <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Protocols/BridgableProperty.html">BridgableProperty</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/DeepCopyable.html">DeepCopyable</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/Engine.html">Engine</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/EngineImageLoader.html">EngineImageLoader</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/EngineLayerContainer.html">EngineLayerContainer</a>
@@ -118,6 +127,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/EngineObjectContainer.html">EngineObjectContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/EngineSpriteContainer.html">EngineSpriteContainer</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/EngineTexture.html">EngineTexture</a>
@@ -182,16 +194,13 @@
               <li class="nav-group-task">
                 <a href="Protocols/TilePostProcessor.html">TilePostProcessor</a>
               </li>
-              <li class="nav-group-task">
-                <a href="Protocols/TiledEngineBridgableProperty.html">TiledEngineBridgableProperty</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/BridgedProperty.html">BridgedProperty</a>
+                <a href="Structs/BridgablePropertyProcessor.html">BridgablePropertyProcessor</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Color.html">Color</a>
@@ -262,6 +271,9 @@
               <li class="nav-group-task">
                 <a href="Structs/TileSetReference.html">TileSetReference</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Structs/TiledType.html">TiledType</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -327,16 +339,25 @@
     print ("Hello, \(map.name)!")
 </code></pre>
 
+<p>The primary use of TiledKit will be enable you to convert the maps you design in Tiled into playable games using a game engine, and there is significant support
+for doing that quickly and efficiently (as well as open source projects that already capture them such as <a href="https://github.com/SwiftStudies/SKTiledKit">SpriteKit</a>). 
+You can find documentation aimed at guiding you through that process <a href="/Documentation/Game%20Engine%20Specialization.md">Game Engine Specialization</a>. </p>
+
+<p>Here&rsquo;s an example of a single Tiled level being rendered by two different specializations in TiledKit (bottom right, <a href="https://github.com/SwiftStudies/TextEngine">TextEngine</a> in the console output, bottom left <a href="https://github.com/SwiftStudies/SKTiledKit">SpriteKit using SKTiledKit</a>))</p>
+
+<p align="center"><img src="https://swiftstudies.github.io/TiledKit/Documentation/Images/Multiple%20Game%20Engines.png" width="500" /></p>
+
 <p>TiledKit works on all Apple &amp; Linux platforms supporting Swift 5.3 or later. </p>
 <h2 id='installation' class='heading'>Installation</h2>
 
 <p>TiledKit is distributed as a Swift package to be built with SPM. You can include it in your project by adding the following dependency to your <code>Package.swift</code> file</p>
-<pre class="highlight plaintext"><code>.package(url: "https://github.com/SwiftStudies/TiledKit", from: "0.4")
+<pre class="highlight plaintext"><code>.package(url: "https://github.com/SwiftStudies/TiledKit", from: "0.6.0")
 </code></pre>
 <h2 id='available-specializations' class='heading'>Available Specializations</h2>
 
 <ul>
 <li><a href="https://github.com/SwiftStudies/SKTiledKit">SpriteKit</a></li>
+<li><a href="https://github.com/SwiftStudies/TextEngine">TextEngine</a></li>
 </ul>
 <h2 id='documentation' class='heading'>Documentation</h2>
 

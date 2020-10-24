@@ -95,6 +95,9 @@
                 <a href="../Extensions/Properties.html">Properties</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Extensions/Sequence.html">Sequence</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/URL.html">URL</a>
               </li>
             </ul>
@@ -103,10 +106,16 @@
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Protocols/BridgableProperty.html">BridgableProperty</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/DeepCopyable.html">DeepCopyable</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Engine.html">Engine</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineImageLoader.html">EngineImageLoader</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/EngineLayerContainer.html">EngineLayerContainer</a>
@@ -119,6 +128,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/EngineObjectContainer.html">EngineObjectContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineSpriteContainer.html">EngineSpriteContainer</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/EngineTexture.html">EngineTexture</a>
@@ -183,16 +195,13 @@
               <li class="nav-group-task">
                 <a href="../Protocols/TilePostProcessor.html">TilePostProcessor</a>
               </li>
-              <li class="nav-group-task">
-                <a href="../Protocols/TiledEngineBridgableProperty.html">TiledEngineBridgableProperty</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/BridgedProperty.html">BridgedProperty</a>
+                <a href="../Structs/BridgablePropertyProcessor.html">BridgablePropertyProcessor</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Color.html">Color</a>
@@ -263,6 +272,9 @@
               <li class="nav-group-task">
                 <a href="../Structs/TileSetReference.html">TileSetReference</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TiledType.html">TiledType</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -323,9 +335,9 @@ has created the specialized sprite for the tile</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_05PointcJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
-                    <a name="//apple_ref/swift/Method/process(_:from:for:from:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_05PointcJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(_:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process5point4from3forAF10EngineType_05PointcK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(point:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process5point4from3forAF10EngineType_05PointcK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(point:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -340,7 +352,7 @@ has created the specialized sprite for the tile</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">point</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PointObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PointObjectType</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">point</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PointObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PointObjectType</span></code></pre>
 
                         </div>
                       </div>
@@ -405,9 +417,9 @@ has created the specialized sprite for the tile</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_09RectanglecJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
-                    <a name="//apple_ref/swift/Method/process(_:from:for:from:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_09RectanglecJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(_:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process9rectangle4from3forAF10EngineType_09RectanglecK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(rectangle:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process9rectangle4from3forAF10EngineType_09RectanglecK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(rectangle:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -422,7 +434,7 @@ has created the specialized sprite for the tile</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">rectangle</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">RectangleObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">RectangleObjectType</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">rectangle</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">RectangleObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">RectangleObjectType</span></code></pre>
 
                         </div>
                       </div>
@@ -487,9 +499,9 @@ has created the specialized sprite for the tile</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_07EllipsecJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
-                    <a name="//apple_ref/swift/Method/process(_:from:for:from:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_07EllipsecJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(_:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process7ellipse4from3forAF10EngineType_07EllipsecK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(ellipse:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process7ellipse4from3forAF10EngineType_07EllipsecK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(ellipse:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -504,7 +516,7 @@ has created the specialized sprite for the tile</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">ellipse</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">EllipseObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">EllipseObjectType</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">ellipse</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">EllipseObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">EllipseObjectType</span></code></pre>
 
                         </div>
                       </div>
@@ -569,9 +581,9 @@ has created the specialized sprite for the tile</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_06SpriteJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
-                    <a name="//apple_ref/swift/Method/process(_:from:for:from:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_06SpriteJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(_:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process6sprite4from3forAF10EngineType_06SpriteK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(sprite:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process6sprite4from3forAF10EngineType_06SpriteK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(sprite:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -586,7 +598,7 @@ has created the specialized sprite for the tile</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">sprite</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">SpriteType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">SpriteType</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">sprite</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">SpriteType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">SpriteType</span></code></pre>
 
                         </div>
                       </div>
@@ -651,9 +663,9 @@ has created the specialized sprite for the tile</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_04TextcJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
-                    <a name="//apple_ref/swift/Method/process(_:from:for:from:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_04TextcJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(_:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process4text4from3forAF10EngineType_04TextcK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(text:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process4text4from3forAF10EngineType_04TextcK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(text:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -668,7 +680,7 @@ has created the specialized sprite for the tile</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">TextObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">TextObjectType</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">TextObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">TextObjectType</span></code></pre>
 
                         </div>
                       </div>
@@ -733,9 +745,9 @@ has created the specialized sprite for the tile</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_08PolylinecJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
-                    <a name="//apple_ref/swift/Method/process(_:from:for:from:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_08PolylinecJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(_:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process8polyline4from3forAF10EngineType_08PolylinecK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(polyline:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process8polyline4from3forAF10EngineType_08PolylinecK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(polyline:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -750,7 +762,7 @@ has created the specialized sprite for the tile</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">polyline</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PolylineObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PolylineObjectType</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">polyline</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PolylineObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PolylineObjectType</span></code></pre>
 
                         </div>
                       </div>
@@ -815,9 +827,9 @@ has created the specialized sprite for the tile</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_07PolygoncJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
-                    <a name="//apple_ref/swift/Method/process(_:from:for:from:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process_4from3forAE10EngineType_07PolygoncJ0QZAI_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(_:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
+                    <a name="/s:8TiledKit19ObjectPostProcessorP7process7polygon4from3forAF10EngineType_07PolygoncK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF"></a>
+                    <a name="//apple_ref/swift/Method/process(polygon:from:for:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit19ObjectPostProcessorP7process7polygon4from3forAF10EngineType_07PolygoncK0QZAJ_AA0C8Protocol_pAA3MapVAA7ProjectCtKF">process(polygon:<wbr>from:<wbr>for:<wbr>from:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -832,7 +844,7 @@ has created the specialized sprite for the tile</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="n">_</span> <span class="nv">polygon</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PolygonObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PolygonObjectType</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">process</span><span class="p">(</span><span class="nv">polygon</span><span class="p">:</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PolygonObjectType</span><span class="p">,</span> <span class="n">from</span> <span class="nv">object</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">map</span><span class="p">:</span> <span class="kt"><a href="../Structs/Map.html">Map</a></span><span class="p">,</span> <span class="n">from</span> <span class="nv">project</span><span class="p">:</span> <span class="kt"><a href="../Classes/Project.html">Project</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">EngineType</span><span class="o">.</span><span class="kt">PolygonObjectType</span></code></pre>
 
                         </div>
                       </div>

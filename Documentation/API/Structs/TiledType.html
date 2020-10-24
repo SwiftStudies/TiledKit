@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TiledType Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/TiledType" class="dashAnchor"></a>
+    <a title="TiledType Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">TiledKit</a> (98% documented)</p>
+        <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">TiledKit Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        TiledType Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/MapTiles.html">MapTiles</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Project.html">Project</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Tile.html">Tile</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TileSet.html">TileSet</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/FileType.html">FileType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/HorizontalTextAlignment.html">HorizontalTextAlignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LayerMatchingError.html">LayerMatchingError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Orientation.html">Orientation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PropertyValue.html">PropertyValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RenderingOrder.html">RenderingOrder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/VerticalTextAlignment.html">VerticalTextAlignment</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CaseIterable.html">CaseIterable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Properties.html">Properties</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Sequence.html">Sequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URL.html">URL</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/BridgableProperty.html">BridgableProperty</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DeepCopyable.html">DeepCopyable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Engine.html">Engine</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineImageLoader.html">EngineImageLoader</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineLayerContainer.html">EngineLayerContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineMap.html">EngineMap</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineObject.html">EngineObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineObjectContainer.html">EngineObjectContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineSpriteContainer.html">EngineSpriteContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/EngineTexture.html">EngineTexture</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ExpressibleAsTiledColor.html">ExpressibleAsTiledColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ExpressibleAsTiledFloat.html">ExpressibleAsTiledFloat</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LayerContainer.html">LayerContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LayerFactory.html">LayerFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LayerFilter.html">LayerFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LayerPostProcessor.html">LayerPostProcessor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LayerProtocol.html">LayerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Loadable.html">Loadable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MapFactory.html">MapFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MapPostProcessor.html">MapPostProcessor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MutablePropertied.html">MutablePropertied</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ObjectFactory.html">ObjectFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ObjectFilter.html">ObjectFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ObjectPostProcessor.html">ObjectPostProcessor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ObjectProtocol.html">ObjectProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:8TiledKit8ProducerP">Producer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Propertied.html">Propertied</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ResourceLoader.html">ResourceLoader</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TileFactory.html">TileFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TilePostProcessor.html">TilePostProcessor</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/BridgablePropertyProcessor.html">BridgablePropertyProcessor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Color.html">Color</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Dimension.html">Dimension</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Frame.html">Frame</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Group.html">Group</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GroupLayer.html">GroupLayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ImageLayer.html">ImageLayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ImageReference.html">ImageReference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Layer.html">Layer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Layer/Kind.html">– Kind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Map.html">Map</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Object.html">Object</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Object/Kind.html">– Kind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ObjectLayer.html">ObjectLayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ObjectType.html">ObjectType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ObjectTypes.html">ObjectTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Point.html">Point</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Rectangle.html">Rectangle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TextStyle.html">TextStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TileFlip.html">TileFlip</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TileGID.html">TileGID</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TileGrid.html">TileGrid</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TileLayer.html">TileLayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TileSetReference.html">TileSetReference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TiledType.html">TiledType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit4Bytea">Byte</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit4Patha">Path</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit11PixelBoundsa">PixelBounds</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit10PixelPointa">PixelPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit9PixelSizea">PixelSize</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit8Positiona">Position</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit4Sizea">Size</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit16TileGridPositiona">TileGridPosition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8TiledKit12TileGridSizea">TileGridSize</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>TiledType</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TiledType</span> <span class="p">:</span> <span class="kt">OptionSet</span><span class="p">,</span> <span class="kt">CustomStringConvertible</span></code></pre>
+
+                </div>
+              </div>
+            <p>Enables the definition or identification of the type of any of the core Tiled objects such as maps, layers, etc.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV8rawValueSivp"></a>
+                    <a name="//apple_ref/swift/Property/rawValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV8rawValueSivp">rawValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The bitmask</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">rawValue</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV8rawValueACSi_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(rawValue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV8rawValueACSi_tcfc">init(rawValue:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new instance</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">rawValue</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rawValue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The bit value to use</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV3mapACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/map" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV3mapACvpZ">map</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The object is or must be a tiled map</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">map</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV9tileLayerACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/tileLayer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV9tileLayerACvpZ">tileLayer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The object is or must be a tiled tile layer</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">tileLayer</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV10imageLayerACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/imageLayer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV10imageLayerACvpZ">imageLayer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The object is or must be a tiled image layer</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">imageLayer</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV10groupLayerACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/groupLayer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV10groupLayerACvpZ">groupLayer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The object is or must be a tiled group layer</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">groupLayer</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV11objectLayerACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/objectLayer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV11objectLayerACvpZ">objectLayer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The object is or must be a tiled object layer</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">objectLayer</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV11pointObjectACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/pointObject" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV11pointObjectACvpZ">pointObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The object is or must be a point object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">pointObject</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV15rectangleObjectACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/rectangleObject" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV15rectangleObjectACvpZ">rectangleObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The object is or must be a rectangle object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">rectangleObject</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV13ellipseObjectACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/ellipseObject" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV13ellipseObjectACvpZ">ellipseObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The object is or must be a ellipse object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">ellipseObject</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV14polylineObjectACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/polylineObject" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV14polylineObjectACvpZ">polylineObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The object is or must be a polyline object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">polylineObject</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV13polygonObjectACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/polygonObject" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV13polygonObjectACvpZ">polygonObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The object is or must be a polygon object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">polygonObject</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV10tileObjectACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/tileObject" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV10tileObjectACvpZ">tileObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The object is or must be a tile object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">tileObject</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV10textObjectACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/textObject" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV10textObjectACvpZ">textObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The object is or must be a text object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">textObject</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV4tileACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/tile" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV4tileACvpZ">tile</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The object is or must be a tile object from a tile set</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">tile</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV8anyLayerACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/anyLayer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV8anyLayerACvpZ">anyLayer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Used for conditionals where the object must be a layer</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">anyLayer</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV9anyObjectACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/anyObject" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV9anyObjectACvpZ">anyObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Used for conditionals where the object must be an tiled object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">anyObject</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV8anyShapeACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/anyShape" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV8anyShapeACvpZ">anyShape</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Used for conditionals where the object must be a geometric (point, rectangle, ellipse, polyline, or polygon)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">anyShape</span><span class="p">:</span> <span class="kt">TiledType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit0A4TypeV11descriptionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit0A4TypeV11descriptionSSvp">description</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Describes the condition or type</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>(c) 2020 SwiftStudies. All rights reserved</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
