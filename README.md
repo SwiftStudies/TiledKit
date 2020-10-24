@@ -35,11 +35,12 @@ TiledKit works on all Apple & Linux platforms supporting Swift 5.3 or later.
 
 TiledKit is distributed as a Swift package to be built with SPM. You can include it in your project by adding the following dependency to your `Package.swift` file
 
-    .package(url: "https://github.com/SwiftStudies/TiledKit", from: "0.5.0")
+    .package(url: "https://github.com/SwiftStudies/TiledKit", from: "0.6.0")
 
 ## Available Specializations
 
   - [SpriteKit](https://github.com/SwiftStudies/SKTiledKit)
+  - [TextEngine](https://github.com/SwiftStudies/TextEngine)
   
 ## Documentation
 

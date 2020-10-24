@@ -95,6 +95,9 @@
                 <a href="Extensions/Properties.html">Properties</a>
               </li>
               <li class="nav-group-task">
+                <a href="Extensions/Sequence.html">Sequence</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/URL.html">URL</a>
               </li>
             </ul>
@@ -103,10 +106,16 @@
             <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Protocols/BridgableProperty.html">BridgableProperty</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/DeepCopyable.html">DeepCopyable</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/Engine.html">Engine</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/EngineImageLoader.html">EngineImageLoader</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/EngineLayerContainer.html">EngineLayerContainer</a>
@@ -119,6 +128,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/EngineObjectContainer.html">EngineObjectContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/EngineSpriteContainer.html">EngineSpriteContainer</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/EngineTexture.html">EngineTexture</a>
@@ -183,16 +195,13 @@
               <li class="nav-group-task">
                 <a href="Protocols/TilePostProcessor.html">TilePostProcessor</a>
               </li>
-              <li class="nav-group-task">
-                <a href="Protocols/TiledEngineBridgableProperty.html">TiledEngineBridgableProperty</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/BridgedProperty.html">BridgedProperty</a>
+                <a href="Structs/BridgablePropertyProcessor.html">BridgablePropertyProcessor</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Color.html">Color</a>
@@ -263,6 +272,9 @@
               <li class="nav-group-task">
                 <a href="Structs/TileSetReference.html">TileSetReference</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Structs/TiledType.html">TiledType</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -325,7 +337,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Useful for enums that capture <code><a href="Protocols/TiledEngineBridgableProperty.html">TiledEngineBridgableProperty</a></code> to enable them to be
+                        <p>Useful for enums that capture <code><a href="Protocols/BridgableProperty.html">BridgableProperty</a></code> to enable them to be
 quickly and easily applied</p>
 
                         <a href="Extensions/CaseIterable.html" class="slightly-smaller">See more</a>
@@ -334,7 +346,7 @@ quickly and easily applied</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">CaseIterable</span> <span class="k">where</span> <span class="k">Self</span> <span class="p">:</span> <span class="kt"><a href="Protocols/TiledEngineBridgableProperty.html">TiledEngineBridgableProperty</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">CaseIterable</span> <span class="k">where</span> <span class="k">Self</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BridgableProperty.html">BridgableProperty</a></span></code></pre>
 
                         </div>
                       </div>
@@ -362,7 +374,63 @@ quickly and easily applied</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">Collection</span> <span class="k">where</span> <span class="kt">Element</span> <span class="p">:</span> <span class="kt"><a href="Protocols/TiledEngineBridgableProperty.html">TiledEngineBridgableProperty</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">Collection</span> <span class="k">where</span> <span class="kt">Element</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BridgableProperty.html">BridgableProperty</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8TiledKit10Propertiesa"></a>
+                    <a name="//apple_ref/swift/Extension/Properties" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8TiledKit10Propertiesa">Properties</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>For any property list, rapidly determine if the bridgable properties are included</p>
+
+                        <a href="Extensions/Properties.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt"><a href="Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ST"></a>
+                    <a name="//apple_ref/swift/Extension/Sequence" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ST">Sequence</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Convience to for working with Bridgeable properites</p>
+
+                        <a href="Extensions/Sequence.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">Sequence</span> <span class="k">where</span> <span class="kt">Element</span> <span class="p">:</span> <span class="kt"><a href="Protocols/BridgableProperty.html">BridgableProperty</a></span></code></pre>
 
                         </div>
                       </div>
@@ -420,34 +488,6 @@ quickly and easily applied</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">URL</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8TiledKit10Propertiesa"></a>
-                    <a name="//apple_ref/swift/Extension/Properties" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8TiledKit10Propertiesa">Properties</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Provides the ability to merge two sets of properties</p>
-
-                        <a href="Extensions/Properties.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt"><a href="Typealiases.html#/s:8TiledKit10Propertiesa">Properties</a></span></code></pre>
 
                         </div>
                       </div>
