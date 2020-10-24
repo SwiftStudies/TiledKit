@@ -31,6 +31,15 @@ public protocol LayerPostProcessor : Producer {
     ///   - map: The map the layer is in
     ///   - project: The project the map was loaded from
     func process(tileLayer:EngineType.TileLayerType, from layer:LayerProtocol, for map:Map, in project:Project) throws -> EngineType.TileLayerType
+    
+    /// Perform post processing on a tile instance created in a tile layer
+    /// - Parameters:
+    ///   - tileInstance: The tile sprite to be processed
+    ///   - tile: The tile definition
+    ///   - tileset: The tile set the tile is from
+    ///   - map: The map it is in
+    ///   - project: The project the map was loaded from
+    func process(tileInstance:EngineType.SpriteType, from tile:Tile, and tileset:TileSet, in layer:LayerProtocol, for map:Map, from project:Project) throws -> EngineType.SpriteType
 
     /// Perfforms post processing on an image layer after creation
     /// - Parameters:
@@ -60,8 +69,6 @@ public extension Engine {
 }
 
 internal struct AnyLayerPostProcessor<EngineType:Engine> : LayerPostProcessor {
-
-    
     let objectLayerProcessor : (_ objectLayer: EngineType.ObjectLayerType, _ layer: LayerProtocol, _ map: Map, _ project: Project) throws -> EngineType.ObjectLayerType
     
     let tileLayerProcessor : (_ tileLayer: EngineType.TileLayerType, _ layer: LayerProtocol, _ map: Map, _ project: Project) throws -> EngineType.TileLayerType
@@ -70,11 +77,18 @@ internal struct AnyLayerPostProcessor<EngineType:Engine> : LayerPostProcessor {
     
     let groupLayerProcessor : (_ groupLayer: EngineType.GroupLayerType, _ layer: LayerProtocol, _ map: Map, _ project: Project) throws -> EngineType.GroupLayerType
     
+    let tileInstanceProcessor : (_ tileInstance: EngineType.SpriteType, _ tile: Tile, _ tileset: TileSet, _ layer: LayerProtocol, _ map: Map, _ project: Project) throws -> EngineType.SpriteType
+    
     init<F:LayerPostProcessor>(wrap factory:F) where F.EngineType == EngineType {
         objectLayerProcessor = factory.process
         tileLayerProcessor = factory.process
         imageLayerProcessor = factory.process
         groupLayerProcessor = factory.process
+        tileInstanceProcessor = factory.process
+    }
+    
+    func process(tileInstance: EngineType.SpriteType, from tile: Tile, and tileset: TileSet, in layer: LayerProtocol, for map: Map, from project: Project) throws -> EngineType.SpriteType {
+        return try tileInstanceProcessor(tileInstance, tile, tileset, layer, map, project)
     }
     
     func process(objectLayer: EngineType.ObjectLayerType, from layer: LayerProtocol, for map: Map, in project: Project) throws -> EngineType.ObjectLayerType {

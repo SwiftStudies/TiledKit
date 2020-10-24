@@ -26,7 +26,7 @@ public struct Frame : Equatable {
 
 /// A `Tile` represents a 2D image that should be rendered when referenced on by an `Object` or `Layer`.
 /// It contains a reference to the image, and the portion of that image that should be used to generate the image.
-public class Tile : Equatable {
+public class Tile : Propertied,Equatable {
     /// The URL of the image used
     public let imageSource : URL
     

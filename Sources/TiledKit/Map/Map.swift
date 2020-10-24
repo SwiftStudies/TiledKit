@@ -17,6 +17,8 @@ import TKCoding
 
 enum MapError : Error {
     case unknownMapType(String)
+    case unsupportedOrientation(Orientation)
+    case unsupportedRenderingOrder(RenderingOrder)
 }
 
 /// Represents a Tiled map which can be loaded from a Tiled `tmx` file (other Tiled formats can be supported in the future, such as JSON). It contains the root collection of `Layer`s as well as carrying the references to the `TileSet`s used by the `Map`
@@ -62,9 +64,20 @@ public struct Map : LayerContainer, Loadable, MutablePropertied{
     public subscript(_ tile:TileGID)->Tile? {
         let tileSetTileId = tile.globalTileOffset
         
+        if let tileSetReference = tileSetReference(containing: tile){
+            return tileSetReference.tileSet[tileSetTileId - tileSetReference.firstGid]
+        }
+
+        return nil
+    }
+    
+    /// Gets the tileset that contains the tile with the supplied tile
+    /// - Parameter tileGid: The tileGID of the tile whose `TileSet` you wish to retrieve
+    internal func tileSetReference(containing tile:TileGID)->TileSetReference?{
+
         for tileSetReference in tileSetReferences.reversed() {
             if tileSetReference.firstGid <= tile.globalTileOffset {
-                return tileSetReference.tileSet[tileSetTileId - tileSetReference.firstGid]
+                return tileSetReference
             }
         }
         
