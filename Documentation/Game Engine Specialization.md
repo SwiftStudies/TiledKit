@@ -376,7 +376,7 @@ Finally image objects are really just "bespoke" tile placements. You are passed 
 
 It can feel like a lot of things to get implemented but they key here is TiledKit tries to keep each function very self contained and focused on asking you create an instance of some tiled object, giving you _just_ the right context you need and allowing you to keep each implementation very very simple. It typically only takes an hour or so to make the decisions about which game engine objects are best for each Tiled type... and then fill in the stubs... you will find you are up and running very quickly. Wondering about how things turned out in [TextEngine](https://github.com/SwiftStudies/TextEngine)? Here's the output of a Tiled Level (and just for a little flair... you can see the console output from [TextEngine](https://github.com/SwiftStudies/TextEngine)  on the right, and the same map being rendered by SpriteKit using [SKTiledKit](https://github.com/SwiftStudies/SKTiledKit) on the left!).
 
-![One Tiled Map, Two Engines Rendering It](Documentation/Images/TiledKit.png)
+![One Tiled Map, Two Engines Rendering It](https://swiftstudies.github.io/TiledKit/Documentation/Images/Multiple%20Game%20Engines.png)
 
 
 
