@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "TiledResources",
+        "repositoryURL": "https://github.com/SwiftStudies/TiledResources.git",
+        "state": {
+          "branch": "main",
+          "revision": "25c6fd104b205538ead5aa1715951afd42d5acc6",
+          "version": null
+        }
+      },
+      {
         "package": "XMLCoder",
         "repositoryURL": "https://github.com/MaxDesiatov/XMLCoder.git",
         "state": {

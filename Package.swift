@@ -25,7 +25,8 @@ let package = Package(
         .executable(name: "tkcodegen", targets: ["TiledKitCodeGenerator"])
     ],
     dependencies: [
-        .package(url: "https://github.com/MaxDesiatov/XMLCoder.git", from: "0.11.1")
+        .package(url: "https://github.com/MaxDesiatov/XMLCoder.git", from: "0.11.1"),
+        .package(url: "https://github.com/SwiftStudies/TiledResources.git",.branch("main")),
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],

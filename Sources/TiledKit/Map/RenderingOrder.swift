@@ -22,4 +22,45 @@ public enum RenderingOrder : String, Codable, CaseIterable {
     case leftDown = "left-down"
     /// Moving left, then up
     case leftUp = "left-up"
+    
+    
+    /// Generatas a series of tile grid positions for the supplied map using the rendering order
+    /// - Parameter map: The map to use
+    /// - Throws: An error if the rendering order is not support
+    /// - Returns: An array of `TileGridPositions`
+    public func tileSequence(for map:Map) throws -> [TileGridPosition]{
+        var sequence = [TileGridPosition]()
+        
+        switch self {
+        case .leftUp:
+            for y in (0..<map.mapSize.height).reversed() {
+                for x in (0..<map.mapSize.width).reversed() {
+                    sequence.append(TileGridPosition(x: x, y: y))
+                }
+            }
+        case .leftDown:
+            for y in 0..<map.mapSize.height {
+                for x in (0..<map.mapSize.width).reversed() {
+                    sequence.append(TileGridPosition(x: x, y: y))
+                }
+            }
+        case .rightUp:
+            for y in (0..<map.mapSize.height).reversed() {
+                for x in 0..<map.mapSize.width {
+                    sequence.append(TileGridPosition(x: x, y: y))
+                }
+            }
+        case .rightDown:
+            for y in 0..<map.mapSize.height {
+                for x in 0..<map.mapSize.width {
+                    sequence.append(TileGridPosition(x: x, y: y))
+                }
+            }
+        default:
+            throw MapError.unsupportedRenderingOrder(self)
+        }
+        
+        return sequence
+    }
+
 }
