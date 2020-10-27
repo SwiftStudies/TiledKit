@@ -163,10 +163,10 @@ final class EngineTests: XCTestCase {
         let map = Map(with: TileGridSize(width: 2, height: 2), and: PixelSize(width: 16, height: 8), orientation: .isometric, renderingOrder: .rightDown)
         
         let expectedResults = [
-            Position(x: 0, y: 0),
-            Position(x: -8, y: 4),
-            Position(x: 8, y: 4),
-            Position(x: 0, y: 8),
+            Position(x: 8, y: 0),
+            Position(x: 0, y: 4),
+            Position(x: 16, y: 4),
+            Position(x: 8, y: 8),
         ]
         
         do {
