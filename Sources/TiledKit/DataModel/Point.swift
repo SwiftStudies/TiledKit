@@ -38,7 +38,7 @@ public struct Point<N:Numeric> : Equatable, CustomStringConvertible{
     
     /// The description of the point
     public var description: String {
-        return "(\(x),\(y)"
+        return "(\(x),\(y))"
     }
 }
 

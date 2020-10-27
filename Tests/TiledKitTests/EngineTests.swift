@@ -96,6 +96,91 @@ final class EngineTests: XCTestCase {
         
     }
 
+    func testRenderingOrder(){
+        let map = Map(with: TileGridSize(width: 2, height: 2), and: PixelSize(width: 16, height: 8), orientation: .isometric, renderingOrder: .rightDown)
+        
+        let rightDown = [
+            TileGridPosition(x: 0, y: 0),
+            TileGridPosition(x: 1, y: 0),
+            TileGridPosition(x: 0, y: 1),
+            TileGridPosition(x: 1, y: 1),
+        ]
+
+        let rightUp = [
+            TileGridPosition(x: 0, y: 1),
+            TileGridPosition(x: 1, y: 1),
+            TileGridPosition(x: 0, y: 0),
+            TileGridPosition(x: 1, y: 0),
+        ]
+
+        let leftDown = [
+            TileGridPosition(x: 1, y: 0),
+            TileGridPosition(x: 0, y: 0),
+            TileGridPosition(x: 1, y: 1),
+            TileGridPosition(x: 0, y: 1),
+        ]
+
+        let leftUp = [
+            TileGridPosition(x: 1, y: 1),
+            TileGridPosition(x: 0, y: 1),
+            TileGridPosition(x: 1, y: 0),
+            TileGridPosition(x: 0, y: 0),
+        ]
+
+        
+        do {
+            var i = 0
+            for gridPosition in try RenderingOrder.rightDown.tileSequence(for: map) {
+                XCTAssertEqual(gridPosition, rightDown[i])
+                
+                i+=1
+            }
+            i = 0
+            for gridPosition in try RenderingOrder.rightUp.tileSequence(for: map) {
+                XCTAssertEqual(gridPosition, rightUp[i])
+                
+                i+=1
+            }
+            i=0
+            for gridPosition in try RenderingOrder.leftDown.tileSequence(for: map) {
+                XCTAssertEqual(gridPosition, leftDown[i])
+                
+                i+=1
+            }
+            i=0
+            for gridPosition in try RenderingOrder.leftUp.tileSequence(for: map) {
+                XCTAssertEqual(gridPosition, leftUp[i])
+                
+                i+=1
+            }
+
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testIsometricLayout(){
+        let map = Map(with: TileGridSize(width: 2, height: 2), and: PixelSize(width: 16, height: 8), orientation: .isometric, renderingOrder: .rightDown)
+        
+        let expectedResults = [
+            Position(x: 8, y: 0),
+            Position(x: 0, y: 4),
+            Position(x: 16, y: 4),
+            Position(x: 8, y: 8),
+        ]
+        
+        do {
+            var i = 0
+            for gridPosition in try RenderingOrder.rightDown.tileSequence(for: map) {
+                let result = try Orientation.isometric.position(for: gridPosition, in: map)
+                XCTAssertEqual(expectedResults[i], result)
+                i += 1
+            }
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
     func loadTestMap(_ named:String)->TestMap{
         let testMap : TestMap
         do {

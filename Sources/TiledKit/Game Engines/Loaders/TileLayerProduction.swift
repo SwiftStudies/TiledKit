@@ -12,23 +12,14 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
+import Foundation
 
-fileprivate extension RenderingOrder {
-    func tileSequence(for map:Map) throws -> [TileGridPosition]{
-        var sequence = [TileGridPosition]()
-        
-        switch self {
-        case .rightDown:
-            for x in 0..<map.mapSize.width {
-                for y in 0..<map.mapSize.height {
-                    sequence.append(TileGridPosition(x: x, y: y))
-                }
-            }
-        default:
-            throw MapError.unsupportedRenderingOrder(self)
-        }
-        
-        return sequence
+// Provides some basic mathmeatical functions
+public extension Point where N : BinaryFloatingPoint {
+    func distance(to p2: Point<N>)->N {
+        let dx = x - p2.x
+        let dy = y - p2.y
+        return (dx*dx + dy*dy).squareRoot()
     }
 }
 
@@ -36,6 +27,10 @@ internal extension Orientation {
     
     func position(for gridPosition:TileGridPosition, in map:Map) throws ->Position {
         switch self {
+        case .isometric:
+            return Position(
+                x: Double(gridPosition.y * (map.tileSize.width / 2 )) - Double(gridPosition.x * (map.tileSize.width / 2 )) + Double((map.pixelSize.width  / 2) - map.tileSize.width / 2),
+                y: Double(gridPosition.y * (map.tileSize.height / 2)) + Double(gridPosition.x * (map.tileSize.height / 2))                                  )
         case .orthogonal:
             return Position(
                 x: Double(gridPosition.x*map.tileSize.width),

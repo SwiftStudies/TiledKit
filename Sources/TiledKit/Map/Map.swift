@@ -60,6 +60,30 @@ public struct Map : LayerContainer, Loadable, MutablePropertied{
         return tileSetReferences.map({$0.tileSet})
     }
     
+    /// Creates a new instance of a map
+    /// - Parameters:
+    ///   - mapSize: The size of the map in tiles
+    ///   - tileSize: The size of tiles in the map (pixel dimensions)
+    ///   - orientation: The `Orientation` of the map
+    ///   - renderingOrder: The `RenderingOrder` of the map
+    public init(with mapSize: TileGridSize, and tileSize:PixelSize, orientation:Orientation, renderingOrder:RenderingOrder){
+        url = nil
+        self.mapSize = mapSize
+        self.tileSize = tileSize
+        self.orientation = orientation
+        self.renderingOrder = renderingOrder
+        backgroundColor = nil
+    }
+    
+    internal init(url:URL, mapSize: TileGridSize, tileSize:PixelSize, orientation:Orientation, renderingOrder:RenderingOrder, backgroundColor:Color?){
+        self.url = url
+        self.mapSize = mapSize
+        self.tileSize = tileSize
+        self.orientation = orientation
+        self.renderingOrder = renderingOrder
+        self.backgroundColor = backgroundColor
+    }
+
     /// Retreive a tile based on its `TileGID`
     public subscript(_ tile:TileGID)->Tile? {
         let tileSetTileId = tile.globalTileOffset
