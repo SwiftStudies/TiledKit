@@ -43,7 +43,7 @@ let package = Package(
         ),
         .testTarget(
             name: "TiledKitTests",
-            dependencies: ["TiledKit"],
+            dependencies: ["TiledKit","TiledResources"],
             exclude: [
                 "Resources/PikoPixel",
                 "Resources/Test Project.tiled-session"

@@ -29,8 +29,8 @@ internal extension Orientation {
         switch self {
         case .isometric:
             return Position(
-                x: Double(gridPosition.y * map.tileSize.width ) - Double(gridPosition.x * map.tileSize.width),
-                y: Double(gridPosition.y * map.tileSize.height) + Double(gridPosition.x * map.tileSize.height))
+                x: Double(gridPosition.y * (map.tileSize.width / 2 )) - Double(gridPosition.x * (map.tileSize.width / 2 )),
+                y: Double(gridPosition.y * (map.tileSize.height / 2)) + Double(gridPosition.x * (map.tileSize.height / 2)) )
         case .orthogonal:
             return Position(
                 x: Double(gridPosition.x*map.tileSize.width),
