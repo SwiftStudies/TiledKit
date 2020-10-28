@@ -56,8 +56,6 @@ public enum RenderingOrder : String, Codable, CaseIterable {
                     sequence.append(TileGridPosition(x: x, y: y))
                 }
             }
-        default:
-            throw MapError.unsupportedRenderingOrder(self)
         }
         
         return sequence

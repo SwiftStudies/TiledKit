@@ -288,20 +288,6 @@ public class Project {
         return resourceCache.store(asset, as: assetUrl)
     }
     
-    /// Gets a map from the project.
-    /// - Parameters:
-    ///   - fileName: The filename (excluding the extension) of the map
-    ///   - subDirectory: The subdirectory (if any, supply `nil` if the map is in the root of the project) of the map.
-    /// - Throws: Any error while loading the map
-    /// - Returns: An instance of the `Map`
-    @available(*, deprecated, message: "Use retreive(Map.self, from: url(fileName,subDirectory)) instead")
-    public func get(_ fileName:String, in subDirectory:String? = nil) throws -> Map {
-        guard let url = url(for: fileName, in: subDirectory, of: .tmx) else {
-            throw ProjectError.fileDoesNotExist("\(fileContainer)\(subDirectory ?? "")\\(fileName)")
-        }
-        
-        return try resourceCache.retrieve(as: Map.self, from: url)
-    }
 }
 
 fileprivate extension URL {
