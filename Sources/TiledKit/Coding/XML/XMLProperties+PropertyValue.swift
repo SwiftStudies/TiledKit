@@ -76,7 +76,6 @@ internal extension PropertyValue{
         case .double(let value):
             return value.description
         case .file(let value):
-            #warning("This converts relative paths at load time into absolute paths... not desireable")
             return value.relativePath
         case .color(let value):
             return value.tiledFormatDescription
@@ -89,7 +88,6 @@ internal extension PropertyValue{
 }
 
 extension XMLProperties {
-    #warning("This should be done AFTER everything else has been loaded so that files and objects can be fully resolved")
     func interpret(baseUrl:URL?, in project:Project) -> Properties{
         var properties = Properties()
         for property in self.properties {

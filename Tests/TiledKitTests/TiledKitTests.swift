@@ -71,9 +71,9 @@ final class TiledKitTests: XCTestCase {
     
     func loadTestMap(from project:Project, name:String? = nil, in subDirectory:String = "Maps") throws -> Map {
         if let name = name {
-            return try project.get(name, in: subDirectory)
+            return try project.retrieve(map: name, in: subDirectory)
         }
-        return try project.get("Test Map 1", in: "Maps")
+        return try project.retrieve(map: "Test Map 1", in: "Maps")
     }
     
     func testMap(){

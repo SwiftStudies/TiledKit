@@ -29,7 +29,7 @@ public enum PropertyValue : Equatable, CustomStringConvertible, ExpressibleByStr
     case file(url:URL)
     /// Color properties
     case color(Color)
-    #warning("The public API should have a value that is explicitly the object")
+
     /// Object properties
     case object(id:Int)
     /// Unknown types
