@@ -164,8 +164,8 @@ final class EngineTests: XCTestCase {
         
         let expectedResults = [
             Position(x: 8, y: 0),
-            Position(x: 0, y: 4),
             Position(x: 16, y: 4),
+            Position(x: 0, y: 4),
             Position(x: 8, y: 8),
         ]
         
