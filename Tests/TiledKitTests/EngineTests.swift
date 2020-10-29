@@ -16,9 +16,7 @@ import XCTest
 @testable import TiledKit
 
 final class EngineTests: XCTestCase {
-    lazy var moduleBundleProject : Project = {
-        Project(using: Bundle.module)
-    }()
+
     
     func testProductionRegistration(){
         struct SomeMapFactory : MapPostProcessor, MapFactory {
@@ -53,8 +51,8 @@ final class EngineTests: XCTestCase {
         let testMap : TestMap
         let originalMap : Map
         do {
-            testMap = try moduleBundleProject.retrieve(TestEngine.self, mapNamed: "Test Map 1", in: "Maps")
-            originalMap = try moduleBundleProject.retrieve(map: "Test Map 1", in: "Maps")
+            testMap = try TiledResources.GenericTiledProject.Maps.testMap1.load(for: TestEngine.self)
+            originalMap = try TiledResources.GenericTiledProject.Maps.testMap1.load()
         } catch {
             return XCTFail("\(error)")
         }
@@ -73,12 +71,12 @@ final class EngineTests: XCTestCase {
         XCTAssertEqual(TestEngine.engineMapFactories().count, 1)
         XCTAssertEqual(TestEngine.engineMapPostProcessors().count, 2)
 
-        XCTAssertEqual(TestEngine.createdSprites.count, 5)
+        XCTAssertEqual(TestEngine.createdSprites.count, 32)
         XCTAssertEqual(TestEngine.createdSprites.filter(\.postProcessed).count, TestEngine.createdSprites.count)
         
         // Reset sprite count
         TestEngine.createdSprites.removeAll()
-        guard let customMap : TestMap = try? moduleBundleProject.retrieve(TestEngine.self, mapNamed:"Test Map 1", in:"Maps") else {
+        guard let customMap : TestMap = try? TiledResources.GenericTiledProject.Maps.testMap1.load(for: TestEngine.self) else {
             TestEngine.removeProducers()
             return XCTFail("Could not load custom map")
         }
@@ -87,7 +85,7 @@ final class EngineTests: XCTestCase {
         XCTAssertEqual(customMap.falseByDefault, true)
         XCTAssertEqual(customMap.lifeTheUniverseAndEverything, 42)
         XCTAssertEqual(customMap.userData["multiProcessed"] as? Bool, true)
-        XCTAssertEqual(TestEngine.createdSprites.count, 5)
+        XCTAssertEqual(TestEngine.createdSprites.count, 32)
         XCTAssertEqual(TestEngine.createdSprites.filter(\.postProcessed).count, 0)
 
         
@@ -180,20 +178,10 @@ final class EngineTests: XCTestCase {
             XCTFail("\(error)")
         }
     }
-    
-    func loadTestMap(_ named:String)->TestMap{
-        let testMap : TestMap
-        do {
-            testMap = try moduleBundleProject.retrieve(TestEngine.self, mapNamed: named, in: "Maps")
-        } catch {
-            XCTFail("\(error)")
-            fatalError("Can't load the map, can't continue with testing")
-        }
-        return testMap
-    }
+
     
     func testMapProcessing(){
-        XCTAssertEqual(loadTestMap("Test Map 1").userData["processedBy"] as? String, "TestEngine")
+        XCTAssertEqual(try TiledResources.GenericTiledProject.Maps.testMap1.load(for: TestEngine.self).userData["processedBy"] as? String, "TestEngine")
         
         struct CustomMapProcessor : MapPostProcessor {
             typealias EngineType = TestEngine
@@ -207,7 +195,7 @@ final class EngineTests: XCTestCase {
         
         TestEngine.register(producer: CustomMapProcessor())
         
-        XCTAssertEqual(loadTestMap("Test Map 1").userData["processedBy"] as? String, "CustomMapProcessor")
+        XCTAssertEqual(try TiledResources.GenericTiledProject.Maps.testMap1.load(for: TestEngine.self).userData["processedBy"] as? String, "CustomMapProcessor")
     }
     
     func testBridgeAblePropertyApplication(){
