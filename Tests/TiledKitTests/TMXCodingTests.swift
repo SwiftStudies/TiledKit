@@ -195,7 +195,22 @@ final class TMXCodingTests: XCTestCase {
         }
     }
     
+    func testBase64(){
+        XCTAssertNoThrow(try TiledResources.GenericTiledProject.Maps.base64.load())
+    }
+    
+    func testBase64zlib(){
+        XCTAssertNoThrow(try TiledResources.GenericTiledProject.Maps.base64zlib.load())        
+    }
+    
+    func testBase64zstandard(){
+        XCTAssertNoThrow(try TiledResources.GenericTiledProject.Maps.base64zstandard.load())          
+    }
+    
     static var allTests = [
+        ("testBase64",testBase64),
+        ("testBase64zlib",testBase64zlib),
+        ("testBase64zstandard",testBase64zstandard),
         ("testTMXLevel",testTMXLevel),
         ("testMultiImageTileSetWithSingleTile",testMultiImageTileSetWithSingleTile),
         ("testMultiImageTileSet",testMultiImageTileSet),
