@@ -14,6 +14,7 @@
 
 import XCTest
 @testable import TiledKit
+import TiledResources
 
 final class EngineTests: XCTestCase {
 

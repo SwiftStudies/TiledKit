@@ -1,5 +1,6 @@
 import XCTest
 @testable import TiledKit
+import TiledResources
 
 final class TiledKitTests: XCTestCase {
     

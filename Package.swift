@@ -36,17 +36,7 @@ let package = Package(
         ),
         .testTarget(
             name: "TiledKitTests",
-            dependencies: ["TiledKit"],
-            exclude: [
-                "Resources/PikoPixel",
-                "Resources/Test Project.tiled-session"
-            ],
-            resources: [
-                .copy("Resources/Object Types.xml"),
-                .copy("Resources/Test Project.tiled-project"),
-                .copy("Resources/Maps"),
-                .copy("Resources/Tilesets"),
-                .copy("Resources/Images")]
+            dependencies: ["TiledKit","TiledResources"]
             ),
         .target(
             name: "TKCoding",
