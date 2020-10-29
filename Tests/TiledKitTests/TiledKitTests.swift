@@ -8,16 +8,16 @@ final class TiledKitTests: XCTestCase {
     }
     
     func testResources() {
-        XCTAssertNotNil(Bundle.module.path(forResource: "Test Map 1", ofType: "tmx", inDirectory: "Maps"))
+        XCTAssertTrue(try TiledResources.GenericTiledProject.Maps.testMap1.url.checkResourceIsReachable())
     }
     
     func testSingleImageTileSet(){
         do {
-            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "SingleImageAutoTransparency", in: "Tilesets", of: .tsx)!)
+            let tileSet = try TiledResources.GenericTiledProject.TileSets.topDownNoMarginNoSpacing.load()
             
             XCTAssertEqual(tileSet.tileSize.width, 16)
             XCTAssertEqual(tileSet.tileSize.width, 16)
-            XCTAssertEqual(tileSet.count, 4)
+            XCTAssertEqual(tileSet.count, 16)
             XCTAssertEqual(tileSet.properties.count, 1)
             XCTAssertEqual(tileSet.properties["filteringMode"], .string("nearest"))
         } catch {
@@ -27,12 +27,11 @@ final class TiledKitTests: XCTestCase {
     
     func testSingleImageTileSetWithOptionals(){
         do {
-            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "SingleImageMarginsAndSpacing", in: "Tilesets", of: .tsx)!)
+            let tileSet = try TiledResources.GenericTiledProject.TileSets.singleTile.load()
             
-            XCTAssertEqual(tileSet.tileSize.width, 12)
-            XCTAssertEqual(tileSet.tileSize.height, 12)
-            XCTAssertEqual(tileSet.count, 4)
-            XCTAssertEqual(tileSet[0]?.transparentColor ?? Color(r: 0, g: 0, b: 0), Color(r: 255, g: 0, b: 255))
+            XCTAssertEqual(tileSet.tileSize.width, 16)
+            XCTAssertEqual(tileSet.tileSize.height, 16)
+            XCTAssertEqual(tileSet.count, 1)
         } catch {
             XCTFail("Error thrown \(error)")
         }
@@ -40,8 +39,7 @@ final class TiledKitTests: XCTestCase {
 
     func testMultiImageTileSetWithSingleTile(){
         do {
-            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "SeparateSingleImage", in: "Tilesets", of: .tsx)!)
-
+            let tileSet = try TiledResources.GenericTiledProject.TileSets.singleTile.load()
             
             XCTAssertEqual(tileSet.tileSize.width, 16)
             XCTAssertEqual(tileSet.tileSize.height, 16)
@@ -53,33 +51,27 @@ final class TiledKitTests: XCTestCase {
     
     func testMultiImageTileSet(){
         do {
-            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "SeparateMultipleImages", in: "Tilesets", of: .tsx)!)
-
-            
+            let tileSet = try TiledResources.GenericTiledProject.TileSets.alphabet.load()
             
             XCTAssertEqual(tileSet.tileSize.width, 16)
             XCTAssertEqual(tileSet.tileSize.height, 16)
-            XCTAssertEqual(tileSet.count, 2)
+            XCTAssertEqual(tileSet.count, 6)
         } catch {
             XCTFail("Error thrown \(error)")
         }
     }
     
-    lazy var moduleBundleProject : Project = {
-        Project(using: Bundle.module)
-    }()
-    
-    func loadTestMap(from project:Project, name:String? = nil, in subDirectory:String = "Maps") throws -> Map {
-        if let name = name {
-            return try project.retrieve(map: name, in: subDirectory)
+    func loadTestMap(map:MapResource? = TiledResources.GenericTiledProject.Maps.testMap1) throws -> Map {
+        if let map = map {
+            return try map.load()
         }
-        return try project.retrieve(map: "Test Map 1", in: "Maps")
+        return try TiledResources.GenericTiledProject.Maps.testMap1.load()
     }
     
     func testMap(){
         let map : Map
         do {
-            map = try loadTestMap(from: moduleBundleProject)
+            map = try loadTestMap()
         } catch {
             XCTFail("\(error)")
             return
@@ -104,13 +96,13 @@ final class TiledKitTests: XCTestCase {
             let nestedImageLayer = try map.groupLayer(Layer.named("Group")).imageLayer(Layer.named("Grouped Image Layer"))
                         
             XCTAssertEqual(nestedImageLayer.name, "Grouped Image Layer")
-            XCTAssertEqual(try map.tileLayer(TileLayer.kind, at:0).grid[0,0], TileGID(tileId: 0, flip: []))
+            XCTAssertEqual(try map.tileLayer(TileLayer.kind, at:0).grid[0,0], TileGID(tileId: 2, flip: []))
             
             XCTAssertEqual(try map.tileLayer(TileLayer.kind,at:1).grid[0,0], TileGID(tileId: 5, flip: []))
             XCTAssertEqual(try map.tileLayer(TileLayer.kind, at:0).grid.size,  map.mapSize)
             XCTAssertEqual(nestedImageLayer.image.size, PixelSize(width: 16, height: 16))
             XCTAssertTrue(nestedImageLayer.image.source.path.hasSuffix("F.png"))
-            XCTAssertEqual(try? map.layers(ObjectLayer.kind)[0].objects.count, 7)
+            XCTAssertEqual(try? map.layers(ObjectLayer.kind)[0].objects.count, 10)
         } catch {
             return XCTFail("Failed to filter layers \(error)")
         }
@@ -120,7 +112,7 @@ final class TiledKitTests: XCTestCase {
     
     func testTileGrid(){
         
-        guard let url = moduleBundleProject.url(for: "One of Everything", in: "Maps", of: .tmx), let map = try? moduleBundleProject.retrieve(asType: Map.self, from: url) else {
+        guard let map = try? TiledResources.GenericTiledProject.Maps.oneOfEverything.load() else {
             XCTFail("Could not load map")
             return
         }
@@ -146,7 +138,7 @@ final class TiledKitTests: XCTestCase {
     func testObjectLayer(){
         let map : Map
         do {
-            map = try loadTestMap(from: moduleBundleProject)
+            map = try loadTestMap()
         } catch {
             XCTFail("\(error)")
             return
@@ -169,7 +161,7 @@ final class TiledKitTests: XCTestCase {
     func testTextObject(){
         let map : Map
         do {
-            map = try loadTestMap(from: moduleBundleProject)
+            map = try loadTestMap()
         } catch {
             XCTFail("\(error)")
             return
@@ -209,7 +201,7 @@ final class TiledKitTests: XCTestCase {
     func testElipseObject(){
         let map : Map
         do {
-            map = try loadTestMap(from: moduleBundleProject)
+            map = try loadTestMap()
         } catch {
             XCTFail("\(error)")
             return
@@ -238,7 +230,7 @@ final class TiledKitTests: XCTestCase {
     func testRectangleObject(){
         let map : Map
         do {
-            map = try loadTestMap(from: moduleBundleProject)
+            map = try loadTestMap()
         } catch {
             XCTFail("\(error)")
             return
@@ -254,13 +246,13 @@ final class TiledKitTests: XCTestCase {
             return
         }
         XCTAssertEqual(object.id, 4)
-        XCTAssertEqual(object.position.x, 128.027)
-        XCTAssertEqual(object.position.y, 19.5807)
+        XCTAssertEqual(object.position.x, 127.663)
+        XCTAssertEqual(object.position.y, 15.9443)
 
         switch object.kind {
         case .rectangle(let size, let rotation):
             XCTAssertEqual(rotation, 0)
-            XCTAssertEqual(size, Size(width: 15.8151, height: 12.3007))
+            XCTAssertEqual(size, Size(width: 15.9969, height: 15.9371))
         default:
             XCTFail("Object is not a Rectangle")
         }
@@ -269,7 +261,7 @@ final class TiledKitTests: XCTestCase {
     func testImageObject(){
         let map : Map
         do {
-            map = try loadTestMap(from: moduleBundleProject)
+            map = try loadTestMap()
         } catch {
             XCTFail("\(error)")
             return
@@ -290,7 +282,7 @@ final class TiledKitTests: XCTestCase {
 
         switch object.kind {
         case .tile(let gid, let size, let rotation):
-            XCTAssertEqual(gid, TileGID(tileId: 1, flip: []))
+            XCTAssertEqual(gid, TileGID(tileId: 10, flip: []))
             XCTAssertEqual(rotation, 45)
             XCTAssertEqual(size, Size(width: 16, height: 16))
             guard let tile = map[gid] else {
@@ -298,8 +290,8 @@ final class TiledKitTests: XCTestCase {
                 return
             }
             
-            XCTAssertEqual(tile.imageSource.lastPathComponent, "4 Tiles.png")
-            XCTAssertEqual(tile.bounds, PixelBounds(origin: Point.zero, size: Dimension(width:16,height: 16)))
+            XCTAssertEqual(tile.imageSource.lastPathComponent, "2D Top Down.png")
+            XCTAssertEqual(tile.bounds, PixelBounds(origin: Point(x: 16, y: 32), size: Dimension(width:16,height: 16)))
         default:
             XCTFail("Object is not a Tile")
         }
@@ -308,7 +300,7 @@ final class TiledKitTests: XCTestCase {
     func testImageLayer(){
         let map : Map
         do {
-            map = try loadTestMap(from: moduleBundleProject)
+            map = try loadTestMap()
         } catch {
             XCTFail("\(error)")
             return
@@ -322,13 +314,13 @@ final class TiledKitTests: XCTestCase {
         
         XCTAssertEqual(imageLayer.position.x, 72)
         XCTAssertEqual(imageLayer.position.y, 48)
-        XCTAssertTrue(imageLayer.image.source.standardized.path.hasSuffix("Resources/Images/Individual/F.png"), "URL is incorrect \(imageLayer.image.source)")
+        XCTAssertTrue(imageLayer.image.source.standardized.path.hasSuffix("Images/Test Card 16x16.png"), "URL is incorrect \(imageLayer.image.source)")
     }
     
     func testOneOfEverything(){
         let map : Map
         do {
-            map = try loadTestMap(from: moduleBundleProject, name: "One of Everything" )
+            map = try loadTestMap(map: TiledResources.GenericTiledProject.Maps.oneOfEverything)
         } catch {
             XCTFail("\(error)")
             return
@@ -351,8 +343,7 @@ final class TiledKitTests: XCTestCase {
 
     func testMultipleProperties(){
         do {
-            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
-
+            let tileSet = try TiledResources.GenericTiledProject.TileSets.animation.load()
 
             //Confirm loading multiline properties works OK
             XCTAssertEqual(tileSet.properties["filteringMode"],"nearest")
@@ -365,16 +356,16 @@ final class TiledKitTests: XCTestCase {
     
     func testTileSetCollisionObjects(){
         do {
-            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
+            let tileSet = try TiledResources.GenericTiledProject.TileSets.animation.load()
 
-            guard let collisionBodies = tileSet[0]?.collisionBodies else {
+            guard let collisionBodies = tileSet[8]?.collisionBodies else {
                 XCTFail("Tile or collision bodies not found")
                 return
             }
             
-            XCTAssertEqual(collisionBodies.count, 2)
-            XCTAssertLessThan(collisionBodies[0].position.x - 7.92176, 0.1)
-            XCTAssertLessThan(collisionBodies[1].position.y - 3.00272, 0.1)
+            XCTAssertEqual(collisionBodies.count, 1)
+            XCTAssertLessThan(collisionBodies[0].position.x - 3.25, 0.1)
+            XCTAssertLessThan(collisionBodies[0].position.y - 3.25, 0.1)
         } catch {
             XCTFail("\(error)")
         }
@@ -382,30 +373,30 @@ final class TiledKitTests: XCTestCase {
     
     func testTileSetAnimationFrames(){
         do {
-            let tileSet = try moduleBundleProject.retrieve(asType: TileSet.self, from: moduleBundleProject.url(for: "Animation", in: "Tilesets", of: .tsx)!)
+            let tileSet = try TiledResources.GenericTiledProject.TileSets.animation.load()
 
             
-            guard let frames = tileSet[1]?.frames else {
+            guard let frames = tileSet[4]?.frames else {
                 XCTFail("No tile with id 1, or no frames")
                 return
             }
             
             XCTAssertEqual(frames.count, 4)
-            XCTAssertEqual(frames[0].tile.bounds.origin, Point(x: 0, y: 0))
-            XCTAssertEqual(frames[0].duration, 1)
-            XCTAssertEqual(frames[1].tile.bounds.origin, Point(x: 16, y: 0))
+            XCTAssertEqual(frames[0].tile.bounds.origin, Point(x: 0, y: 16))
+            XCTAssertEqual(frames[0].duration, 10.0)
+            XCTAssertEqual(frames[1].tile.bounds.origin, Point(x: 16, y: 16))
             XCTAssertEqual(frames[1].duration, 1)
-            XCTAssertEqual(frames[2].tile.bounds.origin, Point(x: 0, y: 16))
+            XCTAssertEqual(frames[2].tile.bounds.origin, Point(x: 32, y: 16))
             XCTAssertEqual(frames[2].duration, 1)
-            XCTAssertEqual(frames[3].tile.bounds.origin, Point(x: 16, y: 16))
-            XCTAssertEqual(frames[3].duration, 1)
+            XCTAssertEqual(frames[3].tile.bounds.origin, Point(x: 48, y: 16))
+            XCTAssertEqual(frames[3].duration, 2)
         } catch {
             XCTFail("\(error)")
         }
     }
     
     func testTileObjectScaling(){
-        guard let map = try? loadTestMap(from: moduleBundleProject) else {
+        guard let map = try? loadTestMap() else {
             XCTFail("Could not load map")
             return
         }
@@ -430,22 +421,26 @@ final class TiledKitTests: XCTestCase {
     }
     
     func testObjectTypeDefinitions(){
-        guard var objectTypes = try? moduleBundleProject.retrieve(asType: ObjectTypes.self, from: "Object Types", of: .objectTypeDefinitionFile) else {
-            return XCTFail("Could not load object type definitions")
+        do {
+            let project = Project(at: TiledResources.GenericTiledProject.projectFile.url)
+            var objectTypes = try project.retrieve(asType: ObjectTypes.self, from: TiledResources.GenericTiledProject.objectTypesFile.url)
+            
+            XCTAssertEqual(objectTypes.count, 1)
+            XCTAssertEqual(objectTypes["Object Type"]?.color, Color(from: "#fd6fcf"))
+            XCTAssertEqual(objectTypes["Object Type"]?["File Unset"], .file(url: URL(fileURLWithPath: "")))
+            XCTAssertEqual(objectTypes["Object Type"]?.allPropertyNames.count, 11)
+            
+            var objectDefinition = objectTypes["Object Type"]!
+            objectDefinition["File Unset"] = .file(url: URL(fileURLWithPath: "Something else"))
+            
+            
+            objectTypes["Object Type"] = objectDefinition
+            
+            XCTAssertNotEqual(objectTypes["Object Type"]?["File Unset"], .file(url: URL(fileURLWithPath: "")))
+
+        } catch {
+            return XCTFail("\(error)")
         }
-        
-        XCTAssertEqual(objectTypes.count, 1)
-        XCTAssertEqual(objectTypes["Object Type"]?.color, Color(from: "#fd6fcf"))
-        XCTAssertEqual(objectTypes["Object Type"]?["File Unset"], .file(url: URL(fileURLWithPath: "")))
-        XCTAssertEqual(objectTypes["Object Type"]?.allPropertyNames.count, 11)
-        
-        var objectDefinition = objectTypes["Object Type"]!
-        objectDefinition["File Unset"] = .file(url: URL(fileURLWithPath: "Something else"))
-        
-        
-        objectTypes["Object Type"] = objectDefinition
-        
-        XCTAssertNotEqual(objectTypes["Object Type"]?["File Unset"], .file(url: URL(fileURLWithPath: "")))
     }
     
     func testWritingObjectTypeDefinition(){
@@ -489,7 +484,7 @@ final class TiledKitTests: XCTestCase {
     }
     
     func testObjectSearch(){
-        guard let map = try? moduleBundleProject.retrieve(map: "Maps/Test Map 2") else {
+        guard let map = try? TiledResources.GenericTiledProject.Maps.testMap2.load() else {
             return XCTFail("Could not load map")
         }
         
@@ -503,7 +498,7 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(map.objects(matching: Object.isEither(Object.isPoint, or: Object.isRectangle)).count, 5)
         XCTAssertEqual(map.objects(matching: Object.isOf(type: "Object Type")).count, 2)
 
-        guard let map2 = try? moduleBundleProject.retrieve(map: "Maps/Test Map 1") else {
+        guard let map2 = try? TiledResources.GenericTiledProject.Maps.testMap1.load()else {
             return XCTFail("Could not load map")
         }
         
@@ -511,7 +506,7 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(map2.objects(matching: Object.isText).count, 2)
         XCTAssertEqual(map2.objects(matching: Object.isPolygon).count, 2)
         XCTAssertEqual(map2.objects(matching: Object.isPolyline).count, 1)
-        XCTAssertEqual(map2.objects(matching: Object.isTile).count, 2)
+        XCTAssertEqual(map2.objects(matching: Object.isTile).count, 5)
         XCTAssertEqual(map2.objects(matching: Object.isTile, Object.isNamed("Stretched Tile")).count, 1)
         XCTAssertEqual(map2.objects(matching: Object.isRectangle).count, 1)
         XCTAssertEqual(map2.objects(matching: Object.isEllipse).count, 1)
