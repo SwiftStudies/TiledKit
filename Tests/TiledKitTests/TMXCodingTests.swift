@@ -2,6 +2,7 @@ import XCTest
 
 @testable import TKCoding
 import XMLCoder
+import TiledResources
 
 final class TMXCodingTests: XCTestCase {
     
