@@ -19,6 +19,7 @@ let package = Package(
     name: "TiledKit",
     products: [
         .library(name: "TiledKit", targets: ["TiledKit"]),
+        .library(name: "Compression", targets: ["Compression"]),
         .executable(name: "tkcodegen", targets: ["TiledKitCodeGenerator"]),
     ],
     dependencies: [
@@ -28,10 +29,14 @@ let package = Package(
     targets: [
         .target(
             name: "TiledKit",
-            dependencies: ["TKCoding"]
+            dependencies: ["TKCoding","Compression"]
             ),
         .target(
             name: "TiledKitCodeGenerator",
+            dependencies: []
+        ),
+        .target(
+            name: "Compression",
             dependencies: []
         ),
         .testTarget(
