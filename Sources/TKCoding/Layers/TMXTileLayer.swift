@@ -13,6 +13,7 @@
 //    limitations under the License.
 
 import Foundation
+import Inflate
 
 enum TileDataEncoding : String, Codable {
     case csv,base64
@@ -64,6 +65,18 @@ public struct TMXTileLayer : XMLLayer {
         
         if rawData.encoding == .csv && rawData.compression == nil {
             data = rawData.data.replacingOccurrences(of: "\n", with: "").split(separator: ",").map({(UInt32($0) ?? 0)})
+        } else if let compression = rawData.compression ?? TileDataCompression.none, rawData.encoding == .base64, let decodedData = Data(base64Encoded: rawData.data) {
+            
+            
+            switch compression {
+            case .none:
+                data = decodedData.withUnsafeBytes{ Array($0.bindMemory(to: UInt32.self))}
+//            case .gzip,.zlib,.zstd:
+//                let inflatedData = try inflate(decodedData)
+//                data = inflatedData.withUnsafeBytes{ Array($0.bindMemory(to: UInt32.self))}
+            default:
+                throw XMLDecodingError.unsupportedTileDataFormat(encoding: rawData.encoding, compression: rawData.compression ?? .none)                
+            }
         } else {
             throw XMLDecodingError.unsupportedTileDataFormat(encoding: rawData.encoding, compression: rawData.compression ?? .none)
         }

@@ -37,6 +37,11 @@ TiledKit is distributed as a Swift package to be built with SPM. You can include
 
     .package(url: "https://github.com/SwiftStudies/TiledKit", from: "0.6.0")
 
+> __Note__ If you are building with XCode it seems to struggle with buillding TiledKit before it
+> builds the tests (which causes some issues). The simplest solution is to ensure you build _just_ 
+> TiledKit first (pick the TiledKit scheme first, from then on you will always be able to build/test the 
+> entire package as normal). There are seem to be no issues when including TiledKit as a dependency and Swift Package Manager does not have any problems at all. 
+
 ## Available Specializations
 
   - [SpriteKit](https://github.com/SwiftStudies/SKTiledKit)
