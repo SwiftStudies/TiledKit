@@ -200,11 +200,11 @@ final class TMXCodingTests: XCTestCase {
     }
     
     func testBase64zlib(){
-//        XCTAssertNoThrow(try TiledResources.GenericTiledProject.Maps.base64zlib.load())        
+        XCTAssertNoThrow(try TiledResources.GenericTiledProject.Maps.base64zlib.load())        
     }
     
     func testBase64zstandard(){
-//        XCTAssertNoThrow(try TiledResources.GenericTiledProject.Maps.base64zstandard.load())          
+        XCTAssertNoThrow(try TiledResources.GenericTiledProject.Maps.base64zstandard.load())          
     }
     
     static var allTests = [

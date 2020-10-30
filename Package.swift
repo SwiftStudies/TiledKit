@@ -27,9 +27,17 @@ let package = Package(
         .package(url: "https://github.com/SwiftStudies/TiledResources.git",from: "0.1.0"),
     ],
     targets: [
+        .systemLibrary(
+            name: "swiftZLib",
+            path: "Sources/swiftZLib",
+            pkgConfig: "swiftzlib",
+            providers: [
+                .apt(["libz-dev"])
+            ]
+        ), 
         .target(
             name: "TiledKit",
-            dependencies: ["TKCoding","Inflate"]
+            dependencies: ["TKCoding","Inflate","swiftZLib"]
             ),
         .target(
             name: "TiledKitCodeGenerator",
@@ -37,7 +45,7 @@ let package = Package(
         ),
         .target(
             name: "Inflate",
-            dependencies: []
+            dependencies: ["swiftZLib"]
         ),
         .testTarget(
             name: "TiledKitTests",
