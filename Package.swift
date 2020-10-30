@@ -19,7 +19,7 @@ let package = Package(
     name: "TiledKit",
     products: [
         .library(name: "TiledKit", targets: ["TiledKit"]),
-        .library(name: "Compression", targets: ["Compression"]),
+        .library(name: "Inflate", targets: ["Inflate"]),
         .executable(name: "tkcodegen", targets: ["TiledKitCodeGenerator"]),
     ],
     dependencies: [
@@ -29,23 +29,23 @@ let package = Package(
     targets: [
         .target(
             name: "TiledKit",
-            dependencies: ["TKCoding","Compression"]
+            dependencies: ["TKCoding","Inflate"]
             ),
         .target(
             name: "TiledKitCodeGenerator",
             dependencies: []
         ),
         .target(
-            name: "Compression",
+            name: "Inflate",
             dependencies: []
         ),
         .testTarget(
             name: "TiledKitTests",
-            dependencies: ["TiledKit","TiledResources"]
+            dependencies: ["TiledKit","TiledResources","Inflate"]
             ),
         .target(
             name: "TKCoding",
-            dependencies: ["XMLCoder"]
+            dependencies: ["XMLCoder","Inflate"]
             ),
     ]
 )

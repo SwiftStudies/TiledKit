@@ -13,7 +13,7 @@
 //    limitations under the License.
 
 import Foundation
-import Compression
+import Inflate
 
 enum TileDataEncoding : String, Codable {
     case csv,base64
