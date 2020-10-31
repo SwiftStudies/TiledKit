@@ -34,6 +34,35 @@ struct TMXTileData : Codable {
     }
 }
 
+
+
+fileprivate extension Data {
+    var tileLayerData : [UInt32] {
+        return withUnsafeBytes{ Array($0.bindMemory(to: UInt32.self))}
+    }
+    
+    func decompress(using compressionMethod:TileDataCompression) throws -> [UInt32] {
+        
+//        if #available(iOS 13,tvOS 13,watchOS 6,macOS 10.15, *) {
+//            switch compressionMethod {
+//            case .zlib, .gzip:
+//                
+//                return try (((self as NSData).decompressed(using: .zlib)) as Data).tileLayerData 
+//            default: break
+//            }
+//        }
+        
+        switch compressionMethod {
+        case .zlib, .gzip, .zstd:
+            return try gunzipped().tileLayerData
+//        case .zstd:
+//            return try inflate(self).tileLayerData
+        default:            
+            throw XMLDecodingError.unsupportedTileDataFormat(encoding: .base64, compression: compressionMethod)                
+        }        
+    }
+}
+
 public struct TMXTileLayer : XMLLayer {
     public var id: Int
     public var name: String
@@ -67,15 +96,11 @@ public struct TMXTileLayer : XMLLayer {
             data = rawData.data.replacingOccurrences(of: "\n", with: "").split(separator: ",").map({(UInt32($0) ?? 0)})
         } else if let compression = rawData.compression ?? TileDataCompression.none, rawData.encoding == .base64, let decodedData = Data(base64Encoded: rawData.data) {
             
-            
             switch compression {
             case .none:
-                data = decodedData.withUnsafeBytes{ Array($0.bindMemory(to: UInt32.self))}
-//            case .gzip,.zlib,.zstd:
-//                let inflatedData = try inflate(decodedData)
-//                data = inflatedData.withUnsafeBytes{ Array($0.bindMemory(to: UInt32.self))}
+                data = decodedData.tileLayerData
             default:
-                throw XMLDecodingError.unsupportedTileDataFormat(encoding: rawData.encoding, compression: rawData.compression ?? .none)                
+                data = try decodedData.decompress(using: compression)
             }
         } else {
             throw XMLDecodingError.unsupportedTileDataFormat(encoding: rawData.encoding, compression: rawData.compression ?? .none)

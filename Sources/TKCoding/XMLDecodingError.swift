@@ -16,4 +16,6 @@ enum XMLDecodingError : Error {
     case propertyHasNoValue(String, type:XMLRawPropertyType)
     case unknownLevelElement(String)
     case unsupportedTileDataFormat(encoding:TileDataEncoding, compression:TileDataCompression)
+    case unsupportOnPlatform(String)
+    case decompressionFailure(String)
 }

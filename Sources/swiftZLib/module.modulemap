@@ -1,0 +1,6 @@
+module swiftZLib [system] {
+    header "zconf.h"
+    header "zlib.h"
+    link "z"
+    export *
+}
