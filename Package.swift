@@ -20,6 +20,7 @@ let package = Package(
     products: [
         .library(name: "TiledKit", targets: ["TiledKit"]),
         .library(name: "Inflate", targets: ["Inflate"]),
+        .library(name: "SwiftZLib", targets: ["swiftZLib"]),
         .executable(name: "tkcodegen", targets: ["TiledKitCodeGenerator"]),
     ],
     dependencies: [
@@ -30,14 +31,13 @@ let package = Package(
         .systemLibrary(
             name: "swiftZLib",
             path: "Sources/swiftZLib",
-            pkgConfig: "swiftzlib",
             providers: [
                 .apt(["libz-dev"])
             ]
         ), 
         .target(
             name: "TiledKit",
-            dependencies: ["TKCoding","Inflate","swiftZLib"]
+            dependencies: ["TKCoding","Inflate"]
             ),
         .target(
             name: "TiledKitCodeGenerator",

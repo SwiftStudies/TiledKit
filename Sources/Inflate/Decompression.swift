@@ -162,7 +162,7 @@ public extension Data {
      - throws: `GzipError`
      - returns: Gzip-compressed `Data` object.
      */
-    public func gzipped(level: CompressionLevel = .defaultCompression) throws -> Data {
+    func gzipped(level: CompressionLevel = .defaultCompression) throws -> Data {
 
         guard self.isEmpty == false else {
             return Data()
@@ -186,7 +186,7 @@ public extension Data {
             if Int(stream.total_out) >= data.count {
                 data.count += CHUNK_SIZE
             }
-
+            
             data.withUnsafeMutableBytes { (bytes: UnsafeMutablePointer<Bytef>) in
                 stream.next_out = bytes.advanced(by: Int(stream.total_out))
             }
