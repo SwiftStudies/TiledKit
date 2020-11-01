@@ -8,7 +8,7 @@ env:
   - SWIFT_VERSION=5.3
   
 os:
-#  - linux
+  - linux
   - osx
   
 language: generic
@@ -42,5 +42,5 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e /usr/local/lib/libzstd.a; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then test -e /usr/local/lib/libzstd.dylib; fi
   - swift build
-  - swift test
+  - swift test --enable-test-discovery
 #  - swift build -c release
