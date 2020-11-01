@@ -13,7 +13,8 @@
 //    limitations under the License.
 
 import Foundation
-import zlib
+
+import swiftZLib
 
 /**
  Compression level with constants based on the zlib's constants.
