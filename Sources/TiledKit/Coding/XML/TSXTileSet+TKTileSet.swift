@@ -41,11 +41,15 @@ extension TSXTileSet {
                 transparentColor = nil
             }
             
+            let margin  = tileSetXML.margin ?? 0
+            let spacing = tileSetXML.spacing ?? 0
+            
             // Calculate the bounds for each tile and add them to the tile set
             for tileId in 0..<tileSetXML.tileCount {
                 let origin = PixelPoint(
-                    x: (tileId % tileSetXML.columns) * tileSetXML.tileWidth,
-                    y: (tileId / tileSetXML.columns) * tileSetXML.tileHeight)
+                    x: margin + (tileId % tileSetXML.columns) * (tileSetXML.tileWidth + spacing),
+                    y: margin + (tileId / tileSetXML.columns) * (tileSetXML.tileHeight + spacing)
+                )
                 
                 let tile = Tile(
                     tileImageUrl,

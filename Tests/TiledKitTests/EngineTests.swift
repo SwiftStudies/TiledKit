@@ -52,8 +52,8 @@ final class EngineTests: XCTestCase {
         let testMap : TestMap
         let originalMap : Map
         do {
-            testMap = try TiledResources.GenericTiledProject.Maps.testMap1.load(for: TestEngine.self)
-            originalMap = try TiledResources.GenericTiledProject.Maps.testMap1.load()
+            testMap = try TiledResources.GenericTiledProject.Maps.testMap1.loadMap(for: TestEngine.self)
+            originalMap = try TiledResources.GenericTiledProject.Maps.testMap1.loadMap()
         } catch {
             return XCTFail("\(error)")
         }
@@ -77,7 +77,7 @@ final class EngineTests: XCTestCase {
         
         // Reset sprite count
         TestEngine.createdSprites.removeAll()
-        guard let customMap : TestMap = try? TiledResources.GenericTiledProject.Maps.testMap1.load(for: TestEngine.self) else {
+        guard let customMap : TestMap = try? TiledResources.GenericTiledProject.Maps.testMap1.loadMap(for: TestEngine.self) else {
             TestEngine.removeProducers()
             return XCTFail("Could not load custom map")
         }
@@ -182,7 +182,7 @@ final class EngineTests: XCTestCase {
 
     
     func testMapProcessing(){
-        XCTAssertEqual(try TiledResources.GenericTiledProject.Maps.testMap1.load(for: TestEngine.self).userData["processedBy"] as? String, "TestEngine")
+        XCTAssertEqual(try TiledResources.GenericTiledProject.Maps.testMap1.loadMap(for: TestEngine.self).userData["processedBy"] as? String, "TestEngine")
         
         struct CustomMapProcessor : MapPostProcessor {
             typealias EngineType = TestEngine
@@ -196,7 +196,7 @@ final class EngineTests: XCTestCase {
         
         TestEngine.register(producer: CustomMapProcessor())
         
-        XCTAssertEqual(try TiledResources.GenericTiledProject.Maps.testMap1.load(for: TestEngine.self).userData["processedBy"] as? String, "CustomMapProcessor")
+        XCTAssertEqual(try TiledResources.GenericTiledProject.Maps.testMap1.loadMap(for: TestEngine.self).userData["processedBy"] as? String, "CustomMapProcessor")
     }
     
     func testBridgeAblePropertyApplication(){

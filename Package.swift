@@ -20,7 +20,6 @@ let package = Package(
     products: [
         .library(name: "TiledKit", targets: ["TiledKit"]),
         .library(name: "Inflate", targets: ["Inflate"]),
-        .library(name: "SwiftZLib", targets: ["swiftZLib"]),
         .executable(name: "tkcodegen", targets: ["TiledKitCodeGenerator"]),
     ],
     dependencies: [
