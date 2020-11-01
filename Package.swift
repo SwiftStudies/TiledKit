@@ -19,7 +19,6 @@ let package = Package(
     name: "TiledKit",
     products: [
         .library(name: "TiledKit", targets: ["TiledKit"]),
-        .library(name: "Inflate", targets: ["Inflate"]),
         .executable(name: "tkcodegen", targets: ["TiledKitCodeGenerator"]),
     ],
     dependencies: [
@@ -27,6 +26,18 @@ let package = Package(
         .package(url: "https://github.com/SwiftStudies/TiledResources.git",from: "0.1.0"),
     ],
     targets: [
+        .target(
+            name: "TiledKit",
+            dependencies: ["TKCoding"]
+            ),
+        .target(
+            name: "TiledKitCodeGenerator",
+            dependencies: []
+        ),
+        .target(
+            name: "TKCoding",
+            dependencies: ["XMLCoder","swiftZLib","libzstd"]
+            ),
         .systemLibrary(
             name: "swiftZLib",
             path: "Sources/swiftZLib",
@@ -34,25 +45,17 @@ let package = Package(
                 .apt(["libz-dev"])
             ]
         ), 
-        .target(
-            name: "TiledKit",
-            dependencies: ["TKCoding","Inflate"]
-            ),
-        .target(
-            name: "TiledKitCodeGenerator",
-            dependencies: []
-        ),
-        .target(
-            name: "Inflate",
-            dependencies: ["swiftZLib"]
-        ),
+        .systemLibrary(
+            name: "libzstd", 
+            path: "Sources/zstd", 
+            pkgConfig: "libzstd", 
+            providers: [
+                .brew(["zstd"]),
+                .apt(["libzstd-dev"]),
+            ]),
         .testTarget(
             name: "TiledKitTests",
-            dependencies: ["TiledKit","TiledResources","Inflate"]
-            ),
-        .target(
-            name: "TKCoding",
-            dependencies: ["XMLCoder","Inflate"]
+            dependencies: ["TiledKit","TiledResources"]
             ),
     ]
 )

@@ -21,7 +21,7 @@ public struct TMXElements : Codable {
 
 public struct TMXMap : Codable, XMLPropertied {
     enum CodingKeys : String, CodingKey {
-        case version, tiledVersion = "tiledversion", orientation, renderOrder = "renderorder", width, height, tileWidth = "tilewidth", tileHeight = "tileheight", infinite, tileSetReference = "tileset", backgroundColor = "backgroundcolor",hexSideLength = "hexsidelength", staggerAxis = "staggeraxis", staggerIndex = "staggerIndex"
+        case version, tiledVersion = "tiledversion", orientation, renderOrder = "renderorder", width, height, tileWidth = "tilewidth", tileHeight = "tileheight", infinite, tileSetReference = "tileset", backgroundColor = "backgroundcolor",hexSideLength = "hexsidelength", staggerAxis = "staggeraxis", staggerIndex = "staggerindex"
     }
     
     public static var decoder : XMLDecoder {

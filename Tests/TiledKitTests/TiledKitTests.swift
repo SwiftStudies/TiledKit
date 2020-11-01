@@ -166,6 +166,16 @@ final class TiledKitTests: XCTestCase {
         }
     }
     
+    func testLoadAllMaps(){
+        for resource in TiledResources.GenericTiledProject.Maps.contents + TiledResources.SpriteKit.Maps.contents {
+            do {
+                let _ = try resource.loadMap()
+            } catch {
+                XCTFail("Failed to load \(resource.url.lastPathComponent):\n \(error)")
+            }            
+        }
+    }
+    
     func testHexagonalOrientationYOdd(){
         let orientation = Orientation.hexagonal(axis: .y, index: .odd, sideLength: 8)
         
