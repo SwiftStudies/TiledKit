@@ -15,6 +15,13 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Loaders/TileLayerProduction.swift",
+      "line": 19,
+      "symbol": "Point.distance(to:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Game Engines/Post Processors/BridgablePropertyProcessor.swift",
       "line": 15,
       "symbol": "BridgablePropertyProcessor",
@@ -54,6 +61,20 @@
       "line": 17,
       "symbol": "TileLayer.grid",
       "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Map/Orientation.swift",
+      "line": 30,
+      "symbol": "Orientation.init(_:staggerAxis:staggerIndex:hexSideLength:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Map/Stagger.swift",
+      "line": 50,
+      "symbol": "StaggerIndex.appliesTo(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {

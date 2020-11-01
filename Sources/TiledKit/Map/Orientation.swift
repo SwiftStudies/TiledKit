@@ -13,7 +13,7 @@
 //    limitations under the License.
 
 /// Captures the different orientations supported by Tiled `Map`s
-public enum Orientation : String, Codable, CaseIterable{
+public enum Orientation {
     
     /// A top-down/side-on view
     case orthogonal
@@ -24,6 +24,24 @@ public enum Orientation : String, Codable, CaseIterable{
     /// A staggered view
     case staggered
     
-    /// A hexagonal grid (all tiles have 6 sides)
-    case hexagonal
+    /// A hexagonal grid, captures the axis and index of the stagger
+    case hexagonal(axis:StaggerAxis, index:StaggerIndex, sideLength:Int)
+    
+    public init(_ stringValue:String, staggerAxis:StaggerAxis?, staggerIndex:StaggerIndex?, hexSideLength:Int?) throws {
+        switch stringValue {
+        case "orthogonal":
+            self = .orthogonal
+        case "isometric":
+            self = .isometric
+        case "staggered":
+            self = .staggered
+        case "hexagonal":
+            guard let axis = staggerAxis, let index = staggerIndex, let sideLength = hexSideLength else {
+                throw MapError.missingOrientationInformation(axis: staggerAxis, index: staggerIndex, hexSideLength: hexSideLength)
+            }
+            self = .hexagonal(axis: axis, index: index, sideLength: sideLength)
+        default:
+            throw MapError.unknownOrientation(stringValue)
+        }
+    }
 }

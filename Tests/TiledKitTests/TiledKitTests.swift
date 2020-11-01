@@ -135,6 +135,130 @@ final class TiledKitTests: XCTestCase {
         
     }
     
+    func testHexagonalOrientationYEven(){
+        let orientation = Orientation.hexagonal(axis: .y, index: .even, sideLength: 8)
+        
+        let map = Map(with: TileGridSize(width: 3, height: 3), and: PixelSize(width:16, height: 16), orientation: orientation, renderingOrder: .rightDown)
+
+        var expectedPositions = [
+            Position(x:8, y:0),
+            Position(x:24, y:0),
+            Position(x:40, y:0),
+            Position(x:0, y:12),
+            Position(x:16, y:12),
+            Position(x:32, y:12),
+            Position(x:8, y:24),
+            Position(x:24, y:24),
+            Position(x:40, y:24),
+        ]
+        
+        if expectedPositions.count != map.mapSize.width * map.mapSize.height {
+            return XCTFail("Not enough predicted positions for the map size")
+        }
+        
+        do {
+            for gridPosition in try RenderingOrder.rightDown.tileSequence(for: map){
+                let expected = expectedPositions.removeFirst()
+                XCTAssertEqual(expected, try orientation.position(for: gridPosition, in: map))
+            }
+        } catch {
+            return XCTFail("\(error)")
+        }
+    }
+    
+    func testHexagonalOrientationYOdd(){
+        let orientation = Orientation.hexagonal(axis: .y, index: .odd, sideLength: 8)
+        
+        let map = Map(with: TileGridSize(width: 3, height: 3), and: PixelSize(width:16, height: 16), orientation: orientation, renderingOrder: .rightDown)
+
+        var expectedPositions = [
+            Position(x:0, y:0),
+            Position(x:16, y:0),
+            Position(x:32, y:0),
+            Position(x:8, y:12),
+            Position(x:24, y:12),
+            Position(x:40, y:12),
+            Position(x:0, y:24),
+            Position(x:16, y:24),
+            Position(x:32, y:24),
+        ]
+        
+        if expectedPositions.count != map.mapSize.width * map.mapSize.height {
+            return XCTFail("Not enough predicted positions for the map size")
+        }
+        
+        do {
+            for gridPosition in try RenderingOrder.rightDown.tileSequence(for: map){
+                let expected = expectedPositions.removeFirst()
+                XCTAssertEqual(expected, try orientation.position(for: gridPosition, in: map))
+            }
+        } catch {
+            return XCTFail("\(error)")
+        }
+    }        
+        
+    func testHexagonalOrientationXEven(){
+        let orientation = Orientation.hexagonal(axis: .x, index: .even, sideLength: 8)
+        
+        let map = Map(with: TileGridSize(width: 3, height: 3), and: PixelSize(width:16, height: 16), orientation: orientation, renderingOrder: .rightDown)
+
+        var expectedPositions = [
+            Position(x:0, y:8),
+            Position(x:12, y:0),
+            Position(x:24, y:8),
+            Position(x:0, y:24),
+            Position(x:12, y:16),
+            Position(x:24, y:24),
+            Position(x:0, y:40),
+            Position(x:12, y:32),
+            Position(x:24, y:40),
+        ]
+        
+        if expectedPositions.count != map.mapSize.width * map.mapSize.height {
+            return XCTFail("Not enough predicted positions for the map size")
+        }
+        
+        do {
+            for gridPosition in try RenderingOrder.rightDown.tileSequence(for: map){
+                let expected = expectedPositions.removeFirst()
+                XCTAssertEqual(expected, try orientation.position(for: gridPosition, in: map))
+            }
+        } catch {
+            return XCTFail("\(error)")
+        }
+    }
+    
+    func testHexagonalOrientationXOdd(){
+        let orientation = Orientation.hexagonal(axis: .x, index: .odd, sideLength: 8)
+        
+        let map = Map(with: TileGridSize(width: 3, height: 3), and: PixelSize(width:16, height: 16), orientation: orientation, renderingOrder: .rightDown)
+
+        var expectedPositions = [
+            Position(x:0, y:0),
+            Position(x:12, y:8),
+            Position(x:24, y:0),
+            Position(x:0, y:16),
+            Position(x:12, y:24),
+            Position(x:24, y:16),
+            Position(x:0, y:32),
+            Position(x:12, y:40),
+            Position(x:24, y:32),
+        ]
+        
+        if expectedPositions.count != map.mapSize.width * map.mapSize.height {
+            return XCTFail("Not enough predicted positions for the map size")
+        }
+        
+        do {
+            for gridPosition in try RenderingOrder.rightDown.tileSequence(for: map){
+                let expected = expectedPositions.removeFirst()
+                XCTAssertEqual(expected, try orientation.position(for: gridPosition, in: map))
+            }
+        } catch {
+            return XCTFail("\(error)")
+        }
+    }    
+    
     func testTileGrid(){
         
         guard let map = try? TiledResources.GenericTiledProject.Maps.oneOfEverything.loadMap() else {
