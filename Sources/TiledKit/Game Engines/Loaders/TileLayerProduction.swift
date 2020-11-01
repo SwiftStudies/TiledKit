@@ -33,11 +33,75 @@ internal extension Orientation {
                 y: Double(gridPosition.y * (map.tileSize.height / 2)) + Double(gridPosition.x * (map.tileSize.height / 2))                                  )
         case .orthogonal:
             return Position(
-                x: Double(gridPosition.x*map.tileSize.width),
-                y: Double(gridPosition.y*map.tileSize.height))
+                x: Double(gridPosition.x)*map.orientation.tileWidth(for:map),
+                y: Double(gridPosition.y)*map.orientation.tileHeight(for:map))
+        case .hexagonal:
+            var position = try Orientation.orthogonal.position(for: gridPosition, in: map)
+
+            position.x += xStagger(for: gridPosition)
+            position.y += yStagger(for: gridPosition)
+            return position
         default:
             throw MapError.unsupportedOrientation(self)
         }
+    }
+    
+    func tileWidth(for map:Map)->Double{
+        switch self {
+        case .hexagonal(let staggerAxis, _ , let sideLength):
+            switch staggerAxis {
+            case .x:
+                return Double(map.tileSize.width - (sideLength/2))
+            case .y:
+                return Double(map.tileSize.width) 
+            }
+        default:
+            return Double(map.tileSize.width)
+        }        
+    }
+    
+    func tileHeight(for map:Map)->Double{
+        switch self {
+        case .hexagonal(let staggerAxis, _ , let sideLength):
+            switch staggerAxis {
+            case .y:
+                return Double(map.tileSize.height - (sideLength/2))
+            case .x:
+                return Double(map.tileSize.height)
+            }
+        default:
+            return Double(map.tileSize.height)
+        }        
+        
+    }
+    
+    func xStagger(for gridPosition:TileGridPosition)->Double{
+        switch self {
+        case .hexagonal(let staggerAxis, let staggerIndex, let sideLength):
+            switch staggerAxis {
+            case .x:
+                return 0
+            case .y:
+                return  staggerIndex.appliesTo(gridPosition.y) ?   Double(sideLength) : 0
+            }
+        default:
+            return 0
+        }
+    }
+    
+    func yStagger(for gridPosition:TileGridPosition)->Double{
+        switch self {
+        case .hexagonal(let staggerAxis, let staggerIndex, let sideLength):
+            switch staggerAxis {
+            case .y:
+                return 0
+            case .x:
+                return  staggerIndex.appliesTo(gridPosition.x) ?   Double(sideLength) : 0
+            }
+        
+        default:
+            return 0
+        }        
     }
     
     func produce<SpriteContainer:EngineSpriteContainer>(spriteContainer container:SpriteContainer, tilesFor grid:TileGrid, with sprites:MapTiles<SpriteContainer.EngineType>,from layer:LayerProtocol, for map:Map, `in` project:Project) throws {

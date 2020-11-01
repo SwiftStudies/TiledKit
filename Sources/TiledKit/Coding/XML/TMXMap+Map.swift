@@ -31,11 +31,17 @@ extension TMXMap {
             backgroundColor = nil
         }
         
+        let orientation = try Orientation(
+            tmxMap.orientation ?? "orthogonal", 
+            staggerAxis: StaggerAxis(tmxMap.staggerAxis), 
+            staggerIndex: StaggerIndex(tmxMap.staggerIndex), 
+            hexSideLength: tmxMap.hexSideLength)
+        
         var map = Map(
             url: url,
             mapSize: TileGridSize(width: tmxMap.width, height: tmxMap.height),
             tileSize: PixelSize(width: tmxMap.tileWidth, height: tmxMap.tileHeight),
-            orientation: tmxMap.orientation == nil ? .orthogonal : Orientation(rawValue: tmxMap.orientation!) ?? .orthogonal,
+            orientation: orientation,
             renderingOrder: RenderingOrder(rawValue: tmxMap.renderOrder) ?? .rightDown,
             backgroundColor: backgroundColor
         )

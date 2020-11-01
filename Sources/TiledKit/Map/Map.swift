@@ -19,6 +19,8 @@ enum MapError : Error {
     case unknownMapType(String)
     case unsupportedOrientation(Orientation)
     case unsupportedRenderingOrder(RenderingOrder)
+    case unknownOrientation(String)
+    case missingOrientationInformation(axis:StaggerAxis?, index:StaggerIndex?, hexSideLength:Int?)
 }
 
 /// Represents a Tiled map which can be loaded from a Tiled `tmx` file (other Tiled formats can be supported in the future, such as JSON). It contains the root collection of `Layer`s as well as carrying the references to the `TileSet`s used by the `Map`
@@ -42,7 +44,7 @@ public struct Map : LayerContainer, Loadable, MutablePropertied{
     
     /// The orientation of the map
     public var    orientation      : Orientation
-
+        
     /// The rendering order the map was designed in
     public var    renderingOrder   : RenderingOrder
 

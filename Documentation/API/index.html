@@ -16,7 +16,7 @@
     <a title="TiledKit  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">TiledKit</a> (98% documented)</p>
+        <p><a href="index.html">TiledKit</a> (97% documented)</p>
         <p class="header-right"><a href="https://github.com/SwiftStudies/TiledKit"><img src="img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="search.json">
@@ -72,6 +72,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="Enums/RenderingOrder.html">RenderingOrder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/StaggerAxis.html">StaggerAxis</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/StaggerIndex.html">StaggerIndex</a>
               </li>
               <li class="nav-group-task">
                 <a href="Enums/VerticalTextAlignment.html">VerticalTextAlignment</a>
@@ -353,6 +359,13 @@ You can find documentation aimed at guiding you through that process <a href="/D
 <p>TiledKit is distributed as a Swift package to be built with SPM. You can include it in your project by adding the following dependency to your <code>Package.swift</code> file</p>
 <pre class="highlight plaintext"><code>.package(url: "https://github.com/SwiftStudies/TiledKit", from: "0.6.0")
 </code></pre>
+
+<blockquote>
+<p><strong>Note</strong> If you are building with XCode it seems to struggle with buillding TiledKit before it
+builds the tests (which causes some issues). The simplest solution is to ensure you build <em>just</em> 
+TiledKit first (pick the TiledKit scheme first, from then on you will always be able to build/test the 
+entire package as normal). There are seem to be no issues when including TiledKit as a dependency and Swift Package Manager does not have any problems at all. </p>
+</blockquote>
 <h2 id='available-specializations' class='heading'>Available Specializations</h2>
 
 <ul>

@@ -21,7 +21,7 @@ public struct TMXElements : Codable {
 
 public struct TMXMap : Codable, XMLPropertied {
     enum CodingKeys : String, CodingKey {
-        case version, tiledVersion = "tiledversion", orientation, renderOrder = "renderorder", width, height, tileWidth = "tilewidth", tileHeight = "tileheight", infinite, tileSetReference = "tileset", backgroundColor = "backgroundcolor"
+        case version, tiledVersion = "tiledversion", orientation, renderOrder = "renderorder", width, height, tileWidth = "tilewidth", tileHeight = "tileheight", infinite, tileSetReference = "tileset", backgroundColor = "backgroundcolor",hexSideLength = "hexsidelength", staggerAxis = "staggeraxis", staggerIndex = "staggerIndex"
     }
     
     public static var decoder : XMLDecoder {
@@ -33,6 +33,9 @@ public struct TMXMap : Codable, XMLPropertied {
     public let version : String
     public let tiledVersion : String
     public let orientation : String?
+    public let hexSideLength : Int? 
+    public let staggerIndex : String?
+    public let staggerAxis  : String?
     public let renderOrder : String
     public let width : Int
     public let height : Int
@@ -59,6 +62,10 @@ public struct TMXMap : Codable, XMLPropertied {
         tileHeight = loaded.tileHeight
         infinite = loaded.infinite
         
+        staggerAxis = loaded.staggerAxis
+        staggerIndex = loaded.staggerIndex
+        hexSideLength = loaded.hexSideLength
+        
         layers = loaded.layers
         tileSetReferences = loaded.tileSetReferences
         properties = loaded.properties
@@ -71,6 +78,11 @@ public struct TMXMap : Codable, XMLPropertied {
         version = try container.decode(String.self, forKey: .version)
         tiledVersion = try container.decode(String.self, forKey: .tiledVersion)
         orientation = try container.decodeIfPresent(String.self, forKey: .orientation)
+        
+        staggerAxis = try container.decodeIfPresent(String.self, forKey: .staggerAxis)
+        staggerIndex = try container.decodeIfPresent(String.self, forKey: .staggerIndex)
+        hexSideLength = try container.decodeIfPresent(Int.self, forKey: .hexSideLength)
+        
         renderOrder = try container.decode(String.self, forKey: .renderOrder)
         backgroundColor = try container.decodeIfPresent(String.self, forKey: .backgroundColor)
         
