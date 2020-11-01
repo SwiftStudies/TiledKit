@@ -13,7 +13,7 @@
 //    limitations under the License.
 
 import Foundation
-import Inflate
+
 
 enum TileDataEncoding : String, Codable {
     case csv,base64
@@ -43,20 +43,13 @@ fileprivate extension Data {
     
     func decompress(using compressionMethod:TileDataCompression) throws -> [UInt32] {
         
-//        if #available(iOS 13,tvOS 13,watchOS 6,macOS 10.15, *) {
-//            switch compressionMethod {
-//            case .zlib, .gzip:
-//                
-//                return try (((self as NSData).decompressed(using: .zlib)) as Data).tileLayerData 
-//            default: break
-//            }
-//        }
-        
         switch compressionMethod {
-        case .zlib, .gzip, .zstd:
+        case .zlib, .gzip:
             return try gunzipped().tileLayerData
-//        case .zstd:
-//            return try inflate(self).tileLayerData
+        case .zstd:
+            let processor = ZSTDProcessor(useContext: false)
+            
+            return try processor.decompressFrame(self).tileLayerData
         default:            
             throw XMLDecodingError.unsupportedTileDataFormat(encoding: .base64, compression: compressionMethod)                
         }        

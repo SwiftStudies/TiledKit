@@ -31,17 +31,6 @@ Here's an example of a single Tiled level being rendered by two different specia
 
 TiledKit works on all Apple & Linux platforms supporting Swift 5.3 or later. 
 
-## Installation
-
-TiledKit is distributed as a Swift package to be built with SPM. You can include it in your project by adding the following dependency to your `Package.swift` file
-
-    .package(url: "https://github.com/SwiftStudies/TiledKit", from: "0.6.0")
-
-> __Note__ If you are building with XCode it seems to struggle with buillding TiledKit before it
-> builds the tests (which causes some issues). The simplest solution is to ensure you build _just_ 
-> TiledKit first (pick the TiledKit scheme first, from then on you will always be able to build/test the 
-> entire package as normal). There are seem to be no issues when including TiledKit as a dependency and Swift Package Manager does not have any problems at all. 
-
 ## Available Specializations
 
   - [SpriteKit](https://github.com/SwiftStudies/SKTiledKit)
@@ -49,6 +38,26 @@ TiledKit is distributed as a Swift package to be built with SPM. You can include
   
 ## Documentation
 
-[Full API documentation](https://swiftstudies.github.io/TiledKit/Documentation/API/) is available for TiledKit
-  
-  
+ - Worked example of specialization for your chosen platform [Game Engine Specialization](/Documentation/Game%20Engine%20Specialization.md)
+ - [Full API documentation](https://swiftstudies.github.io/TiledKit/Documentation/API/) is available for TiledKit
+
+## Installation
+
+TiledKit is distributed as a Swift package to be built with SPM. You can include it in your project by adding the following dependency to your `Package.swift` file
+
+    .package(url: "https://github.com/SwiftStudies/TiledKit", from: "0.6.0")
+
+### Compression
+
+In order to support the different compression standards used in Tiled you will need zlib and zstd. zlib is availble already on Apple platforms, but you 
+will still need zstd. In order to make these buildable follow the instructions below, these are very standard libraries and you should not have any 
+issues. 
+
+#### Apple Platforms
+
+    brew install zstd
+    
+#### Linux
+
+    sudo apt install libz-dev
+    sudo apt install libzstd-dev
