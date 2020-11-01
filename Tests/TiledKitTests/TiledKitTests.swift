@@ -62,6 +62,30 @@ final class TiledKitTests: XCTestCase {
         }
     }
     
+    func testTileBounds(){
+        let expectedBounds : [PixelBounds] = [
+            PixelBounds(x: 2, y: 2, width: 14, height: 14),
+            PixelBounds(x: 18, y: 2, width: 14, height: 14),
+            PixelBounds(x: 34, y: 2, width: 14, height: 14),
+            PixelBounds(x: 50, y: 2, width: 14, height: 14),
+            PixelBounds(x: 2, y: 18, width: 14, height: 14),
+            PixelBounds(x: 18, y: 18, width: 14, height: 14),
+            PixelBounds(x: 34, y: 18, width: 14, height: 14),
+            PixelBounds(x: 50, y: 18, width: 14, height: 14),
+        ]
+        do {
+            let tileSet = try TiledResources.GenericTiledProject.Tilesets.topDownMarginAndSpacing.loadTileSet()
+            for tileId  in 0..<expectedBounds.count {
+                guard let tile = tileSet[UInt32(tileId)] else {
+                    return XCTFail("Tile not found \(tileId)")
+                }
+                XCTAssertEqual(expectedBounds[tileId], tile.bounds)
+            }
+        } catch {
+            XCTFail("Error: \(error)")
+        }
+    }
+    
     func loadTestMap(map:ProjectResource? = TiledResources.GenericTiledProject.Maps.testMap1) throws -> Map {
         if let map = map {
             return try map.loadMap()

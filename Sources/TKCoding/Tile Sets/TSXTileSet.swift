@@ -23,12 +23,14 @@ public struct TSXTileSet : Codable {
     public let tileHeight : Int
     public let tileCount : Int
     public let columns : Int
+    public let spacing : Int? 
+    public let margin : Int? 
     public let properties : XMLProperties
     public let image : XMLImageElement?
     public let tileSpecs : [TSXTile]
     
     private enum CodingKeys : String, CodingKey{
-        case version, tiledVersion = "tiledversion", name, tileWidth = "tilewidth", tileHeight = "tileheight", tileCount = "tilecount", columns, properties, image, tileSpecs = "tile"
+        case version, tiledVersion = "tiledversion", name, tileWidth = "tilewidth", tileHeight = "tileheight", tileCount = "tilecount", columns, properties, image, tileSpecs = "tile", spacing, margin
     }
     
     static var decoder : XMLDecoder {
@@ -50,6 +52,9 @@ public struct TSXTileSet : Codable {
         tileCount = loaded.tileCount
         columns = loaded.columns
         
+        spacing = loaded.spacing
+        margin = loaded.margin
+        
         image = loaded.image
         
         properties = loaded.properties
@@ -68,6 +73,9 @@ public struct TSXTileSet : Codable {
         tileHeight = try container.decode(Int.self, forKey: .tileHeight)
         tileCount = try container.decode(Int.self, forKey: .tileCount)
         columns = try container.decode(Int.self, forKey: .columns)
+        
+        spacing = try container.decodeIfPresent(Int.self, forKey: .spacing)
+        margin = try container.decodeIfPresent(Int.self, forKey: .margin)
         
         properties = try XMLProperties.decode(from: decoder)
         
