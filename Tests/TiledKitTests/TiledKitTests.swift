@@ -14,7 +14,7 @@ final class TiledKitTests: XCTestCase {
     
     func testSingleImageTileSet(){
         do {
-            let tileSet = try TiledResources.GenericTiledProject.TileSets.topDownNoMarginNoSpacing.load()
+            let tileSet = try TiledResources.GenericTiledProject.Tilesets.topDownNoMarginNoSpacing.loadTileSet()
             
             XCTAssertEqual(tileSet.tileSize.width, 16)
             XCTAssertEqual(tileSet.tileSize.width, 16)
@@ -28,7 +28,7 @@ final class TiledKitTests: XCTestCase {
     
     func testSingleImageTileSetWithOptionals(){
         do {
-            let tileSet = try TiledResources.GenericTiledProject.TileSets.singleTile.load()
+            let tileSet = try TiledResources.GenericTiledProject.Tilesets.singleTile.loadTileSet()
             
             XCTAssertEqual(tileSet.tileSize.width, 16)
             XCTAssertEqual(tileSet.tileSize.height, 16)
@@ -40,7 +40,7 @@ final class TiledKitTests: XCTestCase {
 
     func testMultiImageTileSetWithSingleTile(){
         do {
-            let tileSet = try TiledResources.GenericTiledProject.TileSets.singleTile.load()
+            let tileSet = try TiledResources.GenericTiledProject.Tilesets.singleTile.loadTileSet()
             
             XCTAssertEqual(tileSet.tileSize.width, 16)
             XCTAssertEqual(tileSet.tileSize.height, 16)
@@ -52,7 +52,7 @@ final class TiledKitTests: XCTestCase {
     
     func testMultiImageTileSet(){
         do {
-            let tileSet = try TiledResources.GenericTiledProject.TileSets.alphabet.load()
+            let tileSet = try TiledResources.GenericTiledProject.Tilesets.alphabet.loadTileSet()
             
             XCTAssertEqual(tileSet.tileSize.width, 16)
             XCTAssertEqual(tileSet.tileSize.height, 16)
@@ -62,11 +62,11 @@ final class TiledKitTests: XCTestCase {
         }
     }
     
-    func loadTestMap(map:MapResource? = TiledResources.GenericTiledProject.Maps.testMap1) throws -> Map {
+    func loadTestMap(map:ProjectResource? = TiledResources.GenericTiledProject.Maps.testMap1) throws -> Map {
         if let map = map {
-            return try map.load()
+            return try map.loadMap()
         }
-        return try TiledResources.GenericTiledProject.Maps.testMap1.load()
+        return try TiledResources.GenericTiledProject.Maps.testMap1.loadMap()
     }
     
     func testMap(){
@@ -113,7 +113,7 @@ final class TiledKitTests: XCTestCase {
     
     func testTileGrid(){
         
-        guard let map = try? TiledResources.GenericTiledProject.Maps.oneOfEverything.load() else {
+        guard let map = try? TiledResources.GenericTiledProject.Maps.oneOfEverything.loadMap() else {
             XCTFail("Could not load map")
             return
         }
@@ -344,7 +344,7 @@ final class TiledKitTests: XCTestCase {
 
     func testMultipleProperties(){
         do {
-            let tileSet = try TiledResources.GenericTiledProject.TileSets.animation.load()
+            let tileSet = try TiledResources.GenericTiledProject.Tilesets.animation.loadTileSet()
 
             //Confirm loading multiline properties works OK
             XCTAssertEqual(tileSet.properties["filteringMode"],"nearest")
@@ -357,7 +357,7 @@ final class TiledKitTests: XCTestCase {
     
     func testTileSetCollisionObjects(){
         do {
-            let tileSet = try TiledResources.GenericTiledProject.TileSets.animation.load()
+            let tileSet = try TiledResources.GenericTiledProject.Tilesets.animation.loadTileSet()
 
             guard let collisionBodies = tileSet[8]?.collisionBodies else {
                 XCTFail("Tile or collision bodies not found")
@@ -374,7 +374,7 @@ final class TiledKitTests: XCTestCase {
     
     func testTileSetAnimationFrames(){
         do {
-            let tileSet = try TiledResources.GenericTiledProject.TileSets.animation.load()
+            let tileSet = try TiledResources.GenericTiledProject.Tilesets.animation.loadTileSet()
 
             
             guard let frames = tileSet[4]?.frames else {
@@ -485,7 +485,7 @@ final class TiledKitTests: XCTestCase {
     }
     
     func testObjectSearch(){
-        guard let map = try? TiledResources.GenericTiledProject.Maps.testMap2.load() else {
+        guard let map = try? TiledResources.GenericTiledProject.Maps.testMap2.loadMap() else {
             return XCTFail("Could not load map")
         }
         
@@ -499,7 +499,7 @@ final class TiledKitTests: XCTestCase {
         XCTAssertEqual(map.objects(matching: Object.isEither(Object.isPoint, or: Object.isRectangle)).count, 5)
         XCTAssertEqual(map.objects(matching: Object.isOf(type: "Object Type")).count, 2)
 
-        guard let map2 = try? TiledResources.GenericTiledProject.Maps.testMap1.load()else {
+        guard let map2 = try? TiledResources.GenericTiledProject.Maps.testMap1.loadMap()else {
             return XCTFail("Could not load map")
         }
         

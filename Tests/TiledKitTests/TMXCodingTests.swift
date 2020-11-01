@@ -101,7 +101,7 @@ final class TMXCodingTests: XCTestCase {
     func testSingleImageTileSet(){
         let tileSet : TSXTileSet
         do {
-            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: TiledResources.GenericTiledProject.TileSets.alphabet.url))
+            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: TiledResources.GenericTiledProject.Tilesets.alphabet.url))
 
             XCTAssertEqual(tileSet.tileWidth, 16)
             XCTAssertEqual(tileSet.tileHeight, 16)
@@ -117,7 +117,7 @@ final class TMXCodingTests: XCTestCase {
     func testSingleImageTileSetWithOptionals(){
         let tileSet : TSXTileSet
         do {
-            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: TiledResources.GenericTiledProject.TileSets.topDownNoMarginNoSpacing.url))
+            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: TiledResources.GenericTiledProject.Tilesets.topDownNoMarginNoSpacing.url))
             XCTAssertEqual(tileSet.tileWidth, 16)
             XCTAssertEqual(tileSet.tileHeight, 16)
             XCTAssertEqual(tileSet.tileCount, 16)
@@ -131,7 +131,7 @@ final class TMXCodingTests: XCTestCase {
     func testMultiImageTileSetWithSingleTile(){
         let tileSet : TSXTileSet
         do {
-            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: TiledResources.GenericTiledProject.TileSets.alphabet.url))
+            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: TiledResources.GenericTiledProject.Tilesets.alphabet.url))
             XCTAssertEqual(tileSet.tileWidth, 16)
             XCTAssertEqual(tileSet.tileHeight, 16)
             XCTAssertEqual(tileSet.tileCount, 6)
@@ -143,7 +143,7 @@ final class TMXCodingTests: XCTestCase {
     func testMultiImageTileSet(){
         let tileSet : TSXTileSet
         do {
-            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: TiledResources.GenericTiledProject.TileSets.alphabet.url))
+            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: TiledResources.GenericTiledProject.Tilesets.alphabet.url))
             XCTAssertEqual(tileSet.tileWidth, 16)
             XCTAssertEqual(tileSet.tileHeight, 16)
             XCTAssertEqual(tileSet.tileCount, 6)
@@ -155,7 +155,7 @@ final class TMXCodingTests: XCTestCase {
     func testTileSetCollisionObjects(){
         let tileSet : TSXTileSet
         do {
-            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: TiledResources.GenericTiledProject.TileSets.animation.url))
+            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: TiledResources.GenericTiledProject.Tilesets.animation.url))
 
             if tileSet.tileSpecs.count < 6 {
                 return XCTFail("Expected at least one tile")
@@ -173,7 +173,7 @@ final class TMXCodingTests: XCTestCase {
     func testTileSetAnimationFrames(){
         let tileSet : TSXTileSet
         do {
-            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: TiledResources.GenericTiledProject.TileSets.animation.url))
+            tileSet = try TSXTileSet.decoder.decode(TSXTileSet.self, from:  Data(contentsOf: TiledResources.GenericTiledProject.Tilesets.animation.url))
 
             if tileSet.tileSpecs.count < 6 {
                 return XCTFail("Execpted more tiles")
@@ -196,15 +196,15 @@ final class TMXCodingTests: XCTestCase {
     }
     
     func testBase64(){
-        XCTAssertNoThrow(try TiledResources.GenericTiledProject.Maps.base64.load())
+        XCTAssertNoThrow(try TiledResources.GenericTiledProject.Maps.base64.loadMap())
     }
     
     func testBase64zlib(){
-        XCTAssertNoThrow(try TiledResources.GenericTiledProject.Maps.base64zlib.load())        
+        XCTAssertNoThrow(try TiledResources.GenericTiledProject.Maps.base64zlib.loadMap())        
     }
     
     func testBase64zstandard(){
-        XCTAssertNoThrow(try TiledResources.GenericTiledProject.Maps.base64zstandard.load())          
+ //       XCTAssertNoThrow(try TiledResources.GenericTiledProject.Maps.base64standard.loadMap())          
     }
     
     static var allTests = [
