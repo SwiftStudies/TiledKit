@@ -176,6 +176,29 @@ final class TiledKitTests: XCTestCase {
         }
     }
     
+    func  testHexagonalPixelSize(){
+        let testsAndResults = [
+            (map:TiledResources.GenericTiledProject.Maps.hexagonalXEvenStagger, 
+             size: PixelSize(width: 168, height: 88)),
+            (map:TiledResources.GenericTiledProject.Maps.hexagonalXOddStagger, 
+             size: PixelSize(width: 168, height: 88)),
+            (map:TiledResources.GenericTiledProject.Maps.hexagonalYOddStagger, 
+             size: PixelSize(width: 168, height: 124)),
+            (map:TiledResources.GenericTiledProject.Maps.hexagonalYEvenStagger, 
+             size: PixelSize(width: 168, height: 124)),
+        ]
+        
+        for test in testsAndResults {
+            do {
+                let map = try test.map.loadMap()
+                
+                XCTAssertEqual(test.size, map.pixelSize)
+            } catch {
+                XCTFail("Failed for \(test.map.url.lastPathComponent):\n\(error)")
+            }
+        }
+    }
+    
     func testHexagonalOrientationYOdd(){
         let orientation = Orientation.hexagonal(axis: .y, index: .odd, sideLength: 8)
         

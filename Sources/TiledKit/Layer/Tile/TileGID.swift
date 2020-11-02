@@ -25,21 +25,25 @@ public struct TileFlip : OptionSet {
         self.rawValue = rawValue
     }
 
+    public mutating func add(_ flip:TileFlip){
+        rawValue |= flip.rawValue
+    }
+    
     /// Include if the tile should be flipped horizontally
-    public static let horizontally : UInt32 = 0x80000000
+    public static let horizontally  = TileFlip(rawValue: 0x80000000)
     
     /// Include if the tile should be flipped vertically
-    public static let vertically : UInt32    = 0x40000000
+    public static let vertically    = TileFlip(rawValue: 0x40000000)
     
     /// Include if the tile should be flipped diagnoally
-    public static let diagonally : UInt32    = 0x20000000
+    public static let diagonally    = TileFlip(rawValue: 0x20000000)
 }
 
 /// Represents the reference to a specific `Tile` in a tile `Layer` for a given `Map`. It captures not only an identifier uniquely identifying the `Tile` (and the `TileSet` it is in) but also if the `Tile` should be flipped (see `TileFlip`)
 public struct TileGID : ExpressibleByIntegerLiteral, Equatable {
     public typealias IntegerLiteralType = UInt32
     
-    private static let tileIdMask : UInt32    = ~(TileFlip.horizontally | TileFlip.vertically | TileFlip.diagonally)
+    private static let tileIdMask : UInt32    = ~(TileFlip.horizontally.rawValue | TileFlip.vertically.rawValue | TileFlip.diagonally.rawValue)
 
     let value : UInt32
     
@@ -68,19 +72,34 @@ public struct TileGID : ExpressibleByIntegerLiteral, Equatable {
     
     /// `true` if the tile should be flipped horizontally
     public var flipHorizontally : Bool {
-        return value & TileFlip.horizontally != 0
+        return value & TileFlip.horizontally.rawValue != 0
     }
 
     /// `true` if the tile should be flipped vertically
     public var flipVertically : Bool {
-        return value & TileFlip.vertically != 0
+        return value & TileFlip.vertically.rawValue != 0
     }
 
     /// `true` if the tile should be flipped diagonally
     public var flipDiagonally : Bool {
-        return value & TileFlip.diagonally != 0
+        return value & TileFlip.diagonally.rawValue != 0
     }
 
+    /// The combined changes to the orientation of the tile
+    public var orientation : TileFlip {
+        var result : TileFlip = []
+        if flipHorizontally {
+            result.add([.horizontally])
+        }
+        if flipVertically {
+            result.add(TileFlip.vertically)
+        }
+        if flipDiagonally {
+            result.add(TileFlip.diagonally)
+        }
+        
+        return result
+    }
 }
 
 extension UInt32 {
