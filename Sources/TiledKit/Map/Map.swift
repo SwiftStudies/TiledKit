@@ -39,7 +39,22 @@ public struct Map : LayerContainer, Loadable, MutablePropertied{
     
     /// The size of the map in pixels
     public var    pixelSize        : PixelSize {
-        return PixelSize(width: tileSize.width * mapSize.width, height: tileSize.height * mapSize.height)
+        switch orientation {
+        case .orthogonal, .isometric, .staggered:
+            return PixelSize(width: tileSize.width * mapSize.width, height: tileSize.height * mapSize.height)
+        case .hexagonal(let staggerAxis, _, let sideLength):
+            switch staggerAxis {
+            case .x:
+                return PixelSize(
+                    width:  (tileSize.width * mapSize.width) + sideLength, 
+                    height: ((tileSize.height) / 2) * mapSize.height + sideLength)
+            case .y:
+                return PixelSize(
+                    width:  (tileSize.width * mapSize.width) + sideLength, 
+                    height: Int(orientation.tileHeight(for: self)) * mapSize.height + sideLength / 2)
+            }
+            
+        }
     }
     
     /// The orientation of the map
