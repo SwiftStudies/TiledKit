@@ -354,18 +354,6 @@ You can find documentation aimed at guiding you through that process <a href="/D
 <p align="center"><img src="https://swiftstudies.github.io/TiledKit/Documentation/Images/Multiple%20Game%20Engines.png" width="500" /></p>
 
 <p>TiledKit works on all Apple &amp; Linux platforms supporting Swift 5.3 or later. </p>
-<h2 id='installation' class='heading'>Installation</h2>
-
-<p>TiledKit is distributed as a Swift package to be built with SPM. You can include it in your project by adding the following dependency to your <code>Package.swift</code> file</p>
-<pre class="highlight plaintext"><code>.package(url: "https://github.com/SwiftStudies/TiledKit", from: "0.6.0")
-</code></pre>
-
-<blockquote>
-<p><strong>Note</strong> If you are building with XCode it seems to struggle with buillding TiledKit before it
-builds the tests (which causes some issues). The simplest solution is to ensure you build <em>just</em> 
-TiledKit first (pick the TiledKit scheme first, from then on you will always be able to build/test the 
-entire package as normal). There are seem to be no issues when including TiledKit as a dependency and Swift Package Manager does not have any problems at all. </p>
-</blockquote>
 <h2 id='available-specializations' class='heading'>Available Specializations</h2>
 
 <ul>
@@ -374,7 +362,27 @@ entire package as normal). There are seem to be no issues when including TiledKi
 </ul>
 <h2 id='documentation' class='heading'>Documentation</h2>
 
-<p><a href="https://swiftstudies.github.io/TiledKit/Documentation/API/">Full API documentation</a> is available for TiledKit</p>
+<ul>
+<li>Worked example of specialization for your chosen platform <a href="/Documentation/Game%20Engine%20Specialization.md">Game Engine Specialization</a></li>
+<li><a href="https://swiftstudies.github.io/TiledKit/Documentation/API/">Full API documentation</a> is available for TiledKit</li>
+</ul>
+<h2 id='installation' class='heading'>Installation</h2>
+
+<p>TiledKit is distributed as a Swift package to be built with SPM. You can include it in your project by adding the following dependency to your <code>Package.swift</code> file</p>
+<pre class="highlight plaintext"><code>.package(url: "https://github.com/SwiftStudies/TiledKit", from: "0.6.0")
+</code></pre>
+<h3 id='compression' class='heading'>Compression</h3>
+
+<p>In order to support the different compression standards used in Tiled you will need zlib and zstd. zlib is availble already on Apple platforms, but you 
+will still need zstd. In order to make these buildable follow the instructions below, these are very standard libraries and you should not have any 
+issues. </p>
+<h4 id='apple-platforms' class='heading'>Apple Platforms</h4>
+<pre class="highlight plaintext"><code>brew install zstd
+</code></pre>
+<h4 id='linux' class='heading'>Linux</h4>
+<pre class="highlight plaintext"><code>sudo apt install libz-dev
+sudo apt install libzstd-dev
+</code></pre>
 
           </section>
         </section>

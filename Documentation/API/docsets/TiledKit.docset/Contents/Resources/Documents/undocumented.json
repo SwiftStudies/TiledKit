@@ -64,13 +64,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Layer/Tile/TileGID.swift",
-      "line": 28,
-      "symbol": "TileFlip.add(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Volumes/Games/Personal Documents/Code/SPM/TiledKit/Sources/TiledKit/Map/Orientation.swift",
       "line": 30,
       "symbol": "Orientation.init(_:staggerAxis:staggerIndex:hexSideLength:)",
