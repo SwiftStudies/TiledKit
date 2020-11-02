@@ -135,7 +135,7 @@ internal extension Orientation {
                 guard let sprite = sprites[tileGid] else {
                     throw EngineError.couldNotFindTileInMap(tileGid)
                 }
-                tileInstance = try SpriteContainer.EngineType.make(tileWith: sprite, at: tilePosition, for: layer, in: map, from: project)
+                tileInstance = try SpriteContainer.EngineType.make(tileWith: sprite, at: tilePosition, orientation: tileGid.orientation, for: layer, in: map, from: project)
             }
             
             container.add(sprite: tileInstance)

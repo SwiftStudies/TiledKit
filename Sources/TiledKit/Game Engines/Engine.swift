@@ -145,7 +145,7 @@ public protocol Engine {
     ///   - tileLayer: The tile layer containing the tile
     ///   - map: The map containing the tile layer
     ///   - project: The project containing the map
-    static func make(tileWith tile:SpriteType, at position:Position, for tileLayer:LayerProtocol, in map:Map, from project:Project) throws -> SpriteType
+    static func make(tileWith tile:SpriteType, at position:Position, orientation flip:TileFlip, for tileLayer:LayerProtocol, in map:Map, from project:Project) throws -> SpriteType
     
     /// Creates a point object
     /// - Parameters:

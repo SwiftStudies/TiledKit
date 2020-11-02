@@ -98,9 +98,9 @@ final class TestEngine : Engine {
         return TestNode()
     }
 
-    static func make(tileWith tile: TestSprite, at position: Position, for tileLayer: LayerProtocol, in map: Map, from project: Project) throws -> TestSprite {
+    static func make(tileWith tile: TestSprite, at position: Position, orientation flip: TileFlip, for tileLayer: LayerProtocol, in map: Map, from project: Project) throws -> TestSprite {
         return tile
-    }
+    }    
     
     static func make(pointFor object: ObjectProtocol, in map: Map, from project: Project) throws -> TestPoint {
         return TestPoint()
