@@ -13,7 +13,7 @@
 //    limitations under the License.
 
 /// Captures if and how a `Tile` should be rendered
-public struct TileFlip : OptionSet {
+public struct TileFlip : OptionSet, CustomStringConvertible {
     /// As specied in the Tiled TMX format, a tile gid is a 32-bit unsigned integer
     public typealias RawValue = UInt32
 
@@ -37,6 +37,12 @@ public struct TileFlip : OptionSet {
     
     /// Include if the tile should be flipped diagnoally
     public static let diagonally    = TileFlip(rawValue: 0x20000000)
+    
+    /// A human readiable description of the flip
+    public var description: String {
+        return "\(contains(.horizontally) ? "H" : "-")\(contains(.vertically) ? "V" : "-")\(contains(.diagonally) ? "D" : "-")"
+    }
+    
 }
 
 /// Represents the reference to a specific `Tile` in a tile `Layer` for a given `Map`. It captures not only an identifier uniquely identifying the `Tile` (and the `TileSet` it is in) but also if the `Tile` should be flipped (see `TileFlip`)
@@ -89,13 +95,13 @@ public struct TileGID : ExpressibleByIntegerLiteral, Equatable {
     public var orientation : TileFlip {
         var result : TileFlip = []
         if flipHorizontally {
-            result.add([.horizontally])
+            result.add(.horizontally)
         }
         if flipVertically {
-            result.add(TileFlip.vertically)
+            result.add(.vertically)
         }
         if flipDiagonally {
-            result.add(TileFlip.diagonally)
+            result.add(.diagonally)
         }
         
         return result
