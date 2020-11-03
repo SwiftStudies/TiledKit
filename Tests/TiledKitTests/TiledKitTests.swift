@@ -176,6 +176,47 @@ final class TiledKitTests: XCTestCase {
         }
     }
     
+    func testTileFlips(){
+        do {
+            let map = try TiledResources.GenericTiledProject.Maps.tileFlipTest.loadMap()
+            
+            switch map.layers[0].kind {
+            case .tile(let grid):
+                for row in 1..<9 {
+                    var expectedFlip = TileFlip(rawValue: 0)
+                    
+                    if row < 5 {
+                        expectedFlip.add(.horizontally)
+                    }
+                    
+                    if [3,4,7,8].contains(row){
+                        expectedFlip.add(.vertically)
+                    }
+                    
+                    if row % 2 == 0 {
+                        expectedFlip.add(.diagonally)                        
+                    }
+                    
+                    XCTAssertEqual(grid[4,row].orientation, expectedFlip,"Row \(row) expected \(expectedFlip) but got \(grid[4,row].orientation) from \(String(grid[4,row].value, radix: 16, uppercase: true))")
+                }
+                XCTAssertTrue(grid[4,1].flipHorizontally)
+                XCTAssertFalse(grid[4,1].flipVertically)
+                XCTAssertFalse(grid[4,1].flipDiagonally)
+
+                XCTAssertFalse(grid[4,6].flipHorizontally)
+                XCTAssertFalse(grid[4,6].flipVertically)
+                XCTAssertTrue(grid[4,6].flipDiagonally)
+                XCTAssertEqual(grid[4,6].orientation, [.diagonally])
+                
+                XCTAssertEqual(TileGID(tileId: 0, flip: .diagonally).orientation, .diagonally)
+            default: return XCTFail("Expected layer to be tile layer")
+            }
+       
+        } catch {
+            return XCTFail("\(error)")
+        }
+    }
+    
     func  testHexagonalPixelSize(){
         let testsAndResults = [
             (map:TiledResources.GenericTiledProject.Maps.hexagonalXEvenStagger, 
